@@ -1,0 +1,14 @@
+/build/
+/install/
+/log/
+/validation/*_build/
+/validation/*_install/
+/validation/*_log/
+/validation/**/build/
+/validation/**/install/
+/validation/**/log/
+/validation/**/test_log/
+/validation/**/ros_logs/
+__pycache__/
+.pytest_cache/
+*.egg-info/

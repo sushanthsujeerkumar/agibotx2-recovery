@@ -8,3 +8,5 @@ ros2_ws/log/
 artifacts/runs/
 artifacts/videos/
 *.egg-info/
+
+assets/x2/meshes/
