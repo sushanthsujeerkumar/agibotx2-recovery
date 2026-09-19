@@ -24,7 +24,7 @@ def main():
             if manifest.exists():
                 try:
                     meta = json.loads(manifest.read_text())
-                    candidate = directory / "actor_latest.pt"
+                    candidate = Path(meta["actor"])
                     stamp = candidate.stat().st_mtime_ns
                     if candidate.exists() and stamp != actor:
                         import torch
@@ -32,6 +32,7 @@ def main():
                         policy = torch.jit.load(str(candidate), map_location="cpu").eval()
                         runtime.policy = policy
                         runtime.controller = "policy"
+                        runtime.display_label = f"PPO checkpoint {meta['iteration']}"
                         actor = stamp
                         print("VIEWER: trained policy", json.dumps(meta), flush=True)
                 except (OSError, ValueError, RuntimeError) as exc:

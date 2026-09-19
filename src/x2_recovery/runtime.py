@@ -21,6 +21,7 @@ class RecoveryRuntime:
         self.model.opt.tolerance = 1e-6
         self.data = mujoco.MjData(self.model)
         self.controller = controller
+        self.display_label = "SCRIPTED BASELINE" if controller == "scripted" else "TRAINED POLICY"
         self.policy = None
         self.viewer = None
         if controller == "policy":
@@ -48,34 +49,50 @@ class RecoveryRuntime:
         return self.snapshot(False, False)
 
     def _scripted_target(self):
-        """Untrained bounded keyframe attempt. No direct base motion or assistance."""
-        target = self.info.nominal.copy()
+        """Bounded asymmetric roll-and-crouch attempt, not a proven recovery.
+
+        URDF signs: hip flexion and elbow flexion are negative; knee flexion
+        is positive. Axial waist yaw rotates around the spine during a side
+        roll. All movement still comes from the shared torque-limited PD loop.
+        """
+        if float(self.data.time) < self.control_dt or not hasattr(self, "_scripted_start"):
+            # Start at the physically settled joint state to avoid a reset jump.
+            self._scripted_start = self.data.qpos[self.info.qadr].copy()
+
         def pose(values):
-            q = target.copy()
+            q = self.info.nominal.copy()
             for name, value in values.items():
-                if name in self.info.names:
-                    q[self.info.names.index(name)] = value
+                q[self.info.names.index(name)] = value
             return np.clip(q, self.info.lower, self.info.upper)
-        tuck = pose({"left_hip_pitch_joint": -1.5, "right_hip_pitch_joint": -1.5,
-                     "left_knee_joint": 2.1, "right_knee_joint": 2.1,
-                     "left_shoulder_pitch_joint": -.8, "right_shoulder_pitch_joint": -.8,
-                     "left_elbow_joint": -1., "right_elbow_joint": -1.})
-        roll = tuck.copy()
-        for name, value in {"waist_roll_joint": .25, "left_hip_roll_joint": .3,
-                            "right_hip_roll_joint": .2, "left_shoulder_roll_joint": .7,
-                            "right_shoulder_roll_joint": -.3}.items():
-            if name in self.info.names: roll[self.info.names.index(name)] = value
-        crouch = pose({"left_hip_pitch_joint": -1.1, "right_hip_pitch_joint": -1.1,
-                       "left_knee_joint": 2., "right_knee_joint": 2.,
-                       "left_ankle_pitch_joint": -.6, "right_ankle_pitch_joint": -.6,
-                       "left_shoulder_pitch_joint": -.9, "right_shoulder_pitch_joint": -.9})
-        times = [0., 1.5, 3., 5., 8., 15.]
-        poses = [self.info.supine[self.info.qadr], tuck, roll, crouch, target, target]
+
+        side_roll = pose({
+            "waist_yaw_joint": -2.0, "waist_pitch_joint": .2,
+            "left_hip_pitch_joint": -1.2, "right_hip_pitch_joint": -.6,
+            "left_knee_joint": 1.8, "right_knee_joint": 1.3,
+            "left_hip_yaw_joint": -.8,
+            "left_hip_roll_joint": -.15, "right_hip_roll_joint": -.25,
+            # Left forearm reaches across the chest; right arm seeks support.
+            "left_shoulder_pitch_joint": -.6, "right_shoulder_pitch_joint": 1.8,
+            "left_shoulder_yaw_joint": -1.5,
+            "left_shoulder_roll_joint": 0., "right_shoulder_roll_joint": -.2,
+            "left_elbow_joint": -1.8, "right_elbow_joint": -.3,
+        })
+        crouch = pose({
+            "left_hip_pitch_joint": -1.3, "right_hip_pitch_joint": -1.3,
+            "left_knee_joint": 1.9, "right_knee_joint": 1.9,
+            "left_ankle_pitch_joint": -.7, "right_ankle_pitch_joint": -.7,
+            "left_shoulder_pitch_joint": -.8, "right_shoulder_pitch_joint": -.8,
+            "left_elbow_joint": -.8, "right_elbow_joint": -.8,
+        })
+        # Brief holds allow contacts to settle before unwinding and extending.
+        times = [0., 1., 2., 4., 6., 8., 15.]
+        poses = [self._scripted_start, side_roll, side_roll, crouch, crouch,
+                 self.info.nominal, self.info.nominal]
         t = float(self.data.time)
-        k = min(int(np.searchsorted(times, t, side="right"))-1, len(times)-2)
-        u = np.clip((t-times[k])/(times[k+1]-times[k]), 0, 1)
-        u = u*u*(3-2*u)
-        return np.clip((1-u)*poses[k] + u*poses[k+1], self.info.lower, self.info.upper)
+        k = min(max(int(np.searchsorted(times, t, side="right")) - 1, 0), len(times) - 2)
+        u = np.clip((t - times[k]) / (times[k + 1] - times[k]), 0, 1)
+        u = u * u * (3 - 2 * u)
+        return np.clip((1 - u) * poses[k] + u * poses[k + 1], self.info.lower, self.info.upper)
 
     def step(self):
         if self.policy is not None:
@@ -103,7 +120,11 @@ class RecoveryRuntime:
         self.hold_time = self.hold_time + CONTROL_DT if all(self.last_conditions.values()) else 0.
         self.max_height = max(self.max_height, float(self.data.qpos[2]))
         success = self.hold_time >= HOLD_SECONDS - 1e-8
-        if self.viewer is not None and self.viewer.is_running():
+        if self.viewer is not None and self.viewer.is_running() and round(self.data.time/CONTROL_DT) % 2 == 0:
+            self.viewer.set_texts((mujoco.mjtFontScale.mjFONTSCALE_150,
+                                   mujoco.mjtGridPos.mjGRID_TOPLEFT,
+                                   "X2 recovery evaluation\nController\nEpisode time\nPelvis height\nStable standing\nOutcome",
+                                   f"\n{self.display_label}\n{self.data.time:.1f} s\n{self.data.qpos[2]:.3f} m\n{self.hold_time:.2f} / {HOLD_SECONDS:.1f} s\n{'SUCCEEDED' if success else 'RUNNING'}"))
             self.viewer.sync()
         return self.snapshot(success, bool(invalid))
 

@@ -1,0 +1,26 @@
+[
+  {
+    "num_envs": 128,
+    "setup_seconds": 3.938696682999762,
+    "measured_seconds": 0.33721424700024727,
+    "control_steps_per_second": 15183.225636360037,
+    "torch_peak_allocated_mib": 8.41455078125,
+    "note": "zero-action physics throughput, excludes PPO updates; Warp allocations not included in torch memory"
+  },
+  {
+    "num_envs": 256,
+    "setup_seconds": 1.9756746230000317,
+    "measured_seconds": 0.40528875799964226,
+    "control_steps_per_second": 25265.936441318805,
+    "torch_peak_allocated_mib": 8.6884765625,
+    "note": "zero-action physics throughput, excludes PPO updates; Warp allocations not included in torch memory"
+  },
+  {
+    "num_envs": 512,
+    "setup_seconds": 1.979097701000228,
+    "measured_seconds": 0.5272616669999479,
+    "control_steps_per_second": 38842.19407894491,
+    "torch_peak_allocated_mib": 9.236328125,
+    "note": "zero-action physics throughput, excludes PPO updates; Warp allocations not included in torch memory"
+  }
+]

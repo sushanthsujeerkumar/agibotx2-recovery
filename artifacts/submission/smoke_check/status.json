@@ -1,0 +1,23 @@
+{
+  "iteration": 5,
+  "environment_steps": 61440,
+  "wall_time_s": 3.356772720000208,
+  "training_time_s": 3.166940212249756,
+  "iteration_time_s": 0.5549519062042236,
+  "steps_per_second": 22142.4593061547,
+  "mean_episode_reward": null,
+  "mean_episode_length": null,
+  "success_rate": null,
+  "learning_rate": 1.5000000000000005e-05,
+  "mean_action_std": 0.6039304137229919,
+  "losses": {
+    "value": 0.007116855122148991,
+    "surrogate": -0.022556839510798454,
+    "entropy": 28.32588005065918
+  },
+  "metrics": {},
+  "state": "COMPLETED",
+  "pid": 17597,
+  "updated_unix": 1789859860.237736,
+  "checkpoint": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/smoke/model_000005.pt"
+}
