@@ -35,6 +35,8 @@ Automatic finalizer scripts/finalize_run.py is already running for local: it sle
 2. At one-hour stop evaluate final actor 5 seeds1001..1005,15s each, exact feet-only support2s rule; make training reward plot.
 3. If clearly stalled, inspect videos/reward and allow at most one targeted local correction; total local training cap3h. Preserve first run; new directory if reward/model changes. Do not blindly extend or rent cloud.
 4. Final policy via ROS: launch scripts/ros_launch.sh controller:=policy checkpoint:=ABSOLUTE_ACTOR_PATH; use probe + timeout. Existing script validate_ros.sh defaults scripted.
+Fresh source checkout smoke also passed: three physics tests and one exported-policy simulator step, using the existing locked Python environment (a second complete dependency download was intentionally not repeated). Policy ROS smoke also passed (471 real frames, busy rejection and configured timeout); see ros2_ws/validation/policy_smoke.
+
 5. Save final/best checkpoint+actor under artifacts/submission (runs ignored by git), config and progress log, plot and evaluation results. Include selected video (avoid oversized git files); README honest x/5, failure analysis, training walltime.
 6. Fresh checkout reproduction validation. Update README/results/docs then meaningful commit+push. Pause heartbeat after final local report and next-step recommendation.
 
