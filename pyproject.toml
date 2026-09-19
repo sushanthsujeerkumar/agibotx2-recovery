@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hrs-x2-recovery"
+version = "0.1.0"
+description = "Reproducible AgiBot X2 ground recovery experiment and ROS 2 integration"
+requires-python = ">=3.12,<3.13"
+dependencies = ["mjlab", "matplotlib", "pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
