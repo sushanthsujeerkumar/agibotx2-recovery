@@ -153,3 +153,34 @@ Run it from the repository root after sourcing ROS and the built workspace, with
 the two nodes already launched. It creates one episode, checks acceptance and busy
 rejection, records actual joint messages with advancing timestamps, and checks the
 final status. Use a longer `--deadline` for a longer configured timeout.
+
+### Exported-policy ROS smoke: passed
+
+A separate check loaded the frozen exported PPO smoke actor
+`artifacts/runs/smoke/model_000005_actor.pt` (five training iterations) through the
+same ROS worker using `controller:=policy`. This is a checkpoint-loading and
+execution smoke test, **not the final recovery evaluation**. It ran headlessly on
+ROS domain 72 while GPU training and the visible viewer continued separately.
+
+```bash
+ROS_DOMAIN_ID=72 scripts/ros_launch.sh controller:=policy checkpoint:="$PWD/artifacts/runs/smoke/model_000005_actor.pt" render:=false realtime:=true timeout_s:=12.0 max_sim_duration_s:=60.0
+```
+
+In another sourced terminal, with the same ROS domain:
+
+```bash
+ROS_DOMAIN_ID=72 python3 ros2_ws/scripts/check_ros_integration.py --expect-final FAILED --deadline 30 --output ros2_ws/validation/policy_smoke/integration.json
+```
+
+- Acceptance returned in **0.000916 seconds**; the immediate second request was
+  rejected as busy.
+- **471 actual simulator joint messages** covered all 31 joints, with finite
+  changing positions and strictly increasing timestamps from 0.02 to 9.42 seconds.
+- The policy episode transitioned `RUNNING → FAILED` after **12.017 wall seconds**;
+  the supervisor explicitly logged `wall-clock timeout (includes simulator startup)`.
+- Both ROS nodes shut down cleanly after the check.
+
+Evidence and checkpoint SHA-256 provenance are in
+`ros2_ws/validation/policy_smoke/{integration.json,metadata.json,probe.log,launch.log}`.
+The short smoke actor did not achieve recovery in this timeout test. No recovery
+success is claimed from this ROS integration result.

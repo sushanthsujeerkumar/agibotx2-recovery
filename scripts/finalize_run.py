@@ -34,6 +34,8 @@ def main():
             if current["state"] in {"PAUSED","COMPLETED","FAILED"}: break
             proc=Path(f"/proc/{current['pid']}/cmdline")
             if not proc.exists() or b"x2_recovery.train" not in proc.read_bytes():
+                current=json.loads((run/"status.json").read_text())
+                if current["state"] in {"PAUSED","COMPLETED","FAILED"}: break
                 raise RuntimeError("Training process ended without a final status; inspect console.log")
             time.sleep(60)
         if current["state"] == "FAILED":
@@ -52,7 +54,7 @@ def main():
         if a.video: command.append("--video")
         with (dest/"evaluation.log").open('w') as log:
             subprocess.run(command,cwd=root,stdout=log,stderr=subprocess.STDOUT,check=True)
-        subprocess.run([sys.executable,"-m","x2_recovery.plot",str(run),"--output",str(dest/"training_curve.png")],cwd=root,check=True)
+        subprocess.run([sys.executable,"-m","x2_recovery.plot",str(dest),"--output",str(dest/"training_curve.png")],cwd=root,check=True)
         summary=json.loads((dest/"evaluation/summary.json").read_text())
         manifest={"run_directory":str(run),"iteration":meta["iteration"],
                   "environment_steps":meta["environment_steps"],"training_wall_time_s":current.get('wall_time_s'),
