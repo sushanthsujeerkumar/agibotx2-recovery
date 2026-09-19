@@ -1,0 +1,157 @@
+"""Batched X2 recovery using mjlab's MuJoCo Warp simulation backend."""
+from __future__ import annotations
+
+import numpy as np
+import mujoco
+import torch
+import warp as wp
+from tensordict import TensorDict
+from mjlab.sim import Simulation, SimulationCfg, MujocoCfg
+from .common import (ModelInfo, CONTROL_DT, EPISODE_SECONDS, HOLD_SECONDS,
+                     SUCCESS_TILT, SUCCESS_LINEAR_SPEED, SUCCESS_ANGULAR_SPEED,
+                     CONTACT_FORCE, reset_cpu)
+
+
+class X2RecoveryEnv:
+    def __init__(self, num_envs=256, device="cuda:0", seed=0):
+        self.device = torch.device(device)
+        self.num_envs = num_envs
+        self.info = ModelInfo()
+        self.num_actions = self.info.model.nu
+        self.num_obs = self.num_actions * 3 + 13
+        self.num_privileged_obs = self.num_obs
+        self.max_episode_length = round(EPISODE_SECONDS / CONTROL_DT)
+        self.cfg = {"physics_dt": self.info.model.opt.timestep, "control_dt": CONTROL_DT,
+                    "episode_seconds": EPISODE_SECONDS, "hold_seconds": HOLD_SECONDS,
+                    "reset": "settled_supine", "seed": seed, "num_envs": num_envs,
+                    "reward_version": 1, "is_finite_horizon": False}
+        torch.manual_seed(seed)
+        np.random.seed(seed)
+        wp.init()
+        if self.device.type == "cuda":
+            wp.set_stream(wp.stream_from_torch(torch.cuda.current_stream(self.device)))
+        cfg = SimulationCfg(nconmax=128, njmax=512,
+            mujoco=MujocoCfg(timestep=self.info.model.opt.timestep,
+                            iterations=30, ls_iterations=10, tolerance=1e-6,
+                            integrator="implicitfast", cone="pyramidal", solver="newton"))
+        self.sim = Simulation(num_envs=num_envs, cfg=cfg, model=self.info.model, device=str(self.device))
+        self.qpos = wp.to_torch(self.sim.wp_data.qpos)
+        self.qvel = wp.to_torch(self.sim.wp_data.qvel)
+        self.ctrl = wp.to_torch(self.sim.wp_data.ctrl)
+        self.xmat = wp.to_torch(self.sim.wp_data.xmat)
+        self.sensors = wp.to_torch(self.sim.wp_data.sensordata)
+        self.qadr = torch.as_tensor(self.info.qadr, device=self.device, dtype=torch.long)
+        self.vadr = torch.as_tensor(self.info.vadr, device=self.device, dtype=torch.long)
+        for name in ["lower", "upper", "effort", "velocity", "kp", "kd", "nominal", "action_scale", "action_positive", "action_negative"]:
+            setattr(self, name, torch.as_tensor(getattr(self.info, name), device=self.device, dtype=torch.float32))
+        m = self.info.model
+        meta = self.info.metadata
+        self.foot_sensor = torch.as_tensor([m.sensor_adr[i] for i in meta["foot_sensor_indices"]], device=self.device)
+        self.other_sensor = torch.as_tensor([m.sensor_adr[i] for i in meta["nonfoot_sensor_indices"]], device=self.device)
+        self.pelvis_id = m.body("pelvis").id
+        self.episode_length_buf = torch.zeros(num_envs, dtype=torch.long, device=self.device)
+        self.hold_buf = torch.zeros(num_envs, dtype=torch.long, device=self.device)
+        self.previous_action = torch.zeros((num_envs, self.num_actions), device=self.device)
+        self.episode_reward = torch.zeros(num_envs, device=self.device)
+        self.previous_height = torch.zeros(num_envs, device=self.device)
+        self.max_height = torch.zeros(num_envs, device=self.device)
+        self.reset_q, self.reset_v = self._reset_bank(seed)
+        self.reset()
+
+    def _reset_bank(self, seed):
+        d = mujoco.MjData(self.info.model)
+        qs, vs = [], []
+        for i in range(16):
+            reset_cpu(self.info, d, seed+i)
+            qs.append(d.qpos.copy())
+            vs.append(d.qvel.copy())
+        return (torch.as_tensor(np.stack(qs), dtype=torch.float32, device=self.device),
+                torch.as_tensor(np.stack(vs), dtype=torch.float32, device=self.device))
+
+    def reset(self, ids=None):
+        if ids is None:
+            ids = torch.arange(self.num_envs, device=self.device)
+        self.sim.reset(ids)
+        choice = torch.randint(len(self.reset_q), (len(ids),), device=self.device)
+        self.qpos[ids] = self.reset_q[choice]
+        self.qvel[ids] = self.reset_v[choice]
+        self.ctrl[ids] = 0
+        self.previous_action[ids] = 0
+        self.episode_length_buf[ids] = 0
+        self.hold_buf[ids] = 0
+        self.episode_reward[ids] = 0
+        self.previous_height[ids] = self.qpos[ids, 2]
+        self.max_height[ids] = self.qpos[ids, 2]
+        self.sim.forward()
+        return self.get_observations(), {}
+
+    def support_forces(self):
+        return torch.cat([self.sensors[:, self.foot_sensor],
+                          self.sensors[:, self.other_sensor].sum(dim=-1, keepdim=True)], dim=-1)
+
+    def get_observations(self):
+        r = self.xmat[:, self.pelvis_id].reshape(-1, 3, 3)
+        gravity = -r[:, 2, :]
+        local_vel = torch.bmm(r.transpose(1, 2), self.qvel[:, :3, None]).squeeze(-1)
+        obs = torch.cat([self.qpos[:, self.qadr] - self.nominal,
+                         self.qvel[:, self.vadr] * 0.1, gravity, local_vel,
+                         self.qvel[:, 3:6] * .25, self.qpos[:, 2:3],
+                         (self.support_forces() > CONTACT_FORCE).float(), self.previous_action], dim=-1)
+        obs = torch.nan_to_num(obs, nan=0., posinf=10., neginf=-10.).clamp(-10, 10)
+        return TensorDict({"actor": obs, "critic": obs}, batch_size=[self.num_envs])
+
+    def step(self, actions):
+        actions = actions.detach().clamp(-1, 1)
+        scale = torch.where(actions >= 0, self.action_positive, self.action_negative)
+        target = (self.nominal + actions * scale).clamp(self.lower, self.upper)
+        for _ in range(self.info.substeps):
+            v = self.qvel[:, self.vadr]
+            tau = (self.kp * (target-self.qpos[:, self.qadr]) - self.kd*v).clamp(-self.effort, self.effort)
+            tau = torch.where(((v >= self.velocity) & (tau > 0)) | ((v <= -self.velocity) & (tau < 0)), 0., tau)
+            self.ctrl.copy_(tau)
+            self.sim.step()
+        self.episode_length_buf += 1
+        height = self.qpos[:, 2]
+        up = self.xmat[:, self.info.torso_id].reshape(-1, 3, 3)[:, 2, 2]
+        forces = self.support_forces()
+        feet = (forces[:, :2] > CONTACT_FORCE).all(dim=-1)
+        other_clear = forces[:, 2] <= CONTACT_FORCE
+        linear = self.qvel[:, :3].norm(dim=-1)
+        angular = self.qvel[:, 3:6].norm(dim=-1)
+        standing = ((height >= self.info.height_threshold) & (up >= np.cos(SUCCESS_TILT)) &
+                    feet & other_clear & (linear < SUCCESS_LINEAR_SPEED) & (angular < SUCCESS_ANGULAR_SPEED))
+        self.hold_buf = torch.where(standing, self.hold_buf+1, 0)
+        success = self.hold_buf >= round(HOLD_SECONDS/CONTROL_DT)
+        upright = ((up+1.)*.5).clamp(0, 1)
+        h = (height/self.info.standing[2]).clamp(0, 1.1)
+        progress = (height-self.previous_height).clamp(-.1, .1)/CONTROL_DT
+        effort = ((self.ctrl/self.effort)**2).mean(dim=-1)
+        action_change = ((actions-self.previous_action)**2).mean(dim=-1)
+        speed_excess = ((self.qvel[:,self.vadr].abs()/self.velocity-1).clamp_min(0)**2).mean(dim=-1)
+        joint_limit = (((self.lower+.03-self.qpos[:,self.qadr]).clamp_min(0) +
+                        (self.qpos[:,self.qadr]-self.upper+.03).clamp_min(0))**2).mean(dim=-1)
+        reward = (2.*h*upright + upright + .5*progress + 1.*feet.float()*h*upright +
+                  4.*standing.float() - .03*effort - .03*action_change - .1*speed_excess - joint_limit)*CONTROL_DT
+        reward += 10.*success.float()
+        invalid = (~torch.isfinite(self.qpos).all(dim=-1) | ~torch.isfinite(self.qvel).all(dim=-1) |
+                   (self.qvel.abs().amax(dim=-1)>150) | (height<-.05))
+        reward = torch.nan_to_num(reward, nan=-1., posinf=-1., neginf=-1.) - invalid.float()
+        timeout = self.episode_length_buf >= self.max_episode_length
+        done = success | timeout | invalid
+        self.episode_reward += reward
+        self.max_height = torch.maximum(self.max_height, torch.nan_to_num(height, nan=0., posinf=0., neginf=0.))
+        self.previous_height.copy_(height)
+        self.previous_action.copy_(actions)
+        extras = {"time_outs": timeout & ~success & ~invalid}
+        ids = torch.nonzero(done, as_tuple=False).flatten()
+        if len(ids):
+            extras["log"] = {"recovery/success_rate": success[ids].float(),
+                              "recovery/invalid_rate": invalid[ids].float(),
+                              "recovery/max_pelvis_height": self.max_height[ids],
+                              "recovery/episode_return": self.episode_reward[ids],
+                              "recovery/episode_seconds": self.episode_length_buf[ids]*CONTROL_DT}
+            self.reset(ids)
+        return self.get_observations(), reward, done.long(), extras
+
+    def close(self):
+        pass
