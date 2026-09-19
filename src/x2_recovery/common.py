@@ -129,7 +129,7 @@ def reset_cpu(info, data, seed=0):
     data.qvel[:] = 0
     mujoco.mj_forward(info.model, data)
     target = data.qpos[info.qadr].copy()
-    for _ in range(round(0.5 / info.model.opt.timestep)):
+    for _ in range(round(1.0 / info.model.opt.timestep)):
         data.ctrl[:] = info.torque(data.qpos[info.qadr], data.qvel[info.vadr], target)
         mujoco.mj_step(info.model, data)
     # Settling is outside the timed episode; retain physically attained velocities.

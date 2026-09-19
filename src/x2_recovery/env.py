@@ -29,7 +29,9 @@ class X2RecoveryEnv:
         np.random.seed(seed)
         wp.init()
         if self.device.type == "cuda":
-            wp.set_stream(wp.stream_from_torch(torch.cuda.current_stream(self.device)))
+            # Use Warp's owned non-default stream for both libraries and graph capture.
+            self._torch_stream = torch.cuda.ExternalStream(wp.get_stream(str(self.device)).cuda_stream, device=self.device)
+            torch.cuda.set_stream(self._torch_stream)
         cfg = SimulationCfg(nconmax=128, njmax=512,
             mujoco=MujocoCfg(timestep=self.info.model.opt.timestep,
                             iterations=30, ls_iterations=10, tolerance=1e-6,

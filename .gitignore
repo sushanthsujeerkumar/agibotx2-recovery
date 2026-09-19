@@ -10,3 +10,5 @@ artifacts/videos/
 *.egg-info/
 
 assets/x2/meshes/
+
+.tools/

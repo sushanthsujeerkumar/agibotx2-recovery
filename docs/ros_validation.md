@@ -25,6 +25,15 @@ From the repository root, first install the shared simulator project according t
 the main README. ROS 2 Jazzy uses Python 3.12. Use the same Python version for the
 project virtual environment and expose its packages to ROS before launching.
 
+The wrapper performs the build, sources ROS/the workspace, and adds the simulator
+environment to `PYTHONPATH` automatically:
+
+```bash
+scripts/ros_launch.sh controller:=scripted render:=true
+```
+
+Equivalent manual commands:
+
 ```bash
 source /opt/ros/jazzy/setup.bash
 export PYTHONPATH="$PWD/src:$PWD/.venv/lib/python3.12/site-packages:${PYTHONPATH:-}"
@@ -74,8 +83,18 @@ colcon test-result --verbose
 Unit tests explicitly substitute a small runtime in test code only, verifying
 acceptance-before-execution, rejection while queued, deadlines, errors, invalid
 frames, timestamp conversion, and closing the simulator. These unit tests do not
-constitute simulator-integration evidence. The recorded real-simulator build,
-launch and CLI outcomes will be appended below after the shared runtime is ready.
+constitute simulator-integration evidence. Real simulator evidence is recorded
+separately below. Reproduce the full fresh-build and live integration check with:
+
+```bash
+scripts/validate_ros.sh
+```
+
+The script uses a separate ROS domain (71 by default), a headless MuJoCo worker,
+12 wall seconds per attempt and a 60-second simulation safeguard. It creates a
+new build/install tree and evidence directory each run. Set `X2_ROS_DOMAIN_ID`,
+`X2_ROS_TIMEOUT_SECONDS`, or `X2_ROS_EVIDENCE_DIR` to override these choices. It
+does not interact with a separately opened viewer.
 
 ## Recorded checks, 2026-09-20
 
@@ -87,8 +106,42 @@ launch and CLI outcomes will be appended below after the shared runtime is ready
   `ros2_ws/validation/final_fresh_launch.log`.
 - `colcon test` and `colcon test-result --verbose`: 19 tests, zero errors,
   zero failures, zero skipped. The tests run against ROS 2 Jazzy/Python 3.12.3.
-- Episode execution, real simulator telemetry, busy rejection via CLI, and
-  timeout integration are pending completion of the shared simulator runtime.
+
+### Real simulator integration: passed
+
+The complete `scripts/validate_ros.sh` run passed on 2026-09-20 local time
+(2026-09-19 23:13 UTC). Evidence is in
+`ros2_ws/validation/20260919T231348Z-15524/`.
+
+| Check | Observed result | Evidence |
+| --- | --- | --- |
+| Fresh build | One package built successfully in 1.61 s | `build.log` |
+| Unit tests | 19 passed, zero errors/failures/skips | `test_results.log`, `tests.log` |
+| One launch command | Both required nodes started | `launch.log` |
+| Acceptance before execution | `success=true` in 0.00085 s; first telemetry arrived afterwards | `integration.json` |
+| Concurrent request | Immediate second request returned `success=false` | `integration.json` |
+| Actual simulator telemetry | 516 messages, 31 named joints, finite changing positions | `integration.json` |
+| Simulation timestamps | Strictly increasing from 0.02 to 10.32 seconds | `integration.json` |
+| Configured wall timeout | `RUNNING` then `FAILED` at 12.019 wall seconds | `integration.json`, `launch.log` |
+| Literal CLI start call | `Trigger_Response(success=True, ...)` | `cli_accepted.log` |
+| Literal CLI busy call | `Trigger_Response(success=False, ...)` | `cli_busy.log` |
+| Literal CLI live joint echo | Named positions and simulator timestamp received | `cli_joint_states.log` |
+| Literal CLI final status echo | `data: FAILED` | `cli_final_status.log` |
+| Clean shutdown | Both nodes exited cleanly; no episode process remained | `launch.log` |
+
+The scripted baseline moved the real robot but did not achieve recovery during
+these deliberately short timeout checks. `FAILED` is the expected result here,
+not a claimed successful recovery. This validates ROS/simulator integration; the
+five-episode learned-policy evaluation is a separate experiment.
+
+Representative telemetry from the second real episode:
+
+```text
+status=RUNNING; left_hip_pitch_joint=-1.41117 rad; sim_time=2.880 s
+status=RUNNING; left_hip_pitch_joint=-0.48975 rad; sim_time=6.880 s
+Recovery completed: wall-clock timeout (includes simulator startup)
+status=FAILED; left_hip_pitch_joint=-0.17509 rad; sim_time=10.600 s
+```
 
 The real-simulator probe is available for the final integration pass:
 

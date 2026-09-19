@@ -26,3 +26,27 @@
 [telemetry_node-2] [INFO] [1789859647.146279278] [x2_telemetry]: Status: FAILED
 [recovery_node-1] [INFO] [1789859647.146357467] [x2_recovery]: Recovery completed: wall-clock timeout (includes simulator startup)
 [telemetry_node-2] [INFO] [1789859647.423784579] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.17357 rad; sim_time=10.320 s
+[recovery_node-1] [INFO] [1789859648.146253406] [x2_recovery]: Recovery status: RUNNING
+[telemetry_node-2] [INFO] [1789859648.146710867] [x2_telemetry]: Status: RUNNING
+[telemetry_node-2] [INFO] [1789859648.423998435] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789859649.423851575] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789859650.424048306] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.87858 rad; sim_time=0.880 s
+[telemetry_node-2] [INFO] [1789859651.423912284] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.36120 rad; sim_time=1.880 s
+[telemetry_node-2] [INFO] [1789859652.423850746] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.41117 rad; sim_time=2.880 s
+[telemetry_node-2] [INFO] [1789859653.423896624] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.37746 rad; sim_time=3.880 s
+[telemetry_node-2] [INFO] [1789859654.424131340] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.11253 rad; sim_time=4.880 s
+[telemetry_node-2] [INFO] [1789859655.423840448] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.92957 rad; sim_time=5.880 s
+[telemetry_node-2] [INFO] [1789859656.423733189] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.48975 rad; sim_time=6.880 s
+[telemetry_node-2] [INFO] [1789859657.423781857] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.17224 rad; sim_time=7.880 s
+[telemetry_node-2] [INFO] [1789859658.423853024] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.16456 rad; sim_time=8.880 s
+[telemetry_node-2] [INFO] [1789859659.423836459] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.17105 rad; sim_time=9.880 s
+[recovery_node-1] [INFO] [1789859660.146236374] [x2_recovery]: Recovery status: FAILED
+[telemetry_node-2] [INFO] [1789859660.146537988] [x2_telemetry]: Status: FAILED
+[recovery_node-1] [INFO] [1789859660.146552466] [x2_recovery]: Recovery completed: wall-clock timeout (includes simulator startup)
+[telemetry_node-2] [INFO] [1789859660.423845931] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.17509 rad; sim_time=10.600 s
+[telemetry_node-2] [INFO] [1789859661.423839597] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.17509 rad; sim_time=10.600 s
+[telemetry_node-2] [INFO] [1789859662.423798872] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.17509 rad; sim_time=10.600 s
+[telemetry_node-2] [INFO] [1789859663.423890042] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.17509 rad; sim_time=10.600 s
+[telemetry_node-2] [INFO] [1789859664.423879553] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.17509 rad; sim_time=10.600 s
+[INFO] [recovery_node-1]: process has finished cleanly [pid 15790]
+[INFO] [telemetry_node-2]: process has finished cleanly [pid 15791]

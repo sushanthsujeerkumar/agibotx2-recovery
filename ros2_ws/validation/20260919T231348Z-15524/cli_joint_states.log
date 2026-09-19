@@ -1,0 +1,72 @@
+header:
+  stamp:
+    sec: 1
+    nanosec: 100000000
+  frame_id: ''
+name:
+- left_hip_pitch_joint
+- left_hip_roll_joint
+- left_hip_yaw_joint
+- left_knee_joint
+- left_ankle_pitch_joint
+- left_ankle_roll_joint
+- right_hip_pitch_joint
+- right_hip_roll_joint
+- right_hip_yaw_joint
+- right_knee_joint
+- right_ankle_pitch_joint
+- right_ankle_roll_joint
+- waist_yaw_joint
+- waist_pitch_joint
+- waist_roll_joint
+- left_shoulder_pitch_joint
+- left_shoulder_roll_joint
+- left_shoulder_yaw_joint
+- left_elbow_joint
+- left_wrist_yaw_joint
+- left_wrist_pitch_joint
+- left_wrist_roll_joint
+- right_shoulder_pitch_joint
+- right_shoulder_roll_joint
+- right_shoulder_yaw_joint
+- right_elbow_joint
+- right_wrist_yaw_joint
+- right_wrist_pitch_joint
+- right_wrist_roll_joint
+- head_yaw_joint
+- head_pitch_joint
+position:
+- -1.0956671928550341
+- -0.002136271741433228
+- 0.0003552091100350682
+- 1.6608332011596514
+- -0.14886678650916663
+- -0.002589227629323327
+- -1.0955350317101074
+- 0.002129226543915186
+- 0.0002824313985624832
+- 1.6631613429261556
+- -0.1469537217024318
+- 0.002458321553150481
+- 0.0008486227317800456
+- 0.10970979315655344
+- 0.0022245104847634016
+- -0.390986311911357
+- 0.05995204986216908
+- -0.0015736430529054843
+- -0.7326206353541665
+- 0.0003305265731250859
+- 0.028900406599180146
+- 0.0003396450204564394
+- -0.39066467806683963
+- -0.060220829874310045
+- 0.0018001815920993
+- -0.7323433864638028
+- -0.000735654749971352
+- 0.028673862622943382
+- 0.0027314718087862997
+- -0.00018130044241104664
+- -0.004283367035230762
+velocity: []
+effort: []
+---
