@@ -6,15 +6,25 @@ Private GitHub: https://github.com/sushanthsujeerkumar/hrs-x2-recovery
 User authorized full local build, visible simulator and economical timed monitoring.
 Cloud is NOT authorized to start in this phase; report local outcome and next plan first.
 
-## Running experiment
+## Active experiment / intervention
 
-- Initial real PPO: artifacts/runs/local (512 environments, seed0, one-hour max-seconds).
-- Read process.json for PID and exact start/command, status.json for atomic current status.
-- Training started successfully; >1 million environment steps in first minute, ~22k steps/s including PPO, 0 invalid episode rate, no recovery successes yet.
-- GPU memory ~1.65GB at early checkpoint with visible CPU viewer; RTX5060 8GB.
-- Native visible viewer: x2_recovery.watch, reloads actor_latest.pt between 15-second episodes. It began with scripted baseline and switched to real trained actor. Log is work/viewer.log in parent workspace.
-- Main training stops after one hour at a completed PPO update with saved checkpoint/export.
-- Checkpoints every250 iterations (~2-3min early). Do not continuously poll; heartbeat check-x2-local-training every15min.
+The initial local run was stopped gracefully after 1450.8s (~24.2min), iteration 2803, 34,443,264 steps because learned Gaussian action std grew to 11.2 and nearly all raw deterministic outputs saturated the action clamp. Frozen checkpoint 2501 reached feet/upright/height but kept moving. Final initial policy evaluation is COMPLETE: 0/5 successes, all timeouts, no invalid physics. Evidence: artifacts/submission/local_initial (checkpoint, actor, config, progress, curve, five videos + JSON, hash manifest). This is partial recovery, not stable standing.
+
+The ONE targeted correction is now RUNNING: fresh PPO variant stability with bounded std .05–.6, initial .4, entropy 1e-4; reward version 2 adds gated dense base-velocity stabilization and a mild upright posture penalty. We did not warm-start the saturated baseline outputs.
+
+- Active directory: artifacts/runs/local_stability. Read its status.json and process.json (PID 23009; verify identity, PID can be reused).
+- Command: ./TRAIN_STABILITY.sh. 512 environments, seed 0, maximum 5400 seconds (90 minutes), checkpoint every 250 iterations.
+- GPU smoke passed: 128 environments, five PPO updates, exported actor CPU rollout; independent runner checks cover updates/export and standard-deviation bounds.
+- Native viewer PID 23146 watches local_stability; parent work/viewer-stability.log and process JSON.
+- Lightweight finalizer PID 23147 sleeps 60 seconds between status checks without AI usage. It will save artifacts/submission/local_stability; inspect finalization.json before duplicating work. Parent work/finalizer-stability.log and process JSON.
+- Heartbeat check-x2-local-training updated to check this run every 15 minutes. No further method revisions without user direction; total local training <=3 hours. Initial + planned revised run is about 114 minutes.
+- Initial revised throughput ~22k environment steps/s; std ~0.41. These are health measures, not recovery evidence.
+
+## Initial experiment (preserved)
+
+- Original PPO: artifacts/runs/local (512 environments, seed 0). Gracefully stopped at 24.2 minutes after diagnosing behavior; full original config and evidence preserved.
+- Trained throughput ~22–24k steps/s including PPO; zero invalid episode rate. GPU memory ~1.65GB with visible CPU viewer.
+- Finalizer completed artifacts/submission/local_initial: 0/5 stable recoveries. All ended upright at standing height, but all failed linear/angular speed thresholds; both feet supported in 3/5 final frames. Do not label this successful recovery.
 
 ## Completed correctness evidence
 
@@ -29,16 +39,13 @@ Cloud is NOT authorized to start in this phase; report local outcome and next pl
 
 ## Remaining work
 
-Automatic finalizer scripts/finalize_run.py is already running for local: it sleeps60s with no AI, then copies final checkpoint/actor and runs five-episode video evaluation + plot under artifacts/submission/local_initial. Check its finalization.json before duplicating work. Smoke finalization passed (0/5 expected for five-update smoke policy).
-
-1. Monitor real learning and occasionally evaluate a fixed checkpoint (NOT mutable actor_latest.pt midway across an evaluation). Preserve checkpoint identity.
-2. At one-hour stop evaluate final actor 5 seeds1001..1005,15s each, exact feet-only support2s rule; make training reward plot.
-3. If clearly stalled, inspect videos/reward and allow at most one targeted local correction; total local training cap3h. Preserve first run; new directory if reward/model changes. Do not blindly extend or rent cloud.
-4. Final policy via ROS: launch scripts/ros_launch.sh controller:=policy checkpoint:=ABSOLUTE_ACTOR_PATH; use probe + timeout. Existing script validate_ros.sh defaults scripted.
-Fresh source checkout smoke also passed: three physics tests and one exported-policy simulator step, using the existing locked Python environment (a second complete dependency download was intentionally not repeated). Policy ROS smoke also passed (471 real frames, busy rejection and configured timeout); see ros2_ws/validation/policy_smoke.
-
-5. Save final/best checkpoint+actor under artifacts/submission (runs ignored by git), config and progress log, plot and evaluation results. Include selected video (avoid oversized git files); README honest x/5, failure analysis, training walltime.
-6. Fresh checkout reproduction validation. Update README/results/docs then meaningful commit+push. Pause heartbeat after final local report and next-step recommendation.
+1. Monitor revised real learning economically; occasionally evaluate a fixed checkpoint, never a mutable actor_latest.pt across an evaluation. Preserve checkpoint identity.
+2. At revised 90-minute stop, use the automatic finalizer output: five seeds 1001–1005, 15 seconds each, exact feet-only support for two seconds, reward plot and frozen artifacts.
+3. Inspect videos and success checks. One targeted correction has already been used. Do not blindly extend or rent cloud.
+4. Validate selected final policy through ROS: scripts/ros_launch.sh controller:=policy checkpoint:=ABSOLUTE_ACTOR_PATH, then actual service/topic probe and timeout. Existing policy smoke passed (471 frames, busy rejection, configured timeout), but run the final artifact too. See docs/ros_validation.md and ros2_ws/validation/policy_smoke.
+5. Update README/results/docs with final x/5, failure analysis, actual wall time, reproducible commands and selected artifact. Commit/push evidence; runs are ignored, submission evidence is tracked.
+6. Fresh source checkout smoke already passed: three physics tests and one exported-policy simulator step using the existing locked Python environment. Final validation should exercise the selected actor from a clean source checkout, without another multi-GB dependency download.
+7. Finish ready-to-run deliverable, stop project-owned active simulator/training processes cleanly, pause heartbeat, and report final local result plus the next plan before any cloud action.
 
 ## Tool paths / environment
 

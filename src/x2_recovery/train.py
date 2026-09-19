@@ -27,15 +27,19 @@ import torch
 from rsl_rl.runners import OnPolicyRunner
 
 
-def ppo_config(seed: int = 0, steps_per_env: int = 24, save_interval: int = 50) -> dict:
+def ppo_config(seed: int = 0, steps_per_env: int = 24, save_interval: int = 50,
+               variant: str = "baseline") -> dict:
     """Conservative feed-forward PPO defaults, shared by training and inference."""
+    if variant not in {"baseline", "stability"}:
+        raise ValueError(f"Unknown PPO variant: {variant}")
     model = {
         "class_name": "MLPModel",
         "hidden_dims": [256, 128, 128],
         "activation": "elu",
         "obs_normalization": True,
     }
-    return {
+    cfg = {
+        "variant": variant,
         "seed": seed,
         "num_steps_per_env": steps_per_env,
         "save_interval": save_interval,
@@ -70,6 +74,10 @@ def ppo_config(seed: int = 0, steps_per_env: int = 24, save_interval: int = 50) 
             "symmetry_cfg": None,
         },
     }
+    if variant == "stability":
+        cfg["actor"]["distribution_cfg"].update(init_std=0.4, std_range=(0.05, 0.6))
+        cfg["algorithm"]["entropy_coef"] = 1e-4
+    return cfg
 
 
 def _json_default(value: Any) -> Any:
@@ -292,6 +300,8 @@ def make_parser() -> argparse.ArgumentParser:
     parser.add_argument("--num-envs", type=int, default=256)
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--variant", choices=["baseline", "stability"], default="baseline",
+                        help="Configuration for a new run; resume uses the saved variant.")
     parser.add_argument("--max-iterations", type=int, default=3000, help="Total target, including iterations already trained.")
     parser.add_argument("--steps-per-env", type=int, default=24)
     parser.add_argument("--save-interval", type=int, default=50)
@@ -326,13 +336,21 @@ def main(argv: list[str] | None = None) -> None:
     torch.manual_seed(args.seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(args.seed)
-    cfg = ppo_config(args.seed, args.steps_per_env, args.save_interval)
+    cfg = ppo_config(args.seed, args.steps_per_env, args.save_interval, args.variant)
     if args.resume:
         checkpoint = torch.load(args.resume, map_location="cpu", weights_only=False)
         cfg = copy.deepcopy(checkpoint["train_cfg"])
         cfg["save_interval"] = args.save_interval
         cfg["logger"] = "tensorboard"
+        saved_reward_version = checkpoint.get("environment_cfg", {}).get("reward_version", 1)
+        if env_kwargs.get("reward_version", saved_reward_version) != saved_reward_version:
+            raise SystemExit("Resume must preserve checkpoint reward_version; start a separate run for a new experiment")
+        env_kwargs["reward_version"] = saved_reward_version
         del checkpoint
+    elif args.variant == "stability":
+        if env_kwargs.get("reward_version", 2) != 2:
+            raise SystemExit("The stability variant requires reward_version=2")
+        env_kwargs["reward_version"] = 2
     from x2_recovery.env import X2RecoveryEnv
 
     _atomic_json(output / "status.json", {

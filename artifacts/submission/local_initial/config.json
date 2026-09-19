@@ -1,0 +1,94 @@
+{
+  "training": {
+    "seed": 0,
+    "num_steps_per_env": 24,
+    "save_interval": 250,
+    "obs_groups": {
+      "actor": [
+        "actor"
+      ],
+      "critic": [
+        "critic"
+      ]
+    },
+    "logger": "tensorboard",
+    "check_for_nan": true,
+    "actor": {
+      "class_name": "MLPModel",
+      "hidden_dims": [
+        256,
+        128,
+        128
+      ],
+      "activation": "elu",
+      "obs_normalization": true,
+      "distribution_cfg": {
+        "class_name": "GaussianDistribution",
+        "init_std": 0.6,
+        "std_type": "log"
+      }
+    },
+    "critic": {
+      "class_name": "MLPModel",
+      "hidden_dims": [
+        256,
+        128,
+        128
+      ],
+      "activation": "elu",
+      "obs_normalization": true
+    },
+    "algorithm": {
+      "class_name": "PPO",
+      "num_learning_epochs": 5,
+      "num_mini_batches": 4,
+      "learning_rate": 0.001,
+      "schedule": "adaptive",
+      "gamma": 0.99,
+      "lam": 0.95,
+      "entropy_coef": 0.01,
+      "desired_kl": 0.01,
+      "max_grad_norm": 1.0,
+      "value_loss_coef": 1.0,
+      "use_clipped_value_loss": true,
+      "clip_param": 0.2,
+      "normalize_advantage_per_mini_batch": false,
+      "rnd_cfg": null,
+      "symmetry_cfg": null
+    }
+  },
+  "environment": {
+    "physics_dt": 0.002,
+    "control_dt": 0.02,
+    "episode_seconds": 15.0,
+    "hold_seconds": 2.0,
+    "reset": "settled_supine",
+    "seed": 0,
+    "num_envs": 512,
+    "reward_version": 1,
+    "is_finite_horizon": false
+  },
+  "arguments": {
+    "num_envs": 512,
+    "device": "cuda:0",
+    "seed": 0,
+    "max_iterations": 100000,
+    "steps_per_env": 24,
+    "save_interval": 250,
+    "print_interval": 100,
+    "max_seconds": 3600.0,
+    "output": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/local",
+    "resume": null,
+    "env_kwargs": "{}",
+    "torch_threads": 4
+  },
+  "versions": {
+    "torch": "2.11.0",
+    "mujoco": "3.11.0",
+    "mujoco-warp": "3.11.0",
+    "warp-lang": "1.17.0",
+    "rsl-rl-lib": "5.4.2",
+    "mjlab": "1.6.0"
+  },
+  "started_unix": 1789859939.3341756
+}

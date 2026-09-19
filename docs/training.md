@@ -38,6 +38,71 @@ deviation 0.6, five update epochs, four minibatches, adaptive learning rate
 The actor standard deviation uses a logarithmic parameterization to remain
 positive. `config.json` records the actual configuration and package versions.
 
+## Targeted stability revision
+
+The original configuration remains available as `--variant baseline` (the
+default), including initial Gaussian standard deviation 0.6 and entropy
+coefficient 0.01. Its checkpoint and logs are preserved in
+`artifacts/runs/local`; they are not overwritten by the revision.
+
+The first experiment learned to reach an upright, foot-supported posture, but
+the inspected episode still moved too quickly to pass the two-second stability
+check. Its exploration also became excessive: at checkpoint 2501 the per-joint
+Gaussian standard deviations ranged from 1.62 to 13.0, and 29–30 of 31 raw
+deterministic action means exceeded the executed [-1,1] range in inspected
+states. Clamping such outputs makes many different network outputs produce
+the same saturated joint target.
+
+RSL-RL's Gaussian entropy is calculated on the unbounded sampled distribution,
+before environment action clipping. Its default standard-deviation bounds are
+1e-6 to 1e6. Increasing that entropy can therefore increase latent noise without
+providing useful additional physical exploration. The PPO likelihoods themselves
+remain consistent with the recorded raw samples; this is an exploration-design
+problem rather than an incorrect likelihood implementation. PPO normalizes
+advantages, so multiplying dense rewards by timestep does not by itself prove
+that the entropy gradient dominates.
+
+The **stability variant** starts a fresh policy with initial standard deviation
+0.4, effective standard-deviation bounds [0.05,0.6], and entropy coefficient
+0.0001. It selects environment reward version 2, which adds the separately
+documented stability shaping. The original network topology, PPO update
+settings, action mapping and success test remain the same.
+
+```bash
+python -m x2_recovery.train --variant stability --num-envs 512 --seed 0 --max-iterations 100000 --max-seconds 5400 --save-interval 250 --output artifacts/runs/local_stability
+```
+
+The same 512-environment, 90-minute configuration is available through
+[`./TRAIN_STABILITY.sh`](../TRAIN_STABILITY.sh), which also sets CPU thread
+limits and a quieter print interval. This is the currently running corrected
+experiment; its final evaluation remains pending. The generic `runs/local`
+examples elsewhere in this document describe independent baseline runs.
+
+`--variant stability` passes `reward_version=2` in the environment constructor
+kwargs. It is also valid to state this explicitly with
+`--env-kwargs '{"reward_version":2}'`. A different reward version is rejected
+for this variant. The fresh run avoids inheriting the original actor's very
+large saturated means and does not alter its saved checkpoints. This is a
+targeted correction, not a controlled single-variable ablation or a guarantee
+of successful recovery.
+
+Resume a stability run using its own checkpoint:
+
+```bash
+python -m x2_recovery.train --resume artifacts/runs/local_stability/latest.pt --num-envs 512 --max-iterations 100000 --max-seconds 5400 --save-interval 250 --output artifacts/runs/local_stability
+```
+
+The launcher equivalent is
+`./TRAIN_STABILITY.sh --resume artifacts/runs/local_stability/latest.pt`.
+The wall-clock budget applies to each invocation. Monitor the active corrected
+run with `watch -n 300 cat artifacts/runs/local_stability/status.json`, and point
+the local viewer at `--directory artifacts/runs/local_stability`.
+
+On resume, the saved PPO variant and environment reward version take priority;
+an explicitly conflicting reward version is rejected. Standard-deviation bounds
+constrain effective sampling noise, not the Gaussian mean. Continue checking
+actual movement, action saturation and the final deterministic success test.
+
 Compare 128, 256 and 512 environments using fresh output directories. Compare
 steady-state `steps_per_second`, memory consumption and actual behaviour;
 changing batch size does not guarantee faster learning.

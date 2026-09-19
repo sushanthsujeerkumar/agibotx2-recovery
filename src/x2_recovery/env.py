@@ -13,7 +13,7 @@ from .common import (ModelInfo, CONTROL_DT, EPISODE_SECONDS, HOLD_SECONDS,
 
 
 class X2RecoveryEnv:
-    def __init__(self, num_envs=256, device="cuda:0", seed=0):
+    def __init__(self, num_envs=256, device="cuda:0", seed=0, reward_version=1):
         self.device = torch.device(device)
         self.num_envs = num_envs
         self.info = ModelInfo()
@@ -21,10 +21,13 @@ class X2RecoveryEnv:
         self.num_obs = self.num_actions * 3 + 13
         self.num_privileged_obs = self.num_obs
         self.max_episode_length = round(EPISODE_SECONDS / CONTROL_DT)
+        if reward_version not in (1, 2):
+            raise ValueError("reward_version must be 1 (baseline) or 2 (stability correction)")
+        self.reward_version = reward_version
         self.cfg = {"physics_dt": self.info.model.opt.timestep, "control_dt": CONTROL_DT,
                     "episode_seconds": EPISODE_SECONDS, "hold_seconds": HOLD_SECONDS,
                     "reset": "settled_supine", "seed": seed, "num_envs": num_envs,
-                    "reward_version": 1, "is_finite_horizon": False}
+                    "reward_version": reward_version, "is_finite_horizon": False}
         torch.manual_seed(seed)
         np.random.seed(seed)
         wp.init()
@@ -134,6 +137,13 @@ class X2RecoveryEnv:
                         (self.qpos[:,self.qadr]-self.upper+.03).clamp_min(0))**2).mean(dim=-1)
         reward = (2.*h*upright + upright + .5*progress + 1.*feet.float()*h*upright +
                   4.*standing.float() - .03*effort - .03*action_change - .1*speed_excess - joint_limit)*CONTROL_DT
+        if self.reward_version == 2:
+            # The first run stood up but kept hopping/travelling. Give a smooth
+            # gradient toward rest before the strict binary success threshold.
+            support_gate = h * upright * feet.float() * other_clear.float()
+            stability = torch.exp(-1.5*linear.square() - .3*angular.square())
+            posture_error = ((self.qpos[:,self.qadr]-self.nominal)**2).mean(dim=-1)
+            reward += (4.*support_gate*stability - .15*h*upright*posture_error)*CONTROL_DT
         reward += 10.*success.float()
         invalid = (~torch.isfinite(self.qpos).all(dim=-1) | ~torch.isfinite(self.qvel).all(dim=-1) |
                    (self.qvel.abs().amax(dim=-1)>150) | (height<-.05))
@@ -151,7 +161,9 @@ class X2RecoveryEnv:
                               "recovery/invalid_rate": invalid[ids].float(),
                               "recovery/max_pelvis_height": self.max_height[ids],
                               "recovery/episode_return": self.episode_reward[ids],
-                              "recovery/episode_seconds": self.episode_length_buf[ids]*CONTROL_DT}
+                              "recovery/episode_seconds": self.episode_length_buf[ids]*CONTROL_DT,
+                              "recovery/terminal_linear_speed": linear[ids],
+                              "recovery/terminal_angular_speed": angular[ids]}
             self.reset(ids)
         return self.get_observations(), reward, done.long(), extras
 

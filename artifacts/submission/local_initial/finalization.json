@@ -1,0 +1,29 @@
+{
+  "state": "COMPLETED",
+  "updated_unix": 1789861420.9271665,
+  "run_directory": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/local",
+  "iteration": 2803,
+  "environment_steps": 34443264,
+  "training_wall_time_s": 1450.8145775509997,
+  "actor_sha256": "d5fc6150312d53b4522b27375ea7c5a6c477c1f88a75acd5e729986dcde65710",
+  "checkpoint_sha256": "c740324d7e4b11958efa31ce3cf35d907e74b84d5b80eef3a0c980ff721892b1",
+  "successes": 0,
+  "episodes": 5,
+  "controller": "learned_policy",
+  "evaluation_command": [
+    "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/.venv/bin/python",
+    "-m",
+    "x2_recovery.evaluate",
+    "--controller",
+    "policy",
+    "--checkpoint",
+    "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/submission/local_initial/actor.pt",
+    "--episodes",
+    "5",
+    "--seed",
+    "1001",
+    "--output",
+    "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/submission/local_initial/evaluation",
+    "--video"
+  ]
+}

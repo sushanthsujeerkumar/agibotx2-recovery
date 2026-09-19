@@ -1,0 +1,114 @@
+{
+  "controller": "policy",
+  "checkpoint": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/submission/local_initial/actor.pt",
+  "episodes": 5,
+  "successes": 0,
+  "results": [
+    {
+      "episode": 1,
+      "seed": 1001,
+      "outcome": "FAILED",
+      "reason": "timeout",
+      "sim_time": 15.000000000001679,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6973373316507285,
+      "max_pelvis_height": 0.8554720172361444,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "episode": 2,
+      "seed": 1002,
+      "outcome": "FAILED",
+      "reason": "timeout",
+      "sim_time": 15.000000000001679,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.7029067919750553,
+      "max_pelvis_height": 0.7702982667499164,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "episode": 3,
+      "seed": 1003,
+      "outcome": "FAILED",
+      "reason": "timeout",
+      "sim_time": 15.000000000001679,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.7038981901366133,
+      "max_pelvis_height": 0.8032448163227911,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "episode": 4,
+      "seed": 1004,
+      "outcome": "FAILED",
+      "reason": "timeout",
+      "sim_time": 15.000000000001679,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6721120113486352,
+      "max_pelvis_height": 0.7451663284899275,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "episode": 5,
+      "seed": 1005,
+      "outcome": "FAILED",
+      "reason": "timeout",
+      "sim_time": 15.000000000001679,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6888086065555871,
+      "max_pelvis_height": 0.8694928829434052,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    }
+  ],
+  "success_spec": {
+    "hold_seconds": 2.0,
+    "tilt_degrees": 14.999999999999998,
+    "pelvis_height_min": 0.6048,
+    "ground_support": "both feet only"
+  }
+}

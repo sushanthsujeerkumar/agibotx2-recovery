@@ -1,0 +1,165 @@
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=10, out_features=16, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=16, out_features=4, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=10, out_features=16, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=16, out_features=1, bias=True)
+  )
+)
+Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-09-19/l/work/runner-check-f3lk5x1o/git/hrs-x2-recovery.diff
+################################################################################
+[1m                             Learning iteration 0/2                             [0m 
+
+                            Total steps: 32 
+                       Steps per second: 2436 
+                        Collection time: 0.005s 
+                          Learning time: 0.008s 
+                        Mean value loss: 2.6672
+                    Mean surrogate loss: 0.0365
+                      Mean entropy loss: 3.6325
+                            Mean reward: 2.64
+                    Mean episode length: 4.00
+                        Mean action std: 0.60
+                  recovery/success_rate: 0.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.01s
+                           Time elapsed: 0:00:00
+                                    ETA: 0:00:00
+
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=10, out_features=16, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=16, out_features=4, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=10, out_features=16, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=16, out_features=1, bias=True)
+  )
+)
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=10, out_features=16, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=16, out_features=4, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=10, out_features=16, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=16, out_features=1, bias=True)
+  )
+)
+################################################################################
+[1m                            Learning iteration 0/10                             [0m 
+
+                            Total steps: 32 
+                       Steps per second: 3601 
+                        Collection time: 0.004s 
+                          Learning time: 0.005s 
+                        Mean value loss: 2.3846
+                    Mean surrogate loss: 0.0012
+                      Mean entropy loss: 3.6305
+                            Mean reward: 2.27
+                    Mean episode length: 4.00
+                        Mean action std: 0.60
+                  recovery/success_rate: 0.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.01s
+                           Time elapsed: 0:00:00
+                                    ETA: 0:00:00
+
+PASS: PPO update, JSON logs, optimizer/normalizer resume, completed-step counts, CPU TorchScript parity, time limit.
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=10, out_features=16, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=16, out_features=4, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=10, out_features=16, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=16, out_features=1, bias=True)
+  )
+)
+Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-09-19/l/work/stability-check-4e_i_xus/git/hrs-x2-recovery.diff
+################################################################################
+[1m                             Learning iteration 0/2                             [0m 
+
+                            Total steps: 32 
+                       Steps per second: 2558 
+                        Collection time: 0.006s 
+                          Learning time: 0.007s 
+                        Mean value loss: 3.9216
+                    Mean surrogate loss: 0.0178
+                      Mean entropy loss: 2.0096
+                            Mean reward: 3.12
+                    Mean episode length: 4.00
+                        Mean action std: 0.40
+                  recovery/success_rate: 0.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.01s
+                           Time elapsed: 0:00:00
+                                    ETA: 0:00:00
+
+PASS: baseline unchanged, stability config, PPO updates/export parity, preserved config, enforced effective std bounds.

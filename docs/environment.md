@@ -127,12 +127,59 @@ The dense terms are multiplied by control period so their scale approximates
 reward per simulated second. The final torque sample is an inexpensive effort
 proxy, not a mechanical-energy measurement. A nonfinite aggregate reward is
 replaced with -1 before the additional invalid-state penalty is applied.
-`reward_version=1` is recorded in environment configuration.
+This original equation is `reward_version=1` in environment configuration.
 
 These weights are a baseline design, not a demonstrated optimal reward. Sitting,
 kneeling or short upward motions can improve dense return without completing
 recovery. Therefore training return is always reported separately from actual
 five-episode success. No claim that reward alone proves recovery is made.
+
+### Reward version 2: targeted stability correction
+
+The original local experiment learned to rise but continued moving after
+reaching an upright, elevated posture. Its frozen policy achieved 0/5 stable
+recoveries after 34,443,264 environment steps and 1,450.8 wall seconds. All five
+episodes timed out; their terminal linear- and angular-speed checks failed.
+The original checkpoint, rewards and evaluation remain preserved under
+`artifacts/submission/local_initial`.
+
+Version 2 retains every version-1 reward term and adds the following before
+the common invalid-state handling:
+
+```text
+C = 1 if aggregate nonfoot touch force <= 2 N, else 0
+G = H * U * F * C
+L = norm(free-base linear velocity)
+W = norm(free-base angular velocity)
+T = exp(-1.5 * L^2 - 0.3 * W^2)
+Q = mean((q_i - nominal_standing_q_i)^2)
+
+r_version_2 = r_version_1 + dt * (4 * G * T - 0.15 * H * U * Q)
+```
+
+The positive `T` term supplies a smooth preference for slowing the base before
+it satisfies the strict binary speed checks. Its `G` gate requires elevation,
+uprightness, both-foot touch and no other touch support. A small all-joint
+posture penalty discourages extreme positions as the robot becomes elevated
+and upright. This is a soft preference, not a hard pose constraint; intermediate
+recovery poses remain feasible and physical actuator limits still apply.
+
+The fresh `--variant stability` experiment also reduces entropy coefficient
+from 0.01 to 0.0001, starts Gaussian standard deviation at 0.4 and limits its
+effective value to [0.05,0.6]. The original Gaussian had initial standard
+deviation 0.6 and default bounds [1e-6,1e6]. Its final mean standard deviation
+grew to 11.21, while raw action means were extensively clipped in inspected
+states. The corrected policy starts afresh rather than inheriting those
+saturated means. Its output directory is `artifacts/runs/local_stability`,
+with 512 environments and a 5,400 s (90-minute) local budget. It is running;
+its final outcome is pending.
+
+This is a combined targeted revision, not a controlled ablation. **The final
+success thresholds, floor-contact evaluation, episode duration and two-second
+hold requirement are unchanged.** Version 2 does not redefine moving upright
+as a successful recovery. Because the reward equation differs, total returns
+between the two versions are not directly comparable; compare the fixed-seed
+success checks and movement instead.
 
 ## End of an episode and success measurement
 
@@ -176,11 +223,14 @@ plus a configurable maximum simulated duration.
 
 PPO uses 24 transitions per environment per update, five learning epochs, four
 minibatches, initial learning rate 1e-3 with KL-based adaptation toward 0.01,
-discount 0.99, GAE lambda 0.95, clipping 0.2, entropy coefficient 0.01, value-loss
-weight 1, clipped value loss and gradient norm limit 1. Actor and critic are
+discount 0.99, GAE lambda 0.95, clipping 0.2, value-loss
+weight 1, clipped value loss and gradient norm limit 1. The baseline entropy
+coefficient is 0.01; the stability variant uses 0.0001 as described above.
+Actor and critic are
 independent ELU MLPs with layers 256/128/128 and learned observation
 normalization. The Gaussian actor starts at standard deviation 0.6, with a
-logarithmic parameterization; evaluation uses its deterministic mean.
+logarithmic parameterization; the stability variant starts at 0.4 with bounds
+[0.05,0.6]. Evaluation uses the deterministic action mean in both cases.
 
 At 256 environments the rollout contains 6,144 transitions. Actual batch size,
 seed, dependency versions, elapsed time and counters are saved with every run.
@@ -188,3 +238,10 @@ The initial configuration is a practical baseline for local compute; it is not
 the result of a hyperparameter search. Independent-seed performance, robust
 fall distributions, hardware transfer and success outside the defined flat
 floor task have not been established.
+
+Both recorded/planned main local runs use 512 environments, or 12,288
+transitions per PPO update. The baseline stopped at iteration 2803; the
+corrected run is limited by its wall-clock budget. GPU numerical variation
+means matching seed/configuration/update budget does not promise identical
+trajectories or elapsed time. Resuming restores the saved reward version so a
+version-2 checkpoint is not silently trained under version-1 rewards.

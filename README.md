@@ -7,10 +7,12 @@ deterministic evaluation and ROS-controlled episodes.
 
 **Current result:** model validation, the PPO runner's CPU contract checks and
 the real-simulator ROS integration check have passed. GPU/CPU consistency and
-512-environment PPO smoke tests passed. The one-hour local learning experiment
-is now running; final five-episode policy evaluation is pending. **No
-successful learned recovery is claimed.** The scripted controller is explicitly
-an untrained baseline, not evidence of a learned policy.
+512-environment PPO smoke tests passed. The initial local PPO experiment
+completed **34,443,264 environment steps in 1,450.8 s** and achieved **0/5 stable
+recoveries** in the recorded evaluation. It learned to rise but kept moving
+afterward. A fresh 512-environment stability revision is **running with a
+90-minute local training budget**; its final outcome is pending. **No successful learned
+recovery is claimed.** The scripted controller is an untrained baseline.
 
 ## Setup
 
@@ -74,18 +76,33 @@ From the repository root with `.venv` activated, first view one scripted attempt
 python -m x2_recovery.evaluate --controller scripted --episodes 1 --seed 1001 --render --output artifacts/scripted_preview
 ```
 
-Start with a short GPU training smoke test, then a bounded experiment:
+Start with a short GPU training smoke test, then the targeted stability revision:
 
 ```bash
 python -m x2_recovery.train --num-envs 128 --max-iterations 10 --output artifacts/runs/smoke
-python -m x2_recovery.train --num-envs 512 --max-iterations 100000 --max-seconds 3600 --save-interval 250 --output artifacts/runs/local
+python -m x2_recovery.train --variant stability --num-envs 512 --seed 0 --max-iterations 100000 --max-seconds 5400 --save-interval 250 --output artifacts/runs/local_stability
 ```
+
+[`./TRAIN_STABILITY.sh`](TRAIN_STABILITY.sh) is the ready-to-run launcher for
+the same corrected experiment, including CPU thread limits and quieter logging.
+Use the launcher or the full training command; an existing run requires resume.
+
+The initial baseline remains reproducible with its original settings and a
+separate output directory. The recorded baseline stopped at iteration 2803:
+
+```bash
+python -m x2_recovery.train --variant baseline --num-envs 512 --seed 0 --max-iterations 2803 --save-interval 250 --output artifacts/runs/baseline_reproduction
+```
+
+This reproduces the configuration and update budget, not bitwise GPU results
+or an identical wall-clock duration. The baseline's frozen evidence is in
+[`artifacts/submission/local_initial`](artifacts/submission/local_initial/manifest.json).
 
 The learner runs headlessly. In a second terminal, activate `.venv` and open the
 local simulator to replay newly saved policies:
 
 ```bash
-python -m x2_recovery.watch --directory artifacts/runs/local --minutes 120
+python -m x2_recovery.watch --directory artifacts/runs/local_stability --minutes 120
 ```
 
 The viewer uses the scripted baseline until the first trained actor exists,
@@ -95,23 +112,25 @@ it is not rendering one of the learner's exploratory environments. Close its
 window to stop viewing while training continues.
 
 Press **Ctrl+C once in the training terminal** to save and pause after the
-current PPO update. The one-hour budget also pauses at an update boundary.
+current PPO update. The 90-minute budget also pauses at an update boundary.
 Resume using a cumulative iteration target:
 
 ```bash
-python -m x2_recovery.train --num-envs 512 --max-iterations 100000 --max-seconds 3600 --output artifacts/runs/local --resume artifacts/runs/local/latest.pt
+python -m x2_recovery.train --num-envs 512 --max-iterations 100000 --max-seconds 5400 --output artifacts/runs/local_stability --resume artifacts/runs/local_stability/latest.pt
 ```
 
 Checkpoints preserve the actor, critic, observation normalization, optimizer,
 RNG state and counters. Simulator episodes restart on resume; bitwise
-continuation of an uninterrupted physics trajectory is not claimed.
+continuation of an uninterrupted physics trajectory is not claimed. Resume
+restores the checkpoint's variant and reward version. `--max-seconds` is the
+budget for each invocation, including a resumed invocation.
 
 Progress is written without needing an AI session to poll continuously:
 
 ```bash
-watch -n 300 cat artifacts/runs/local/status.json
+watch -n 300 cat artifacts/runs/local_stability/status.json
 tensorboard --logdir artifacts/runs --host 127.0.0.1 --port 6006
-python -m x2_recovery.plot artifacts/runs/local
+python -m x2_recovery.plot artifacts/runs/local_stability
 ```
 
 Open [local TensorBoard](http://127.0.0.1:6006). The plot command creates
@@ -142,7 +161,11 @@ end after 15 simulation seconds, stable recovery, or an invalid physical state.
 There are no standing-start episodes, reference-motion rewards or external
 assistance. PPO uses 24 steps per environment, five epochs, four minibatches,
 256/128/128 ELU networks, observation normalization, adaptive learning rate
-1e-3, gamma 0.99, GAE lambda 0.95 and entropy coefficient 0.01.
+1e-3, gamma 0.99 and GAE lambda 0.95. The baseline uses entropy coefficient
+0.01 and initial Gaussian standard deviation 0.6. The fresh stability variant
+uses entropy coefficient 0.0001, initial standard deviation 0.4 and effective
+standard-deviation bounds [0.05,0.6]. This addresses the baseline's observed
+growth of raw action noise and saturation at joint targets.
 
 The dense reward combines normalized pelvis height and upright orientation
 (weight 2), upright orientation alone (1), height progress (0.5), both-foot
@@ -150,15 +173,25 @@ support (1), and currently stable standing (4). It penalizes normalized torque
 (0.03), action changes (0.03), excessive joint speed (0.1) and joint-limit
 proximity (1). These terms are multiplied by the 0.02 s control period. A
 completed two-second recovery adds 10; an invalid state subtracts 1.
+Reward version 2 adds a smooth low-base-velocity reward when upright/elevated
+and supported by both feet only, plus a mild upright posture penalty. This is
+the targeted stability revision; the original reward remains version 1.
 Exact equations, observation ordering, success thresholds and limitations are
 in [environment.md](docs/environment.md).
 
 ## Five-episode evaluation
 
-Use an exported **TorchScript actor**, not the full optimizer checkpoint:
+Use an exported **TorchScript actor**, not the full optimizer checkpoint.
+Recheck the already-frozen initial policy:
 
 ```bash
-python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/runs/local/actor_latest.pt --episodes 5 --seed 1001 --output artifacts/evaluation/policy
+python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/submission/local_initial/actor.pt --episodes 5 --seed 1001 --output artifacts/evaluation/local_initial_recheck
+```
+
+After the corrected run finishes, evaluate its available policy separately:
+
+```bash
+python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/runs/local_stability/actor_latest.pt --episodes 5 --seed 1001 --output artifacts/evaluation/local_stability
 ```
 
 This evaluates seeds **1001–1005** with deterministic actions and writes a
@@ -167,7 +200,7 @@ This evaluates seeds **1001–1005** with deterministic actions and writes a
 an NVIDIA host, select EGL before launching:
 
 ```bash
-MUJOCO_GL=egl python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/runs/local/actor_latest.pt --episodes 5 --seed 1001 --video --output artifacts/evaluation/policy_video
+MUJOCO_GL=egl python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/runs/local_stability/actor_latest.pt --episodes 5 --seed 1001 --video --output artifacts/evaluation/local_stability_video
 ```
 
 For a separately labelled scripted comparison:
@@ -183,20 +216,59 @@ in total, base linear speed below 0.15 m/s and angular speed below 0.3 rad/s.
 Final evaluation inspects actual floor contacts and ignores self-contact.
 Merely reaching standing height does not count.
 
-The final policy's success count, episode reasons and measured failure analysis
-must come from `artifacts/evaluation/policy/summary.json`; those results are
-pending. An absent report is not a zero-success result. Training checkpoints,
-curves and evaluation evidence will be preserved for the submitted run; bulky
-intermediate runs are ignored by Git. No success percentage is inferred from
-reward improvement alone.
+### Recorded initial result and failure analysis
 
-Likely experiment limitations are exploration from a fully grounded pose,
-dense-reward plateaus in sitting/kneeling, contact-model approximations, and
-transfer between GPU and CPU solvers. After measured failures are available,
-the next changes should target the observed bottleneck: validate a short
-recovery reference, improve stage-specific rewards, expand reset diversity,
-and repeat training with independent seeds. None of these improvements is
-represented as already implemented.
+The frozen `local_initial` policy completed 2,803 PPO updates and 34,443,264
+environment steps using 512 environments. The run took 1,450.8 wall seconds
+(about 24.2 minutes, excluding initial environment setup). Its final
+rolling mean episode return was 50.83. The
+[training curve](artifacts/submission/local_initial/training_curve.png),
+[configuration](artifacts/submission/local_initial/config.json),
+[training status](artifacts/submission/local_initial/status.json),
+[checkpoint](artifacts/submission/local_initial/checkpoint.pt) and
+[exported actor](artifacts/submission/local_initial/actor.pt) are preserved.
+
+The deterministic evaluation achieved **0/5 recoveries**. Every episode timed
+out after 15 simulated seconds, with no invalid-state termination:
+
+| Seed | Outcome | Maximum pelvis height | Final both-foot support |
+|---|---|---:|---|
+| 1001 | FAILED: timeout | 0.855 m | No |
+| 1002 | FAILED: timeout | 0.770 m | Yes |
+| 1003 | FAILED: timeout | 0.803 m | Yes |
+| 1004 | FAILED: timeout | 0.745 m | No |
+| 1005 | FAILED: timeout | 0.869 m | Yes |
+
+All five episodes ended with an upright, elevated torso and no other body-ground
+support, but failed both final base-speed checks. The recorded trajectories
+first showed simultaneous upright/height checks at approximately 0.62–0.72 s;
+the robot then continued hopping, travelling or rotating rather than holding
+a stable posture. Reaching height was therefore correctly rejected as success.
+See the [five-episode report](artifacts/submission/local_initial/evaluation/summary.json)
+and the [first recorded episode](artifacts/submission/local_initial/evaluation/episode_1.mp4).
+
+The original action noise grew to mean standard deviation 11.21 by the end of
+training. Inspection of checkpoint 2501 also found 29–30 of 31 deterministic
+action means outside the [-1,1] execution range. Unbounded Gaussian entropy can
+reward increasingly noisy raw actions even though the simulator clips them to
+the same joint targets. The baseline reward also lacks a smooth incentive to
+slow the base before reaching the strict binary stability threshold.
+
+The fresh `local_stability` run addresses these observations with bounded
+exploration noise, lower entropy weight, a smooth velocity-based reward and a
+mild posture penalty. Its 5,400 s budget and 512 environments are recorded
+separately; **its final five-episode result is not available yet**. This combined
+targeted revision is not a single-variable ablation. The exact solver-ground
+success checks and two-second hold requirement are unchanged. Total returns
+from reward versions 1 and 2 must not be compared directly as evidence of
+better recovery.
+
+Remaining limitations include primitive contacts, CPU/GPU solver differences,
+a narrow reset distribution and a single training seed per configuration.
+Further work should follow the corrected evaluation: inspect persistent speed
+or contact failures, refine balance/posture shaping if needed, expand reset
+diversity, and repeat with independent seeds. No result is inferred from an
+absent report or from reward improvement alone.
 
 ## ROS 2 demonstration
 
@@ -215,7 +287,7 @@ bash scripts/ros_launch.sh controller:=scripted render:=true max_sim_duration_s:
 For the trained actor, replace that launch command with:
 
 ```bash
-bash scripts/ros_launch.sh controller:=policy checkpoint:="$PWD/artifacts/runs/local/actor_latest.pt" render:=true max_sim_duration_s:=15.0 timeout_s:=60.0
+bash scripts/ros_launch.sh controller:=policy checkpoint:="$PWD/artifacts/submission/local_initial/actor.pt" render:=true max_sim_duration_s:=15.0 timeout_s:=60.0
 ```
 
 In another terminal:
@@ -279,4 +351,5 @@ test scope and detailed evidence, and
 [model validation](assets/x2/model_validation.json) for contact and actuator
 checks. The PPO runner additionally passed a bounded CPU check covering actual
 updates, optimizer/normalizer resume, completed-step counts and TorchScript
-inference parity. Main GPU experiment results remain pending as stated above.
+inference parity. The initial learned-policy result is 0/5 as reported above;
+the corrected stability run's final evaluation remains pending.
