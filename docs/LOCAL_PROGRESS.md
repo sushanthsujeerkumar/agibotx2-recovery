@@ -1,3 +1,28 @@
+# Floor-transition feasibility stage
+
+The approved bounded local reference work established a scripted deep-crouch →
+hands-and-feet squat → clean-standing motion in 5/5 fresh seeds 9101–9105. Full
+16 s trajectories pass 1 kHz position/speed/commanded-effort monitoring; minimum
+pelvis height 0.260240–0.260245 m, terminal clean hold 4.46 s, peak speed 0.19727
+of rating, effort reaches 1.0. Actual re-simulation video matches the numerical
+validation. Run ../RUN_HAND_SUPPORT_DEMO.sh; see ../FLOOR_TRANSITION_RESULTS.md.
+
+No floor-to-squat connection was found. Twelve supine candidates yield only a
+repeatable reclined arm-propped endpoint (formal one-second intermediate hold
+0/5); twelve symmetric kneeling bridges, six physical IK waypoint attempts and
+two gravity-offset attempts all fail to return to standing while staying within
+monitored joint limits. Three static poses fit the torque budget. The one
+12-waypoint fixed-support path fails its last interpolated interval with 17.59 cm
+floor penetration and was rejected before physical replay. Offline kinematic and
+static images/results are not physical or learned motion. No new PPO training,
+cloud compute, actor replacement or main ZIP update occurred. The retained PPO
+actor's most recent full supine assessment remains 0/5.
+
+Next method: a collision-free contact-changing reference, physically validated
+before imitation/PPO. Official AgiBot simulation/MC get-up documentation is being
+assessed as a possible source of motion guidance; no vendor policy is part of our
+result. Preserve all earlier evidence. The heartbeat remains paused.
+
 # Completed deeper-crouch stage
 
 The user approved continuation. Final deep_crouch PPO update226 is frozen in artifacts/experiments/deep_crouch_ppo after180.16s,1,388,544 transitions. Fresh CPU seeds:5/5deep,5/5moderate,5/5standing; noise.0035/5, .0050/5butall10s, .0150/5withfour earlyfalls. Supine0/5strict, five timeouts. Joint-limit reports are valid only through observed trajectories. Main robustness gain is a contact-normalization correction: normalized flags previously changed by100, now1. Matched .003 oldactor1/5, correctedwarm5/5, finalPPO5/5; no incremental pass-count gain from the short PPO pilot. Generic inputclip5failed and was rejected. Scripted deep reference5/5,12valid demos6000samples captured but unused in refinement.33CPU/controller/ROS tests pass. See ../DEEP_CROUCH_STAGE_RESULTS.md. Keep prior checkpoints and main historical ZIP. No cloud; scheduled heartbeat remains paused. Next missing work is physical floor-to-crouch through sitting/kneeling, not more unstructured worker scaling.

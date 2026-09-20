@@ -1,0 +1,1920 @@
+{
+  "seed": 9001,
+  "knee": 2.2,
+  "requested_lean": 0.4,
+  "joint_targets": {
+    "left_hip_pitch_joint": -1.9000000000000004,
+    "left_hip_roll_joint": 0.0,
+    "left_hip_yaw_joint": 0.0,
+    "left_knee_joint": 2.2,
+    "left_ankle_pitch_joint": -0.7,
+    "left_ankle_roll_joint": 0.0,
+    "right_hip_pitch_joint": -1.9000000000000004,
+    "right_hip_roll_joint": 0.0,
+    "right_hip_yaw_joint": 0.0,
+    "right_knee_joint": 2.2,
+    "right_ankle_pitch_joint": -0.7,
+    "right_ankle_roll_joint": 0.0,
+    "waist_yaw_joint": 0.0,
+    "waist_pitch_joint": 0.0,
+    "waist_roll_joint": 0.0,
+    "left_shoulder_pitch_joint": -0.4,
+    "left_shoulder_roll_joint": 0.08,
+    "left_shoulder_yaw_joint": 0.0,
+    "left_elbow_joint": -0.12,
+    "left_wrist_yaw_joint": 0.0,
+    "left_wrist_pitch_joint": 0.0,
+    "left_wrist_roll_joint": 0.0,
+    "right_shoulder_pitch_joint": -0.4,
+    "right_shoulder_roll_joint": -0.08,
+    "right_shoulder_yaw_joint": 0.0,
+    "right_elbow_joint": -0.12,
+    "right_wrist_yaw_joint": 0.0,
+    "right_wrist_pitch_joint": 0.0,
+    "right_wrist_roll_joint": 0.0,
+    "head_yaw_joint": 0.0,
+    "head_pitch_joint": 0.0
+  },
+  "minimum_height": 0.3035353630749689,
+  "minimum_state": {
+    "time": 4.779999999999931,
+    "pelvis_height": 0.3035353630749689,
+    "torso_up": 0.8916272370212811,
+    "contacts": {
+      "left_ankle_roll_link": 206.18447829140203,
+      "right_ankle_roll_link": 205.50024951202025
+    },
+    "linear_speed": 3.6389084570778325e-05,
+    "angular_speed": 9.531807068550549e-05,
+    "qpos": [
+      -0.1245310370935315,
+      0.010922638701275515,
+      0.3035353630749689,
+      0.9801958505493695,
+      0.00046045125712111017,
+      0.1980127040082873,
+      -0.0026175564489653398,
+      -1.9184613069455474,
+      -6.2988466626615546e-06,
+      0.00010606637619893458,
+      2.2350169931009223,
+      -0.715443699334192,
+      0.00023374153607989536,
+      -1.9183755842666825,
+      3.4289075469269725e-06,
+      -0.00012485745091780933,
+      2.2348846594900147,
+      -0.7153965006754018,
+      8.730062890237852e-06,
+      -3.860492649956812e-05,
+      0.07120801912159311,
+      -0.0003061601681044803,
+      -0.40050569160029825,
+      0.07079404108588191,
+      -0.000857744498105561,
+      -0.12052263314148015,
+      -8.327290567145126e-05,
+      0.0006921960308348657,
+      -0.0007937870636592387,
+      -0.40069496853546793,
+      -0.07076826945749438,
+      0.0008687803071184793,
+      -0.12061620549199618,
+      7.657901470857144e-05,
+      0.0006813334482413904,
+      0.0008008812365347533,
+      -0.00019737254296136206,
+      0.0066880645251416815
+    ],
+    "qvel": [
+      -3.634890033375325e-05,
+      4.0582281664836165e-07,
+      -1.6607914581962628e-06,
+      8.803864126769691e-08,
+      -9.531734991466473e-05,
+      -3.600745062169461e-07,
+      2.634196270350845e-06,
+      -1.9107738663898904e-06,
+      6.966560130127134e-07,
+      -4.864343608356528e-05,
+      0.00016413838712820932,
+      7.658958213996817e-07,
+      1.5685539071246342e-06,
+      1.0973915997993424e-07,
+      -8.18574380814523e-07,
+      -4.9431480162616795e-05,
+      0.00016600039138272736,
+      -7.222185537035906e-07,
+      2.140181898283308e-07,
+      -0.0002982356686854542,
+      7.500259329495441e-06,
+      3.5929526847284183e-06,
+      0.00012938362483891548,
+      1.9211111119942137e-06,
+      9.193416145077874e-05,
+      8.891258667006277e-07,
+      6.1924492902283085e-06,
+      3.868926473397417e-06,
+      4.616368713277582e-06,
+      -0.00012995659990731862,
+      -1.927794881190722e-06,
+      9.21988596337932e-05,
+      -9.248065737657668e-07,
+      6.258920196984759e-06,
+      -3.9383800239744355e-06,
+      -3.253702473459674e-05,
+      0.000901188690125555
+    ]
+  },
+  "ground_contact_bodies": [
+    "left_ankle_roll_link",
+    "right_ankle_roll_link"
+  ],
+  "complete": true,
+  "sim_time": 15.999999999996572,
+  "reason": "duration",
+  "return_clean_pass": true,
+  "terminal_clean_hold": 4.459999999999993,
+  "max_clean_hold": 4.459999999999993,
+  "limits": {
+    "ok": true,
+    "physics_steps": 16001,
+    "max_position_violation_rad": 0.0,
+    "max_speed_ratio": 0.06158493354601884,
+    "max_commanded_effort_ratio": 0.49724853424304594,
+    "first_violation": null
+  },
+  "final": {
+    "time": 15.999999999996572,
+    "pelvis_height": 0.6689443749079087,
+    "torso_up": 0.9973630713236973,
+    "contacts": {
+      "left_ankle_roll_link": 206.30344271185456,
+      "right_ankle_roll_link": 205.4936432491702
+    },
+    "linear_speed": 0.003980654063406891,
+    "angular_speed": 0.007738916261666661
+  },
+  "trajectory": [
+    {
+      "time": 0.02000000000000001,
+      "pelvis_height": 0.47259722494817297,
+      "torso_up": 0.9953342262331419,
+      "contacts": {
+        "left_ankle_roll_link": 206.16650983706575,
+        "right_ankle_roll_link": 205.39064190151728
+      },
+      "linear_speed": 0.003801960484345994,
+      "angular_speed": 0.010671850392693005
+    },
+    {
+      "time": 0.12000000000000009,
+      "pelvis_height": 0.4725643578698982,
+      "torso_up": 0.9954638273393924,
+      "contacts": {
+        "left_ankle_roll_link": 206.14083106698286,
+        "right_ankle_roll_link": 205.3642727349789
+      },
+      "linear_speed": 0.0025711550003044543,
+      "angular_speed": 0.012492128417481506
+    },
+    {
+      "time": 0.22000000000000017,
+      "pelvis_height": 0.47193565477762167,
+      "torso_up": 0.995660416848634,
+      "contacts": {
+        "left_ankle_roll_link": 207.08654953883635,
+        "right_ankle_roll_link": 206.3096045140337
+      },
+      "linear_speed": 0.010312251478299122,
+      "angular_speed": 0.01627680384755977
+    },
+    {
+      "time": 0.32000000000000023,
+      "pelvis_height": 0.47069698764985385,
+      "torso_up": 0.9959483952064178,
+      "contacts": {
+        "left_ankle_roll_link": 207.90143236033464,
+        "right_ankle_roll_link": 207.13008071257997
+      },
+      "linear_speed": 0.017481017856343175,
+      "angular_speed": 0.022049395080066196
+    },
+    {
+      "time": 0.4200000000000003,
+      "pelvis_height": 0.4689041665680068,
+      "torso_up": 0.9963317193224985,
+      "contacts": {
+        "left_ankle_roll_link": 208.6455547932651,
+        "right_ankle_roll_link": 207.8782595392906
+      },
+      "linear_speed": 0.02393432074852541,
+      "angular_speed": 0.028906466902691982
+    },
+    {
+      "time": 0.5200000000000004,
+      "pelvis_height": 0.46659466935587396,
+      "torso_up": 0.9968015555413684,
+      "contacts": {
+        "left_ankle_roll_link": 209.34949995043746,
+        "right_ankle_roll_link": 208.58359032127257
+      },
+      "linear_speed": 0.029668334464987293,
+      "angular_speed": 0.03659434981846975
+    },
+    {
+      "time": 0.6200000000000004,
+      "pelvis_height": 0.4638018825471132,
+      "torso_up": 0.9973388447530753,
+      "contacts": {
+        "left_ankle_roll_link": 210.017673228958,
+        "right_ankle_roll_link": 209.2528517203727
+      },
+      "linear_speed": 0.03472949639025646,
+      "angular_speed": 0.044906471946298196
+    },
+    {
+      "time": 0.7200000000000005,
+      "pelvis_height": 0.460557687782035,
+      "torso_up": 0.997916844751747,
+      "contacts": {
+        "left_ankle_roll_link": 210.6550857992103,
+        "right_ankle_roll_link": 209.8913687159377
+      },
+      "linear_speed": 0.03918694264263184,
+      "angular_speed": 0.053697529538509516
+    },
+    {
+      "time": 0.8200000000000006,
+      "pelvis_height": 0.45689323849472885,
+      "torso_up": 0.9985017619401154,
+      "contacts": {
+        "left_ankle_roll_link": 211.2506295432208,
+        "right_ankle_roll_link": 210.48821752656366
+      },
+      "linear_speed": 0.04312044293912729,
+      "angular_speed": 0.06270796597198562
+    },
+    {
+      "time": 0.9200000000000007,
+      "pelvis_height": 0.4528378714901539,
+      "torso_up": 0.999051882994808,
+      "contacts": {
+        "left_ankle_roll_link": 211.80528833061936,
+        "right_ankle_roll_link": 211.0450000414536
+      },
+      "linear_speed": 0.04659575812747954,
+      "angular_speed": 0.07173044187131072
+    },
+    {
+      "time": 1.0199999999999985,
+      "pelvis_height": 0.44841919920902995,
+      "torso_up": 0.9995190694446201,
+      "contacts": {
+        "left_ankle_roll_link": 212.3014441604633,
+        "right_ankle_roll_link": 211.54565187472778
+      },
+      "linear_speed": 0.04963081814305717,
+      "angular_speed": 0.08061770408932815
+    },
+    {
+      "time": 1.1199999999999875,
+      "pelvis_height": 0.4436669573371122,
+      "torso_up": 0.999851845890808,
+      "contacts": {
+        "left_ankle_roll_link": 212.76538761468382,
+        "right_ankle_roll_link": 212.0112759902514
+      },
+      "linear_speed": 0.05217551431666668,
+      "angular_speed": 0.08975731886617379
+    },
+    {
+      "time": 1.2199999999999764,
+      "pelvis_height": 0.4386182364495554,
+      "torso_up": 0.9999976395831657,
+      "contacts": {
+        "left_ankle_roll_link": 213.17936089823667,
+        "right_ankle_roll_link": 212.42728432098787
+      },
+      "linear_speed": 0.054312205164743825,
+      "angular_speed": 0.09889253740885451
+    },
+    {
+      "time": 1.3199999999999654,
+      "pelvis_height": 0.4333067558193198,
+      "torso_up": 0.9998986258153679,
+      "contacts": {
+        "left_ankle_roll_link": 213.55061757967283,
+        "right_ankle_roll_link": 212.80087881553473
+      },
+      "linear_speed": 0.0560946755948296,
+      "angular_speed": 0.10781050464040821
+    },
+    {
+      "time": 1.4199999999999544,
+      "pelvis_height": 0.42776497707826944,
+      "torso_up": 0.9994945703943646,
+      "contacts": {
+        "left_ankle_roll_link": 213.87846227452806,
+        "right_ankle_roll_link": 213.13118452008248
+      },
+      "linear_speed": 0.05756873517513334,
+      "angular_speed": 0.1163106627075519
+    },
+    {
+      "time": 1.5199999999999434,
+      "pelvis_height": 0.42202415133099885,
+      "torso_up": 0.99872682572678,
+      "contacts": {
+        "left_ankle_roll_link": 214.1623483703296,
+        "right_ankle_roll_link": 213.4176538754616
+      },
+      "linear_speed": 0.05879665551875061,
+      "angular_speed": 0.12411723620715774
+    },
+    {
+      "time": 1.6199999999999324,
+      "pelvis_height": 0.4161133072180419,
+      "torso_up": 0.997542170020216,
+      "contacts": {
+        "left_ankle_roll_link": 214.40588374004483,
+        "right_ankle_roll_link": 213.66385199818666
+      },
+      "linear_speed": 0.05981228597547835,
+      "angular_speed": 0.13103626003019422
+    },
+    {
+      "time": 1.7199999999999214,
+      "pelvis_height": 0.4100596434598166,
+      "torso_up": 0.9958962370149694,
+      "contacts": {
+        "left_ankle_roll_link": 214.6214790992733,
+        "right_ankle_roll_link": 213.88210749246943
+      },
+      "linear_speed": 0.06063531709030414,
+      "angular_speed": 0.1368820696403015
+    },
+    {
+      "time": 1.8199999999999104,
+      "pelvis_height": 0.4038924622474662,
+      "torso_up": 0.993756112128367,
+      "contacts": {
+        "left_ankle_roll_link": 214.76423627711478,
+        "right_ankle_roll_link": 214.02737709894686
+      },
+      "linear_speed": 0.06127837432214308,
+      "angular_speed": 0.14161005803490273
+    },
+    {
+      "time": 1.9199999999998993,
+      "pelvis_height": 0.39763606196567675,
+      "torso_up": 0.9911019921153218,
+      "contacts": {
+        "left_ankle_roll_link": 214.88521100642504,
+        "right_ankle_roll_link": 214.15149502192187
+      },
+      "linear_speed": 0.06173120761514857,
+      "angular_speed": 0.14510618543168557
+    },
+    {
+      "time": 2.0199999999998886,
+      "pelvis_height": 0.39131867468978,
+      "torso_up": 0.9879293981607165,
+      "contacts": {
+        "left_ankle_roll_link": 214.9634757320111,
+        "right_ankle_roll_link": 214.23194089921972
+      },
+      "linear_speed": 0.061969432824082564,
+      "angular_speed": 0.1474444137525423
+    },
+    {
+      "time": 2.1199999999998775,
+      "pelvis_height": 0.38496888278148883,
+      "torso_up": 0.9842467735609925,
+      "contacts": {
+        "left_ankle_roll_link": 215.00217384152407,
+        "right_ankle_roll_link": 214.27327090176263
+      },
+      "linear_speed": 0.06196737697505144,
+      "angular_speed": 0.14869997515407557
+    },
+    {
+      "time": 2.2199999999998665,
+      "pelvis_height": 0.37861754107556544,
+      "torso_up": 0.9800741101002732,
+      "contacts": {
+        "left_ankle_roll_link": 214.99993811715638,
+        "right_ankle_roll_link": 214.2740192392655
+      },
+      "linear_speed": 0.06169171953279787,
+      "angular_speed": 0.1490035947900443
+    },
+    {
+      "time": 2.3199999999998555,
+      "pelvis_height": 0.37229781160292696,
+      "torso_up": 0.975440593750678,
+      "contacts": {
+        "left_ankle_roll_link": 214.95654764327318,
+        "right_ankle_roll_link": 214.23378950587056
+      },
+      "linear_speed": 0.061110707150746,
+      "angular_speed": 0.14849440001318157
+    },
+    {
+      "time": 2.4199999999998445,
+      "pelvis_height": 0.3660452058093134,
+      "torso_up": 0.9703823935907049,
+      "contacts": {
+        "left_ankle_roll_link": 214.87199716364506,
+        "right_ankle_roll_link": 214.15113391474273
+      },
+      "linear_speed": 0.06019933762642029,
+      "angular_speed": 0.14729261348501355
+    },
+    {
+      "time": 2.5199999999998335,
+      "pelvis_height": 0.359897028605883,
+      "torso_up": 0.964941159885576,
+      "contacts": {
+        "left_ankle_roll_link": 214.74350242830144,
+        "right_ankle_roll_link": 214.02600387241114
+      },
+      "linear_speed": 0.058942205293784654,
+      "angular_speed": 0.14547793390531105
+    },
+    {
+      "time": 2.6199999999998225,
+      "pelvis_height": 0.3538915555298409,
+      "torso_up": 0.9591641748470102,
+      "contacts": {
+        "left_ankle_roll_link": 214.5725368077995,
+        "right_ankle_roll_link": 213.85684201497452
+      },
+      "linear_speed": 0.05733373957880713,
+      "angular_speed": 0.14306983833743211
+    },
+    {
+      "time": 2.7199999999998115,
+      "pelvis_height": 0.34806704621177903,
+      "torso_up": 0.9531052326099921,
+      "contacts": {
+        "left_ankle_roll_link": 214.3579248746912,
+        "right_ankle_roll_link": 213.64470436021864
+      },
+      "linear_speed": 0.05538047952573802,
+      "angular_speed": 0.14002175823725704
+    },
+    {
+      "time": 2.8199999999998004,
+      "pelvis_height": 0.3424607694397365,
+      "torso_up": 0.946826961540169,
+      "contacts": {
+        "left_ankle_roll_link": 214.09940451816976,
+        "right_ankle_roll_link": 213.3888542803296
+      },
+      "linear_speed": 0.05309518417044505,
+      "angular_speed": 0.13623493693899413
+    },
+    {
+      "time": 2.9199999999997894,
+      "pelvis_height": 0.33710813918222143,
+      "torso_up": 0.9404030708221006,
+      "contacts": {
+        "left_ankle_roll_link": 213.79700429715456,
+        "right_ankle_roll_link": 213.0889975438698
+      },
+      "linear_speed": 0.0504974448968332,
+      "angular_speed": 0.13154568285288415
+    },
+    {
+      "time": 3.0199999999997784,
+      "pelvis_height": 0.33204240144746355,
+      "torso_up": 0.9339209612432423,
+      "contacts": {
+        "left_ankle_roll_link": 213.4518758320063,
+        "right_ankle_roll_link": 212.74622445974148
+      },
+      "linear_speed": 0.04760029640703251,
+      "angular_speed": 0.12583731141724597
+    },
+    {
+      "time": 3.1199999999997674,
+      "pelvis_height": 0.3272950293562827,
+      "torso_up": 0.9274805395539981,
+      "contacts": {
+        "left_ankle_roll_link": 213.06433074652864,
+        "right_ankle_roll_link": 212.36085832267446
+      },
+      "linear_speed": 0.04441319448106643,
+      "angular_speed": 0.11900478517302737
+    },
+    {
+      "time": 3.2199999999997564,
+      "pelvis_height": 0.32289628268626086,
+      "torso_up": 0.9211916101470712,
+      "contacts": {
+        "left_ankle_roll_link": 212.6287645479159,
+        "right_ankle_roll_link": 211.92732298849134
+      },
+      "linear_speed": 0.04095447890100805,
+      "angular_speed": 0.11096941687121682
+    },
+    {
+      "time": 3.3199999999997454,
+      "pelvis_height": 0.31887546616907053,
+      "torso_up": 0.915174362663446,
+      "contacts": {
+        "left_ankle_roll_link": 212.16057077097835,
+        "right_ankle_roll_link": 211.4604083229436
+      },
+      "linear_speed": 0.03715994111200846,
+      "angular_speed": 0.10188147954285603
+    },
+    {
+      "time": 3.4199999999997344,
+      "pelvis_height": 0.31526460309586757,
+      "torso_up": 0.9095376458493916,
+      "contacts": {
+        "left_ankle_roll_link": 211.64076629405156,
+        "right_ankle_roll_link": 210.94304434328947
+      },
+      "linear_speed": 0.03308250746596642,
+      "angular_speed": 0.09165545060666322
+    },
+    {
+      "time": 3.5199999999997234,
+      "pelvis_height": 0.3120940181046819,
+      "torso_up": 0.9043990106688029,
+      "contacts": {
+        "left_ankle_roll_link": 211.07698119039338,
+        "right_ankle_roll_link": 210.38094665613966
+      },
+      "linear_speed": 0.028681235061325736,
+      "angular_speed": 0.08048008002396348
+    },
+    {
+      "time": 3.6199999999997123,
+      "pelvis_height": 0.309396666072178,
+      "torso_up": 0.8998660012975188,
+      "contacts": {
+        "left_ankle_roll_link": 210.46560826408822,
+        "right_ankle_roll_link": 209.77100959715307
+      },
+      "linear_speed": 0.023948465144280166,
+      "angular_speed": 0.06843972585052568
+    },
+    {
+      "time": 3.7199999999997013,
+      "pelvis_height": 0.30720619286070505,
+      "torso_up": 0.8960349749624541,
+      "contacts": {
+        "left_ankle_roll_link": 209.80733832504018,
+        "right_ankle_roll_link": 209.11395097724562
+      },
+      "linear_speed": 0.018877928597202456,
+      "angular_speed": 0.05562478597462859
+    },
+    {
+      "time": 3.8199999999996903,
+      "pelvis_height": 0.3055570954412372,
+      "torso_up": 0.8929929057864958,
+      "contacts": {
+        "left_ankle_roll_link": 209.10083032812506,
+        "right_ankle_roll_link": 208.40843644436467
+      },
+      "linear_speed": 0.013467547972480823,
+      "angular_speed": 0.04210070628835905
+    },
+    {
+      "time": 3.9199999999996793,
+      "pelvis_height": 0.3044837074233414,
+      "torso_up": 0.8908173794066208,
+      "contacts": {
+        "left_ankle_roll_link": 208.34446085133644,
+        "right_ankle_roll_link": 207.65282132267936
+      },
+      "linear_speed": 0.007747974383257367,
+      "angular_speed": 0.02778088388080676
+    },
+    {
+      "time": 4.019999999999677,
+      "pelvis_height": 0.3040202835073383,
+      "torso_up": 0.8895941605919193,
+      "contacts": {
+        "left_ankle_roll_link": 207.52693599768403,
+        "right_ankle_roll_link": 206.83572675628054
+      },
+      "linear_speed": 0.0019021707269266956,
+      "angular_speed": 0.012656418116990307
+    },
+    {
+      "time": 4.119999999999711,
+      "pelvis_height": 0.3040049289904699,
+      "torso_up": 0.889345295578624,
+      "contacts": {
+        "left_ankle_roll_link": 206.27387112598598,
+        "right_ankle_roll_link": 205.5857785089636
+      },
+      "linear_speed": 0.0001426242518997581,
+      "angular_speed": 5.09803930060343e-05
+    },
+    {
+      "time": 4.219999999999744,
+      "pelvis_height": 0.30395335476199464,
+      "torso_up": 0.889687844681501,
+      "contacts": {
+        "left_ankle_roll_link": 206.20057980545388,
+        "right_ankle_roll_link": 205.51436313180443
+      },
+      "linear_speed": 0.0012743814222698315,
+      "angular_speed": 0.005546717972265796
+    },
+    {
+      "time": 4.319999999999777,
+      "pelvis_height": 0.30384982780783903,
+      "torso_up": 0.8902226442019053,
+      "contacts": {
+        "left_ankle_roll_link": 206.1768265060926,
+        "right_ankle_roll_link": 205.49154947759226
+      },
+      "linear_speed": 0.00203273287005816,
+      "angular_speed": 0.00866729784542361
+    },
+    {
+      "time": 4.419999999999811,
+      "pelvis_height": 0.303728596041134,
+      "torso_up": 0.8907615648156868,
+      "contacts": {
+        "left_ankle_roll_link": 206.18176120267444,
+        "right_ankle_roll_link": 205.4969272203219
+      },
+      "linear_speed": 0.0019794414536443154,
+      "angular_speed": 0.00847233306925986
+    },
+    {
+      "time": 4.519999999999844,
+      "pelvis_height": 0.30362681910005285,
+      "torso_up": 0.891212970232759,
+      "contacts": {
+        "left_ankle_roll_link": 206.17360386428157,
+        "right_ankle_roll_link": 205.4890910347417
+      },
+      "linear_speed": 0.0013989105592340193,
+      "angular_speed": 0.006126487174642319
+    },
+    {
+      "time": 4.6199999999998775,
+      "pelvis_height": 0.30356369025645313,
+      "torso_up": 0.8914893988404622,
+      "contacts": {
+        "left_ankle_roll_link": 206.18260633724626,
+        "right_ankle_roll_link": 205.49830807225544
+      },
+      "linear_speed": 0.000716489438677212,
+      "angular_speed": 0.0031513468414275728
+    },
+    {
+      "time": 4.719999999999911,
+      "pelvis_height": 0.30353844271803015,
+      "torso_up": 0.8916042551409051,
+      "contacts": {
+        "left_ankle_roll_link": 206.18454489153612,
+        "right_ankle_roll_link": 205.50030724031825
+      },
+      "linear_speed": 0.00021442584390604042,
+      "angular_speed": 0.0008991887757342067
+    },
+    {
+      "time": 4.819999999999944,
+      "pelvis_height": 0.3035363352571629,
+      "torso_up": 0.8916302643668483,
+      "contacts": {
+        "left_ankle_roll_link": 206.1847255946532,
+        "right_ankle_roll_link": 205.50050565035394
+      },
+      "linear_speed": 5.577139733923247e-05,
+      "angular_speed": 0.0002638927764224442
+    },
+    {
+      "time": 4.919999999999978,
+      "pelvis_height": 0.3035444589025419,
+      "torso_up": 0.8916124247231871,
+      "contacts": {
+        "left_ankle_roll_link": 206.1857184989642,
+        "right_ankle_roll_link": 205.50154174371124
+      },
+      "linear_speed": 0.00015922265396007835,
+      "angular_speed": 0.000714716686021637
+    },
+    {
+      "time": 5.020000000000011,
+      "pelvis_height": 0.3035552692370157,
+      "torso_up": 0.8915790840925678,
+      "contacts": {
+        "left_ankle_roll_link": 206.18668540900464,
+        "right_ankle_roll_link": 205.5025798697863
+      },
+      "linear_speed": 0.00017364113429977094,
+      "angular_speed": 0.0007658465452248546
+    },
+    {
+      "time": 5.1200000000000445,
+      "pelvis_height": 0.3035650198748984,
+      "torso_up": 0.8915456825415269,
+      "contacts": {
+        "left_ankle_roll_link": 206.18736744657474,
+        "right_ankle_roll_link": 205.50335042092016
+      },
+      "linear_speed": 0.00014538396940337042,
+      "angular_speed": 0.0006336023286624582
+    },
+    {
+      "time": 5.220000000000078,
+      "pelvis_height": 0.30357232885927105,
+      "torso_up": 0.8915189373607743,
+      "contacts": {
+        "left_ankle_roll_link": 206.18774447018032,
+        "right_ankle_roll_link": 205.50382266672375
+      },
+      "linear_speed": 0.0001040644323142224,
+      "angular_speed": 0.00044854543593715384
+    },
+    {
+      "time": 5.320000000000111,
+      "pelvis_height": 0.30357710082309,
+      "torso_up": 0.8915004273368612,
+      "contacts": {
+        "left_ankle_roll_link": 206.18789031764038,
+        "right_ankle_roll_link": 205.5040632421564
+      },
+      "linear_speed": 6.536048404089471e-05,
+      "angular_speed": 0.00027809868637454884
+    },
+    {
+      "time": 5.420000000000145,
+      "pelvis_height": 0.30357981273893714,
+      "torso_up": 0.8914891750526173,
+      "contacts": {
+        "left_ankle_roll_link": 206.18789287447265,
+        "right_ankle_roll_link": 205.504155905738
+      },
+      "linear_speed": 3.556749445354594e-05,
+      "angular_speed": 0.00014849993952985438
+    },
+    {
+      "time": 5.520000000000178,
+      "pelvis_height": 0.30358108940815653,
+      "torso_up": 0.8914832934143101,
+      "contacts": {
+        "left_ankle_roll_link": 206.1878243552685,
+        "right_ankle_roll_link": 205.5041709090996
+      },
+      "linear_speed": 1.5621785955576946e-05,
+      "angular_speed": 6.276056961977015e-05
+    },
+    {
+      "time": 5.6200000000002115,
+      "pelvis_height": 0.30358149132210854,
+      "torso_up": 0.8914808855912398,
+      "contacts": {
+        "left_ankle_roll_link": 206.18773195149151,
+        "right_ankle_roll_link": 205.50415482264634
+      },
+      "linear_speed": 4.0220758365474425e-06,
+      "angular_speed": 1.3293404452450053e-05
+    },
+    {
+      "time": 5.720000000000245,
+      "pelvis_height": 0.3035814375077812,
+      "torso_up": 0.8914804334920983,
+      "contacts": {
+        "left_ankle_roll_link": 206.18764214294094,
+        "right_ankle_roll_link": 205.5041341590304
+      },
+      "linear_speed": 2.1151492449161417e-06,
+      "angular_speed": 1.0528017468337394e-05
+    },
+    {
+      "time": 5.820000000000278,
+      "pelvis_height": 0.3035812008900108,
+      "torso_up": 0.8914808896857085,
+      "contacts": {
+        "left_ankle_roll_link": 206.18756616634823,
+        "right_ankle_roll_link": 205.50412085958303
+      },
+      "linear_speed": 4.031757425480844e-06,
+      "angular_speed": 1.8454928144535746e-05
+    },
+    {
+      "time": 5.920000000000312,
+      "pelvis_height": 0.303580936183776,
+      "torso_up": 0.891481620821378,
+      "contacts": {
+        "left_ankle_roll_link": 206.18750673987947,
+        "right_ankle_roll_link": 205.5041184081199
+      },
+      "linear_speed": 4.0488096702689014e-06,
+      "angular_speed": 1.7942117339628938e-05
+    },
+    {
+      "time": 6.020000000000345,
+      "pelvis_height": 0.3035807154511053,
+      "torso_up": 0.8914823012445757,
+      "contacts": {
+        "left_ankle_roll_link": 206.18746255079793,
+        "right_ankle_roll_link": 205.5041256512772
+      },
+      "linear_speed": 3.204606895996802e-06,
+      "angular_speed": 1.3912099798603096e-05
+    },
+    {
+      "time": 6.1200000000003785,
+      "pelvis_height": 0.30372034985765173,
+      "torso_up": 0.891506957159875,
+      "contacts": {
+        "left_ankle_roll_link": 206.54562742809057,
+        "right_ankle_roll_link": 205.86066697851143
+      },
+      "linear_speed": 0.004137285013074596,
+      "angular_speed": 0.005300897003548085
+    },
+    {
+      "time": 6.220000000000412,
+      "pelvis_height": 0.30455632701294333,
+      "torso_up": 0.891817268591282,
+      "contacts": {
+        "left_ankle_roll_link": 205.65638861361774,
+        "right_ankle_roll_link": 204.96923880469942
+      },
+      "linear_speed": 0.011767347937937295,
+      "angular_speed": 0.011563949887221857
+    },
+    {
+      "time": 6.320000000000445,
+      "pelvis_height": 0.3060944569588221,
+      "torso_up": 0.8928144888522699,
+      "contacts": {
+        "left_ankle_roll_link": 204.80947117486653,
+        "right_ankle_roll_link": 204.12069661249393
+      },
+      "linear_speed": 0.01796941632222896,
+      "angular_speed": 0.021708345571458915
+    },
+    {
+      "time": 6.420000000000479,
+      "pelvis_height": 0.3082166751118082,
+      "torso_up": 0.8947424383304825,
+      "contacts": {
+        "left_ankle_roll_link": 203.98237129158267,
+        "right_ankle_roll_link": 203.29266941460173
+      },
+      "linear_speed": 0.023179568630313823,
+      "angular_speed": 0.03545683845861876
+    },
+    {
+      "time": 6.520000000000512,
+      "pelvis_height": 0.31084582481305567,
+      "torso_up": 0.897648171044924,
+      "contacts": {
+        "left_ankle_roll_link": 203.22726971656047,
+        "right_ankle_roll_link": 202.5369846086148
+      },
+      "linear_speed": 0.02775116107873112,
+      "angular_speed": 0.05093982447514588
+    },
+    {
+      "time": 6.6200000000005454,
+      "pelvis_height": 0.3139188880504208,
+      "torso_up": 0.9014802479163965,
+      "contacts": {
+        "left_ankle_roll_link": 202.49664157099187,
+        "right_ankle_roll_link": 201.80552958835906
+      },
+      "linear_speed": 0.031698021094779386,
+      "angular_speed": 0.06786928542011662
+    },
+    {
+      "time": 6.720000000000579,
+      "pelvis_height": 0.31738172485150684,
+      "torso_up": 0.9062180102248225,
+      "contacts": {
+        "left_ankle_roll_link": 201.81186273868025,
+        "right_ankle_roll_link": 201.11948791501726
+      },
+      "linear_speed": 0.03530106855075043,
+      "angular_speed": 0.08433654973038547
+    },
+    {
+      "time": 6.820000000000612,
+      "pelvis_height": 0.32120592958117417,
+      "torso_up": 0.9117671033613822,
+      "contacts": {
+        "left_ankle_roll_link": 201.15217466944677,
+        "right_ankle_roll_link": 200.45823794270996
+      },
+      "linear_speed": 0.03869879745396341,
+      "angular_speed": 0.09912470155492695
+    },
+    {
+      "time": 6.920000000000646,
+      "pelvis_height": 0.3253739674687229,
+      "torso_up": 0.9179346957710885,
+      "contacts": {
+        "left_ankle_roll_link": 200.53672138424866,
+        "right_ankle_roll_link": 199.8410112375023
+      },
+      "linear_speed": 0.04195924799455202,
+      "angular_speed": 0.11146403828284408
+    },
+    {
+      "time": 7.020000000000679,
+      "pelvis_height": 0.3298751729974517,
+      "torso_up": 0.9244908202773664,
+      "contacts": {
+        "left_ankle_roll_link": 199.97038246022967,
+        "right_ankle_roll_link": 199.27288033541518
+      },
+      "linear_speed": 0.0451241769323871,
+      "angular_speed": 0.12104241015833225
+    },
+    {
+      "time": 7.120000000000712,
+      "pelvis_height": 0.33470030001529844,
+      "torso_up": 0.9312274483342095,
+      "contacts": {
+        "left_ankle_roll_link": 199.45737076345807,
+        "right_ankle_roll_link": 198.75729855627026
+      },
+      "linear_speed": 0.048170261664056975,
+      "angular_speed": 0.12805305413997
+    },
+    {
+      "time": 7.220000000000746,
+      "pelvis_height": 0.3398351343306593,
+      "torso_up": 0.9379736782272632,
+      "contacts": {
+        "left_ankle_roll_link": 198.99278737031636,
+        "right_ankle_roll_link": 198.29012817156922
+      },
+      "linear_speed": 0.051050384577878846,
+      "angular_speed": 0.13301023344520221
+    },
+    {
+      "time": 7.320000000000779,
+      "pelvis_height": 0.34525714178266625,
+      "torso_up": 0.9446023941086853,
+      "contacts": {
+        "left_ankle_roll_link": 198.57683744545596,
+        "right_ankle_roll_link": 197.87158971469998
+      },
+      "linear_speed": 0.05369716413676593,
+      "angular_speed": 0.13652395716763027
+    },
+    {
+      "time": 7.420000000000813,
+      "pelvis_height": 0.3509355628032859,
+      "torso_up": 0.9510267645138868,
+      "contacts": {
+        "left_ankle_roll_link": 198.210863491787,
+        "right_ankle_roll_link": 197.5017458519507
+      },
+      "linear_speed": 0.056045177454471726,
+      "angular_speed": 0.1391263409826271
+    },
+    {
+      "time": 7.520000000000846,
+      "pelvis_height": 0.35683329641378514,
+      "torso_up": 0.9571876889594916,
+      "contacts": {
+        "left_ankle_roll_link": 197.88934477998976,
+        "right_ankle_roll_link": 197.1778979031461
+      },
+      "linear_speed": 0.05803938085391855,
+      "angular_speed": 0.14122782013893986
+    },
+    {
+      "time": 7.620000000000879,
+      "pelvis_height": 0.3629086425962213,
+      "torso_up": 0.9630431469976308,
+      "contacts": {
+        "left_ankle_roll_link": 197.61475434425557,
+        "right_ankle_roll_link": 196.9002371151247
+      },
+      "linear_speed": 0.05964038011892358,
+      "angular_speed": 0.1430606348299517
+    },
+    {
+      "time": 7.720000000000913,
+      "pelvis_height": 0.3691181029287654,
+      "torso_up": 0.9685593141449841,
+      "contacts": {
+        "left_ankle_roll_link": 197.387704541871,
+        "right_ankle_roll_link": 196.66970786817961
+      },
+      "linear_speed": 0.06083708781080572,
+      "angular_speed": 0.14467772292353828
+    },
+    {
+      "time": 7.820000000000946,
+      "pelvis_height": 0.3754187511984524,
+      "torso_up": 0.9737037761384951,
+      "contacts": {
+        "left_ankle_roll_link": 197.209255581913,
+        "right_ankle_roll_link": 196.48776208242134
+      },
+      "linear_speed": 0.06163856896608259,
+      "angular_speed": 0.145998042000819
+    },
+    {
+      "time": 7.92000000000098,
+      "pelvis_height": 0.3817697188039045,
+      "torso_up": 0.9784433791655668,
+      "contacts": {
+        "left_ankle_roll_link": 197.0814688570942,
+        "right_ankle_roll_link": 196.35602642424868
+      },
+      "linear_speed": 0.062070703749338714,
+      "angular_speed": 0.14686493735386005
+    },
+    {
+      "time": 8.020000000000994,
+      "pelvis_height": 0.38813313938617666,
+      "torso_up": 0.9827451336001168,
+      "contacts": {
+        "left_ankle_roll_link": 197.00494275878324,
+        "right_ankle_roll_link": 196.2758387690568
+      },
+      "linear_speed": 0.06216649008607179,
+      "angular_speed": 0.1470931931994864
+    },
+    {
+      "time": 8.120000000000939,
+      "pelvis_height": 0.3944741706250213,
+      "torso_up": 0.986579236694854,
+      "contacts": {
+        "left_ankle_roll_link": 196.98068528268385,
+        "right_ankle_roll_link": 196.24829524862213
+      },
+      "linear_speed": 0.06196057951125169,
+      "angular_speed": 0.14651342883026167
+    },
+    {
+      "time": 8.220000000000883,
+      "pelvis_height": 0.4007606829372633,
+      "torso_up": 0.9899226029013833,
+      "contacts": {
+        "left_ankle_roll_link": 197.00962577785552,
+        "right_ankle_roll_link": 196.27344099831927
+      },
+      "linear_speed": 0.061483054093518986,
+      "angular_speed": 0.14499898533712438
+    },
+    {
+      "time": 8.320000000000828,
+      "pelvis_height": 0.40696277568674394,
+      "torso_up": 0.9927620631966121,
+      "contacts": {
+        "left_ankle_roll_link": 197.07966816969545,
+        "right_ankle_roll_link": 196.33979768638653
+      },
+      "linear_speed": 0.0607667918631541,
+      "angular_speed": 0.14245413279183394
+    },
+    {
+      "time": 8.420000000000773,
+      "pelvis_height": 0.4130521583041155,
+      "torso_up": 0.9950963053132802,
+      "contacts": {
+        "left_ankle_roll_link": 197.20856875373224,
+        "right_ankle_roll_link": 196.4655186342478
+      },
+      "linear_speed": 0.05979429731122865,
+      "angular_speed": 0.1389212625564006
+    },
+    {
+      "time": 8.520000000000717,
+      "pelvis_height": 0.4189995393986399,
+      "torso_up": 0.9969368240428907,
+      "contacts": {
+        "left_ankle_roll_link": 197.40453050488492,
+        "right_ankle_roll_link": 196.65816198512965
+      },
+      "linear_speed": 0.05858995859170829,
+      "angular_speed": 0.13442715580095912
+    },
+    {
+      "time": 8.620000000000662,
+      "pelvis_height": 0.42477732099665344,
+      "torso_up": 0.9983078538157341,
+      "contacts": {
+        "left_ankle_roll_link": 197.6396556991964,
+        "right_ankle_roll_link": 196.8907232474608
+      },
+      "linear_speed": 0.057175316722545125,
+      "angular_speed": 0.12898162049344078
+    },
+    {
+      "time": 8.720000000000606,
+      "pelvis_height": 0.4303588144038055,
+      "torso_up": 0.9992441227732095,
+      "contacts": {
+        "left_ankle_roll_link": 197.9226903981231,
+        "right_ankle_roll_link": 197.16959150598436
+      },
+      "linear_speed": 0.0555003754487308,
+      "angular_speed": 0.1227170381041964
+    },
+    {
+      "time": 8.820000000000551,
+      "pelvis_height": 0.43571540609280823,
+      "torso_up": 0.9997894871220108,
+      "contacts": {
+        "left_ankle_roll_link": 198.25102762922148,
+        "right_ankle_roll_link": 197.4949889108374
+      },
+      "linear_speed": 0.05356527036072496,
+      "angular_speed": 0.11573701215369538
+    },
+    {
+      "time": 8.920000000000496,
+      "pelvis_height": 0.44081894409585215,
+      "torso_up": 0.9999948234983582,
+      "contacts": {
+        "left_ankle_roll_link": 198.6258873343801,
+        "right_ankle_roll_link": 197.86714223955542
+      },
+      "linear_speed": 0.05134972611427526,
+      "angular_speed": 0.1081468483623893
+    },
+    {
+      "time": 9.02000000000044,
+      "pelvis_height": 0.4456412567068906,
+      "torso_up": 0.9999152742938644,
+      "contacts": {
+        "left_ankle_roll_link": 199.04220926066452,
+        "right_ankle_roll_link": 198.28169629167988
+      },
+      "linear_speed": 0.04882747031257389,
+      "angular_speed": 0.10007066018557524
+    },
+    {
+      "time": 9.120000000000385,
+      "pelvis_height": 0.4501539293419871,
+      "torso_up": 0.9996081274692187,
+      "contacts": {
+        "left_ankle_roll_link": 199.50220812879957,
+        "right_ankle_roll_link": 198.74015010275966
+      },
+      "linear_speed": 0.04597632920929903,
+      "angular_speed": 0.09159838050150931
+    },
+    {
+      "time": 9.22000000000033,
+      "pelvis_height": 0.45432899709897895,
+      "torso_up": 0.9991308407461004,
+      "contacts": {
+        "left_ankle_roll_link": 200.00038450923088,
+        "right_ankle_roll_link": 199.23670163559612
+      },
+      "linear_speed": 0.04278016764859948,
+      "angular_speed": 0.08278404943994609
+    },
+    {
+      "time": 9.320000000000274,
+      "pelvis_height": 0.4581391809320544,
+      "torso_up": 0.9985397067079328,
+      "contacts": {
+        "left_ankle_roll_link": 200.54399321408047,
+        "right_ankle_roll_link": 199.77873282437565
+      },
+      "linear_speed": 0.03920421390456201,
+      "angular_speed": 0.07375067484249326
+    },
+    {
+      "time": 9.420000000000218,
+      "pelvis_height": 0.4615565676332714,
+      "torso_up": 0.9978879378792582,
+      "contacts": {
+        "left_ankle_roll_link": 201.12510389638777,
+        "right_ankle_roll_link": 200.3584201106474
+      },
+      "linear_speed": 0.0352467358245723,
+      "angular_speed": 0.06447997940739975
+    },
+    {
+      "time": 9.520000000000163,
+      "pelvis_height": 0.46455489674818884,
+      "torso_up": 0.9972252248816793,
+      "contacts": {
+        "left_ankle_roll_link": 201.73752351464125,
+        "right_ankle_roll_link": 200.969745584078
+      },
+      "linear_speed": 0.030885485153576295,
+      "angular_speed": 0.05503720123754576
+    },
+    {
+      "time": 9.620000000000108,
+      "pelvis_height": 0.4671079009729641,
+      "torso_up": 0.9965972427687851,
+      "contacts": {
+        "left_ankle_roll_link": 202.40303669256642,
+        "right_ankle_roll_link": 201.63410557222883
+      },
+      "linear_speed": 0.026082225666038177,
+      "angular_speed": 0.04547991471445999
+    },
+    {
+      "time": 9.720000000000052,
+      "pelvis_height": 0.46918776132257656,
+      "torso_up": 0.9960436441041207,
+      "contacts": {
+        "left_ankle_roll_link": 203.0962801159604,
+        "right_ankle_roll_link": 202.3270928938633
+      },
+      "linear_speed": 0.0208020556743233,
+      "angular_speed": 0.035979374634996626
+    },
+    {
+      "time": 9.819999999999997,
+      "pelvis_height": 0.47076475545652274,
+      "torso_up": 0.9955950230241181,
+      "contacts": {
+        "left_ankle_roll_link": 203.82713417366242,
+        "right_ankle_roll_link": 203.05785906325409
+      },
+      "linear_speed": 0.015084538804530832,
+      "angular_speed": 0.02637825245556295
+    },
+    {
+      "time": 9.919999999999941,
+      "pelvis_height": 0.47181073638940035,
+      "torso_up": 0.9952774663519062,
+      "contacts": {
+        "left_ankle_roll_link": 204.59945872619716,
+        "right_ankle_roll_link": 203.830356174625
+      },
+      "linear_speed": 0.008950539172882774,
+      "angular_speed": 0.016523588587974834
+    },
+    {
+      "time": 10.019999999999886,
+      "pelvis_height": 0.4722972693331304,
+      "torso_up": 0.9951142466771469,
+      "contacts": {
+        "left_ankle_roll_link": 205.43411953697918,
+        "right_ankle_roll_link": 204.66547887787343
+      },
+      "linear_speed": 0.0024192469340262057,
+      "angular_speed": 0.0061776094873895624
+    },
+    {
+      "time": 10.11999999999983,
+      "pelvis_height": 0.4728233512245909,
+      "torso_up": 0.9950689306644412,
+      "contacts": {
+        "left_ankle_roll_link": 206.1634586668389,
+        "right_ankle_roll_link": 205.3885820900385
+      },
+      "linear_speed": 0.011558532803962717,
+      "angular_speed": 0.000642339935686519
+    },
+    {
+      "time": 10.219999999999775,
+      "pelvis_height": 0.4750609019182554,
+      "torso_up": 0.995022783554481,
+      "contacts": {
+        "left_ankle_roll_link": 203.14861220762828,
+        "right_ankle_roll_link": 202.36048170135925
+      },
+      "linear_speed": 0.030038919919762208,
+      "angular_speed": 0.005161638065599573
+    },
+    {
+      "time": 10.31999999999972,
+      "pelvis_height": 0.47914158095678633,
+      "torso_up": 0.9949489070625368,
+      "contacts": {
+        "left_ankle_roll_link": 200.18861397940424,
+        "right_ankle_roll_link": 199.38881149139462
+      },
+      "linear_speed": 0.04673922850063535,
+      "angular_speed": 0.010398198507669373
+    },
+    {
+      "time": 10.419999999999664,
+      "pelvis_height": 0.4848837742829514,
+      "torso_up": 0.994876341581645,
+      "contacts": {
+        "left_ankle_roll_link": 197.40870988532342,
+        "right_ankle_roll_link": 196.60106046352945
+      },
+      "linear_speed": 0.06175232745329579,
+      "angular_speed": 0.016584233208734173
+    },
+    {
+      "time": 10.519999999999609,
+      "pelvis_height": 0.49210781451082414,
+      "torso_up": 0.9948354717711991,
+      "contacts": {
+        "left_ankle_roll_link": 194.78192615038355,
+        "right_ankle_roll_link": 193.97016382263007
+      },
+      "linear_speed": 0.0749972343998242,
+      "angular_speed": 0.023805466758058433
+    },
+    {
+      "time": 10.619999999999553,
+      "pelvis_height": 0.5006218918582054,
+      "torso_up": 0.9948428917822494,
+      "contacts": {
+        "left_ankle_roll_link": 192.31087829148424,
+        "right_ankle_roll_link": 191.4969002344896
+      },
+      "linear_speed": 0.08639252880959739,
+      "angular_speed": 0.031783831404094465
+    },
+    {
+      "time": 10.719999999999498,
+      "pelvis_height": 0.5102232015860397,
+      "torso_up": 0.9949085719669247,
+      "contacts": {
+        "left_ankle_roll_link": 190.0052740582861,
+        "right_ankle_roll_link": 189.1893364326486
+      },
+      "linear_speed": 0.09588004722379774,
+      "angular_speed": 0.04014922040985416
+    },
+    {
+      "time": 10.819999999999443,
+      "pelvis_height": 0.5207010402630646,
+      "torso_up": 0.9950385211450946,
+      "contacts": {
+        "left_ankle_roll_link": 187.87823480518864,
+        "right_ankle_roll_link": 187.05985625067498
+      },
+      "linear_speed": 0.10344126877748994,
+      "angular_speed": 0.048587858445730256
+    },
+    {
+      "time": 10.919999999999387,
+      "pelvis_height": 0.5318409098385178,
+      "torso_up": 0.9952342398140772,
+      "contacts": {
+        "left_ankle_roll_link": 185.9378331307904,
+        "right_ankle_roll_link": 185.1161962616473
+      },
+      "linear_speed": 0.10910951603927722,
+      "angular_speed": 0.0569030703478737
+    },
+    {
+      "time": 11.019999999999332,
+      "pelvis_height": 0.5434279396901911,
+      "torso_up": 0.9954932675790771,
+      "contacts": {
+        "left_ankle_roll_link": 184.2554249221188,
+        "right_ankle_roll_link": 183.43059235148192
+      },
+      "linear_speed": 0.11293921065072168,
+      "angular_speed": 0.06486905837538527
+    },
+    {
+      "time": 11.119999999999276,
+      "pelvis_height": 0.5552525045046136,
+      "torso_up": 0.9958102599000459,
+      "contacts": {
+        "left_ankle_roll_link": 182.8096557471498,
+        "right_ankle_roll_link": 181.98213375267218
+      },
+      "linear_speed": 0.11508069506008406,
+      "angular_speed": 0.07249988758857227
+    },
+    {
+      "time": 11.21999999999922,
+      "pelvis_height": 0.5671124435757865,
+      "torso_up": 0.9961787571904104,
+      "contacts": {
+        "left_ankle_roll_link": 181.6586464228531,
+        "right_ankle_roll_link": 180.828975026107
+      },
+      "linear_speed": 0.11569250120783417,
+      "angular_speed": 0.07973666099330329
+    },
+    {
+      "time": 11.319999999999165,
+      "pelvis_height": 0.5788175054923453,
+      "torso_up": 0.9965911015635538,
+      "contacts": {
+        "left_ankle_roll_link": 180.84003340987735,
+        "right_ankle_roll_link": 180.00993706085404
+      },
+      "linear_speed": 0.11499896581770895,
+      "angular_speed": 0.08660818122544038
+    },
+    {
+      "time": 11.41999999999911,
+      "pelvis_height": 0.590192487334544,
+      "torso_up": 0.997038046409314,
+      "contacts": {
+        "left_ankle_roll_link": 180.39749089547945,
+        "right_ankle_roll_link": 179.56830068897102
+      },
+      "linear_speed": 0.11326212514973832,
+      "angular_speed": 0.09313797546096908
+    },
+    {
+      "time": 11.519999999999055,
+      "pelvis_height": 0.6010800145702263,
+      "torso_up": 0.9975085729619051,
+      "contacts": {
+        "left_ankle_roll_link": 180.3715103399928,
+        "right_ankle_roll_link": 179.54453155024393
+      },
+      "linear_speed": 0.11077253320628079,
+      "angular_speed": 0.09933877293861257
+    },
+    {
+      "time": 11.619999999999,
+      "pelvis_height": 0.6113428645980693,
+      "torso_up": 0.9979895142670261,
+      "contacts": {
+        "left_ankle_roll_link": 180.78994069186834,
+        "right_ankle_roll_link": 179.96630036592606
+      },
+      "linear_speed": 0.10783054834969488,
+      "angular_speed": 0.10515076055086162
+    },
+    {
+      "time": 11.719999999998944,
+      "pelvis_height": 0.6208659216743766,
+      "torso_up": 0.998464934138841,
+      "contacts": {
+        "left_ankle_roll_link": 181.66154389851005,
+        "right_ankle_roll_link": 180.8402947838509
+      },
+      "linear_speed": 0.10472096691903568,
+      "angular_speed": 0.11051985400494974
+    },
+    {
+      "time": 11.819999999998888,
+      "pelvis_height": 0.6295576437524928,
+      "torso_up": 0.9989156430388295,
+      "contacts": {
+        "left_ankle_roll_link": 182.9857022113173,
+        "right_ankle_roll_link": 182.16799892032964
+      },
+      "linear_speed": 0.10169381770593215,
+      "angular_speed": 0.11547523766482182
+    },
+    {
+      "time": 11.919999999998833,
+      "pelvis_height": 0.6373511221729579,
+      "torso_up": 0.9993196279007194,
+      "contacts": {
+        "left_ankle_roll_link": 184.73624921671495,
+        "right_ankle_roll_link": 183.921363664599
+      },
+      "linear_speed": 0.09890556598216338,
+      "angular_speed": 0.11996498405736904
+    },
+    {
+      "time": 12.019999999998777,
+      "pelvis_height": 0.6442049142605146,
+      "torso_up": 0.9996521236518445,
+      "contacts": {
+        "left_ankle_roll_link": 186.81926330328764,
+        "right_ankle_roll_link": 186.0081117666458
+      },
+      "linear_speed": 0.09643858241202395,
+      "angular_speed": 0.12391061104603952
+    },
+    {
+      "time": 12.119999999998722,
+      "pelvis_height": 0.6501030114338539,
+      "torso_up": 0.9998858961730908,
+      "contacts": {
+        "left_ankle_roll_link": 189.1268357479486,
+        "right_ankle_roll_link": 188.31956746162737
+      },
+      "linear_speed": 0.09425007241837523,
+      "angular_speed": 0.1270979220530403
+    },
+    {
+      "time": 12.219999999998667,
+      "pelvis_height": 0.6550540545211304,
+      "torso_up": 0.9999949697150267,
+      "contacts": {
+        "left_ankle_roll_link": 191.5375410806485,
+        "right_ankle_roll_link": 190.73371827585507
+      },
+      "linear_speed": 0.09212136920121848,
+      "angular_speed": 0.12934233663240285
+    },
+    {
+      "time": 12.319999999998611,
+      "pelvis_height": 0.6590906920919377,
+      "torso_up": 0.9999560657507921,
+      "contacts": {
+        "left_ankle_roll_link": 193.95743869221963,
+        "right_ankle_roll_link": 193.15848659581474
+      },
+      "linear_speed": 0.08979381759096657,
+      "angular_speed": 0.13073457026986574
+    },
+    {
+      "time": 12.419999999998556,
+      "pelvis_height": 0.6622674320244667,
+      "torso_up": 0.9997516354028382,
+      "contacts": {
+        "left_ankle_roll_link": 196.3441214914497,
+        "right_ankle_roll_link": 195.54239890900715
+      },
+      "linear_speed": 0.08697483065426088,
+      "angular_speed": 0.13094135912014207
+    },
+    {
+      "time": 12.5199999999985,
+      "pelvis_height": 0.6646583560199796,
+      "torso_up": 0.9993740538371274,
+      "contacts": {
+        "left_ankle_roll_link": 198.47921058544807,
+        "right_ankle_roll_link": 197.68062910941347
+      },
+      "linear_speed": 0.08335149693488415,
+      "angular_speed": 0.12924209139212964
+    },
+    {
+      "time": 12.619999999998445,
+      "pelvis_height": 0.6663524484239591,
+      "torso_up": 0.9988274576250632,
+      "contacts": {
+        "left_ankle_roll_link": 200.24240990169613,
+        "right_ankle_roll_link": 199.44604225947575
+      },
+      "linear_speed": 0.07860661076697448,
+      "angular_speed": 0.1247925004847577
+    },
+    {
+      "time": 12.71999999999839,
+      "pelvis_height": 0.6674490547419399,
+      "torso_up": 0.9981278950151249,
+      "contacts": {
+        "left_ankle_roll_link": 202.25383135843606,
+        "right_ankle_roll_link": 201.45802353434243
+      },
+      "linear_speed": 0.07227601945236509,
+      "angular_speed": 0.11807549188453842
+    },
+    {
+      "time": 12.819999999998334,
+      "pelvis_height": 0.66805416614398,
+      "torso_up": 0.997305072743444,
+      "contacts": {
+        "left_ankle_roll_link": 203.40181960980394,
+        "right_ankle_roll_link": 202.6033881777146
+      },
+      "linear_speed": 0.06399499234108998,
+      "angular_speed": 0.10779255180207488
+    },
+    {
+      "time": 12.919999999998279,
+      "pelvis_height": 0.6682658418539614,
+      "torso_up": 0.996414558486125,
+      "contacts": {
+        "left_ankle_roll_link": 204.70338285987634,
+        "right_ankle_roll_link": 203.90352508252482
+      },
+      "linear_speed": 0.05400806616485441,
+      "angular_speed": 0.09344310282956361
+    },
+    {
+      "time": 13.019999999998223,
+      "pelvis_height": 0.6681658559317706,
+      "torso_up": 0.9955346130791352,
+      "contacts": {
+        "left_ankle_roll_link": 205.93160390570026,
+        "right_ankle_roll_link": 205.1302684007103
+      },
+      "linear_speed": 0.04214809932573654,
+      "angular_speed": 0.07634851498689199
+    },
+    {
+      "time": 13.119999999998168,
+      "pelvis_height": 0.6679008947655024,
+      "torso_up": 0.9947492875501216,
+      "contacts": {
+        "left_ankle_roll_link": 206.45567632900028,
+        "right_ankle_roll_link": 205.64878910790142
+      },
+      "linear_speed": 0.03020493960537714,
+      "angular_speed": 0.05493899131339946
+    },
+    {
+      "time": 13.219999999998112,
+      "pelvis_height": 0.6676839435920422,
+      "torso_up": 0.994188621089713,
+      "contacts": {
+        "left_ankle_roll_link": 206.54793797535166,
+        "right_ankle_roll_link": 205.73675929124767
+      },
+      "linear_speed": 0.018299872392294313,
+      "angular_speed": 0.03314948893612083
+    },
+    {
+      "time": 13.319999999998057,
+      "pelvis_height": 0.667569950988934,
+      "torso_up": 0.9939055204912355,
+      "contacts": {
+        "left_ankle_roll_link": 206.57087188013003,
+        "right_ankle_roll_link": 205.75900741412713
+      },
+      "linear_speed": 0.006205169991704842,
+      "angular_speed": 0.01131571683452126
+    },
+    {
+      "time": 13.419999999998002,
+      "pelvis_height": 0.6675670595150819,
+      "torso_up": 0.9938894334070184,
+      "contacts": {
+        "left_ankle_roll_link": 206.52341319856424,
+        "right_ankle_roll_link": 205.71284056678505
+      },
+      "linear_speed": 0.004770951088038961,
+      "angular_speed": 0.009056193081697663
+    },
+    {
+      "time": 13.519999999997946,
+      "pelvis_height": 0.6676613755940682,
+      "torso_up": 0.9940924841237628,
+      "contacts": {
+        "left_ankle_roll_link": 206.4634646463193,
+        "right_ankle_roll_link": 205.65215195883783
+      },
+      "linear_speed": 0.014122409100475899,
+      "angular_speed": 0.026278974497843055
+    },
+    {
+      "time": 13.61999999999789,
+      "pelvis_height": 0.6678294728823096,
+      "torso_up": 0.9944993703168071,
+      "contacts": {
+        "left_ankle_roll_link": 206.40418949461045,
+        "right_ankle_roll_link": 205.59295111001416
+      },
+      "linear_speed": 0.02137664938039641,
+      "angular_speed": 0.040665969331928585
+    },
+    {
+      "time": 13.719999999997835,
+      "pelvis_height": 0.6680481970378752,
+      "torso_up": 0.9950669717424574,
+      "contacts": {
+        "left_ankle_roll_link": 206.34345343196279,
+        "right_ankle_roll_link": 205.53243077712636
+      },
+      "linear_speed": 0.02716704134919518,
+      "angular_speed": 0.05183717683096258
+    },
+    {
+      "time": 13.81999999999778,
+      "pelvis_height": 0.6682981138883204,
+      "torso_up": 0.9957098411529057,
+      "contacts": {
+        "left_ankle_roll_link": 206.2831026625974,
+        "right_ankle_roll_link": 205.47202127398623
+      },
+      "linear_speed": 0.03132225394031496,
+      "angular_speed": 0.05950842058990885
+    },
+    {
+      "time": 13.919999999997724,
+      "pelvis_height": 0.6685576743098259,
+      "torso_up": 0.9963648484223135,
+      "contacts": {
+        "left_ankle_roll_link": 206.23057624089995,
+        "right_ankle_roll_link": 205.420147537893
+      },
+      "linear_speed": 0.03347300083795554,
+      "angular_speed": 0.06347051589018704
+    },
+    {
+      "time": 14.019999999997669,
+      "pelvis_height": 0.6688082182105899,
+      "torso_up": 0.9969846175125816,
+      "contacts": {
+        "left_ankle_roll_link": 206.19083938169047,
+        "right_ankle_roll_link": 205.38073395346578
+      },
+      "linear_speed": 0.03380880681505978,
+      "angular_speed": 0.0639759521431556
+    },
+    {
+      "time": 14.119999999997614,
+      "pelvis_height": 0.6690358058635036,
+      "torso_up": 0.9975373399009916,
+      "contacts": {
+        "left_ankle_roll_link": 206.16417630014496,
+        "right_ankle_roll_link": 205.35464635249676
+      },
+      "linear_speed": 0.032382883725803065,
+      "angular_speed": 0.06122155259712509
+    },
+    {
+      "time": 14.219999999997558,
+      "pelvis_height": 0.6692315621620641,
+      "torso_up": 0.9980033598887752,
+      "contacts": {
+        "left_ankle_roll_link": 206.14975632498454,
+        "right_ankle_roll_link": 205.3408871052489
+      },
+      "linear_speed": 0.02945808211433538,
+      "angular_speed": 0.055616721591855316
+    },
+    {
+      "time": 14.319999999997503,
+      "pelvis_height": 0.6693913709880301,
+      "torso_up": 0.99837454427701,
+      "contacts": {
+        "left_ankle_roll_link": 206.14496499750302,
+        "right_ankle_roll_link": 205.33671151813667
+      },
+      "linear_speed": 0.025299938925322937,
+      "angular_speed": 0.04767343182158865
+    },
+    {
+      "time": 14.419999999997447,
+      "pelvis_height": 0.669514508151241,
+      "torso_up": 0.998653148294627,
+      "contacts": {
+        "left_ankle_roll_link": 206.1467880245795,
+        "right_ankle_roll_link": 205.33908766572642
+      },
+      "linear_speed": 0.020204201972406022,
+      "angular_speed": 0.03797573338634785
+    },
+    {
+      "time": 14.519999999997392,
+      "pelvis_height": 0.6696024880046912,
+      "torso_up": 0.9988473130800831,
+      "contacts": {
+        "left_ankle_roll_link": 206.15229141570327,
+        "right_ankle_roll_link": 205.3450719312972
+      },
+      "linear_speed": 0.014502463839324279,
+      "angular_speed": 0.027151528888579086
+    },
+    {
+      "time": 14.619999999997336,
+      "pelvis_height": 0.6696579434506607,
+      "torso_up": 0.9989670637521202,
+      "contacts": {
+        "left_ankle_roll_link": 206.15873156837483,
+        "right_ankle_roll_link": 205.35196162912308
+      },
+      "linear_speed": 0.008508922586282653,
+      "angular_speed": 0.015911546410568838
+    },
+    {
+      "time": 14.719999999997281,
+      "pelvis_height": 0.6696829586737758,
+      "torso_up": 0.9990222166356484,
+      "contacts": {
+        "left_ankle_roll_link": 206.1727013274835,
+        "right_ankle_roll_link": 205.36593848255
+      },
+      "linear_speed": 0.0025194737874053193,
+      "angular_speed": 0.005007771432682427
+    },
+    {
+      "time": 14.819999999997226,
+      "pelvis_height": 0.669682260737345,
+      "torso_up": 0.9990238913408809,
+      "contacts": {
+        "left_ankle_roll_link": 206.18130089341474,
+        "right_ankle_roll_link": 205.37486136940385
+      },
+      "linear_speed": 0.0024706500771217855,
+      "angular_speed": 0.004762222028728988
+    },
+    {
+      "time": 14.91999999999717,
+      "pelvis_height": 0.6696596088125639,
+      "torso_up": 0.9989844543609733,
+      "contacts": {
+        "left_ankle_roll_link": 206.19213585950652,
+        "right_ankle_roll_link": 205.3852830373038
+      },
+      "linear_speed": 0.006654360150631305,
+      "angular_speed": 0.012295868479640475
+    },
+    {
+      "time": 15.019999999997115,
+      "pelvis_height": 0.6696181867898789,
+      "torso_up": 0.9989089597174559,
+      "contacts": {
+        "left_ankle_roll_link": 206.20225479720935,
+        "right_ankle_roll_link": 205.39539418154797
+      },
+      "linear_speed": 0.009981745566902707,
+      "angular_speed": 0.01858873958990775
+    },
+    {
+      "time": 15.11999999999706,
+      "pelvis_height": 0.669562026564914,
+      "torso_up": 0.9987935478649016,
+      "contacts": {
+        "left_ankle_roll_link": 206.21112391419496,
+        "right_ankle_roll_link": 205.40362063010107
+      },
+      "linear_speed": 0.01232217866254412,
+      "angular_speed": 0.02315179115725151
+    },
+    {
+      "time": 15.219999999997004,
+      "pelvis_height": 0.6694936176244557,
+      "torso_up": 0.998642007127925,
+      "contacts": {
+        "left_ankle_roll_link": 206.22059814663086,
+        "right_ankle_roll_link": 205.4135290310471
+      },
+      "linear_speed": 0.013960296019462552,
+      "angular_speed": 0.026536952268435898
+    },
+    {
+      "time": 15.319999999996949,
+      "pelvis_height": 0.6694152381538545,
+      "torso_up": 0.998465051636136,
+      "contacts": {
+        "left_ankle_roll_link": 206.23262713251944,
+        "right_ankle_roll_link": 205.4251826750214
+      },
+      "linear_speed": 0.01486592698384594,
+      "angular_speed": 0.028189794613436334
+    },
+    {
+      "time": 15.419999999996893,
+      "pelvis_height": 0.6693305119572317,
+      "torso_up": 0.9982722987478259,
+      "contacts": {
+        "left_ankle_roll_link": 206.24616961883447,
+        "right_ankle_roll_link": 205.43837713528217
+      },
+      "linear_speed": 0.014940568013790642,
+      "angular_speed": 0.028270273716634993
+    },
+    {
+      "time": 15.519999999996838,
+      "pelvis_height": 0.6692440356608333,
+      "torso_up": 0.998073130300527,
+      "contacts": {
+        "left_ankle_roll_link": 206.26004543937898,
+        "right_ankle_roll_link": 205.45191182909048
+      },
+      "linear_speed": 0.014240265533419115,
+      "angular_speed": 0.026911638106148265
+    },
+    {
+      "time": 15.619999999996782,
+      "pelvis_height": 0.6691605662088629,
+      "torso_up": 0.9978784549268616,
+      "contacts": {
+        "left_ankle_roll_link": 206.27333344963293,
+        "right_ankle_roll_link": 205.4648375372701
+      },
+      "linear_speed": 0.012880099140034252,
+      "angular_speed": 0.024306499845750933
+    },
+    {
+      "time": 15.719999999996727,
+      "pelvis_height": 0.6690846711220151,
+      "torso_up": 0.9976997403300625,
+      "contacts": {
+        "left_ankle_roll_link": 206.2850348607908,
+        "right_ankle_roll_link": 205.47617934192255
+      },
+      "linear_speed": 0.01098376634026633,
+      "angular_speed": 0.020688659634366127
+    },
+    {
+      "time": 15.819999999996671,
+      "pelvis_height": 0.6690204366507966,
+      "torso_up": 0.9975474036016428,
+      "contacts": {
+        "left_ankle_roll_link": 206.29419304016398,
+        "right_ankle_roll_link": 205.4851127898078
+      },
+      "linear_speed": 0.008678878531363095,
+      "angular_speed": 0.01637752855967583
+    },
+    {
+      "time": 15.919999999996616,
+      "pelvis_height": 0.6689712037275861,
+      "torso_up": 0.997429305313588,
+      "contacts": {
+        "left_ankle_roll_link": 206.30012725359003,
+        "right_ankle_roll_link": 205.49042960409136
+      },
+      "linear_speed": 0.00611051105288495,
+      "angular_speed": 0.011621484898037318
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "knee": 2.32,
+  "requested_lean": 1.2,
+  "rejected_target": "Target outside guarded limits",
+  "return_clean_pass": false
+}

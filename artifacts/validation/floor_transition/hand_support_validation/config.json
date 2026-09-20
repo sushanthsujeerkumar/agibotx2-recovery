@@ -1,0 +1,44 @@
+{
+  "scope": "Independent scripted hands-supported squat and standing-return validation; not learned or floor recovery",
+  "source_function": "screen_supported_lowering.run(info,2.32,0.9,seed)",
+  "validation_seeds": [
+    9101,
+    9102,
+    9103,
+    9104,
+    9105
+  ],
+  "recorded_resimulation_seed": 9101,
+  "physics_profile": "guarded_v2",
+  "physics_dt_s": 0.001,
+  "control_dt_s": 0.02,
+  "episode_seconds": 16.0,
+  "stage_times_s": [
+    0.0,
+    4.0,
+    6.0,
+    10.0,
+    13.0,
+    16.0
+  ],
+  "start": "reset_deep_crouch, physically lowered from standing; no later state injection",
+  "monitoring": {
+    "joint_position_speed_commanded_effort_hz": 1000,
+    "exact_contacts_and_posture_hz": 50
+  },
+  "pass_definition": "Full16s and>=2s clean terminal standing with no latched trajectory-limit violation",
+  "source_sha256": {
+    "scripts/validate_hand_support.py": "f9b954e18b0462de13ff0dcc0cfd6f38c2783fccf1d183a74ba7e0becf1aa931",
+    "scripts/screen_supported_lowering.py": "3a22bd002dfdec7eeab53106906187f6737ed3c8f562b2d1db90a4ec0197b4c7",
+    "assets/x2/scene.xml": "500a69c1463fb0814964d31e003f74ba8316a91bf66b004645f1d4e4e7bbf6cd",
+    "src/x2_recovery/common.py": "760bb247c67080baba92e18377fc1be67806d673e10d58f6aaf73cd24fb66347",
+    "src/x2_recovery/physics.py": "95ab07433b22977d4fd89534a84dec6556dd000c26541c8b3c72f972aa166d6c",
+    "src/x2_recovery/stance.py": "8e3a265a4ad9f39ecf8d48b8d2c1b3ad41ea3c46aebf53a72d54f717650654ff"
+  },
+  "original_validation_script_sha256": "1e0e52c2964dd3bbe55d1c92aba3c3f4ba0ef30000384ad2da727a8182529444",
+  "rendering_revision": "Camera enlarged and captions moved outside viewport after visual QA; only seed9101 re-rendered by actual simulation, with recorded numerical report exactly identical.",
+  "video_dimensions": [
+    640,
+    592
+  ]
+}
