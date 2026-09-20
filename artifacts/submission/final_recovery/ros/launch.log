@@ -1,4 +1,4 @@
-[INFO] [launch]: All log files can be found below /home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/local_evaluation/cleanup_ros/ros_logs/2026-09-20-15-45-45-970529-sushanth-ISRMOT-220-116557
+[INFO] [launch]: All log files can be found below <repo>/artifacts/local_evaluation/cleanup_ros/ros_logs/2026-09-20-15-45-45-970529-sushanth-ISRMOT-220-116557
 [INFO] [launch]: Default logging verbosity is set to INFO
 [INFO] [recovery_node-1]: process started with pid [116623]
 [INFO] [telemetry_node-2]: process started with pid [116624]

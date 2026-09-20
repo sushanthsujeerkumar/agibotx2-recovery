@@ -1,5 +1,5 @@
 {
-  "actor": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/full_recovery_20260920_125144/model_001548_actor.pt",
+  "actor": "<repo>/artifacts/runs/full_recovery_20260920_125144/model_001548_actor.pt",
   "passes": 10,
   "episodes": 10,
   "results": [

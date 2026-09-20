@@ -93,5 +93,5 @@
     "external_teacher": false,
     "resume_environment": "fresh supine episodes"
   },
-  "prior_preparation": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/full_recovery_prepared/preparation.json"
+  "prior_preparation": "<repo>/artifacts/runs/full_recovery_prepared/preparation.json"
 }

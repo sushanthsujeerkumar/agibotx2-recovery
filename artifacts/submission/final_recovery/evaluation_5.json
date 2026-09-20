@@ -1,5 +1,5 @@
 {
-  "actor": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/submission/final_recovery/actor.pt",
+  "actor": "<repo>/artifacts/submission/final_recovery/actor.pt",
   "passes": 5,
   "episodes": 5,
   "results": [

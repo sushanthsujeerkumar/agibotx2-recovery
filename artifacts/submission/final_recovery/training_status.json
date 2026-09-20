@@ -19,6 +19,6 @@
   "state": "PAUSED",
   "pid": 106170,
   "updated_unix": 1789910568.5283487,
-  "checkpoint": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/full_recovery_20260920_125144/model_001548.pt",
+  "checkpoint": "<repo>/artifacts/runs/full_recovery_20260920_125144/model_001548.pt",
   "note": "Bounded run finished; long training requires an explicit launch"
 }

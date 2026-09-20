@@ -216,7 +216,7 @@
     0.0,
     0.0
   ],
-  "prior": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/independent_full_reference_06/standing_actor.pt",
+  "prior": "<repo>/artifacts/runs/independent_full_reference_06/standing_actor.pt",
   "prior_phase": 6.0,
   "prior_rate": 1.4,
   "evaluation_seconds": 15.0,
