@@ -7,7 +7,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
     arguments = [
-        ('controller', 'scripted', 'scripted, policy or reference_residual; reference is an external teacher plus trained correction'),
+        ('controller', 'scripted', 'full_recovery (final policy), scripted, policy (legacy), or reference_residual (external teacher experiment)'),
         ('checkpoint', '', 'Absolute policy checkpoint path'),
         ('vendor_assets', '', 'External vendor asset directory; required only for reference_residual'),
         ('render', 'false', 'Open a local MuJoCo viewer for the recovery episode'),

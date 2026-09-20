@@ -36,7 +36,7 @@ class RecordingConnection:
         self.closed = True
 
 
-def exercise_worker(frames, duration=1.0):
+def exercise_worker(frames, duration=1.0, controller="scripted"):
     module = ModuleType('x2_recovery.runtime')
 
     class TestRuntime:
@@ -61,7 +61,7 @@ def exercise_worker(frames, duration=1.0):
     module.RecoveryRuntime = TestRuntime
     connection = RecordingConnection()
     with patch.dict(sys.modules, {'x2_recovery.runtime': module}):
-        run_episode({'controller': 'scripted', 'checkpoint': '', 'render': False,
+        run_episode({'controller': controller, 'checkpoint': '', 'render': False,
                      'seed': 0, 'realtime': False, 'max_sim_duration_s': duration}, connection)
     assert connection.closed and TestRuntime.closed
     return connection.messages
@@ -118,3 +118,24 @@ def test_reference_bridge_forwards_audited_result_and_real_frame_contract(succes
     assert connection.closed
     assert connection.messages[0] == ('frame', checked_frame(frame()))
     assert connection.messages[-1][1]['success'] is success
+
+
+def test_full_recovery_audits_after_early_success():
+    frames = [frame(success=True, clean_stance_success=True),
+              frame(sim_time=15., success=True, clean_stance_success=False)]
+    messages = exercise_worker(frames, duration=15., controller='full_recovery')
+    assert len([m for m in messages if m[0] == 'frame']) == 2
+    assert messages[-1][1]['success'] is False
+
+
+def test_full_recovery_requires_clean_standing_at_full_horizon():
+    frames = [frame(success=True, clean_stance_success=True),
+              frame(sim_time=15., success=True, clean_stance_success=True)]
+    messages = exercise_worker(frames, duration=15., controller='full_recovery')
+    assert messages[-1][1]['success'] is True
+
+
+def test_shortened_full_recovery_is_timeout_even_if_standing():
+    messages = exercise_worker([frame(success=True, clean_stance_success=True)],
+                              duration=.02, controller='full_recovery')
+    assert messages[-1][1]['success'] is False

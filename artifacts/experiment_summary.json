@@ -43,5 +43,6 @@
     "max_position_violation_rad": 0.14919140053757374,
     "max_speed_over_rating": 4.203334842632375,
     "qualification": "Selected for reproducible inspection of a partial result, not a fully validated physical recovery."
-  }
+  },
+  "scope": "Historical direct-PPO experiments; final selection is in artifacts/selected_policy.json"
 }

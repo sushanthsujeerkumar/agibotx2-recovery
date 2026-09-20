@@ -67,17 +67,21 @@ class RecoveryNode(Node):
             'controller', 'checkpoint', 'render', 'seed', 'timeout_s',
             'max_sim_duration_s', 'realtime', 'physics_profile', 'vendor_assets',
         )}
-        if config['controller'] not in ('scripted', 'policy', 'reference_residual'):
+        if config['controller'] not in ('scripted', 'policy', 'reference_residual', 'full_recovery'):
             response.success = False
-            response.message = 'controller must be scripted, policy or reference_residual'
+            response.message = 'controller must be scripted, policy, reference_residual or full_recovery'
             return response
         if config['physics_profile'] not in ('legacy', 'guarded_v2'):
             response.success = False
             response.message = 'physics_profile must be legacy or guarded_v2'
             return response
-        if config['controller'] in ('policy', 'reference_residual') and not config['checkpoint']:
+        if config['controller'] in ('policy', 'reference_residual', 'full_recovery') and not config['checkpoint']:
             response.success = False
             response.message = 'policy/reference controller requires a checkpoint path'
+            return response
+        if config['controller'] == 'full_recovery' and config['physics_profile'] != 'guarded_v2':
+            response.success = False
+            response.message = 'full_recovery requires guarded_v2 physics'
             return response
         if config['controller'] == 'reference_residual' and (
                 not config['vendor_assets'] or config['physics_profile'] != 'guarded_v2'):

@@ -71,7 +71,17 @@ def run_episode(config, connection):
             if not isinstance(limits, dict) or not limits.get('ok', False):
                 connection.send(('result', {'success': False, 'reason': 'trajectory limits failed or unavailable'}))
                 break
-            if frame['success']:
+            if config['controller'] == 'full_recovery':
+                # Audit the entire fixed horizon, even if standing is achieved earlier.
+                # A smaller configured duration is a timeout, never early success.
+                if elapsed_sim_time >= min(15.0, config['max_sim_duration_s']) - 1e-8:
+                    passed = (elapsed_sim_time >= 15.0 - 1e-8 and
+                              bool(raw.get('clean_stance_success', False)))
+                    reason = ('full recovery: 15-second trajectory and clean standing checks passed'
+                              if passed else 'simulation duration timeout or final clean standing failed')
+                    connection.send(('result', {'success': passed, 'reason': reason}))
+                    break
+            elif frame['success']:
                 connection.send(('result', {'success': True, 'reason': 'stable standing success checks passed'}))
                 break
             if elapsed_sim_time >= config['max_sim_duration_s']:
