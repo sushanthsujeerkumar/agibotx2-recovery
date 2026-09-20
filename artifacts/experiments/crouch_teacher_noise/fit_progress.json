@@ -1,0 +1,158 @@
+[
+  {
+    "step": 1,
+    "training_mse": 0.018404370173811913,
+    "validation_mse": 0.007461745757609606,
+    "wall_seconds": 0.14637176299947896
+  },
+  {
+    "step": 100,
+    "training_mse": 1.6056985259638168e-05,
+    "validation_mse": 1.1596705007832497e-05,
+    "wall_seconds": 0.47922506900067674
+  },
+  {
+    "step": 200,
+    "training_mse": 6.658097390754847e-06,
+    "validation_mse": 3.2717812246119138e-06,
+    "wall_seconds": 0.8083209889991849
+  },
+  {
+    "step": 300,
+    "training_mse": 3.6104847822571173e-06,
+    "validation_mse": 1.1347983672749251e-06,
+    "wall_seconds": 1.1347539749986026
+  },
+  {
+    "step": 400,
+    "training_mse": 2.09478503165883e-06,
+    "validation_mse": 6.242301537895401e-07,
+    "wall_seconds": 1.4659007010013738
+  },
+  {
+    "step": 500,
+    "training_mse": 1.5040782272990327e-06,
+    "validation_mse": 5.283251880427997e-07,
+    "wall_seconds": 1.7910598980015493
+  },
+  {
+    "step": 600,
+    "training_mse": 1.3449617881633458e-06,
+    "validation_mse": 3.975678453116416e-07,
+    "wall_seconds": 2.113385061998997
+  },
+  {
+    "step": 700,
+    "training_mse": 1.0731216661952203e-06,
+    "validation_mse": 4.5134066795071703e-07,
+    "wall_seconds": 2.4370820939984696
+  },
+  {
+    "step": 800,
+    "training_mse": 9.509864185019978e-07,
+    "validation_mse": 4.096482086879405e-07,
+    "wall_seconds": 2.7616807509984937
+  },
+  {
+    "step": 900,
+    "training_mse": 1.0510489119042177e-06,
+    "validation_mse": 3.9204743984555535e-07,
+    "wall_seconds": 3.0894328290014528
+  },
+  {
+    "step": 1000,
+    "training_mse": 7.594238127239805e-07,
+    "validation_mse": 3.516680067150446e-07,
+    "wall_seconds": 3.417563277998852
+  },
+  {
+    "step": 1100,
+    "training_mse": 7.729951789769984e-07,
+    "validation_mse": 3.4533493931121484e-07,
+    "wall_seconds": 3.7456015669995395
+  },
+  {
+    "step": 1200,
+    "training_mse": 8.13197630122886e-07,
+    "validation_mse": 3.929419847281679e-07,
+    "wall_seconds": 4.072498368001106
+  },
+  {
+    "step": 1300,
+    "training_mse": 6.675296617686399e-07,
+    "validation_mse": 2.988221581290418e-07,
+    "wall_seconds": 4.402159068999026
+  },
+  {
+    "step": 1400,
+    "training_mse": 6.040558560016507e-07,
+    "validation_mse": 2.5525400815240573e-07,
+    "wall_seconds": 4.732159825998679
+  },
+  {
+    "step": 1500,
+    "training_mse": 6.091911473049549e-07,
+    "validation_mse": 3.228764740015322e-07,
+    "wall_seconds": 5.058953677998943
+  },
+  {
+    "step": 1600,
+    "training_mse": 6.825350169492594e-07,
+    "validation_mse": 3.4684643424043315e-07,
+    "wall_seconds": 5.384663167998951
+  },
+  {
+    "step": 1700,
+    "training_mse": 8.777247444413661e-07,
+    "validation_mse": 4.936452455694962e-07,
+    "wall_seconds": 5.714967913001601
+  },
+  {
+    "step": 1800,
+    "training_mse": 5.140907433087705e-07,
+    "validation_mse": 3.0520754989993293e-07,
+    "wall_seconds": 6.045557779998489
+  },
+  {
+    "step": 1900,
+    "training_mse": 5.183008511266962e-07,
+    "validation_mse": 3.061603592868778e-07,
+    "wall_seconds": 6.377002296001592
+  },
+  {
+    "step": 2000,
+    "training_mse": 5.475700959323149e-07,
+    "validation_mse": 2.4940675302786985e-07,
+    "wall_seconds": 6.706574515999819
+  },
+  {
+    "step": 2100,
+    "training_mse": 1.0001375585488859e-06,
+    "validation_mse": 5.524402695300523e-07,
+    "wall_seconds": 7.056472863001545
+  },
+  {
+    "step": 2200,
+    "training_mse": 4.1762072555684426e-07,
+    "validation_mse": 2.4915800622693496e-07,
+    "wall_seconds": 7.390083972000866
+  },
+  {
+    "step": 2300,
+    "training_mse": 5.487198677656124e-07,
+    "validation_mse": 3.2798072879813844e-07,
+    "wall_seconds": 7.719935928998893
+  },
+  {
+    "step": 2400,
+    "training_mse": 4.2582453829709266e-07,
+    "validation_mse": 2.5120959890045924e-07,
+    "wall_seconds": 8.054931429000135
+  },
+  {
+    "step": 2500,
+    "training_mse": 4.4979702806813293e-07,
+    "validation_mse": 3.8535966950803413e-07,
+    "wall_seconds": 8.388564161999966
+  }
+]

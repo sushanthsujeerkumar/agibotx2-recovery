@@ -1,0 +1,10 @@
+{
+  "dataset_sha256": "d6602f73d361d422998287bb92eb8d779998338c51be38d3c7bd2aaef00c3281",
+  "checked_samples": 8000,
+  "episode_boundary_previous_action_zero": true,
+  "next_observation_matches_following_observation": true,
+  "next_observation_previous_action_matches_action": true,
+  "50hz_times_valid": true,
+  "training_and_validation_seeds_disjoint": true,
+  "source_hashes_still_match": true
+}

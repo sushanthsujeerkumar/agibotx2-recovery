@@ -31,7 +31,7 @@ from rsl_rl.runners import OnPolicyRunner
 def ppo_config(seed: int = 0, steps_per_env: int = 24, save_interval: int = 50,
                variant: str = "baseline") -> dict:
     """Conservative feed-forward PPO defaults, shared by training and inference."""
-    if variant not in {"baseline", "stability", "stance", "balance"}:
+    if variant not in {"baseline", "stability", "stance", "balance", "crouch"}:
         raise ValueError(f"Unknown PPO variant: {variant}")
     model = {
         "class_name": "MLPModel",
@@ -78,13 +78,16 @@ def ppo_config(seed: int = 0, steps_per_env: int = 24, save_interval: int = 50,
     if variant == "stability":
         cfg["actor"]["distribution_cfg"].update(init_std=0.4, std_range=(0.05, 0.6))
         cfg["algorithm"]["entropy_coef"] = 1e-4
-    elif variant in {"stance", "balance"}:
+    elif variant in {"stance", "balance", "crouch"}:
         cfg["actor"]["distribution_cfg"].update(init_std=0.10, std_range=(0.03, 0.20))
         cfg["algorithm"].update(entropy_coef=1e-4, learning_rate=5e-5,
                                 schedule="fixed", clip_param=0.1)
         if variant == "balance":
             cfg["actor"]["distribution_cfg"].update(init_std=.03, std_range=(.01, .08))
             cfg["algorithm"]["entropy_coef"] = 0.
+        elif variant == "crouch":
+            cfg["actor"]["distribution_cfg"].update(init_std=.015, std_range=(.005, .04))
+            cfg["algorithm"].update(entropy_coef=0., learning_rate=1e-5, clip_param=.05)
     return cfg
 
 
@@ -364,7 +367,7 @@ def make_parser() -> argparse.ArgumentParser:
     parser.add_argument("--num-envs", type=int, default=256)
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--variant", choices=["baseline", "stability", "stance", "balance"], default="baseline",
+    parser.add_argument("--variant", choices=["baseline", "stability", "stance", "balance", "crouch"], default="baseline",
                         help="Configuration for a new run; resume uses the saved variant.")
     parser.add_argument("--max-iterations", type=int, default=3000, help="Total target, including iterations already trained.")
     parser.add_argument("--steps-per-env", type=int, default=24)
@@ -378,6 +381,8 @@ def make_parser() -> argparse.ArgumentParser:
                               help="Start a new experiment using only parent actor/critic networks and normalizers.")
     parser.add_argument("--env-kwargs", default="{}", help="Additional environment constructor arguments as JSON.")
     parser.add_argument("--torch-threads", type=int, default=4)
+    parser.add_argument("--freeze-actor-normalization", action="store_true",
+                        help="Keep the teacher-fitted actor normalization fixed during PPO; saved on resume.")
     return parser
 
 
@@ -406,8 +411,11 @@ def main(argv: list[str] | None = None) -> None:
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(args.seed)
     cfg = ppo_config(args.seed, args.steps_per_env, args.save_interval, args.variant)
+    cfg['freeze_actor_normalization'] = args.freeze_actor_normalization
     if args.resume:
         checkpoint = torch.load(args.resume, map_location="cpu", weights_only=False)
+        if checkpoint.get('warmstart_only', False):
+            raise SystemExit('A supervised warm start requires --initialize-from, not --resume')
         cfg = copy.deepcopy(checkpoint["train_cfg"])
         cfg["save_interval"] = args.save_interval
         cfg["logger"] = "tensorboard"
@@ -421,8 +429,8 @@ def main(argv: list[str] | None = None) -> None:
                 raise SystemExit(f"Resume must preserve {key}; initialize a separate experiment instead")
             env_kwargs[key] = saved
         del checkpoint
-    elif args.variant in {"stability", "stance", "balance"}:
-        reward_version = {"stability": 2, "stance": 3, "balance": 3}[args.variant]
+    elif args.variant in {"stability", "stance", "balance", "crouch"}:
+        reward_version = {"stability": 2, "stance": 3, "balance": 3, "crouch": 3}[args.variant]
         if env_kwargs.get("reward_version", reward_version) != reward_version:
             raise SystemExit(f"The {args.variant} variant requires reward_version={reward_version}")
         env_kwargs["reward_version"] = reward_version
@@ -430,6 +438,11 @@ def main(argv: list[str] | None = None) -> None:
             for key, required in [("physics_profile", "guarded_v2"), ("reset_mode", "balance")]:
                 if env_kwargs.get(key, required) != required:
                     raise SystemExit(f"Balance variant requires {key}={required}")
+                env_kwargs[key] = required
+        elif args.variant == "crouch":
+            for key, required in [("physics_profile", "guarded_v2"), ("reset_mode", "crouch")]:
+                if env_kwargs.get(key, required) != required:
+                    raise SystemExit(f"Crouch variant requires {key}={required}")
                 env_kwargs[key] = required
     from x2_recovery.env import X2RecoveryEnv
 
@@ -458,6 +471,11 @@ def main(argv: list[str] | None = None) -> None:
             runner.initialization = {"method": "zero_mean_nominal_pose_prior",
                                      "purpose": "Preserve validated standing controller at initialization",
                                      "trained_recovery": False}
+        if cfg.get('freeze_actor_normalization', False):
+            normalizer = runner.alg.get_policy().obs_normalizer
+            if not hasattr(normalizer, 'until'):
+                raise RuntimeError('Requested normalization freeze requires empirical normalization')
+            normalizer.until = 0
         versions = {}
         for package in ("torch", "mujoco", "mujoco-warp", "warp-lang", "rsl-rl-lib", "mjlab"):
             try:

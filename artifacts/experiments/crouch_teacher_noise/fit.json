@@ -1,0 +1,33 @@
+{
+  "method": "behavior_cloning_from_audited_scripted_crouch_reference",
+  "dataset": "artifacts/validation/crouch_stage/reference/training_pairs.npz",
+  "dataset_sha256": "d6602f73d361d422998287bb92eb8d779998338c51be38d3c7bd2aaef00c3281",
+  "parent": "artifacts/experiments/balance_prior_v2/checkpoint.pt",
+  "parent_sha256": "c9f34109e81a1c385b4d08b4db3d1f80a087daa75b2b1f71f79fd0549b2f5183",
+  "training_seeds": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112
+  ],
+  "validation_seeds": [
+    113,
+    114,
+    115,
+    116
+  ],
+  "observation_noise_std": 0.002,
+  "gradient_steps": 2500,
+  "best_step": 2200,
+  "best_validation_mse": 2.4915800622693496e-07,
+  "wall_seconds": 8.400624595000409,
+  "note": "Supervised warm start only; zero new PPO iterations. Simulation rollout, not MSE, determines success."
+}

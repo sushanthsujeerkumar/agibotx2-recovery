@@ -1,3 +1,7 @@
+# Active crouch-to-standing stage
+
+The user's next "nxt" request authorizes this local stage. Reference and aggregated supervised policy each pass 5/5 crouch trials. A bounded 300-second PPO fine-tune at artifacts/runs/crouch_v3 is now starting; preserve artifacts/experiments/crouch_teacher_augmented if PPO regresses. See CROUCH_STAGE.md. Do not report a scripted reference or standing/crouch-start result as supine recovery. No cloud or spending.
+
 # Physics v2 local phase completed
 
 User's "nxt" authorized the next local correction phase. Branch: physics-v2. No cloud or spending. See ../PHYSICS_V2_RESULTS.md for current results and commands.

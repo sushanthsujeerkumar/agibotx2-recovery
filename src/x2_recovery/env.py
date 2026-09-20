@@ -19,10 +19,10 @@ class X2RecoveryEnv:
         self.device = torch.device(device)
         self.num_envs = num_envs
         self.info = ModelInfo(physics_profile=physics_profile)
-        if reset_mode not in {"supine", "balance"}:
-            raise ValueError("reset_mode must be supine or balance")
-        if reset_mode == "balance" and physics_profile != "guarded_v2":
-            raise ValueError("Balance curriculum requires guarded_v2")
+        if reset_mode not in {"supine", "balance", "crouch"}:
+            raise ValueError("reset_mode must be supine, balance or crouch")
+        if reset_mode != "supine" and physics_profile != "guarded_v2":
+            raise ValueError("Standing/crouch curriculum requires guarded_v2")
         self.reset_mode = reset_mode
         self.strict_limits = physics_profile == "guarded_v2"
         self.num_actions = self.info.model.nu
@@ -34,7 +34,7 @@ class X2RecoveryEnv:
         self.reward_version = reward_version
         self.cfg = {"physics_dt": self.info.model.opt.timestep, "control_dt": CONTROL_DT,
                     "episode_seconds": EPISODE_SECONDS, "hold_seconds": HOLD_SECONDS,
-                    "reset": "settled_supine" if reset_mode == "supine" else "training_only_balance",
+                    "reset": "settled_supine" if reset_mode == "supine" else f"training_only_{reset_mode}",
                     "reset_mode": reset_mode, "physics_profile": physics_profile,
                     "strict_trajectory_limits": self.strict_limits, "seed": seed, "num_envs": num_envs,
                     "reward_version": reward_version, "is_finite_horizon": False}
@@ -95,9 +95,10 @@ class X2RecoveryEnv:
         d = mujoco.MjData(self.info.model)
         qs, vs = [], []
         for i in range(16):
-            if self.reset_mode == "balance":
-                from .physics import reset_balance
-                reset_balance(self.info, d, seed+i)
+            if self.reset_mode in {"balance", "crouch"}:
+                from .physics import reset_balance, reset_crouch
+                resetter = reset_balance if self.reset_mode == "balance" else reset_crouch
+                resetter(self.info, d, seed+i)
             else:
                 reset_cpu(self.info, d, seed+i)
             qs.append(d.qpos.copy())

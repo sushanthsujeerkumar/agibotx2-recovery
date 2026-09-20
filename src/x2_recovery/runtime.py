@@ -52,13 +52,15 @@ class RecoveryRuntime:
             self.viewer.opt.geomgroup[3] = 0
 
     def reset(self, seed=0, reset_mode="supine"):
+        self.reset_mode = reset_mode
         if reset_mode == "supine":
             reset_cpu(self.info, self.data, seed)
-        elif reset_mode == "balance" and self.info.physics_profile == "guarded_v2":
-            from .physics import reset_balance
-            reset_balance(self.info, self.data, seed)
+        elif reset_mode in {"balance", "crouch"} and self.info.physics_profile == "guarded_v2":
+            from .physics import reset_balance, reset_crouch
+            resetter = reset_balance if reset_mode == "balance" else reset_crouch
+            resetter(self.info, self.data, seed)
         else:
-            raise ValueError("Only guarded_v2 supports training-only balance resets")
+            raise ValueError("Only guarded_v2 supports training-only balance/crouch resets")
         self.previous_action = np.zeros(self.model.nu)
         self.hold_time = 0.
         self.clean_hold_time = 0.
@@ -158,7 +160,7 @@ class RecoveryRuntime:
             outcome = 'LIMIT FAILURE' if not self.limits.ok else 'SUCCEEDED' if display_success else 'RUNNING'
             self.viewer.set_texts((mujoco.mjtFontScale.mjFONTSCALE_150,
                                    mujoco.mjtGridPos.mjGRID_TOPLEFT,
-                                   "X2 recovery evaluation\nController\nEpisode time\nPelvis height\nStable standing\nOutcome" + extra_title,
+                                   f"X2 {'supine recovery' if self.reset_mode == 'supine' else self.reset_mode + ' curriculum'} evaluation\nController\nEpisode time\nPelvis height\nStable standing\nOutcome" + extra_title,
                                    f"\n{self.display_label}\n{self.data.time:.1f} s\n{self.data.qpos[2]:.3f} m\n{self.hold_time:.2f} / {HOLD_SECONDS:.1f} s\n{outcome}" + extra_value))
             self.viewer.sync()
         return self.snapshot(success, bool(invalid))
@@ -169,7 +171,7 @@ class RecoveryRuntime:
                 "sim_time": float(self.data.time), "success": bool(success), "invalid": bool(invalid),
                 "pelvis_height": float(self.data.qpos[2]), "max_pelvis_height": self.max_height,
                 "standing_hold_seconds": self.hold_time, "checks": dict(self.last_conditions)}
-        result.update(physics_profile=self.info.physics_profile,
+        result.update(physics_profile=self.info.physics_profile, reset_mode=self.reset_mode,
                       trajectory_limits=self.limits.report(),
                       validated_success=bool(success and self.limits.ok))
         if self.assess_stance:

@@ -1,0 +1,10 @@
+{
+  "reset_mode": "crouch",
+  "initial_height": 0.5258334279060364,
+  "obs_shape": [
+    106
+  ],
+  "obs_max_diff": 1.7881393432617188e-07,
+  "smoke_control_steps": 20,
+  "limit_failures": 0
+}
