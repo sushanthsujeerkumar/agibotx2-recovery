@@ -1,0 +1,62 @@
+[
+  {
+    "knee_bend": 0.6,
+    "time_s": 13.99999999999768,
+    "min_height": 0.6459118994633763,
+    "final_height": 0.6691627050320593,
+    "clean_hold_after_return": 6.979999999999939,
+    "limits": {
+      "ok": true,
+      "physics_steps": 14000,
+      "max_position_violation_rad": 0.0,
+      "max_speed_ratio": 0.017813361380189633,
+      "max_commanded_effort_ratio": 0.5059573433297567,
+      "first_violation": null
+    }
+  },
+  {
+    "knee_bend": 1.0,
+    "time_s": 13.99999999999768,
+    "min_height": 0.5969938286352745,
+    "final_height": 0.6691626995274635,
+    "clean_hold_after_return": 6.979999999999939,
+    "limits": {
+      "ok": true,
+      "physics_steps": 14000,
+      "max_position_violation_rad": 0.0,
+      "max_speed_ratio": 0.03605431371371875,
+      "max_commanded_effort_ratio": 0.5096630873063077,
+      "first_violation": null
+    }
+  },
+  {
+    "knee_bend": 1.4,
+    "time_s": 13.99999999999768,
+    "min_height": 0.525663104247535,
+    "final_height": 0.6691626887321046,
+    "clean_hold_after_return": 6.979999999999939,
+    "limits": {
+      "ok": true,
+      "physics_steps": 14000,
+      "max_position_violation_rad": 0.0,
+      "max_speed_ratio": 0.053737118654886826,
+      "max_commanded_effort_ratio": 0.5135891756710046,
+      "first_violation": null
+    }
+  },
+  {
+    "knee_bend": 1.7,
+    "time_s": 3.7999999999996925,
+    "min_height": 0.2483603474807006,
+    "final_height": 0.2483603474807006,
+    "clean_hold_after_return": 0.0,
+    "limits": {
+      "ok": true,
+      "physics_steps": 3800,
+      "max_position_violation_rad": 0.0,
+      "max_speed_ratio": 0.06678528391879374,
+      "max_commanded_effort_ratio": 0.5165649317881792,
+      "first_violation": null
+    }
+  }
+]

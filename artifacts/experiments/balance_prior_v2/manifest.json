@@ -1,0 +1,21 @@
+{
+  "purpose": "Standing-start PPO with disclosed nominal prior; not recovery",
+  "source_checkpoint": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/balance_prior_v2/model_000212.pt",
+  "source_commit": "9a16050",
+  "sha256": {
+    "actor.pt": "16b3eb31e9f3d645c9e065a7f2f35c10f6471d9fd6f14fc188c06b4852909494",
+    "actor_latest.json": "220e026c56c13affc8c4c54089f48805225f29a5890a912339160eb471ba94f8",
+    "training_curve.png": "2cf87f9670997c80ba246075b5b50fec83925559cddbef7aa5dc89bf0abf83b5",
+    "status.json": "5949e37535ef8cd59afe01c6f85d1495999cf3252c5a9fef285c92bd94437295",
+    "checkpoint.pt": "c9f34109e81a1c385b4d08b4db3d1f80a087daa75b2b1f71f79fd0549b2f5183",
+    "balance_evaluation.json": "0df17cbe70f774b219e93e088cc3db2330d26416919a5a0182f169abaff5e2be",
+    "config.json": "e8d6327a356edaedb44cb928be122259a75f017a2bdd1b8666d123521d9a83de",
+    "progress.jsonl": "3a3eee3ad4a41affde3a619768c8e67426866d8327a400c0775e344f32380c58",
+    "supine_evaluation/episode_4.json": "f35dc8f06c02cd1be32f3d287a8de0297c7e6568cacb305433439d339188f9fc",
+    "supine_evaluation/episode_3.json": "0b69e376d398382af66e7725f41d2791b5f1e605cab257bace6b4620903cc744",
+    "supine_evaluation/episode_2.json": "57e1d00824a154cb4134df5c4a7a23698b579edd538efd47ab98b198184917b0",
+    "supine_evaluation/summary.json": "0a8a051826f213abab7d4d865d2545fe8fff6017e2c7a4c9d7667bfc08c8421f",
+    "supine_evaluation/episode_1.json": "2f1a2f402f9232d9d57aefa95d3678357805a45d4e6a4773ee22ab97b3f048c9",
+    "supine_evaluation/episode_5.json": "ab563671abed706f6d48ce429e707324af6852bf2edb2ebbdb3850fd6672cc98"
+  }
+}

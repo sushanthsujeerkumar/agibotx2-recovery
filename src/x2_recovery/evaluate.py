@@ -19,6 +19,9 @@ def main():
     parser.add_argument("--assess-stance", action="store_true", help="Report extra posture criteria and continue after original recovery until clean stance or timeout.")
     parser.add_argument("--physics-profile", choices=["legacy", "guarded_v2"], default="legacy")
     parser.add_argument("--require-limits", action="store_true", help="Fail immediately after any trajectory limit violation.")
+    parser.add_argument("--posture-only", dest="require_limits", action="store_false",
+                        help="Historical posture-only reproduction; still reports the independent limit audit.")
+    parser.set_defaults(require_limits=True)
     parser.add_argument("--output", default="artifacts/evaluation")
     args = parser.parse_args()
     output = Path(args.output)

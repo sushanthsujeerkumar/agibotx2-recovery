@@ -1,3 +1,5 @@
+> **physics-v2:** the current ROS worker additionally requires whole-trajectory joint-limit compliance. The old actor now correctly returns FAILED. See [strict ROS evidence](../artifacts/validation/physics_v2/ros/integration.json). Earlier SUCCEEDED records below used the historical posture-only contract.
+
 # ROS 2 interface and validation
 
 The `x2_recovery_ros` package contains a recovery supervisor and a telemetry node.

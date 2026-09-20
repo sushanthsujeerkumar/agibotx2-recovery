@@ -115,3 +115,25 @@ def reset_balance(info, data, seed):
         raise RuntimeError(f"Invalid balance reset: {audit.report()}")
     data.time = 0.
     mujoco.mj_forward(info.model, data)
+
+
+def reset_crouch(info, data, seed):
+    """Reach a moderate crouch through controlled physics, for curriculum tests."""
+    import mujoco
+    reset_balance(info, data, seed)
+    target = info.nominal.copy()
+    for side in ("left", "right"):
+        for part, value in [("hip_pitch", -.7), ("knee", 1.4), ("ankle_pitch", -.7)]:
+            target[info.names.index(f"{side}_{part}_joint")] = value
+    audit = TrajectoryLimits(info)
+    for step in range(round(3.5 / info.model.opt.timestep)):
+        phase = min(step * info.model.opt.timestep / 3., 1.)
+        phase = phase * phase * (3. - 2. * phase)
+        command = info.nominal * (1. - phase) + target * phase
+        data.ctrl[:] = info.torque(data.qpos[info.qadr], data.qvel[info.vadr], command)
+        mujoco.mj_step(info.model, data)
+        audit.observe(data)
+    if not audit.ok or data.qpos[2] < .45:
+        raise RuntimeError(f"Invalid crouch curriculum reset: {audit.report()}")
+    data.time = 0.
+    mujoco.mj_forward(info.model, data)

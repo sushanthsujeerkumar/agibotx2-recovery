@@ -1,0 +1,53 @@
+{
+  "controller": "policy",
+  "checkpoint": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/submission/local_stability/actor.pt",
+  "episodes": 1,
+  "successes": 1,
+  "results": [
+    {
+      "episode": 1,
+      "seed": 1001,
+      "outcome": "SUCCEEDED",
+      "reason": "stable_standing",
+      "sim_time": 8.559999999999528,
+      "success": true,
+      "invalid": false,
+      "pelvis_height": 0.6834612789176261,
+      "max_pelvis_height": 0.8518916480218204,
+      "standing_hold_seconds": 2.0000000000000013,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      },
+      "physics_profile": "legacy",
+      "trajectory_limits": {
+        "ok": false,
+        "physics_steps": 4281,
+        "max_position_violation_rad": 0.11886887677747593,
+        "max_speed_ratio": 3.8902295729825593,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": {
+          "time_s": 0.004,
+          "kind": "speed",
+          "joint": "right_hip_yaw_joint",
+          "value": 1.0229096610157935
+        }
+      },
+      "validated_success": false
+    }
+  ],
+  "success_spec": {
+    "hold_seconds": 2.0,
+    "tilt_degrees": 14.999999999999998,
+    "pelvis_height_min": 0.6048,
+    "ground_support": "both feet only"
+  },
+  "physics_profile": "legacy",
+  "require_limits": false,
+  "trajectory_limit_passes": 0,
+  "validated_successes": 0
+}

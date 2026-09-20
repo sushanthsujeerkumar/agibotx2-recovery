@@ -19,7 +19,7 @@ The guarded GPU training path checks limits at every physics step, rejects viola
 - `standing_validation.json`: five additional perturbed standing starts, each maintained clean stance for 10 seconds, with zero position excursions and no speed/effort violations. This validates balance only.
 - `gpu_check.json`: 16 GPU environments pass a two-second clean balance hold under zero actions; all 16 deliberately injected overspeed states are rejected. Injected states are test faults, not training/evaluation successes.
 - `old_actor_strict/`: strict supine evaluation of the old actor with the guarded profile.
-- 22 CPU/controller/ROS worker tests passed, including a transient violation latch and NumPy/Torch torque parity.
+- 31 CPU/controller/ROS tests passed, including a transient violation latch and NumPy/Torch torque parity.
 
 ## Reproduce
 
@@ -30,3 +30,9 @@ PYTHONPATH=src .venv/bin/python scripts/validate_balance.py
 ```
 
 The short balance training pilot starts from perturbed standing states, uses actual PPO, and has a 180-second training budget. It does not replace the submission policy or demonstrate recovery. Full supine evaluation remains separate and always starts supine. Model identification, broader reset validation, a feasible transition curriculum and compliant supine recovery remain unfinished.
+
+## Pilot outcomes
+
+Both 180-second pilots have finished. Final deterministic standing evaluation passes 5/5 for each, while separate supine recovery is 0/5 for each. Both supine test sets comply with the monitored limits but time out without rising. The first pilot did learn balance despite poor stochastic training metrics; its update-101 snapshot did not pass, but its final update-222 actor does. The second pilot discloses a nominal-controller prior. See [complete phase results](../../../PHYSICS_V2_RESULTS.md).
+
+The two longer live viewers crashed during interpreter shutdown. The owned render thread is now joined before GLFW cleanup; the final short live test exits normally. The nominal and learned balance videos are separate, labelled evidence. No viewer or trainer remains active.

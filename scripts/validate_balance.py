@@ -7,13 +7,14 @@ from pathlib import Path
 import mujoco
 import numpy as np
 from x2_recovery.common import ModelInfo, observation_numpy, sensor_forces, ground_forces, success_conditions
-from x2_recovery.physics import reset_balance, TrajectoryLimits
+from x2_recovery.physics import reset_balance, reset_crouch, TrajectoryLimits
 from x2_recovery.stance import stance_metrics
 
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--checkpoint')
+    p.add_argument('--start',choices=['balance','crouch'],default='balance')
     p.add_argument('--episodes',type=int,default=5)
     p.add_argument('--seed',type=int,default=2001)
     p.add_argument('--seconds',type=float,default=10.)
@@ -28,7 +29,8 @@ def main():
         policy=torch.jit.load(args.checkpoint,map_location='cpu').eval()
     rows=[]
     for seed in range(args.seed,args.seed+args.episodes):
-        reset_balance(info,d,seed)
+        (reset_balance if args.start=='balance' else reset_crouch)(info,d,seed)
+        initial_height=float(d.qpos[2])
         monitor=TrajectoryLimits(info);monitor.observe(d)
         hold=0.;max_hold=0.;previous=np.zeros(m.nu);ever_passed=False
         for step in range(round(args.seconds/.02)):
@@ -48,11 +50,11 @@ def main():
             hold=hold+.02 if clean else 0.;max_hold=max(max_hold,hold)
             ever_passed |= hold>=2.-1e-8
             if not monitor.ok or not np.isfinite(d.qpos).all() or d.qpos[2]<.3:break
-        row=dict(seed=seed,sim_time=float(d.time),clean_balance_pass=bool(ever_passed and monitor.ok),
+        row=dict(seed=seed,initial_height=initial_height,sim_time=float(d.time),clean_balance_pass=bool(ever_passed and monitor.ok),
                  clean_at_end=bool(clean),max_clean_hold_s=max_hold,limits=monitor.report(),final_checks=checks,stance=stance)
         rows.append(row)
         print(json.dumps({k:v for k,v in row.items() if k not in ['stance','final_checks']}),flush=True)
-    result=dict(task='standing-start balance; NOT supine recovery',physics_profile='guarded_v2',
+    result=dict(task=f'{args.start}-start balance; NOT supine recovery',physics_profile='guarded_v2',
                 checkpoint=args.checkpoint,actor_sha256=hashlib.sha256(Path(args.checkpoint).read_bytes()).hexdigest() if args.checkpoint else None,
                 episodes=len(rows),clean_balance_passes=sum(r['clean_balance_pass'] for r in rows),
                 trajectory_limit_passes=sum(r['limits']['ok'] for r in rows),results=rows)

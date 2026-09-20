@@ -1,0 +1,37 @@
+{
+  "iteration": 222,
+  "environment_steps": 1363968,
+  "wall_time_s": 180.6008733029994,
+  "training_time_s": 178.55939102172852,
+  "iteration_time_s": 0.7887799739837646,
+  "steps_per_second": 7789.24440610413,
+  "mean_episode_reward": 21.659331293106078,
+  "mean_episode_length": 352.05,
+  "success_rate": 0.0,
+  "learning_rate": 5e-05,
+  "mean_action_std": 0.09947362542152405,
+  "losses": {
+    "value": 0.7710862755775452,
+    "surrogate": -0.015103908255696297,
+    "entropy": -27.557857513427734
+  },
+  "metrics": {
+    "recovery/success_rate": 0.0,
+    "recovery/invalid_rate": 0.6153846383094788,
+    "recovery/max_pelvis_height": 0.6761409044265747,
+    "recovery/episode_return": 20.52838706970215,
+    "recovery/episode_seconds": 7.070769309997559,
+    "recovery/terminal_linear_speed": 1.0212516784667969,
+    "recovery/terminal_angular_speed": 3.5416431427001953,
+    "recovery/original_recovery_rate": 0.0,
+    "stance/clean_success_rate": 0.0,
+    "stance/terminal_signed_width": -0.14736981689929962,
+    "stance/terminal_sole_error": 1.2188434600830078,
+    "stance/terminal_heading_error": 0.32887253165245056,
+    "physics/limit_failure_rate": 0.6153846383094788
+  },
+  "state": "PAUSED",
+  "pid": 47962,
+  "updated_unix": 1789886894.070965,
+  "checkpoint": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/balance_v2/model_000222.pt"
+}

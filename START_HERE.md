@@ -1,4 +1,4 @@
-> **physics-v2 update:** ROS now fails an episode after a joint-limit violation. The old actor therefore no longer receives `SUCCEEDED` on this branch. Its historical posture-based evidence remains unchanged. See [new physics and balance experiment](artifacts/validation/physics_v2/README.md).
+> **physics-v2 update:** ROS now fails an episode after a joint-limit violation. The old actor therefore no longer receives `SUCCEEDED` on this branch. `./EVALUATE.sh` also uses strict checks; append `--posture-only` only to reproduce the historical posture count. Its historical posture-based evidence remains unchanged. See [new physics and balance results](PHYSICS_V2_RESULTS.md).
 
 # Run the submitted project
 

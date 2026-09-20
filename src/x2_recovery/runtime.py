@@ -26,6 +26,7 @@ class RecoveryRuntime:
         self.display_label = "SCRIPTED BASELINE" if controller == "scripted" else "TRAINED POLICY"
         self.policy = None
         self.viewer = None
+        self._viewer_threads = []
         if controller == "policy":
             if not checkpoint:
                 raise ValueError("policy controller requires an exported TorchScript checkpoint")
@@ -34,8 +35,16 @@ class RecoveryRuntime:
             self.policy = torch.jit.load(str(checkpoint), map_location="cpu").eval()
         self.reset(seed)
         if render:
+            import threading
             from mujoco import viewer as mujoco_viewer
+            previous_threads = set(threading.enumerate())
             self.viewer = mujoco_viewer.launch_passive(self.model, self.data)
+            # MuJoCo 3.11's close() requests exit without joining its daemon GUI
+            # thread. Keep the render thread created by this launch alive through
+            # teardown, before interpreter-level GLFW cleanup can run.
+            self._viewer_threads = [t for t in threading.enumerate()
+                                    if t not in previous_threads and
+                                    t.name.endswith('(_launch_internal)')]
             self.viewer.cam.distance = 2.5
             self.viewer.cam.azimuth = 135
             self.viewer.cam.elevation = -20
@@ -172,4 +181,9 @@ class RecoveryRuntime:
     def close(self):
         if self.viewer is not None:
             self.viewer.close()
+            for thread in self._viewer_threads:
+                thread.join(timeout=5.)
+                if thread.is_alive():
+                    raise RuntimeError('MuJoCo viewer did not finish closing within 5 seconds')
+            self._viewer_threads = []
             self.viewer = None

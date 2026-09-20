@@ -1,0 +1,5 @@
+VIEWER: scripted baseline until a trained checkpoint is available
+VIEWER: trained policy {"iteration": 212, "environment_steps": 1302528, "checkpoint": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/balance_prior_v2/model_000212.pt", "actor": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/balance_prior_v2/model_000212_actor.pt"}
+VIEWER episode 0: controller=policy success=True max_height=0.670
+VIEWER episode 1: controller=policy success=True max_height=0.670
+VIEWER episode 2: controller=policy success=True max_height=0.670

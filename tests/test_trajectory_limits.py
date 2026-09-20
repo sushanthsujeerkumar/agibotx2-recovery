@@ -50,3 +50,15 @@ def test_guarded_profile_preserves_physical_source_and_valid_balance_reset():
     monitor.observe(data)
     assert monitor.ok
     assert data.qpos[2] > .6
+
+
+def test_crouch_start_is_physically_reached_and_below_success_height():
+    from x2_recovery.physics import reset_crouch
+    info = ModelInfo(physics_profile='guarded_v2')
+    data = mujoco.MjData(info.model)
+    reset_crouch(info, data, 2001)
+    monitor = TrajectoryLimits(info)
+    monitor.observe(data)
+    assert monitor.ok
+    assert .45 < data.qpos[2] < info.height_threshold
+    assert data.time == 0.

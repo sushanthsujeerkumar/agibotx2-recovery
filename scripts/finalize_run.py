@@ -49,9 +49,11 @@ def main():
         shutil.copy2(checkpoint,dest/"checkpoint.pt")
         for name in ["config.json","progress.jsonl","status.json"]:
             shutil.copy2(run/name,dest/name)
+        env_config=json.loads((run/"config.json").read_text())["environment"]
         command=[sys.executable,"-m","x2_recovery.evaluate","--controller","policy",
                  "--checkpoint",str(dest/"actor.pt"),"--episodes","5","--seed","1001",
-                 "--output",str(dest/"evaluation")]
+                 "--output",str(dest/"evaluation"),"--require-limits",
+                 "--physics-profile",env_config.get("physics_profile","legacy")]
         if a.video: command.append("--video")
         if a.assess_stance: command.append("--assess-stance")
         with (dest/"evaluation.log").open('w') as log:

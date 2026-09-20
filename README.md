@@ -1,4 +1,4 @@
-> **Current development branch: physics-v2.** The frozen ZIP and main branch retain the historical results below. This branch adds strict trajectory monitoring: ROS now rejects the old policy's limit violations. A guarded controller has passed five standing-start balance tests; these are not recoveries. See [physics v2 progress](artifacts/validation/physics_v2/README.md).
+> **Current development branch: physics-v2.** The frozen ZIP and main branch retain the historical results below. This branch adds strict trajectory monitoring: ROS and the default evaluation launcher now reject the old policy's limit violations. A guarded controller has passed five standing-start balance tests; these are not recoveries. See [current phase results and balance demo](PHYSICS_V2_RESULTS.md).
 
 # AgiBot X2 ground recovery
 

@@ -1,12 +1,12 @@
-# New local phase authorized by user: "nxt"
+# Physics v2 local phase completed
 
-Working branch: physics-v2. The prior local-results ZIP remains frozen. No cloud resources or spending.
+User's "nxt" authorized the next local correction phase. Branch: physics-v2. No cloud or spending. See ../PHYSICS_V2_RESULTS.md for current results and commands.
 
-Guarded physics uses earlier joint-stop engagement and a bounded velocity servo, preserving URDF mass/inertia/ranges/effort. Five perturbed standing tests each sustain 10 s of clean stance within all audited limits. This is balance, not supine recovery. CPU runtime and guarded GPU training now latch joint-limit violations; ROS rejects them before success. A real ROS test of the old actor reaches FAILED for a physical-limit violation, with acceptance, busy rejection and actual telemetry verified.
+Guarded nominal controller and both three-minute PPO balance pilots pass 5/5 clean standing tests for 10 seconds within the monitored joint limits. Both PPO policies achieve 0/5 supine recoveries, while remaining within joint limits in those five timed attempts. No full recovery claim. The original posture count and original source ZIP remain historical.
 
-A bounded 180 s balance pilot uses the previous stance PPO settings, but random initial actor/noise disrupt the known stable nominal controller. Its outcome must be evaluated honestly. A second bounded 180 s pilot will initialize the actor mean at zero (the independently validated nominal target), with standard deviation .03. This is a disclosed controller prior, not a learned initial success. Preserve both run results and measure held-out standing starts and separate supine starts. Do not extend into an overnight campaign automatically. Pause/stop viewers after evidence is saved.
+Completed: 31 unit tests, GPU clean-balance and injected-limit-fault checks, actual ROS acceptance/busy rejection/telemetry/strict FAILED integration, standing/supine evaluations, reference crouch screen, learned-policy video, and viewer shutdown fix verified with exit 0. Two earlier viewer processes crashed during teardown; their training processes and headless evidence were unaffected. All experiment and viewer processes are stopped. Monitoring heartbeat remains paused.
 
-See artifacts/validation/physics_v2/README.md for current evidence. The historical campaign ledger below records the original frozen package.
+The random-initialized balance pilot eventually passed deterministic standing despite poor noisy training metrics. The nominal-prior pilot also passes; its initialization is explicitly disclosed. A slow scripted moderate crouch-and-rise reference is feasible in a one-seed screen, but the learned balance policy cannot yet rise from that crouch. Next work is staged reference-guided crouch/rise and then kneeling/sitting/supine transitions, validated before larger training. Do not automatically launch another campaign on a heartbeat.
 
 ---
 
