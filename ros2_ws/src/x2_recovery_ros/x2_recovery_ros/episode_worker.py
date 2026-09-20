@@ -31,6 +31,11 @@ def run_episode(config, connection):
     """Execute one actual runtime episode; send frames and a terminal result."""
     runtime = None
     try:
+        if config['controller'] == 'reference_residual':
+            from x2_recovery.reference_runtime import run_reference_episode
+            result = run_reference_episode(config, lambda raw: connection.send(('frame', checked_frame(raw))))
+            connection.send(('result', result))
+            return
         from x2_recovery.runtime import RecoveryRuntime
 
         runtime = RecoveryRuntime(

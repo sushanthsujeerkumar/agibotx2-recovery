@@ -488,14 +488,29 @@ dependencies = [
     { name = "torchvision" },
 ]
 
+[package.optional-dependencies]
+reference = [
+    { name = "imageio" },
+    { name = "imageio-ffmpeg" },
+    { name = "onnx" },
+    { name = "pillow" },
+    { name = "pyyaml" },
+]
+
 [package.metadata]
 requires-dist = [
+    { name = "imageio", marker = "extra == 'reference'", specifier = "==2.37.4" },
+    { name = "imageio-ffmpeg", marker = "extra == 'reference'", specifier = "==0.6.0" },
     { name = "matplotlib" },
     { name = "mjlab", specifier = "==1.6.0" },
+    { name = "onnx", marker = "extra == 'reference'", specifier = "==1.23.0" },
+    { name = "pillow", marker = "extra == 'reference'", specifier = "==12.3.0" },
     { name = "pytest" },
+    { name = "pyyaml", marker = "extra == 'reference'", specifier = "==6.0.3" },
     { name = "torch", specifier = "==2.11.0" },
     { name = "torchvision", specifier = "==0.26.0" },
 ]
+provides-extras = ["reference"]
 
 [[package]]
 name = "idna"

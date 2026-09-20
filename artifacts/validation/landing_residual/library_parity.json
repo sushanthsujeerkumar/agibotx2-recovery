@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "terminal_hold": true,
+  "max_clean_hold": true,
+  "max_height": true,
+  "limits": true,
+  "final_stance": true,
+  "final_checks": true,
+  "sim_time": true,
+  "max_residual_rad": true,
+  "750_genuine_frames": true
+}

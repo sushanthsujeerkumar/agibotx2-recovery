@@ -1,0 +1,80 @@
+[
+  {
+    "update": 1,
+    "training_successes": 5,
+    "episodes": 8,
+    "mean_reward": 19.518344037289275,
+    "limit_faults": 3,
+    "total_environment_steps": 5213,
+    "active_decisions": 605,
+    "actor_weight_change_l2": 0.0842272196121795,
+    "mean_approx_kl": 0.000831538064817023,
+    "final_minibatch_loss": 0.5717640519142151,
+    "wall_seconds": 36.25081269200018
+  },
+  {
+    "update": 2,
+    "training_successes": 6,
+    "episodes": 8,
+    "mean_reward": 23.077471617740116,
+    "limit_faults": 2,
+    "total_environment_steps": 10717,
+    "active_decisions": 696,
+    "actor_weight_change_l2": 0.1727869397881286,
+    "mean_approx_kl": 0.0009880142311364413,
+    "final_minibatch_loss": 0.8669200539588928,
+    "wall_seconds": 57.68603056199936
+  },
+  {
+    "update": 3,
+    "training_successes": 5,
+    "episodes": 8,
+    "mean_reward": 19.624818183990214,
+    "limit_faults": 3,
+    "total_environment_steps": 15929,
+    "active_decisions": 604,
+    "actor_weight_change_l2": 0.1821411955905481,
+    "mean_approx_kl": 0.0004744202707712235,
+    "final_minibatch_loss": 0.2520444989204407,
+    "wall_seconds": 93.39553664499545
+  },
+  {
+    "update": 4,
+    "training_successes": 5,
+    "episodes": 8,
+    "mean_reward": 19.974040103871044,
+    "limit_faults": 3,
+    "total_environment_steps": 21257,
+    "active_decisions": 697,
+    "actor_weight_change_l2": 0.20783267269801892,
+    "mean_approx_kl": 0.00034013106954960455,
+    "final_minibatch_loss": 0.3712218701839447,
+    "wall_seconds": 114.33825250799418
+  },
+  {
+    "update": 5,
+    "training_successes": 6,
+    "episodes": 8,
+    "mean_reward": 22.869342098718107,
+    "limit_faults": 2,
+    "total_environment_steps": 26762,
+    "active_decisions": 697,
+    "actor_weight_change_l2": 0.2726283054622625,
+    "mean_approx_kl": 0.000729038231226577,
+    "final_minibatch_loss": 0.18856941163539886,
+    "wall_seconds": 148.8817501079975
+  },
+  {
+    "update": 6,
+    "training_successes": 6,
+    "episodes": 8,
+    "mean_reward": 23.19592839895092,
+    "limit_faults": 2,
+    "total_environment_steps": 32268,
+    "active_decisions": 698,
+    "actor_weight_change_l2": 0.282589782636323,
+    "mean_approx_kl": 0.00018437693405705486,
+    "final_minibatch_loss": 0.40080738067626953,
+    "wall_seconds": 169.60153516099672
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "update": 0,
+    "successes": 4,
+    "episodes": 5,
+    "faults": 1,
+    "mean_reward": 24.296397967930293,
+    "max_speed_ratio": 1.0281074748055405
+  },
+  {
+    "update": 2,
+    "successes": 4,
+    "episodes": 5,
+    "faults": 1,
+    "mean_reward": 24.27765871113065,
+    "max_speed_ratio": 1.0454122960271415
+  },
+  {
+    "update": 4,
+    "successes": 4,
+    "episodes": 5,
+    "faults": 1,
+    "mean_reward": 24.45260986420534,
+    "max_speed_ratio": 1.037970371047815
+  },
+  {
+    "update": 6,
+    "successes": 4,
+    "episodes": 5,
+    "faults": 1,
+    "mean_reward": 24.433654086749577,
+    "max_speed_ratio": 1.008925903409116
+  }
+]

@@ -1,3 +1,11 @@
+# Landing-residual PPO and ROS stage completed
+
+Six PPO updates collected 32,268 transitions in a 183.14-second local campaign, including validation. Selected update 4 and unchanged teacher both pass 24/25 fresh paired episodes (5/5 first batch), with the same right-wrist fault. No improvement claim. The external teacher supplies recovery; the trained policy adds bounded ankle offsets. Original independent PPO remains 0/5.
+
+Reference-controller ROS integration is verified: fresh colcon build, 27 ROS tests, successful physical recovery with 750 actual joint frames, fast acceptance, busy rejection, and both wall/simulation timeout failures. Full Python/ROS suite: 46 tests. Display and headless evidence match. See [current report](../LANDING_RESIDUAL_RESULTS.md) and [run guide](../START_HERE.md). Further training is stopped for delivery; no cloud or employer submission was started.
+
+---
+
 # Reference-guided student stage completed; recovery remains unresolved
 
 Teacher collection passed 14/16. Four supervised fits (50,000 gradient steps, 80.67 seconds of fitting) produced no student-alone recovery: the final fresh batch scored 0/5, including three speed faults. No new PPO or cloud run was started. Student weights and datasets remain in the ignored local experiment directory; numerical evidence and source are preserved. The prior PPO actor hash is unchanged.

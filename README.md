@@ -1,4 +1,4 @@
-> **Current development branch: physics-v2.** The adapted external teacher passed its earlier **5/5** batch and **14/16** additional trials. The new teacher-guided student scored **0/5** fresh supine recoveries; our existing PPO also remains **0/5 supine**. Read [student results and viewer fix](REFERENCE_STUDENT_RESULTS.md), [external-reference results](VENDOR_REFERENCE_RESULTS.md), and [PPO curriculum results](DEEP_CROUCH_STAGE_RESULTS.md). Historical results below and the original ZIP describe earlier experiments.
+> **Current physics-v2 result:** the explicitly external teacher + our trained PPO ankle correction passes **5/5** fresh assessment episodes and **24/25** total fresh episodes. The unchanged teacher passes the same **24/25**, so no success-rate improvement is claimed. The reference controller is integrated with ROS; acceptance, busy handling, telemetry and both timeouts are verified. Our independent PPO remains **0/5** supine. Start with [START_HERE.md](START_HERE.md) and [current results](LANDING_RESIDUAL_RESULTS.md). Historical experiments follow.
 
 # AgiBot X2 ground recovery
 
@@ -7,7 +7,7 @@ through mjlab, PPO, and ROS 2 Jazzy**. Every assessed episode starts from a
 physically settled supine pose. A shared CPU runtime supplies the local viewer,
 deterministic evaluation and ROS-controlled episodes.
 
-**Final local result: a runnable, documented partial-result project.** The retained policy passes **5/5 under the original posture-based recovery check**, but **0/5 under the additional clean-stance check** and **0/5 under a full-trajectory joint position/speed bounds audit**. The feet turn inward, use edge support and brace against each other. The final audit also found joint-position excursions up to **8.55 degrees** and joint speeds up to **4.20 times the URDF rating**, despite bounded position targets and torque commands. The earlier 5/5 count must not be presented as fully validated physical recovery.
+**Historical independent-policy result: a runnable, documented partial result.** The retained policy passes **5/5 under the original posture-based recovery check**, but **0/5 under the additional clean-stance check** and **0/5 under a full-trajectory joint position/speed bounds audit**. The feet turn inward, use edge support and brace against each other. The final audit also found joint-position excursions up to **8.55 degrees** and joint speeds up to **4.20 times the URDF rating**, despite bounded position targets and torque commands. The earlier 5/5 count must not be presented as fully validated physical recovery.
 
 The complete environment, PPO experiments, frozen policies, reward plots, five-episode results and ROS 2 integration are included. A fresh-source ROS episode reached `SUCCEEDED` under the original posture criterion; that validates communication and that criterion, not whole-trajectory limit compliance. The more consistent 90-minute policy is retained for reproducible inspection. The 45-minute posture refinement did not resolve clean stance.
 
@@ -58,7 +58,7 @@ python -c 'import torch, mujoco; print("MuJoCo", mujoco.__version__); print("CUD
 python -m pytest -q tests
 ```
 
-The prepared model and meshes are included. Rebuilding them is optional:
+The repository and release archive include the prepared model and all 39 meshes. To rebuild manually:
 
 ```bash
 python scripts/prepare_model.py --validate

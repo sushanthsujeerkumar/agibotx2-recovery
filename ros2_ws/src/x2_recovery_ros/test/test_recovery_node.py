@@ -47,6 +47,21 @@ def test_policy_requires_checkpoint(node):
     assert not node._busy
 
 
+@pytest.mark.parametrize('assets,physics,accepted', [
+    ('', 'guarded_v2', False), ('/local/assets', 'legacy', False),
+    ('/local/assets', 'guarded_v2', True),
+])
+def test_reference_requires_explicit_assets_and_guarded_physics(node, assets, physics, accepted):
+    node.set_parameters([Parameter('controller', value='reference_residual'),
+                         Parameter('checkpoint', value='/local/own_residual.pt'),
+                         Parameter('vendor_assets', value=assets),
+                         Parameter('physics_profile', value=physics)])
+    with patch.object(node._mp_context, 'Process') as process:
+        response = node._start_callback(Trigger.Request(), Trigger.Response())
+        assert response.success is accepted
+        process.assert_not_called()
+
+
 @pytest.mark.parametrize('value', [0.0, -1.0, float('inf'), float('nan')])
 def test_invalid_timeout_rejected(node, value):
     node.set_parameters([Parameter('timeout_s', value=value)])

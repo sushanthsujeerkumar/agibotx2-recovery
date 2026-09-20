@@ -1,0 +1,88 @@
+[INFO] [launch]: All log files can be found below /home/sushanth/Documents/Codex/2026-09-19/l/work/teacher_correction/ros_validation_v2/ros_logs/2026-09-20-10-44-11-813090-sushanth-ISRMOT-220-79884
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [recovery_node-1]: process started with pid [79912]
+[INFO] [telemetry_node-2]: process started with pid [79913]
+[telemetry_node-2] [WARN] [1789897452.209637893] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISCOVERY_RANGE and ROS_STATIC_PEERS instead.
+[telemetry_node-2] [WARN] [1789897452.209653105] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored.
+[recovery_node-1] [WARN] [1789897452.211218427] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISCOVERY_RANGE and ROS_STATIC_PEERS instead.
+[recovery_node-1] [WARN] [1789897452.211225837] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored.
+[recovery_node-1] [INFO] [1789897452.268677710] [x2_recovery]: Ready: /x2/start_recovery; simulator starts after an accepted response
+[telemetry_node-2] [INFO] [1789897452.516414180] [x2_telemetry]: Status: IDLE
+[recovery_node-1] [INFO] [1789897453.097577739] [x2_recovery]: Recovery status: RUNNING
+[telemetry_node-2] [INFO] [1789897453.097810549] [x2_telemetry]: Status: RUNNING
+[telemetry_node-2] [INFO] [1789897453.256820059] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789897454.256827695] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789897455.256889373] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.20641 rad; sim_time=0.960 s
+[telemetry_node-2] [INFO] [1789897456.256873446] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.34986 rad; sim_time=1.960 s
+[telemetry_node-2] [INFO] [1789897457.256873677] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.43527 rad; sim_time=2.960 s
+[telemetry_node-2] [INFO] [1789897458.256932146] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.43744 rad; sim_time=3.960 s
+[telemetry_node-2] [INFO] [1789897459.257372062] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.43741 rad; sim_time=4.960 s
+[telemetry_node-2] [INFO] [1789897460.257096284] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.36143 rad; sim_time=5.960 s
+[telemetry_node-2] [INFO] [1789897461.257234401] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.55348 rad; sim_time=6.960 s
+[telemetry_node-2] [INFO] [1789897462.256778592] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.84789 rad; sim_time=7.960 s
+[telemetry_node-2] [INFO] [1789897463.256812511] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.37594 rad; sim_time=8.960 s
+[telemetry_node-2] [INFO] [1789897464.257044168] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-2.16049 rad; sim_time=9.960 s
+[telemetry_node-2] [INFO] [1789897465.256822922] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.36736 rad; sim_time=10.960 s
+[telemetry_node-2] [INFO] [1789897466.256779617] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=0.02762 rad; sim_time=11.960 s
+[telemetry_node-2] [INFO] [1789897467.257092094] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.03579 rad; sim_time=12.960 s
+[telemetry_node-2] [INFO] [1789897468.256783665] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.07740 rad; sim_time=13.960 s
+[telemetry_node-2] [INFO] [1789897469.256778765] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.10404 rad; sim_time=14.960 s
+[recovery_node-1] [INFO] [1789897469.297781976] [x2_recovery]: Recovery status: SUCCEEDED
+[telemetry_node-2] [INFO] [1789897469.297882021] [x2_telemetry]: Status: SUCCEEDED
+[recovery_node-1] [INFO] [1789897469.298126837] [x2_recovery]: Recovery completed: full 15-second clean-stance and trajectory-limit checks passed
+[recovery_node-1] [INFO] [1789897470.137463217] [x2_recovery]: Recovery status: RUNNING
+[telemetry_node-2] [INFO] [1789897470.137640752] [x2_telemetry]: Status: RUNNING
+[telemetry_node-2] [INFO] [1789897470.260272670] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789897471.256806187] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789897472.256868193] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789897473.256825559] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.33612 rad; sim_time=1.860 s
+[telemetry_node-2] [INFO] [1789897474.256870178] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.43251 rad; sim_time=2.860 s
+[telemetry_node-2] [INFO] [1789897475.257082154] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.43743 rad; sim_time=3.860 s
+[telemetry_node-2] [INFO] [1789897476.257399546] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.43741 rad; sim_time=4.860 s
+[telemetry_node-2] [INFO] [1789897477.257349561] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.34655 rad; sim_time=5.860 s
+[telemetry_node-2] [INFO] [1789897478.257027234] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.48717 rad; sim_time=6.860 s
+[telemetry_node-2] [INFO] [1789897479.256799974] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.80844 rad; sim_time=7.860 s
+[telemetry_node-2] [INFO] [1789897480.256891365] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-1.34276 rad; sim_time=8.860 s
+[telemetry_node-2] [INFO] [1789897481.256933946] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-2.38966 rad; sim_time=9.860 s
+[telemetry_node-2] [INFO] [1789897482.256904001] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.45829 rad; sim_time=10.860 s
+[telemetry_node-2] [INFO] [1789897483.256827621] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.00757 rad; sim_time=11.860 s
+[telemetry_node-2] [INFO] [1789897484.257087337] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.03052 rad; sim_time=12.860 s
+[telemetry_node-2] [INFO] [1789897485.257143193] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.07454 rad; sim_time=13.860 s
+[telemetry_node-2] [INFO] [1789897486.257097696] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.10143 rad; sim_time=14.860 s
+[recovery_node-1] [INFO] [1789897486.417685935] [x2_recovery]: Recovery status: SUCCEEDED
+[telemetry_node-2] [INFO] [1789897486.417941941] [x2_telemetry]: Status: SUCCEEDED
+[recovery_node-1] [INFO] [1789897486.418008499] [x2_recovery]: Recovery completed: full 15-second clean-stance and trajectory-limit checks passed
+[telemetry_node-2] [INFO] [1789897487.257183693] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897488.257068849] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897489.257253019] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897490.257207326] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897491.257247762] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897492.257087685] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897493.256768259] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897494.256869457] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897495.256879845] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897496.256878795] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[telemetry_node-2] [INFO] [1789897497.257338104] [x2_telemetry]: status=SUCCEEDED; left_hip_pitch_joint=-0.10504 rad; sim_time=15.000 s
+[recovery_node-1] [INFO] [1789897497.577409121] [x2_recovery]: Recovery status: RUNNING
+[telemetry_node-2] [INFO] [1789897497.577917593] [x2_telemetry]: Status: RUNNING
+[telemetry_node-2] [INFO] [1789897498.256880260] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789897499.256838896] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789897500.256813184] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.28067 rad; sim_time=1.480 s
+[telemetry_node-2] [INFO] [1789897501.256828699] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.40896 rad; sim_time=2.480 s
+[telemetry_node-2] [INFO] [1789897502.256813873] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.43732 rad; sim_time=3.500 s
+[recovery_node-1] [INFO] [1789897502.577514525] [x2_recovery]: Recovery status: FAILED
+[telemetry_node-2] [INFO] [1789897502.577885541] [x2_telemetry]: Status: FAILED
+[recovery_node-1] [INFO] [1789897502.578039844] [x2_recovery]: Recovery completed: wall-clock timeout (includes simulator startup)
+[telemetry_node-2] [INFO] [1789897503.256773232] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.43743 rad; sim_time=3.800 s
+[telemetry_node-2] [INFO] [1789897504.256767450] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.43743 rad; sim_time=3.800 s
+[telemetry_node-2] [INFO] [1789897505.256805290] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.43743 rad; sim_time=3.800 s
+[telemetry_node-2] [INFO] [1789897506.257254333] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.43743 rad; sim_time=3.800 s
+[recovery_node-1] [INFO] [1789897506.717465491] [x2_recovery]: Recovery status: RUNNING
+[telemetry_node-2] [INFO] [1789897506.717708736] [x2_telemetry]: Status: RUNNING
+[telemetry_node-2] [INFO] [1789897507.256842737] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789897508.257043901] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[recovery_node-1] [INFO] [1789897508.657576304] [x2_recovery]: Recovery status: FAILED
+[telemetry_node-2] [INFO] [1789897508.657736985] [x2_telemetry]: Status: FAILED
+[recovery_node-1] [INFO] [1789897508.657835091] [x2_recovery]: Recovery completed: simulation duration timeout
+[INFO] [telemetry_node-2]: process has finished cleanly [pid 79913]
+[INFO] [recovery_node-1]: process has finished cleanly [pid 79912]

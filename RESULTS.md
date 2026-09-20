@@ -1,3 +1,5 @@
+> **Latest result:** the external teacher plus our trained PPO landing correction is now available through ROS and passes **24/25**, matching the unchanged teacher on paired fresh seeds. See [LANDING_RESIDUAL_RESULTS.md](LANDING_RESIDUAL_RESULTS.md). This does not change the failed independent-policy results below.
+
 > **Latest local stage:** teacher-guided imitation scored **0/5** fresh supine trials; the external teacher scored **14/16** additional trials. The viewer now uses isolated display data. See [REFERENCE_STUDENT_RESULTS.md](REFERENCE_STUDENT_RESULTS.md). Historical experiment results follow.
 
 > **Separate external-controller result:** [VENDOR_REFERENCE_RESULTS.md](VENDOR_REFERENCE_RESULTS.md) records5/5 compliant supine recoveries using an adapted vendor policy. These are separate from this project's PPO experiments and do not replace their results.

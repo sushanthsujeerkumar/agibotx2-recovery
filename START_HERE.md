@@ -1,40 +1,32 @@
-> **Current development branch: physics-v2.** The adapted external teacher passed its earlier **5/5** batch and **14/16** additional trials. The new teacher-guided student scored **0/5** fresh supine recoveries; our existing PPO also remains **0/5 supine**. Read [student results and viewer fix](REFERENCE_STUDENT_RESULTS.md), [external-reference results](VENDOR_REFERENCE_RESULTS.md), and [PPO curriculum results](DEEP_CROUCH_STAGE_RESULTS.md). Historical results below and the original ZIP describe earlier experiments.
+# Start here — current physics-v2 project
 
-# Run the submitted project
+The current reference controller is **an external AgiBot policy plus our trained
+PPO ankle correction**, not a stand-up policy learned independently. It passed
+5/5 fresh assessment trials and 24/25 total fresh trials. The unchanged external
+teacher passed the same 24/25, so no success-rate benefit from the correction is
+claimed. Our independent PPO and distilled student remain 0/5 supine.
 
-The retained policy passes the original posture-based check in 5/5 episodes, but the additional clean-stance and whole-trajectory joint-limit audits both score 0/5. The simulator, PPO pipeline, ROS integration and evidence are runnable; the controller remains a partial result with unresolved physical-limit and posture problems. See [RESULTS.md](RESULTS.md). Do not describe the earlier 5/5 posture count as fully validated physical recovery.
+Read [current results and limitations](LANDING_RESIDUAL_RESULTS.md). Earlier
+experiments and the original ZIP are historical. Use the `physics-v2` Git branch.
 
-## On the development PC
+## On this development PC
 
-Open a terminal in this project folder. The Python environment and ROS 2 Jazzy are already installed here.
+The environment, model meshes and local external assets are ready. From this folder:
 
 ```bash
-./RUN_DEMO.sh
+./RUN_LANDING_RESIDUAL_DEMO.sh
 ```
 
-This opens one learned recovery attempt using the frozen selected actor. It closes after passing the original recovery test or reaching the 15-second limit. Ctrl+C stops it. To watch the longer posture assessment:
+This opens and records a fresh physical replay of seed 11301, then checks it
+against saved evidence. Captions identify the external teacher and PPO correction.
+The window closes after 15 simulated seconds. Ctrl+C stops a manual run.
+
+## ROS recovery service
+
+Terminal 1, from this folder:
 
 ```bash
-./RUN_DEMO.sh --assess-stance
-```
-
-The extra clean-stance timer is deliberately separate from recovery success.
-
-## Five repeatable evaluation episodes
-
-```bash
-./EVALUATE.sh
-./EVALUATE.sh --assess-stance --output artifacts/local_evaluation/stance
-```
-
-Results are JSON under `artifacts/local_evaluation`. Both commands now enforce trajectory limits on this branch. Add `--posture-only` only to reproduce the historical posture metric; the stance option additionally checks foot posture. For headless videos add `--video` and set `MUJOCO_GL=egl` on this NVIDIA host.
-
-## ROS 2 demo
-
-Terminal 1, in the project folder:
-
-```bash
-./RUN_ROS.sh
+./RUN_REFERENCE_ROS.sh
 ```
 
 Terminal 2:
@@ -47,25 +39,82 @@ ros2 topic echo /x2/joint_states sensor_msgs/msg/JointState --once
 ros2 topic echo /x2/recovery_status std_msgs/msg/String
 ```
 
-The first request is accepted, and a second request while running is rejected. Joint states come from the simulator. The selected seed 1001 episode was verified to reach `SUCCEEDED` under the posture criterion; this status does not certify the separately audited joint-limit compliance. Ctrl+C stops the topic echo and launch. Both nodes are started by one launch file. [ROS validation](docs/ros_validation.md) records fresh build, success, busy rejection and forced-timeout evidence.
+The first request is accepted before simulator work; another request while busy
+is rejected. The service publishes actual simulator joint states and completes
+with `SUCCEEDED` only after the full 15-second limit/clean-stance audit. Faults or
+timeouts produce `FAILED`. Ctrl+C stops the topic subscriber or ROS launch.
+The controller may fail on other seeds; the recorded 25-episode batch includes
+one wrist-speed failure.
 
-## On a fresh Ubuntu 24.04 machine
-
-Extract the archive or clone the repository, then install ROS 2 Jazzy and colcon following [README.md](README.md). From the project folder:
+For headless ROS execution:
 
 ```bash
-bash scripts/setup.sh
-./EVALUATE.sh
-./RUN_DEMO.sh
+./RUN_REFERENCE_ROS.sh render:=false realtime:=false
 ```
 
-Setup creates a local Python 3.12 environment from `uv.lock`. Model meshes, source URDF, license, policy and evidence are included; training is not required to run the selected actor. CUDA is needed for the documented training commands; CPU policy evaluation uses MuJoCo and PyTorch. A desktop with OpenGL is required for visible playback.
+## Fresh Ubuntu 24.04 setup
 
-## Package contents
+Install ROS 2 Jazzy using the instructions linked in [README.md](README.md), then
+clone the correct branch (or extract the new release archive):
 
-- Selected policy: `artifacts/submission/local_stability/actor.pt` (TorchScript inference) and `checkpoint.pt` (full PPO state).
-- [Selected provenance and hashes](artifacts/selected_policy.json).
-- [Training curve](artifacts/submission/local_stability/training_curve.png) and [five-episode results](artifacts/submission/local_stability/evaluation/summary.json).
-- [Detailed results and next experiment](RESULTS.md).
-- [Requirement-to-evidence mapping](docs/requirements.md).
-- [GitHub repository](https://github.com/sushanthsujeerkumar/hrs-x2-recovery), with meaningful development history. The ZIP is a convenience source snapshot; the GitHub repository retains the history required by the assessment. Repository access is private and must be granted to reviewers before they can inspect it.
+```bash
+git clone --branch physics-v2 https://github.com/sushanthsujeerkumar/hrs-x2-recovery.git
+cd hrs-x2-recovery
+bash scripts/setup.sh --reference
+PYTHONPATH=src .venv/bin/python scripts/fetch_vendor_reference.py --output .cache/vendor_reference
+./RUN_LANDING_RESIDUAL_DEMO.sh
+```
+
+The setup script installs locked Python dependencies and runs the tests. The
+repository and archive both include the prepared model and all 39 meshes.
+The separate fetch retrieves the original external policy/configuration locally
+and verifies the pinned policy hash. **Those vendor assets are not included in
+Git or the archive**, and their reuse/redistribution terms remain unverified.
+Skip the fetch when that directory already contains the verified assets. For a
+different local asset directory, set `X2_VENDOR_ASSETS_DIR=/absolute/path` before
+running either launcher. Fetching uses network access; simulation itself is local.
+
+## Repeat the evaluated comparison
+
+Choose a fresh output directory:
+
+```bash
+PYTHONPATH=src .venv/bin/python scripts/compare_landing_residual.py \
+  --asset-dir .cache/vendor_reference \
+  --checkpoint artifacts/experiments/landing_residual_ppo/update_004.pt \
+  --baseline artifacts/experiments/landing_residual_ppo/update_000.pt \
+  --seeds 11301 11302 11303 11304 11305 \
+  --output artifacts/local_evaluation/new_paired_five
+```
+
+This evaluates both controllers on matching seeds, including every 1 ms physics
+step. [The full report](LANDING_RESIDUAL_RESULTS.md) includes the training command,
+reward specification, checkpoint hashes and the additional 20 evaluation seeds.
+To repeat fresh ROS build/service/telemetry/timeout validation:
+
+```bash
+bash scripts/validate_reference_ros.sh
+```
+
+## Historical independent policy
+
+The earlier independent PPO remains runnable and explicitly unsuccessful under
+the stricter full-trajectory recovery checks:
+
+```bash
+./RUN_DEMO.sh --assess-stance
+./EVALUATE.sh --assess-stance --output artifacts/local_evaluation/original_policy_check
+```
+
+`RUN_ROS.sh` retains that historical actor; use `RUN_REFERENCE_ROS.sh` for the
+new reference-controller integration. Its checkpoints are not interchangeable
+with the 78-input residual or its normalized-correction export.
+
+## What to present
+
+Present the working simulation/ROS system, the actual PPO attempts and saved
+reward curves, the attributed external comparison, and the equal 24/25 paired
+result. Do not claim that our independent policy learned full recovery, that PPO
+improved the teacher's success rate, or that 24/25 proves broad robustness.
+The repository preserves the development and failure history. No employer
+submission or cloud deployment has been performed.

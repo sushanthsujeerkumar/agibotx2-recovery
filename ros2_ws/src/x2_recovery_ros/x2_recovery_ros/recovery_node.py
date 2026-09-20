@@ -23,6 +23,7 @@ class RecoveryNode(Node):
         for name, default in {
             'controller': 'scripted',
             'checkpoint': '',
+            'vendor_assets': '',
             'render': False,
             'seed': 0,
             'timeout_s': 60.0,
@@ -64,19 +65,24 @@ class RecoveryNode(Node):
             return response
         config = {name: self.get_parameter(name).value for name in (
             'controller', 'checkpoint', 'render', 'seed', 'timeout_s',
-            'max_sim_duration_s', 'realtime', 'physics_profile',
+            'max_sim_duration_s', 'realtime', 'physics_profile', 'vendor_assets',
         )}
-        if config['controller'] not in ('scripted', 'policy'):
+        if config['controller'] not in ('scripted', 'policy', 'reference_residual'):
             response.success = False
-            response.message = 'controller must be scripted or policy'
+            response.message = 'controller must be scripted, policy or reference_residual'
             return response
         if config['physics_profile'] not in ('legacy', 'guarded_v2'):
             response.success = False
             response.message = 'physics_profile must be legacy or guarded_v2'
             return response
-        if config['controller'] == 'policy' and not config['checkpoint']:
+        if config['controller'] in ('policy', 'reference_residual') and not config['checkpoint']:
             response.success = False
-            response.message = 'policy controller requires a checkpoint path'
+            response.message = 'policy/reference controller requires a checkpoint path'
+            return response
+        if config['controller'] == 'reference_residual' and (
+                not config['vendor_assets'] or config['physics_profile'] != 'guarded_v2'):
+            response.success = False
+            response.message = 'reference_residual requires vendor_assets and guarded_v2 physics'
             return response
         for name in ('timeout_s', 'max_sim_duration_s'):
             if not math.isfinite(config[name]) or config[name] <= 0.0:

@@ -1,0 +1,19 @@
+{
+  "checkpoint": "update_004.pt",
+  "actor": "update_004_actor.pt",
+  "checkpoint_sha256": "74d62dcdd88f00f268bc17bcfb742c5f4aee161709aaaf658210a762c336d033",
+  "selected_ppo_updates": 4,
+  "selected_environment_steps": 21257,
+  "campaign_ppo_updates": 6,
+  "campaign_environment_steps": 32268,
+  "selection": "Highest mean validation reward among checkpoints with the tied best validation success count (4/5); selected before fresh evaluation",
+  "validation_seeds": [
+    11201,
+    11202,
+    11203,
+    11204,
+    11205
+  ],
+  "external_teacher_required": true,
+  "performance_claim": "No fresh paired success-rate improvement demonstrated: both controllers passed 24/25."
+}

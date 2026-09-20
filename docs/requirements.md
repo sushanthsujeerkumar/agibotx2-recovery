@@ -1,3 +1,5 @@
+> **Current additional evidence:** [landing-residual results](../LANDING_RESIDUAL_RESULTS.md) document a real PPO correction experiment, 5/5 assessment trials (24/25 including broader fresh testing), and fresh ROS build/success/busy/telemetry/timeout checks. Recovery relies on an explicitly external teacher; the correction did not improve its paired success count. Historical independent-policy evidence follows.
+
 > **Latest evidence:** the new imitation student remains **0/5** on independent supine tests; the ground-recovery objective is unresolved. Viewer isolation now prevents display actions from changing evaluated dynamics. See [student evidence](../REFERENCE_STUDENT_RESULTS.md).
 
 > **External comparison added:** an optional adapted vendor policy passes5/5 strict supine episodes, but is not our trained policy or the default ROS controller. See [provenance and limits](../VENDOR_REFERENCE_RESULTS.md). Our own PPO ground-recovery objective remains unresolved.

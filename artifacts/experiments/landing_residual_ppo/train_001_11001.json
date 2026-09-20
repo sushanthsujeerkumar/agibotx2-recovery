@@ -1,0 +1,985 @@
+{
+  "seed": 11001,
+  "passed": false,
+  "terminal_hold": 0.0,
+  "max_clean_hold": 0.0,
+  "max_height": 0.4706472044072822,
+  "sim_time": 9.152000000000367,
+  "limits": {
+    "ok": false,
+    "physics_steps": 9153,
+    "max_position_violation_rad": 0.0,
+    "max_speed_ratio": 1.1672036927674618,
+    "max_commanded_effort_ratio": 1.0,
+    "first_violation": {
+      "time_s": 9.152000000000367,
+      "kind": "speed",
+      "joint": "right_wrist_pitch_joint",
+      "value": 1.1672036927674618
+    }
+  },
+  "final_checks": {
+    "upright": false,
+    "height": false,
+    "both_feet": false,
+    "no_other_support": false,
+    "low_linear_speed": false,
+    "low_angular_speed": false
+  },
+  "final_stance": {
+    "signed_foot_width_m": -0.5549642393602773,
+    "foot_heading_error_rad": [
+      0.12159608490012491,
+      0.9244403224609052
+    ],
+    "hip_yaw_rad": [
+      -0.5728880732335868,
+      -1.128627075853484
+    ],
+    "sole_tilt_rad": [
+      1.5357275163879591,
+      0.0209108649560299
+    ],
+    "foot_bracing_force_n": 0.0,
+    "checks": {
+      "stance_width": false,
+      "foot_heading": false,
+      "hip_yaw": false,
+      "flat_soles": false,
+      "no_foot_bracing": true
+    },
+    "posture_ok": false
+  },
+  "reward": 1.7995882882551586,
+  "max_residual_rad": 0.005597745068371296,
+  "stochastic": true,
+  "action_seed": 51105,
+  "contract": "landing_residual_v1: shared_observation[:75] + elapsed/15 + base_ankle_actions2 -> ankle_target_offsets_rad2",
+  "reference_timescale": 1.2,
+  "external_teacher_at_inference": true,
+  "teacher_policy_sha256": "3faf3df8f9616448f9ae580e22c2fa28fcb25c1eb0c9a338a0b0c5b9a520522f",
+  "state_edits_after_reset": false,
+  "wall_seconds": 6.518630038997799,
+  "trace": [
+    {
+      "time": 0.02000000000000001,
+      "height": 0.1492225334592601,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.025325079675136898
+    },
+    {
+      "time": 0.12000000000000009,
+      "height": 0.148493279055202,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.014931933661650397
+    },
+    {
+      "time": 0.22000000000000017,
+      "height": 0.14832034335410113,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.03166210431537875
+    },
+    {
+      "time": 0.32000000000000023,
+      "height": 0.14834183055320135,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.05265704640925008
+    },
+    {
+      "time": 0.4200000000000003,
+      "height": 0.14847713450575958,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.07226052589340241
+    },
+    {
+      "time": 0.5200000000000004,
+      "height": 0.14858652475987816,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.09028004925471077
+    },
+    {
+      "time": 0.6200000000000004,
+      "height": 0.14867174127928207,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.10668599203983245
+    },
+    {
+      "time": 0.7200000000000005,
+      "height": 0.14884301780135165,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.12145526769661161
+    },
+    {
+      "time": 0.8200000000000006,
+      "height": 0.14939919823255865,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.1346087764991698
+    },
+    {
+      "time": 0.9200000000000007,
+      "height": 0.1504755118777327,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.14616484017465944
+    },
+    {
+      "time": 1.0199999999999985,
+      "height": 0.1520122165872993,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.15613047058133567
+    },
+    {
+      "time": 1.1199999999999875,
+      "height": 0.15362190482258412,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.16450966206932846
+    },
+    {
+      "time": 1.2199999999999764,
+      "height": 0.15504020097095772,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.1711503051563554
+    },
+    {
+      "time": 1.3199999999999654,
+      "height": 0.15628050951453878,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.17618577298665405
+    },
+    {
+      "time": 1.4199999999999544,
+      "height": 0.15748777454941812,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.17972529265761952
+    },
+    {
+      "time": 1.5199999999999434,
+      "height": 0.15874610907607192,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.18162801225831915
+    },
+    {
+      "time": 1.6199999999999324,
+      "height": 0.16004847889141216,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.181857461524889
+    },
+    {
+      "time": 1.7199999999999214,
+      "height": 0.16133354386966703,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.18047863952384685
+    },
+    {
+      "time": 1.8199999999999104,
+      "height": 0.1625344402120979,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.17748726369262305
+    },
+    {
+      "time": 1.9199999999998993,
+      "height": 0.16364180857720875,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.17282117940270467
+    },
+    {
+      "time": 2.0199999999998886,
+      "height": 0.16465942252966237,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.1665975816267588
+    },
+    {
+      "time": 2.1199999999998775,
+      "height": 0.16560444069579963,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.15874835043367214
+    },
+    {
+      "time": 2.2199999999998665,
+      "height": 0.16645303833888564,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.14925643375036193
+    },
+    {
+      "time": 2.3199999999998555,
+      "height": 0.16720283392805857,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.13817891028764762
+    },
+    {
+      "time": 2.4199999999998445,
+      "height": 0.16784590522961382,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.12541846071220192
+    },
+    {
+      "time": 2.5199999999998335,
+      "height": 0.16838415984429084,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.1111137302773
+    },
+    {
+      "time": 2.6199999999998225,
+      "height": 0.16881183454913395,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.09515472972868952
+    },
+    {
+      "time": 2.7199999999998115,
+      "height": 0.16914031231389573,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.07753553120156266
+    },
+    {
+      "time": 2.8199999999998004,
+      "height": 0.16934949010521133,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.05840965867586219
+    },
+    {
+      "time": 2.9199999999997894,
+      "height": 0.1694241964053733,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.037657500220680915
+    },
+    {
+      "time": 3.0199999999997784,
+      "height": 0.16942677085032665,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.016053876849148895
+    },
+    {
+      "time": 3.1199999999997674,
+      "height": 0.16944314241669511,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.0030694440980229653
+    },
+    {
+      "time": 3.2199999999997564,
+      "height": 0.1694639636809549,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.001065346778892744
+    },
+    {
+      "time": 3.3199999999997454,
+      "height": 0.16949450112720862,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.0007290915425131434
+    },
+    {
+      "time": 3.4199999999997344,
+      "height": 0.16952471436308636,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.0005551225284246259
+    },
+    {
+      "time": 3.5199999999997234,
+      "height": 0.1695529606361002,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.0004327474090775811
+    },
+    {
+      "time": 3.6199999999997123,
+      "height": 0.16958043107702142,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.0003329296230005115
+    },
+    {
+      "time": 3.7199999999997013,
+      "height": 0.1696080615779123,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.00027666611099764923
+    },
+    {
+      "time": 3.8199999999996903,
+      "height": 0.16963443200893152,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.00026092358315175457
+    },
+    {
+      "time": 3.9199999999996793,
+      "height": 0.16965911711424148,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.00024187907210256794
+    },
+    {
+      "time": 4.019999999999677,
+      "height": 0.16968210980019408,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.0002221414173014363
+    },
+    {
+      "time": 4.119999999999711,
+      "height": 0.16970346246762277,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.00020307598095213654
+    },
+    {
+      "time": 4.219999999999744,
+      "height": 0.16972324387140136,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.0001849135385800144
+    },
+    {
+      "time": 4.319999999999777,
+      "height": 0.16974154642078088,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.0001684609572044117
+    },
+    {
+      "time": 4.419999999999811,
+      "height": 0.16975846618398918,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.00015369065126607137
+    },
+    {
+      "time": 4.519999999999844,
+      "height": 0.1697740971971859,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.0001404568996926887
+    },
+    {
+      "time": 4.6199999999998775,
+      "height": 0.16978853031324506,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.0001285774092237108
+    },
+    {
+      "time": 4.719999999999911,
+      "height": 0.16980185225981273,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.00011789991545523612
+    },
+    {
+      "time": 4.819999999999944,
+      "height": 0.16981414513146614,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.00010826594901610516
+    },
+    {
+      "time": 4.919999999999978,
+      "height": 0.16982548865451627,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 9.944135002956504e-05
+    },
+    {
+      "time": 5.020000000000011,
+      "height": 0.17218985970499526,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.44684186601260495
+    },
+    {
+      "time": 5.1200000000000445,
+      "height": 0.21802903973141988,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.2639636606575878
+    },
+    {
+      "time": 5.220000000000078,
+      "height": 0.24049166818440523,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.1223580971563125
+    },
+    {
+      "time": 5.320000000000111,
+      "height": 0.24708051538747028,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.047713126630818836
+    },
+    {
+      "time": 5.420000000000145,
+      "height": 0.24376353665456216,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.04223195349909765
+    },
+    {
+      "time": 5.520000000000178,
+      "height": 0.24568226610760568,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.09469523087940024
+    },
+    {
+      "time": 5.6200000000002115,
+      "height": 0.24554544356560756,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.12844989877309054
+    },
+    {
+      "time": 5.720000000000245,
+      "height": 0.24151284016362165,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.13050770696995342
+    },
+    {
+      "time": 5.820000000000278,
+      "height": 0.23719416098662927,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.1278882994352594
+    },
+    {
+      "time": 5.920000000000312,
+      "height": 0.23618037242403847,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.08098555303296781
+    },
+    {
+      "time": 6.020000000000345,
+      "height": 0.24548285959960844,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.08556988270074636
+    },
+    {
+      "time": 6.1200000000003785,
+      "height": 0.252575963655101,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.17558459136625856
+    },
+    {
+      "time": 6.220000000000412,
+      "height": 0.23029869976419423,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.16306019331364904
+    },
+    {
+      "time": 6.320000000000445,
+      "height": 0.22083473590527752,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.23770217762152837
+    },
+    {
+      "time": 6.420000000000479,
+      "height": 0.24343615618014058,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.18617130664131532
+    },
+    {
+      "time": 6.520000000000512,
+      "height": 0.2567483247205835,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.22262223885525062
+    },
+    {
+      "time": 6.6200000000005454,
+      "height": 0.2324828260903746,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.23855960211592978
+    },
+    {
+      "time": 6.720000000000579,
+      "height": 0.19242718090073996,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.2552805129730176
+    },
+    {
+      "time": 6.820000000000612,
+      "height": 0.16193816053262639,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.20553606442081537
+    },
+    {
+      "time": 6.920000000000646,
+      "height": 0.1727582487366721,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.165403895686986
+    },
+    {
+      "time": 7.020000000000679,
+      "height": 0.18749259957927752,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.11062037238445166
+    },
+    {
+      "time": 7.120000000000712,
+      "height": 0.19818963440644682,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.09641458301503346
+    },
+    {
+      "time": 7.220000000000746,
+      "height": 0.19409508384291999,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.2170606687974015
+    },
+    {
+      "time": 7.320000000000779,
+      "height": 0.17649220186673667,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.20548613310331676
+    },
+    {
+      "time": 7.420000000000813,
+      "height": 0.17901154807799155,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.21531433481991605
+    },
+    {
+      "time": 7.520000000000846,
+      "height": 0.1716272390671083,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.1680430621187035
+    },
+    {
+      "time": 7.620000000000879,
+      "height": 0.16426186626012274,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.18445040749050223
+    },
+    {
+      "time": 7.720000000000913,
+      "height": 0.15889912012037707,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.2626577345131305
+    },
+    {
+      "time": 7.820000000000946,
+      "height": 0.1618220474805966,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.23576297569007046
+    },
+    {
+      "time": 7.92000000000098,
+      "height": 0.19898107040985452,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.2183390575936696
+    },
+    {
+      "time": 8.020000000000994,
+      "height": 0.2419016260578608,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.20885765922495758
+    },
+    {
+      "time": 8.120000000000939,
+      "height": 0.24219929811060875,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.158163325746369
+    },
+    {
+      "time": 8.220000000000883,
+      "height": 0.2609093669129575,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.12732120076787243
+    },
+    {
+      "time": 8.320000000000828,
+      "height": 0.2962587541308354,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.10325328010195765
+    },
+    {
+      "time": 8.420000000000773,
+      "height": 0.33262323353176615,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.15779301158215422
+    },
+    {
+      "time": 8.520000000000717,
+      "height": 0.38478056457189147,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.1283724722692769
+    },
+    {
+      "time": 8.620000000000662,
+      "height": 0.4160374179991016,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.17529340455638964
+    },
+    {
+      "time": 8.720000000000606,
+      "height": 0.43089488476849186,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.17400238483996322
+    },
+    {
+      "time": 8.820000000000551,
+      "height": 0.44064764413645835,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.26277871166320116
+    },
+    {
+      "time": 8.920000000000496,
+      "height": 0.44284330579789205,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        0.0,
+        0.0
+      ],
+      "step_speed_ratio": 0.33575513221713266
+    },
+    {
+      "time": 9.02000000000044,
+      "height": 0.4383842555202663,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0,
+        -0.0
+      ],
+      "step_speed_ratio": 0.37081064442071837
+    },
+    {
+      "time": 9.120000000000385,
+      "height": 0.45891059298989645,
+      "clean_hold": 0.0,
+      "ankle_offsets_rad": [
+        -0.0014253801200538874,
+        -0.00424565514549613
+      ],
+      "step_speed_ratio": 0.3594691327103922
+    }
+  ]
+}

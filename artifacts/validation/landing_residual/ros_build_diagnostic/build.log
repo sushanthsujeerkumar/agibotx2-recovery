@@ -1,0 +1,11 @@
+Starting >>> x2_recovery_ros
+/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/.venv/lib/python3.12/site-packages/setuptools/_distutils/dist.py:287: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+--- stderr: x2_recovery_ros
+/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/.venv/lib/python3.12/site-packages/setuptools/_distutils/dist.py:287: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+---
+Finished <<< x2_recovery_ros [1.34s]
+
+Summary: 1 package finished [1.62s]
+  1 package had stderr output: x2_recovery_ros

@@ -1,0 +1,14 @@
+{
+  "contract": "TorchScript: same 78 inputs -> normalized tanh corrections2; multiply by 0.04 radians and landing_window(elapsed_seconds)",
+  "joints": [
+    "left_ankle_pitch_joint",
+    "right_ankle_pitch_joint"
+  ],
+  "bound_rad": 0.04,
+  "window_seconds": [
+    9.0,
+    11.0
+  ],
+  "teacher_required": true,
+  "checkpoint_sha256": "1484ca10ec8497dd11f76a650cbdf6aec044194c59d6a1f76e6f3987b09fb79c"
+}
