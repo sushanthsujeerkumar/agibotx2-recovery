@@ -1,3 +1,5 @@
+> **Historical assessment evidence below.** On physics-v2, monitored joint-limit compliance is validated for the new standing/crouch policies and scripted hand-support reference. Full supine recovery remains **0/5** with the latest actor. See [curriculum results](../DEEP_CROUCH_STAGE_RESULTS.md) and [floor-transition results](../FLOOR_TRANSITION_RESULTS.md). These intermediate tests do not satisfy the ground-recovery objective.
+
 # Assessment requirements and evidence
 
 This maps the official HRS take-home requirements to the delivered partial-result project. Actual joint position/speed compliance remains unresolved and is explicitly identified below. The original recovery criterion and the subsequently added clean-stance criterion are reported separately. The posture limitation remains explicit.

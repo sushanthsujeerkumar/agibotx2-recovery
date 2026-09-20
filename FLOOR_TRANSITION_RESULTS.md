@@ -67,11 +67,18 @@ different hand/foot contact schedule is needed for the attempted kneeling route.
 Only a successful physical reference should become new imitation data or a PPO
 curriculum stage. More GPU workers do not fix an invalid reference.
 
-AgiBot documents an official simulation/MC get-up pipeline, which is a potential
-source of motion-phase guidance, subject to availability and model compatibility.
-It is separate from their example ONNX dance deployment and from our PPO policy.
-[Official simulation overview](https://x2-aimdk.agibot.com/en/latest/sim_rl/index.html).
-No manufacturer controller has been installed, imported or evaluated here.
+AgiBot's public MC package includes a 1.32 MB get-up ONNX policy and configuration.
+A bounded inspection read archive metadata and small configuration files only.
+This is a potential source of motion-phase guidance, subject to its terms and
+model compatibility. It uses a different 29-action/history interface and targets
+X2 T2.5; it cannot be inserted into our 31-action, 106-observation PPO interface.
+The next concrete compatibility check is its ONNX input/output contract and the
+BMIMIC runner's history, phase and action interpretation. It is separate from
+their example ONNX dance deployment and from our PPO policy. See the
+[official simulation overview](https://x2-aimdk.agibot.com/en/latest/sim_rl/index.html)
+and [source-research record](artifacts/validation/floor_transition/official_reference_research.md).
+No manufacturer policy binary has been downloaded, installed or evaluated here;
+reuse terms are unverified and no vendor policy is included in this project.
 
 ## Reproduction and evidence boundaries
 
@@ -94,6 +101,8 @@ joint targets; they never inject the proposed floating-base states. Their 28/34 
 diagnostic timings exceed the standard recovery evaluation duration and must not
 be reported as standard assessment episodes. The original source snapshots are
 preserved where diagnostics were subsequently cleaned up or extended. The live
-reference log records a clean viewer run and exit 0. No PPO training or cloud
-compute was used in this stage; existing policies and the historical ZIP remain
-unchanged.
+reference log records a clean viewer run and exit 0. The added standalone launcher
+was also executed through its complete 16 s and exited 0; source compilation,
+shell syntax, evidence counts, video hash and preserved actor hash passed checks.
+No PPO training or cloud compute was used in this stage; existing policies and
+the historical ZIP remain unchanged.

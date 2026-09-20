@@ -1,3 +1,5 @@
+> **Historical main-run results.** Newer physics-v2 curriculum results are in [DEEP_CROUCH_STAGE_RESULTS.md](DEEP_CROUCH_STAGE_RESULTS.md); scripted contact-transition diagnostics are in [FLOOR_TRANSITION_RESULTS.md](FLOOR_TRANSITION_RESULTS.md). Full supine recovery with the latest curriculum actor remains **0/5**.
+
 # Local results and selected policy
 
 The selected learned policy is `artifacts/submission/local_stability/actor.pt`, SHA256`4d7dba4dc1f31e01ddeee3f12c7b60b93361a5708d66812585fa8e23dddf08f3`. It passed 5/5 fixed-seed recovery episodes under the documented criteria and a real ROS 2 recovery episode. It is retained because the posture refinement did not deliver a clean stance and was less consistent during the extended 15-second check.

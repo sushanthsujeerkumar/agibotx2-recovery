@@ -19,9 +19,10 @@ cloud compute, actor replacement or main ZIP update occurred. The retained PPO
 actor's most recent full supine assessment remains 0/5.
 
 Next method: a collision-free contact-changing reference, physically validated
-before imitation/PPO. Official AgiBot simulation/MC get-up documentation is being
-assessed as a possible source of motion guidance; no vendor policy is part of our
-result. Preserve all earlier evidence. The heartbeat remains paused.
+before imitation/PPO. Official AgiBot archive metadata/configuration inspection confirmed a get-up
+ONNX policy for a different interface/model revision. Its graph/runner semantics
+and reuse terms remain to be verified; no vendor policy binary was downloaded or
+integrated. See the official_reference_research.md evidence note. Preserve all earlier evidence. The heartbeat remains paused.
 
 # Completed deeper-crouch stage
 
