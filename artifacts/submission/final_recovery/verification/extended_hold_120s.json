@@ -1,0 +1,19 @@
+{
+  "seed": 30001,
+  "requested_sim_seconds": 120.0,
+  "reached_sim_time": 120.00000000020893,
+  "first_fault": null,
+  "clean_hold_at_15s": 2.1400000000000015,
+  "final_clean_hold_seconds": 107.13999999999582,
+  "final_pelvis_height": 0.6687476704145066,
+  "physics_profile": "guarded_v2",
+  "limits": {
+    "ok": true,
+    "physics_steps": 120001,
+    "max_position_error": 0.0,
+    "max_speed_ratio": 0.9575225365679746,
+    "max_effort_ratio": 1.0,
+    "first_violation": null
+  },
+  "passed": true
+}
