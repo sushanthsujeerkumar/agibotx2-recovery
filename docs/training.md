@@ -14,7 +14,7 @@ The project's earlier standing/crouch work provided a learned standing controlle
 
 `ReferenceController` in `full_recovery.py` reproduces that hybrid reference for data collection. Collection seeds were 17001–17008. The fitted prior passed 10/10 different seeds, 17101–17110, before full-episode PPO. This reference already solves the narrow recovery task; the PPO stage adjusts it rather than learning the whole movement unaided. The reference's metadata describes the state of that earlier preparation stage, so its “training pending” label is historical.
 
-The standing actor is a frozen dependency from an earlier project-trained phase-prior/PPO experiment. Reproducing the final stage uses the included dependency; it does not rerun every earlier search and standing-policy experiment. No externally trained AgiBot controller is used in this final chain. Earlier vendor comparisons remain separately attributed in the historical results.
+The standing actor is a frozen dependency from an earlier project-trained phase-prior/PPO experiment. Reproducing the final stage uses the included dependency; it does not rerun every earlier search and standing-policy experiment. No externally trained AgiBot controller is used in this final chain. Earlier vendor comparisons remain separately attributed in Git history.
 
 ## PPO settings
 
@@ -75,10 +75,10 @@ To export a checkpoint and evaluate it:
   --episodes 5 --seed 30001 --output artifacts/local_evaluation/reexported_5.json
 ```
 
-For video recording, install the locked optional media dependencies (the historical `reference` extra includes them):
+For video recording, install the locked optional media dependencies:
 
 ```bash
-bash scripts/setup.sh --reference
+bash scripts/setup.sh --media
 MUJOCO_GL=egl .venv/bin/python scripts/demo_full_recovery.py \
   --video artifacts/local_demo/recovery.mp4 --output artifacts/local_demo/recovery.json
 ```

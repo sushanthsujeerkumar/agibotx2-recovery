@@ -1,6 +1,0 @@
-{
-  "iteration": 2001,
-  "environment_steps": 24588288,
-  "actor": "artifacts/runs/local_stance/model_002001_actor.pt",
-  "actor_sha256": "2d64b3413d288ef63197019ddd05853741aaa26e892fe13eb5563deb8aec69e3"
-}

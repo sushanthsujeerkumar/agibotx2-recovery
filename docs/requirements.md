@@ -18,4 +18,4 @@ This maps the official HRS task to the submitted version. The final policy is re
 | Dependencies, hardware, reproduction and limitations | [README](../README.md), [training](training.md), `uv.lock` |
 | Development history in GitHub | Existing repository and chronological commits; final local changes prepared without rewriting earlier history |
 
-Evidence paths in the table are relative to `artifacts/submission/final_recovery/` unless otherwise shown. Earlier failed experiments remain available for inspection. Repository sharing/publishing is a separate handoff step.
+Evidence paths in the table are relative to `artifacts/submission/final_recovery/` unless otherwise shown. Earlier failed experiments remain available in Git history for inspection. Repository sharing/publishing is a separate handoff step.

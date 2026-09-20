@@ -10,7 +10,7 @@ requires-python = ">=3.12,<3.13"
 dependencies = ["mjlab==1.6.0", "torch==2.11.0", "torchvision==0.26.0", "matplotlib", "pytest"]
 
 [project.optional-dependencies]
-reference = ["onnx==1.23.0", "PyYAML==6.0.3", "imageio==2.37.4", "imageio-ffmpeg==0.6.0", "pillow==12.3.0"]
+media = ["imageio==2.37.4", "imageio-ffmpeg==0.6.0", "pillow==12.3.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

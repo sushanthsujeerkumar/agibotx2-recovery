@@ -1,1 +1,0 @@
-{"checks": {"standing_return_pass": true, "terminal_hold": true, "max_clean_hold": true, "max_pelvis_height": true, "limits": true, "target_adjustment_steps": true, "max_target_adjustment_rad": true, "final_checks": true, "final_stance": true, "full_15_seconds": true}, "viewer_closed": true}

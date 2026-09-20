@@ -47,14 +47,13 @@ def test_policy_requires_checkpoint(node):
     assert not node._busy
 
 
-@pytest.mark.parametrize('assets,physics,accepted', [
-    ('', 'guarded_v2', False), ('/local/assets', 'legacy', False),
-    ('/local/assets', 'guarded_v2', True),
+@pytest.mark.parametrize('checkpoint,physics,accepted', [
+    ('', 'guarded_v2', False), ('/local/actor.pt', 'legacy', False),
+    ('/local/actor.pt', 'guarded_v2', True),
 ])
-def test_reference_requires_explicit_assets_and_guarded_physics(node, assets, physics, accepted):
-    node.set_parameters([Parameter('controller', value='reference_residual'),
-                         Parameter('checkpoint', value='/local/own_residual.pt'),
-                         Parameter('vendor_assets', value=assets),
+def test_full_recovery_requires_checkpoint_and_guarded_physics(node, checkpoint, physics, accepted):
+    node.set_parameters([Parameter('controller', value='full_recovery'),
+                         Parameter('checkpoint', value=checkpoint),
                          Parameter('physics_profile', value=physics)])
     with patch.object(node._mp_context, 'Process') as process:
         response = node._start_callback(Trigger.Request(), Trigger.Response())

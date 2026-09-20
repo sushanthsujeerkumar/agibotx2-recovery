@@ -1,6 +1,0 @@
-VIEWER: scripted baseline until a trained checkpoint is available
-VIEWER: trained policy {"iteration": 226, "environment_steps": 1388544, "checkpoint": "artifacts/experiments/deep_crouch_ppo/checkpoint.pt", "actor": "artifacts/experiments/deep_crouch_ppo/actor.pt", "label": "DEEP CROUCH ONLY - not floor recovery"}
-VIEWER episode 0: controller=policy success=True max_height=0.670
-VIEWER episode 1: controller=policy success=True max_height=0.670
-VIEWER episode 2: controller=policy success=True max_height=0.670
-VIEWER episode 3: controller=policy success=True max_height=0.670

@@ -7,9 +7,8 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
     arguments = [
-        ('controller', 'scripted', 'full_recovery (final policy), scripted, policy (legacy), or reference_residual (external teacher experiment)'),
+        ('controller', 'scripted', 'full_recovery (submitted policy), scripted baseline, or policy (106-input actor)'),
         ('checkpoint', '', 'Absolute policy checkpoint path'),
-        ('vendor_assets', '', 'External vendor asset directory; required only for reference_residual'),
         ('render', 'false', 'Open a local MuJoCo viewer for the recovery episode'),
         ('seed', '0', 'Repeatable reset seed'),
         ('timeout_s', '60.0', 'Wall-clock deadline including simulator startup'),
@@ -22,7 +21,7 @@ def generate_launch_description():
                     for name, value, description in arguments]
     parameters = {name: ParameterValue(LaunchConfiguration(name), value_type=kind)
                   for name, kind in {
-                      'controller': str, 'checkpoint': str, 'vendor_assets': str, 'render': bool,
+                      'controller': str, 'checkpoint': str, 'render': bool,
                       'seed': int, 'timeout_s': float, 'max_sim_duration_s': float,
                       'realtime': bool,
                       'physics_profile': str,

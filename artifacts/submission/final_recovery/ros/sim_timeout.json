@@ -1,6 +1,6 @@
 {
   "expected_final_status": "FAILED",
-  "acceptance_seconds": 0.0006410809946828522,
+  "acceptance_seconds": 0.0005650960010825656,
   "first_response": {
     "success": true,
     "message": "Accepted: recovery execution is queued"
@@ -13,7 +13,7 @@
     "RUNNING",
     "FAILED"
   ],
-  "elapsed_seconds": 2.107289638996008,
+  "elapsed_seconds": 2.1285159120016033,
   "joint_frame_count": 4,
   "joint_names": [
     "left_hip_pitch_joint",

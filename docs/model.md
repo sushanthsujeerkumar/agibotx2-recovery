@@ -73,6 +73,6 @@ A one-second settling interval already reduced generalized-velocity norm below 0
 
 ## Why the guarded profile was added
 
-An earlier legacy policy could stand while exceeding the URDF position and speed limits. Its five audited trajectories were rejected, despite passing the original posture-only checks. The unchanged evidence remains in `artifacts/validation/final_reproduction/physics_step_limit_audit.json`.
+An earlier legacy policy could stand while exceeding the URDF position and speed limits. Its five audited trajectories were rejected, despite passing the original posture-only checks. The original audit is preserved in Git history at `606f2c0:artifacts/validation/final_reproduction/physics_step_limit_audit.json`. See [development history](development.md).
 
 The submitted model uses `guarded_v2`: earlier joint constraint engagement, target margins and a bounded velocity servo. Published URDF limits are unchanged, and the independent monitor rejects any actual excursion rather than modifying state. The final five episodes have zero position excursions and stay within speed and effort limits. See [current results](../RESULTS.md) and the exact [controller settings](environment.md).

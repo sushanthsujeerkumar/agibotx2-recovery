@@ -3,10 +3,10 @@ set -euo pipefail
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$PROJECT_DIR"
 extra_args=()
-if [[ "${1:-}" == '--reference' ]]; then
-  extra_args=(--extra reference)
+if [[ "${1:-}" == '--media' ]]; then
+  extra_args=(--extra media)
 elif [[ "$#" -gt 0 ]]; then
-  echo "Usage: $0 [--reference]" >&2
+  echo "Usage: $0 [--media]" >&2
   exit 2
 fi
 if command -v uv >/dev/null 2>&1; then

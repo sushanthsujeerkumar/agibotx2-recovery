@@ -1,6 +1,0 @@
-{
-  "iteration": 222,
-  "actor": "artifacts/experiments/balance_v2/actor.pt",
-  "checkpoint": "artifacts/experiments/balance_v2/checkpoint.pt",
-  "label": "BALANCE ONLY - not ground recovery"
-}

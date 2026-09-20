@@ -1,7 +1,0 @@
-{
-  "iteration": 362,
-  "environment_steps": 2224128,
-  "checkpoint": "artifacts/experiments/crouch_ppo/checkpoint.pt",
-  "actor": "artifacts/experiments/crouch_ppo/actor.pt",
-  "label": "CROUCH ONLY - not ground recovery"
-}

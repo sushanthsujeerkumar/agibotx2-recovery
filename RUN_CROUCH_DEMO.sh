@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-cd "$(dirname "${BASH_SOURCE[0]}")"
-exec .venv/bin/python -m x2_recovery.watch --directory artifacts/experiments/crouch_ppo --minutes 1 --physics-profile guarded_v2 --reset-mode crouch --assess-stance "$@"

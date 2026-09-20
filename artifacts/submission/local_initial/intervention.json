@@ -1,9 +1,0 @@
-{
-  "reason": "Excessive Gaussian exploration and saturated action means; frozen checkpoint reaches upright height but fails the base-speed stability checks.",
-  "observed_iteration": 2802,
-  "observed_wall_time_s": 1450.245189928,
-  "observed_action_std": 11.189355850219727,
-  "reference_evaluation": "artifacts/evaluation/checkpoint_2501/summary.json",
-  "decision": "Preserve baseline and start one fresh stability revision; do not warm-start saturated means.",
-  "revision_run": "artifacts/runs/local_stability"
-}

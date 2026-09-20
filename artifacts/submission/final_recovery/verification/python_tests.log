@@ -1,25 +1,15 @@
-.......................                                                  [100%]
+................                                                         [100%]
 =============================== warnings summary ===============================
 tests/test_full_recovery_policy.py::test_prior_phase_contract_and_end_clamping
 tests/test_full_recovery_policy.py::test_checkpoint_export_contains_prior_and_feedback
 tests/test_full_recovery_policy.py::test_checkpoint_export_contains_prior_and_feedback
 tests/test_full_recovery_policy.py::test_checkpoint_export_contains_prior_and_feedback
-tests/test_landing_residual.py::test_exported_normalized_offsets_match_checkpoint_with_documented_scale
-tests/test_landing_residual.py::test_exported_normalized_offsets_match_checkpoint_with_documented_scale
-tests/test_reference_student.py::test_export_retains_normalization_and_explicit_phase_contract
   /home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
     warnings.warn(
 
 tests/test_full_recovery_policy.py::test_checkpoint_export_contains_prior_and_feedback
-tests/test_landing_residual.py::test_exported_normalized_offsets_match_checkpoint_with_documented_scale
-tests/test_reference_student.py::test_export_retains_normalization_and_explicit_phase_contract
   /home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/.venv/lib/python3.12/site-packages/torch/jit/_serialization.py:176: DeprecationWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
     warnings.warn(
 
-tests/test_landing_residual.py::test_exported_normalized_offsets_match_checkpoint_with_documented_scale
-tests/test_reference_student.py::test_export_retains_normalization_and_explicit_phase_contract
-  /home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/.venv/lib/python3.12/site-packages/torch/jit/_serialization.py:89: DeprecationWarning: `torch.jit.save` is deprecated. Please switch to `torch.export`.
-    warnings.warn(
-
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-23 passed, 12 warnings in 15.09s
+16 passed, 5 warnings in 37.11s

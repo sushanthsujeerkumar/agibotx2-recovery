@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-cd "$(dirname "${BASH_SOURCE[0]}")"
-exec .venv/bin/python -m x2_recovery.watch --directory artifacts/experiments/balance_prior_v2 --minutes 1 --physics-profile guarded_v2 --reset-mode balance --assess-stance "$@"

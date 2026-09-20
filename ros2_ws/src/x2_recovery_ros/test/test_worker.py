@@ -102,24 +102,6 @@ def test_stalled_simulation_clock_fails():
     assert 'time did not advance' in messages[-1][1]['reason']
 
 
-@pytest.mark.parametrize('success', [False, True])
-def test_reference_bridge_forwards_audited_result_and_real_frame_contract(success):
-    module = ModuleType('x2_recovery.reference_runtime')
-
-    def reference(config, publish_frame):
-        assert config['vendor_assets'] == '/test/assets'
-        publish_frame(frame())
-        return {'success': success, 'reason': 'explicit test-double audit result'}
-
-    module.run_reference_episode = reference
-    connection = RecordingConnection()
-    with patch.dict(sys.modules, {'x2_recovery.reference_runtime': module}):
-        run_episode({'controller': 'reference_residual', 'vendor_assets': '/test/assets'}, connection)
-    assert connection.closed
-    assert connection.messages[0] == ('frame', checked_frame(frame()))
-    assert connection.messages[-1][1]['success'] is success
-
-
 def test_full_recovery_audits_after_early_success():
     frames = [frame(success=True, clean_stance_success=True),
               frame(sim_time=15., success=True, clean_stance_success=False)]

@@ -30,12 +30,12 @@ The PPO correction is bounded to ±0.01 in normalized action units and operates 
 
 ## Deployment checks
 
-The submitted actor passed the fresh ROS build and launch checks: immediate acceptance, busy rejection, changing joint telemetry, successful full recovery, wall timeout and simulated-duration timeout. The ROS package has 30 passing tests; the Python simulation/policy suite has 23 passing tests. The video is a new simulated run of seed 30001 using the same actor and physics profile. [ROS commands and logs](docs/ros_validation.md)
+The submitted actor passed the fresh ROS build and launch checks: immediate acceptance, busy rejection, changing joint telemetry, successful full recovery, wall timeout and simulated-duration timeout. The ROS package has 28 passing tests; the Python simulation/policy suite has 16 passing tests. The video is a new simulated run of seed 30001 using the same actor and physics profile. [ROS commands and logs](docs/ros_validation.md)
 
 ## Limitations and next experiment
 
 All reported episodes use a narrow perturbation of one supine pose on a fixed flat floor. They do not establish reliability for side/prone falls, large joint perturbations, pushes, friction changes or real hardware. The phase prior provides most of the movement, while the small feedback bound limits how much PPO can recover from timing errors. The two-second endpoint hold is the task's stability check; longer-term standing has not been validated here.
 
-Early direct PPO attempts failed through motion after standing, crossed-foot bracing and state-limit violations. Their original results and checkpoints remain in the repository. The final result applies only to `artifacts/submission/final_recovery/actor.pt` under the documented `guarded_v2` contract.
+Early direct PPO attempts failed through motion after standing, crossed-foot bracing and state-limit violations. Their original results and checkpoints remain in Git history; [development history](docs/development.md) explains how to inspect them. The final result applies only to `artifacts/submission/final_recovery/actor.pt` under the documented `guarded_v2` contract.
 
 The next experiment should compare the frozen prior and final PPO actor on identical disturbed starts, then increase reset diversity gradually. That would measure whether learned feedback adds useful robustness rather than relying on reward alone.

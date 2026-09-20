@@ -31,7 +31,7 @@ ros2 launch x2_recovery_ros recovery.launch.py controller:=full_recovery \
   realtime:=true max_sim_duration_s:=15.0 timeout_s:=60.0
 ```
 
-`./RUN_RECOVERY.sh` performs those steps. The generic launch retains historical controller choices; use the explicit `full_recovery` mode and `guarded_v2` profile for this submission.
+`./RUN_RECOVERY.sh` performs those steps. The generic launch also supports a scripted baseline and plain 106-input actors; use the explicit `full_recovery` mode and `guarded_v2` profile for this submission.
 
 ## Recorded checks
 
@@ -41,12 +41,12 @@ The complete validation script is `scripts/validate_final_ros.sh`. It creates ne
 scripts/validate_final_ros.sh
 ```
 
-The submission run passed with **30 ROS package tests, zero failures or errors**. Its evidence is in [`artifacts/submission/final_recovery/ros/`](../artifacts/submission/final_recovery/ros/).
+The submission run passed with **28 ROS package tests, zero failures or errors**. Its evidence is in [`artifacts/submission/final_recovery/ros/`](../artifacts/submission/final_recovery/ros/).
 
 | Check | Recorded outcome |
 |---|---|
 | Fresh colcon build/test | Passed; `build.log`, `test_result.log` |
-| Service acceptance | `success=True`, response about 0.00087 s; `success.json` |
+| Service acceptance | `success=True`, response about 0.00258 s; `success.json` |
 | Immediate second request | `success=False`, busy; `success.json` and `cli_busy.log` |
 | Full submitted-policy recovery | `RUNNING` then `SUCCEEDED`; `success.json` |
 | Joint telemetry | 31 names, changing positions, increasing simulation timestamps; `success.json`, `cli_joints.log` |

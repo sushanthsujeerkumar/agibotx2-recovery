@@ -1,8 +1,8 @@
-[WARN] [1789913855.176176052] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISCOVERY_RANGE and ROS_STATIC_PEERS instead.
-[WARN] [1789913855.176202705] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored.
+[WARN] [1789915602.688248066] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISCOVERY_RANGE and ROS_STATIC_PEERS instead.
+[WARN] [1789915602.688275045] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored.
 {
   "expected_final_status": "FAILED",
-  "acceptance_seconds": 0.0006210860010469332,
+  "acceptance_seconds": 0.0006904760011821054,
   "first_response": {
     "success": true,
     "message": "Accepted: recovery execution is queued"
@@ -15,7 +15,7 @@
     "RUNNING",
     "FAILED"
   ],
-  "elapsed_seconds": 5.019962177000707,
+  "elapsed_seconds": 5.003814801995759,
   "joint_frame_count": 149,
   "joint_names": [
     "left_hip_pitch_joint",

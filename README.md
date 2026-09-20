@@ -31,7 +31,7 @@ The first dependency installation is several GB because the training environment
 Install ROS 2 Jazzy and colcon separately. For an existing Jazzy installation, the additional build/test tools are available with:
 
 ```bash
-sudo apt install python3-colcon-common-extensions python3-pytest
+sudo apt install python3-colcon-common-extensions python3-pytest ripgrep
 ```
 
 Terminal 1, from the repository root:
@@ -96,6 +96,6 @@ The main remaining limitation is the reset distribution: small perturbations aro
 - `ros2_ws/src/x2_recovery_ros/`: recovery node, telemetry node and one launch file.
 - `artifacts/submission/final_recovery/`: selected actor, resumable checkpoint, reference, raw training log, reward plot, evaluation and ROS evidence. `manifest.json` identifies the deployment files and hashes.
 - `tests/`: export parity, physics, stance, viewer isolation and related regression tests.
-- Older `*_RESULTS.md` files and experiment directories preserve development evidence. They are historical; this README and [RESULTS.md](RESULTS.md) describe the submission.
+- Earlier experiments, failed checkpoints and their results remain in Git history. The working tree contains the submitted method only; see [development history](docs/development.md).
 
 The original robot URDF and meshes retain their Mulan PSL v2 license in `assets/x2/`. The Git history records the actual development stages; earlier unsuccessful checkpoints have not been relabelled as successful results.

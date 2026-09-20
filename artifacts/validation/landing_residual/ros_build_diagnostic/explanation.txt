@@ -1,1 +1,0 @@
-Initial validation exposed the simulator venv before colcon test discovery. Its newer setuptools ignored tests_require and colcon ran zero tests. The corrected validator uses the Ubuntu ROS build/test environment first, then exposes simulator dependencies. Fresh corrected colcon test result: 27 tests, no failures.
