@@ -36,6 +36,12 @@
     "episodes": 5,
     "clean_stance_successes": 0,
     "selection_reason": "Retained5/5 original recovery with allfive seeds still stable at15s in extended audit; actual ROS success validated. Stance fine-tune kept first recovery5/5 but didnot satisfy cleanposture and lost stability again in2/5 at15s.",
-    "limitation": "Inward-twisted edge-supported feet brace against eachother; not a neutral, robust or hardware-ready stance."
+    "limitation": "Inward-twisted edge-supported feet brace against eachother; not a neutral, robust or hardware-ready stance.",
+    "strict_trajectory_limit_passes": 0,
+    "strict_trajectory_limit_episodes": 5,
+    "strict_limit_audit": "artifacts/validation/final_reproduction/physics_step_limit_audit.json",
+    "max_position_violation_rad": 0.14919140053757374,
+    "max_speed_over_rating": 4.203334842632375,
+    "qualification": "Selected for reproducible inspection of a partial result, not a fully validated physical recovery."
   }
 }

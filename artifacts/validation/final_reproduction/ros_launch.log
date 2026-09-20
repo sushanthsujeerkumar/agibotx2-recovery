@@ -1,0 +1,36 @@
+Starting >>> x2_recovery_ros
+Finished <<< x2_recovery_ros [1.72s]
+
+Summary: 1 package finished [1.87s]
+[INFO] [launch]: All log files can be found below /home/sushanth/Documents/Codex/2026-09-19/l/work/final-ros-logs/2026-09-20-03-24-11-885622-sushanth-ISRMOT-220-36813
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [recovery_node-1]: process started with pid [36919]
+[INFO] [telemetry_node-2]: process started with pid [36920]
+[telemetry_node-2] [WARN] [1789871052.281063592] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISCOVERY_RANGE and ROS_STATIC_PEERS instead.
+[telemetry_node-2] [WARN] [1789871052.281074143] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored.
+[recovery_node-1] [WARN] [1789871052.285238726] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISCOVERY_RANGE and ROS_STATIC_PEERS instead.
+[recovery_node-1] [WARN] [1789871052.285247096] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored.
+[recovery_node-1] [INFO] [1789871052.352669192] [x2_recovery]: Ready: /x2/start_recovery; simulator starts after an accepted response
+[telemetry_node-2] [INFO] [1789871052.590979429] [x2_telemetry]: Status: IDLE
+[telemetry_node-2] [INFO] [1789871053.337995463] [x2_telemetry]: status=IDLE; awaiting simulator joint telemetry
+[recovery_node-1] [INFO] [1789871053.658371601] [x2_recovery]: Recovery status: RUNNING
+[telemetry_node-2] [INFO] [1789871053.658596542] [x2_telemetry]: Status: RUNNING
+[telemetry_node-2] [INFO] [1789871054.338412670] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789871055.337998074] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789871056.338001405] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=0.50181 rad; sim_time=0.420 s
+[telemetry_node-2] [INFO] [1789871057.337887140] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.10407 rad; sim_time=1.420 s
+[telemetry_node-2] [INFO] [1789871058.337944617] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.04617 rad; sim_time=2.420 s
+[telemetry_node-2] [INFO] [1789871059.337954352] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=1.20432 rad; sim_time=3.420 s
+[telemetry_node-2] [INFO] [1789871060.338077572] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.06888 rad; sim_time=4.420 s
+[telemetry_node-2] [INFO] [1789871061.337952487] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=1.38543 rad; sim_time=5.420 s
+[telemetry_node-2] [INFO] [1789871062.338116925] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.14604 rad; sim_time=6.420 s
+[telemetry_node-2] [INFO] [1789871063.338046962] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.25010 rad; sim_time=7.420 s
+[telemetry_node-2] [INFO] [1789871064.337856632] [x2_telemetry]: status=RUNNING; left_hip_pitch_joint=-0.24828 rad; sim_time=8.420 s
+[recovery_node-1] [INFO] [1789871064.458486046] [x2_recovery]: Recovery status: SUCCEEDED
+[recovery_node-1] [INFO] [1789871064.458764952] [x2_recovery]: Recovery completed: stable standing success checks passed
+[telemetry_node-2] [INFO] [1789871064.459015118] [x2_telemetry]: Status: SUCCEEDED
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [telemetry_node-2]: sending signal 'SIGINT' to process[telemetry_node-2]
+[INFO] [recovery_node-1]: sending signal 'SIGINT' to process[recovery_node-1]
+[INFO] [recovery_node-1]: process has finished cleanly [pid 36919]
+[INFO] [telemetry_node-2]: process has finished cleanly [pid 36920]

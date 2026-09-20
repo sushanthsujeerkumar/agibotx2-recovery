@@ -350,3 +350,8 @@ budget. GPU numerical variation
 means matching seed/configuration/update budget does not promise identical
 trajectories or elapsed time. Resuming restores the saved reward version so a
 version-2 checkpoint is not silently trained under version-1 rewards.
+
+
+## Final trajectory-limit audit
+
+Command limits and active soft joint constraints did not keep the learned trajectory within the URDF state bounds. A physics-step audit of the selected policy found position excursions up to 0.14919 rad (8.55 degrees) and speed up to 4.20 times the rating, while commanded torque stayed within effort bounds. All five trajectories fail strict position/speed compliance. The prior posture-based 5/5 result is therefore not a claim of fully valid physical recovery. See [RESULTS.md](../RESULTS.md) and [audit](../artifacts/validation/final_reproduction/physics_step_limit_audit.json). The diagnostic code does not alter physics or clamp state.

@@ -1,0 +1,62 @@
+{
+  "note": "Read-only model variants, not changes to submitted model or new training. One-seed diagnostic only.",
+  "results": [
+    {
+      "variant": "original",
+      "seed": 1001,
+      "success": true,
+      "invalid": false,
+      "sim_time": 8.559999999999528,
+      "max_position_violation_rad": 0.11549682443178844,
+      "max_speed_ratio": 3.8902295729825593,
+      "max_speed_joint": "right_wrist_roll_joint",
+      "max_stable_hold": 2.0000000000000013,
+      "final_checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "variant": "tight_stops",
+      "seed": 1001,
+      "success": false,
+      "invalid": false,
+      "sim_time": 15.000000000001679,
+      "max_position_violation_rad": 0.02012817870129291,
+      "max_speed_ratio": 4.099234609396372,
+      "max_speed_joint": "right_wrist_roll_joint",
+      "max_stable_hold": 1.3800000000000008,
+      "final_checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "variant": "smaller_step",
+      "seed": 1001,
+      "success": true,
+      "invalid": false,
+      "sim_time": 6.260000000000425,
+      "max_position_violation_rad": 0.011112109602266718,
+      "max_speed_ratio": 4.060472587650733,
+      "max_speed_joint": "left_wrist_pitch_joint",
+      "max_stable_hold": 2.0000000000000013,
+      "final_checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    }
+  ]
+}

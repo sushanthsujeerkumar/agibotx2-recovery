@@ -5,9 +5,11 @@ through mjlab, PPO, and ROS 2 Jazzy**. Every assessed episode starts from a
 physically settled supine pose. A shared CPU runtime supplies the local viewer,
 deterministic evaluation and ROS-controlled episodes.
 
-**Final local result:** the selected learned policy achieved **5/5 recoveries** under the documented two-second stability check, in **4.28–8.86 seconds**, and completed a real recovery through ROS 2. The posture remains undesirable: the feet turn inward, stand partly on their edges and brace against each other. It achieved **0/5 on the additional clean-stance check**. A separate 45-minute refinement retained 5/5 first recoveries but also scored 0/5 clean stance and lost stability again in 2/5 episodes during the extended 15-second audit. The more consistent 90-minute policy is retained as the default. No neutral-stance or hardware-readiness claim is made.
+**Final local result: a runnable, documented partial-result project.** The retained policy passes **5/5 under the original posture-based recovery check**, but **0/5 under the additional clean-stance check** and **0/5 under a full-trajectory joint position/speed bounds audit**. The feet turn inward, use edge support and brace against each other. The final audit also found joint-position excursions up to **8.55 degrees** and joint speeds up to **4.20 times the URDF rating**, despite bounded position targets and torque commands. The earlier 5/5 count must not be presented as fully validated physical recovery.
 
-Start with [START_HERE.md](START_HERE.md). See [RESULTS.md](RESULTS.md) for experiment comparison and remaining limitations, [requirement evidence](docs/requirements.md) for the assessment checklist, and [selected policy provenance](artifacts/selected_policy.json) for hashes. All three local experiments are preserved. Main training totaled **2 h 39 m 12 s**, excluding setup, compilation, smoke tests and evaluation; no cloud was used.
+The complete environment, PPO experiments, frozen policies, reward plots, five-episode results and ROS 2 integration are included. A fresh-source ROS episode reached `SUCCEEDED` under the original posture criterion; that validates communication and that criterion, not whole-trajectory limit compliance. The more consistent 90-minute policy is retained for reproducible inspection. The 45-minute posture refinement did not resolve clean stance.
+
+Start with [START_HERE.md](START_HERE.md). See [RESULTS.md](RESULTS.md) for the measured limitations and next step, [requirement evidence](docs/requirements.md) for satisfied and unresolved requirements, and [selected policy provenance](artifacts/selected_policy.json) for hashes. Main training totaled **2 h 39 m 12 s**, excluding setup, compilation, smoke tests and evaluation; no cloud was used. This package can be reviewed as an honestly documented partial attempt, not as a fully successful physical controller.
 
 ## Setup
 
@@ -105,7 +107,7 @@ python -m x2_recovery.train --variant stance --initialize-from artifacts/submiss
 45-minute experiment. The stance variant selects reward version 3, initial
 noise 0.10 bounded to [0.03,0.20], fixed learning rate 0.00005, PPO clip 0.1 and
 entropy coefficient 0.0001. Parent network/normalizer weights and provenance
-are retained; the baseline and successful recovery artifacts are preserved.
+are retained; the baseline and posture-pass artifacts are preserved.
 
 The learner runs headlessly. In a second terminal, activate `.venv` and open the
 local simulator to replay newly saved policies:
@@ -425,4 +427,4 @@ ROS: one request accepted, another rejected while busy, **428 actual joint
 frames** and `RUNNING → SUCCEEDED` at **8.56 simulated seconds** for seed 1001.
 Evidence is in
 [the successful ROS integration report](ros2_ws/validation/policy_recovery/integration.json).
-The selected recovery result is 5/5. The completed stance refinement also reached 5/5 first recoveries but 0/5 clean stance; the selected policy is unchanged. Final clean-source and archive reproduction evidence is in artifacts/validation/final_reproduction/.
+The selected posture-based result is 5/5; clean stance and full-trajectory joint-limit compliance are both 0/5. The completed stance refinement also reached 5/5 first recoveries but 0/5 clean stance; the selected policy is unchanged. Final fresh-source reproduction and trajectory-audit evidence is in artifacts/validation/final_reproduction/.

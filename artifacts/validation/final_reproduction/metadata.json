@@ -1,0 +1,29 @@
+{
+  "source_commit": "5d0afda232ef50641daef30a307fe05dfc761686",
+  "source_directory": "/home/sushanth/Documents/Codex/2026-09-19/l/work/release-checkout",
+  "source_method": "git archive from committed source; includes tracked meshes and artifacts",
+  "environment": "Reused existing locked dependency environment through .venv symlink; PYTHONPATH explicitly points at clean source. No second dependency download or clean-machine installation claimed.",
+  "actor_sha256": "4d7dba4dc1f31e01ddeee3f12c7b60b93361a5708d66812585fa8e23dddf08f3",
+  "evaluation_successes": 5,
+  "episodes": 5,
+  "commands": [
+    [
+      ".venv/bin/python",
+      "-c",
+      "import x2_recovery; print(x2_recovery.__file__)"
+    ],
+    [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests"
+    ],
+    [
+      "bash",
+      "EVALUATE.sh",
+      "--output",
+      "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/validation/final_reproduction/evaluation"
+    ]
+  ]
+}

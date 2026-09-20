@@ -1,0 +1,42 @@
+{
+  "actor": "artifacts/submission/local_stability/actor.pt",
+  "sampling": "after each50Hzcontrol step until originalrecovery;10physics steps per controlstep; not a bound on all physics substeps",
+  "results": [
+    {
+      "seed": 1001,
+      "max_sampled_joint_position_violation_rad": 0.11549682443178844,
+      "joint_at_max_violation": "waist_roll_joint",
+      "max_sampled_joint_speed_over_rating": 3.8902295729825593,
+      "max_sampled_commanded_torque_over_rating": 1.0
+    },
+    {
+      "seed": 1002,
+      "max_sampled_joint_position_violation_rad": 0.13643825121300862,
+      "joint_at_max_violation": "right_ankle_roll_joint",
+      "max_sampled_joint_speed_over_rating": 4.152745859892359,
+      "max_sampled_commanded_torque_over_rating": 1.0
+    },
+    {
+      "seed": 1003,
+      "max_sampled_joint_position_violation_rad": 0.13899872629894627,
+      "joint_at_max_violation": "right_ankle_roll_joint",
+      "max_sampled_joint_speed_over_rating": 3.944062185332374,
+      "max_sampled_commanded_torque_over_rating": 1.0
+    },
+    {
+      "seed": 1004,
+      "max_sampled_joint_position_violation_rad": 0.09329379133093507,
+      "joint_at_max_violation": "right_wrist_roll_joint",
+      "max_sampled_joint_speed_over_rating": 3.7220020060453187,
+      "max_sampled_commanded_torque_over_rating": 1.0
+    },
+    {
+      "seed": 1005,
+      "max_sampled_joint_position_violation_rad": 0.14777681303656298,
+      "joint_at_max_violation": "right_ankle_roll_joint",
+      "max_sampled_joint_speed_over_rating": 3.5392962125914993,
+      "max_sampled_commanded_torque_over_rating": 1.0
+    }
+  ],
+  "interpretation": "URDFjoint ranges are active soft MuJoCo constraints, not hard state clamps. PDtargets and commandedtorques are bounded; torque is suppressed when accelerating a joint past its speedrating. Contact impulses and solvercompliance may exceed state position/speed bounds."
+}

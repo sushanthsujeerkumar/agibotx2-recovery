@@ -1,0 +1,75 @@
+{
+  "checkpoint": "artifacts/submission/local_stability/actor.pt",
+  "actor_sha256": "4d7dba4dc1f31e01ddeee3f12c7b60b93361a5708d66812585fa8e23dddf08f3",
+  "sampling": "Every 2ms physics step during the timed episode, excluding the initial settling interval.",
+  "numeric_comparison_tolerance": {
+    "position_rad": 1e-06,
+    "speed_ratio": 1e-06
+  },
+  "interpretation": "Position-target and commanded torque bounds do not guarantee trajectory state bounds. Active soft joint constraints and torque-based speed limiting still permit transient state excursions. This audit is separate from the earlier posture-only recovery pass.",
+  "episodes": 5,
+  "posture_recovery_passes": 5,
+  "within_urdf_state_bounds": 0,
+  "results": [
+    {
+      "seed": 1001,
+      "max_position_violation_rad": 0.11886887677747593,
+      "max_speed_ratio": 3.8902295729825593,
+      "max_commanded_torque_ratio": 1.0,
+      "physics_steps_audited": 4280,
+      "speed_joint": "right_wrist_roll_joint",
+      "position_joint": "waist_roll_joint",
+      "posture_recovery_pass": true,
+      "sim_time": 8.559999999999528,
+      "within_urdf_state_bounds": false
+    },
+    {
+      "seed": 1002,
+      "max_position_violation_rad": 0.13643825121300862,
+      "max_speed_ratio": 4.203334842632375,
+      "max_commanded_torque_ratio": 1.0,
+      "physics_steps_audited": 4430,
+      "speed_joint": "left_wrist_roll_joint",
+      "position_joint": "right_ankle_roll_joint",
+      "posture_recovery_pass": true,
+      "sim_time": 8.859999999999628,
+      "within_urdf_state_bounds": false
+    },
+    {
+      "seed": 1003,
+      "max_position_violation_rad": 0.14381470360148646,
+      "max_speed_ratio": 3.9834994277216773,
+      "max_commanded_torque_ratio": 1.0,
+      "physics_steps_audited": 2140,
+      "speed_joint": "right_wrist_roll_joint",
+      "position_joint": "right_ankle_roll_joint",
+      "posture_recovery_pass": true,
+      "sim_time": 4.279999999999751,
+      "within_urdf_state_bounds": false
+    },
+    {
+      "seed": 1004,
+      "max_position_violation_rad": 0.10049948572374512,
+      "max_speed_ratio": 3.9645522201637595,
+      "max_commanded_torque_ratio": 1.0,
+      "physics_steps_audited": 2360,
+      "speed_joint": "right_wrist_roll_joint",
+      "position_joint": "right_wrist_roll_joint",
+      "posture_recovery_pass": true,
+      "sim_time": 4.719999999999702,
+      "within_urdf_state_bounds": false
+    },
+    {
+      "seed": 1005,
+      "max_position_violation_rad": 0.14919140053757374,
+      "max_speed_ratio": 3.579597850036467,
+      "max_commanded_torque_ratio": 1.0,
+      "physics_steps_audited": 3070,
+      "speed_joint": "right_wrist_pitch_joint",
+      "position_joint": "right_ankle_roll_joint",
+      "posture_recovery_pass": true,
+      "sim_time": 6.139999999999546,
+      "within_urdf_state_bounds": false
+    }
+  ]
+}

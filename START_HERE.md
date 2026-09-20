@@ -1,6 +1,6 @@
 # Run the submitted project
 
-The default policy passed 5/5 defined recovery episodes and the real ROS integration check. Its inward, edge-supported foot stance remains a documented limitation; the additional clean-stance score is 0/5. See [RESULTS.md](RESULTS.md).
+The retained policy passes the original posture-based check in 5/5 episodes, but the additional clean-stance and whole-trajectory joint-limit audits both score 0/5. The simulator, PPO pipeline, ROS integration and evidence are runnable; the controller remains a partial result with unresolved physical-limit and posture problems. See [RESULTS.md](RESULTS.md). Do not describe the earlier 5/5 posture count as fully validated physical recovery.
 
 ## On the development PC
 
@@ -45,7 +45,7 @@ ros2 topic echo /x2/joint_states sensor_msgs/msg/JointState --once
 ros2 topic echo /x2/recovery_status std_msgs/msg/String
 ```
 
-The first request is accepted, and a second request while running is rejected. Joint states come from the simulator. The selected seed 1001 episode was verified to reach`SUCCEEDED`. Ctrl+C stops the topic echo and launch. Both nodes are started by one launch file. [ROS validation](docs/ros_validation.md) records fresh build, success, busy rejection and forced-timeout evidence.
+The first request is accepted, and a second request while running is rejected. Joint states come from the simulator. The selected seed 1001 episode was verified to reach `SUCCEEDED` under the posture criterion; this status does not certify the separately audited joint-limit compliance. Ctrl+C stops the topic echo and launch. Both nodes are started by one launch file. [ROS validation](docs/ros_validation.md) records fresh build, success, busy rejection and forced-timeout evidence.
 
 ## On a fresh Ubuntu 24.04 machine
 
@@ -59,7 +59,7 @@ bash scripts/setup.sh
 
 Setup creates a local Python 3.12 environment from `uv.lock`. Model meshes, source URDF, license, policy and evidence are included; training is not required to run the selected actor. CUDA is needed for the documented training commands; CPU policy evaluation uses MuJoCo and PyTorch. A desktop with OpenGL is required for visible playback.
 
-## Submission contents
+## Package contents
 
 - Selected policy: `artifacts/submission/local_stability/actor.pt` (TorchScript inference) and `checkpoint.pt` (full PPO state).
 - [Selected provenance and hashes](artifacts/selected_policy.json).
