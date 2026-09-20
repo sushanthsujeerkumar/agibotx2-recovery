@@ -20,8 +20,12 @@ python3 scripts/verify_final_artifacts.py
 # Five fresh simulated episodes; writes artifacts/local_evaluation/final_policy_5.json.
 ./EVALUATE.sh
 
-# One visible 15-second recovery, paced in real time.
+# Recover, then keep standing with live physics until the window is closed.
+# Press R in the simulator to restart the recovery with the same seed.
 ./RUN_DEMO.sh
+
+# Original 15-second demo (also use --once when recording --video).
+./RUN_DEMO.sh --once
 ```
 
 The first dependency installation is several GB because the training environment includes PyTorch/CUDA. A desktop display is required for the live viewer. Headless evaluation does not open a window. The submitted video can be viewed without installing the simulator.

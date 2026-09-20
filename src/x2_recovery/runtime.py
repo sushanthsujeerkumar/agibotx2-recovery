@@ -12,7 +12,7 @@ class RecoveryRuntime:
     control_dt = CONTROL_DT
 
     def __init__(self, controller="scripted", checkpoint=None, render=False, seed=0, assess_stance=False,
-                 physics_profile="legacy", reset_mode="supine"):
+                 physics_profile="legacy", reset_mode="supine", key_callback=None):
         if controller not in {"scripted", "policy", "full_recovery"}:
             raise ValueError("controller must be scripted, policy or full_recovery")
         if controller == 'full_recovery' and physics_profile != 'guarded_v2':
@@ -48,7 +48,8 @@ class RecoveryRuntime:
             self._view_model = copy.copy(self.model)
             self._view_data = mujoco.MjData(self._view_model)
             mujoco.mj_copyData(self._view_data, self._view_model, self.data)
-            self.viewer = mujoco_viewer.launch_passive(self._view_model, self._view_data)
+            viewer_options = {"key_callback": key_callback} if key_callback is not None else {}
+            self.viewer = mujoco_viewer.launch_passive(self._view_model, self._view_data, **viewer_options)
             # MuJoCo 3.11's close() requests exit without joining its daemon GUI
             # thread. Keep the render thread created by this launch alive through
             # teardown, before interpreter-level GLFW cleanup can run.
