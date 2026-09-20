@@ -1,0 +1,7 @@
+{
+  "checkpoint_iteration": 2001,
+  "environment_steps": 24588288,
+  "actor_path": "artifacts/runs/local_stability/model_002001_actor.pt",
+  "actor_sha256": "ba58fff0982a13321551f11dae4be1619af1f2607abb725534442df352e0d0ac",
+  "checked_unix": 1789862837.3164866
+}

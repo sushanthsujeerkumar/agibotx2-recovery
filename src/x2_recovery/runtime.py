@@ -10,7 +10,7 @@ from .common import (ModelInfo, CONTROL_DT, HOLD_SECONDS, ground_forces,
 class RecoveryRuntime:
     control_dt = CONTROL_DT
 
-    def __init__(self, controller="scripted", checkpoint=None, render=False, seed=0):
+    def __init__(self, controller="scripted", checkpoint=None, render=False, seed=0, assess_stance=False):
         if controller not in {"scripted", "policy"}:
             raise ValueError("controller must be scripted or policy")
         self.info = ModelInfo()
@@ -21,6 +21,7 @@ class RecoveryRuntime:
         self.model.opt.tolerance = 1e-6
         self.data = mujoco.MjData(self.model)
         self.controller = controller
+        self.assess_stance = assess_stance
         self.display_label = "SCRIPTED BASELINE" if controller == "scripted" else "TRAINED POLICY"
         self.policy = None
         self.viewer = None
@@ -44,6 +45,9 @@ class RecoveryRuntime:
         reset_cpu(self.info, self.data, seed)
         self.previous_action = np.zeros(self.model.nu)
         self.hold_time = 0.
+        self.clean_hold_time = 0.
+        self.max_clean_hold_time = 0.
+        self.stance = {}
         self.max_height = float(self.data.qpos[2])
         self.last_conditions = {}
         return self.snapshot(False, False)
@@ -120,20 +124,34 @@ class RecoveryRuntime:
         self.hold_time = self.hold_time + CONTROL_DT if all(self.last_conditions.values()) else 0.
         self.max_height = max(self.max_height, float(self.data.qpos[2]))
         success = self.hold_time >= HOLD_SECONDS - 1e-8
+        if self.assess_stance:
+            from .stance import stance_metrics
+            self.stance = stance_metrics(self.info, self.data)
+            clean = all(self.last_conditions.values()) and self.stance['posture_ok']
+            self.clean_hold_time = self.clean_hold_time + CONTROL_DT if clean else 0.
+            self.max_clean_hold_time = max(self.max_clean_hold_time, self.clean_hold_time)
         if self.viewer is not None and self.viewer.is_running() and round(self.data.time/CONTROL_DT) % 2 == 0:
+            extra_title = '\nClean stance' if self.assess_stance else ''
+            extra_value = f'\n{self.clean_hold_time:.2f} / {HOLD_SECONDS:.1f} s' if self.assess_stance else ''
+            display_success = self.clean_hold_time >= HOLD_SECONDS - 1e-8 if self.assess_stance else success
             self.viewer.set_texts((mujoco.mjtFontScale.mjFONTSCALE_150,
                                    mujoco.mjtGridPos.mjGRID_TOPLEFT,
-                                   "X2 recovery evaluation\nController\nEpisode time\nPelvis height\nStable standing\nOutcome",
-                                   f"\n{self.display_label}\n{self.data.time:.1f} s\n{self.data.qpos[2]:.3f} m\n{self.hold_time:.2f} / {HOLD_SECONDS:.1f} s\n{'SUCCEEDED' if success else 'RUNNING'}"))
+                                   "X2 recovery evaluation\nController\nEpisode time\nPelvis height\nStable standing\nOutcome" + extra_title,
+                                   f"\n{self.display_label}\n{self.data.time:.1f} s\n{self.data.qpos[2]:.3f} m\n{self.hold_time:.2f} / {HOLD_SECONDS:.1f} s\n{'SUCCEEDED' if display_success else 'RUNNING'}" + extra_value))
             self.viewer.sync()
         return self.snapshot(success, bool(invalid))
 
     def snapshot(self, success, invalid):
-        return {"joint_names": list(self.info.names),
+        result = {"joint_names": list(self.info.names),
                 "joint_positions": self.data.qpos[self.info.qadr].tolist(),
                 "sim_time": float(self.data.time), "success": bool(success), "invalid": bool(invalid),
                 "pelvis_height": float(self.data.qpos[2]), "max_pelvis_height": self.max_height,
                 "standing_hold_seconds": self.hold_time, "checks": dict(self.last_conditions)}
+        if self.assess_stance:
+            result.update(stance=self.stance, clean_stance_hold_seconds=self.clean_hold_time,
+                          max_clean_stance_hold_seconds=self.max_clean_hold_time,
+                          clean_stance_success=self.clean_hold_time >= HOLD_SECONDS - 1e-8)
+        return result
 
     def close(self):
         if self.viewer is not None:

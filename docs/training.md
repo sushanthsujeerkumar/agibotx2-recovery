@@ -74,8 +74,7 @@ python -m x2_recovery.train --variant stability --num-envs 512 --seed 0 --max-it
 
 The same 512-environment, 90-minute configuration is available through
 [`./TRAIN_STABILITY.sh`](../TRAIN_STABILITY.sh), which also sets CPU thread
-limits and a quieter print interval. This is the currently running corrected
-experiment; its final evaluation remains pending. The generic `runs/local`
+limits and a quieter print interval. This stability experiment completed with5/5 original recoveries; its frozen evidence is in artifacts/submission/local_stability. A separate stance refinement is now running. The generic `runs/local`
 examples elsewhere in this document describe independent baseline runs.
 
 `--variant stability` passes `reward_version=2` in the environment constructor
@@ -106,6 +105,60 @@ actual movement, action saturation and the final deterministic success test.
 Compare 128, 256 and 512 environments using fresh output directories. Compare
 steady-state `steps_per_second`, memory consumption and actual behaviour;
 changing batch size does not guarantee faster learning.
+
+## Fresh stance refinement from a learned policy
+
+The frozen checkpoint in
+`artifacts/submission/stable_crossed_stance_009251` passed **5/5 episodes under
+the original two-second stable-recovery criterion**, but its stance has inward-twisted, edge-supported feet with foot-foot self-contact. That criterion does not establish a neutral
+stance or robustness. The frozen checkpoint, its evaluation and this limitation
+remain preserved; refining stance is a separate experiment.
+
+`--initialize-from` starts a **fresh fine-tuning run**. Unlike `--resume`, it
+copies only the learned actor mean network and observation normalizer, plus
+the critic network and its normalizer. It retains the new run's action noise,
+optimizer, learning-rate schedule, counters, environment reset and seeded RNG
+stream. It does not inherit the parent's large iteration count or consume the
+parent's remaining training budget. The two options are mutually exclusive.
+
+The critic is retained because the observation/action contract and recovery
+reward remain largely shared. Its initial values may be biased for the new
+stance reward, so it continues learning; preserving it avoids starting with an
+uninformed value model while preserving a useful recovery policy.
+
+The `stance` variant selects reward version 3 and uses initial Gaussian
+standard deviation 0.10, effective bounds [0.03,0.20], entropy coefficient
+0.0001, **fixed learning rate 0.00005**, and PPO clip 0.1. Fixed learning rate
+prevents an adaptive schedule from quickly increasing it during fine-tuning.
+Other PPO/network settings remain unchanged. The environment defines the new
+stance shaping and training termination; final reports must distinguish the
+original recovery result from the additional clean-stance assessment.
+
+After the preceding local run completes, the bounded 45-minute refinement can
+be started with:
+
+```bash
+python -m x2_recovery.train --variant stance --initialize-from artifacts/submission/stable_crossed_stance_009251/checkpoint.pt --num-envs 512 --seed 1 --max-iterations 100000 --max-seconds 2700 --save-interval 250 --output artifacts/runs/local_stance
+```
+
+The deterministic actor output is unchanged immediately after initialization;
+the new Gaussian noise is initialized independently. Architecture, observation
+group ordering and observation/action dimensions must match the parent or the
+command fails before learning. Training still starts from supine resets; no
+standing-start curriculum or model assistance is introduced by initialization.
+
+Both `config.json` and every checkpoint record the parent path, SHA-256,
+iteration/step count, reward version and the exact state categories copied or
+reset. Resume restores that provenance along with reward version 3:
+
+```bash
+python -m x2_recovery.train --resume artifacts/runs/local_stance/latest.pt --num-envs 512 --max-iterations 100000 --max-seconds 2700 --save-interval 250 --output artifacts/runs/local_stance
+```
+
+The time limit applies to each invocation; a resume is an additional budget,
+not part of the original 45 minutes. Only the full trusted training checkpoint
+can initialize a new learner; a TorchScript inference export lacks the critic,
+configuration and training metadata. The frozen parent's files are not edited.
 
 ## Observe progress without repeatedly using an AI session
 

@@ -10,6 +10,7 @@ import argparse
 import contextlib
 import copy
 import dataclasses
+import hashlib
 import importlib.metadata
 import io
 import json
@@ -30,7 +31,7 @@ from rsl_rl.runners import OnPolicyRunner
 def ppo_config(seed: int = 0, steps_per_env: int = 24, save_interval: int = 50,
                variant: str = "baseline") -> dict:
     """Conservative feed-forward PPO defaults, shared by training and inference."""
-    if variant not in {"baseline", "stability"}:
+    if variant not in {"baseline", "stability", "stance"}:
         raise ValueError(f"Unknown PPO variant: {variant}")
     model = {
         "class_name": "MLPModel",
@@ -77,6 +78,10 @@ def ppo_config(seed: int = 0, steps_per_env: int = 24, save_interval: int = 50,
     if variant == "stability":
         cfg["actor"]["distribution_cfg"].update(init_std=0.4, std_range=(0.05, 0.6))
         cfg["algorithm"]["entropy_coef"] = 1e-4
+    elif variant == "stance":
+        cfg["actor"]["distribution_cfg"].update(init_std=0.10, std_range=(0.03, 0.20))
+        cfg["algorithm"].update(entropy_coef=1e-4, learning_rate=5e-5,
+                                schedule="fixed", clip_param=0.1)
     return cfg
 
 
@@ -166,6 +171,7 @@ class RecoveryRunner(OnPolicyRunner):
         self.elapsed_before_resume = 0.0
         self.last_progress: dict = {}
         self.last_checkpoint: str | None = None
+        self.initialization: dict | None = None
         self._base_log = self.logger.log
         self.logger.log = self._log_progress
 
@@ -224,6 +230,7 @@ class RecoveryRunner(OnPolicyRunner):
             "infos": infos or {},
             "train_cfg": self.cfg,
             "environment_cfg": self.env.cfg,
+            "initialization": self.initialization,
             "observation_shapes": {key: list(value.shape[1:]) for key, value in self.env.get_observations().items()},
             "num_actions": self.env.num_actions,
             "completed_iterations": self.completed_iterations,
@@ -274,6 +281,7 @@ class RecoveryRunner(OnPolicyRunner):
         # Only load trusted project checkpoints: torch pickle is executable.
         checkpoint = torch.load(path, weights_only=False, map_location=map_location or self.device)
         self.alg.load(checkpoint, load_cfg, strict)
+        self.initialization = copy.deepcopy(checkpoint.get("initialization"))
         self.completed_iterations = int(checkpoint.get("completed_iterations", checkpoint["iter"]))
         self.current_learning_iteration = self.completed_iterations
         self.logger.tot_timesteps = int(checkpoint.get("environment_steps", 0))
@@ -294,13 +302,66 @@ class RecoveryRunner(OnPolicyRunner):
         self.last_checkpoint = str(Path(path).resolve())
         return checkpoint.get("infos", {})
 
+    def initialize_from(self, path: str | Path) -> dict:
+        """Initialize a fresh experiment from trusted learned networks only.
+
+        Copy actor mean/normalization and critic/normalization while keeping the
+        new run's Gaussian distribution parameters, optimizer, RNG and counters.
+        Architecture and observation ordering must match; reward version may differ.
+        """
+        if (self.completed_iterations or self.current_learning_iteration
+                or self.logger.tot_timesteps or self.alg.optimizer.state
+                or self.initialization is not None):
+            raise ValueError("initialize_from is only valid on a fresh, untrained runner")
+        source = Path(path).expanduser().resolve(strict=True)
+        # Hash and load the same open file, even if another process replaces a symlink.
+        with source.open("rb") as stream:
+            digest = hashlib.file_digest(stream, "sha256").hexdigest()
+            stream.seek(0)
+            checkpoint = torch.load(stream, weights_only=False, map_location=self.device)
+        parent_cfg = checkpoint["train_cfg"]
+        for model_name in ("actor", "critic"):
+            parent_model = {k: v for k, v in parent_cfg[model_name].items() if k != "distribution_cfg"}
+            current_model = {k: v for k, v in self.cfg[model_name].items() if k != "distribution_cfg"}
+            if parent_model != current_model:
+                raise ValueError(f"Parent {model_name} architecture/normalization differs from the new run")
+        if parent_cfg["obs_groups"] != self.cfg["obs_groups"]:
+            raise ValueError("Parent observation-group order differs from the new run")
+        shapes = {key: list(value.shape[1:]) for key, value in self.env.get_observations().items()}
+        if checkpoint["observation_shapes"] != shapes or checkpoint["num_actions"] != self.env.num_actions:
+            raise ValueError("Parent observation/action dimensions differ from the new environment")
+        actor_state = self.alg.get_policy().state_dict()
+        mean_keys = {key for key in actor_state if not key.startswith("distribution.")}
+        parent_mean = {key: value for key, value in checkpoint["actor_state_dict"].items()
+                       if not key.startswith("distribution.")}
+        if set(parent_mean) != mean_keys:
+            raise ValueError("Parent actor mean/normalizer state is incompatible")
+        actor_state.update(parent_mean)
+        self.alg.load({"actor_state_dict": actor_state,
+                       "critic_state_dict": checkpoint["critic_state_dict"]},
+                      {"actor": True, "critic": True, "optimizer": False,
+                       "iteration": False, "rnd": False}, strict=True)
+        self.initialization = {
+            "parent_checkpoint": str(source), "parent_sha256": digest,
+            "parent_completed_iterations": int(checkpoint.get("completed_iterations", checkpoint["iter"])),
+            "parent_environment_steps": int(checkpoint.get("environment_steps", 0)),
+            "parent_variant": parent_cfg.get("variant", "baseline"),
+            "parent_reward_version": checkpoint.get("environment_cfg", {}).get("reward_version", 1),
+            "loaded": ["actor_mean_network", "actor_observation_normalizer",
+                       "critic_network", "critic_observation_normalizer"],
+            "reset": ["action_distribution", "optimizer", "iteration_and_step_counters",
+                      "environment_state", "random_number_generators"],
+            "new_run_seed": self.cfg["seed"],
+        }
+        return copy.deepcopy(self.initialization)
+
 
 def make_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--num-envs", type=int, default=256)
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--variant", choices=["baseline", "stability"], default="baseline",
+    parser.add_argument("--variant", choices=["baseline", "stability", "stance"], default="baseline",
                         help="Configuration for a new run; resume uses the saved variant.")
     parser.add_argument("--max-iterations", type=int, default=3000, help="Total target, including iterations already trained.")
     parser.add_argument("--steps-per-env", type=int, default=24)
@@ -308,7 +369,10 @@ def make_parser() -> argparse.ArgumentParser:
     parser.add_argument("--print-interval", type=int, default=10)
     parser.add_argument("--max-seconds", type=float, default=0, help="This invocation's wall-clock budget; 0 means unlimited.")
     parser.add_argument("--output", type=Path, default=Path("runs/local"))
-    parser.add_argument("--resume", type=Path)
+    continuation = parser.add_mutually_exclusive_group()
+    continuation.add_argument("--resume", type=Path)
+    continuation.add_argument("--initialize-from", type=Path,
+                              help="Start a new experiment using only parent actor/critic networks and normalizers.")
     parser.add_argument("--env-kwargs", default="{}", help="Additional environment constructor arguments as JSON.")
     parser.add_argument("--torch-threads", type=int, default=4)
     return parser
@@ -327,6 +391,8 @@ def main(argv: list[str] | None = None) -> None:
     output.mkdir(parents=True, exist_ok=True)
     if (output / "progress.jsonl").exists() and args.resume is None:
         raise SystemExit(f"{output} already contains a run; use --resume or choose a new --output directory")
+    if args.initialize_from and args.initialize_from.expanduser().resolve().parent == output:
+        raise SystemExit("Initialization output must differ from the parent checkpoint directory")
     env_kwargs = json.loads(args.env_kwargs)
     if not isinstance(env_kwargs, dict) or any(key in env_kwargs for key in ("num_envs", "device", "seed")):
         raise SystemExit("--env-kwargs must be an object without num_envs, device or seed")
@@ -347,10 +413,11 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit("Resume must preserve checkpoint reward_version; start a separate run for a new experiment")
         env_kwargs["reward_version"] = saved_reward_version
         del checkpoint
-    elif args.variant == "stability":
-        if env_kwargs.get("reward_version", 2) != 2:
-            raise SystemExit("The stability variant requires reward_version=2")
-        env_kwargs["reward_version"] = 2
+    elif args.variant in {"stability", "stance"}:
+        reward_version = {"stability": 2, "stance": 3}[args.variant]
+        if env_kwargs.get("reward_version", reward_version) != reward_version:
+            raise SystemExit(f"The {args.variant} variant requires reward_version={reward_version}")
+        env_kwargs["reward_version"] = reward_version
     from x2_recovery.env import X2RecoveryEnv
 
     _atomic_json(output / "status.json", {
@@ -365,6 +432,8 @@ def main(argv: list[str] | None = None) -> None:
         runner.add_git_repo_to_log(__file__)
         if args.resume:
             runner.load(str(args.resume))
+        elif args.initialize_from:
+            runner.initialize_from(args.initialize_from)
         versions = {}
         for package in ("torch", "mujoco", "mujoco-warp", "warp-lang", "rsl-rl-lib", "mjlab"):
             try:
@@ -373,6 +442,7 @@ def main(argv: list[str] | None = None) -> None:
                 pass
         _atomic_json(output / "config.json", {
             "training": cfg, "environment": env.cfg, "arguments": vars(args),
+            "initialization": runner.initialization,
             "versions": versions, "started_unix": time.time(),
         })
         def request_stop(signum: int, _frame: Any) -> None:

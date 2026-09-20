@@ -1,0 +1,1448 @@
+{
+  "result": {
+    "episode": 2,
+    "seed": 1002,
+    "outcome": "SUCCEEDED",
+    "reason": "stable_standing",
+    "sim_time": 8.859999999999628,
+    "success": true,
+    "invalid": false,
+    "pelvis_height": 0.6834851622873125,
+    "max_pelvis_height": 0.8599898471973793,
+    "standing_hold_seconds": 2.0000000000000013,
+    "checks": {
+      "upright": true,
+      "height": true,
+      "both_feet": true,
+      "no_other_support": true,
+      "low_linear_speed": true,
+      "low_angular_speed": true
+    }
+  },
+  "trajectory": [
+    {
+      "sim_time": 0.020000000000000004,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.12829598151615407,
+      "max_pelvis_height": 0.14439032894512813,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": false,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 0.12000000000000009,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.10471757643943957,
+      "max_pelvis_height": 0.14439032894512813,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 0.22000000000000017,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.15304219681666684,
+      "max_pelvis_height": 0.15304219681666684,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": false,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 0.32000000000000023,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.3166452586756872,
+      "max_pelvis_height": 0.3166452586756872,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 0.4200000000000003,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.3877150735436246,
+      "max_pelvis_height": 0.3877150735436246,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 0.5200000000000004,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.610518759155323,
+      "max_pelvis_height": 0.610518759155323,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 0.6200000000000004,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.784190033609502,
+      "max_pelvis_height": 0.784190033609502,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 0.7200000000000005,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.8580866087035354,
+      "max_pelvis_height": 0.8580866087035354,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 0.8200000000000006,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.8302839573582375,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 0.9200000000000007,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6959634161607463,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.0200000000000007,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6545747875780934,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.1200000000000008,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6437837094386757,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.2200000000000009,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.5619084404773214,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.320000000000001,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.2472245899126274,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.420000000000001,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.1256470295916677,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": false,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.5200000000000011,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.2524655850461829,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.6200000000000012,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.47987839522715076,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.7200000000000013,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.701793395653734,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.8200000000000014,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.823265550788404,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 1.9200000000000015,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.8248737920454203,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.019999999999999,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.7311903317884659,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.119999999999988,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6754186034179536,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.219999999999977,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.685610353472093,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.319999999999966,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6836303060152245,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.419999999999955,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6852139660799151,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.519999999999944,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6856779704459859,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.619999999999933,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6854103375842877,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.719999999999922,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6850703406570673,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.819999999999911,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6846264797071747,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 2.9199999999999,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6838533838683023,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.019999999999889,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6827426123677699,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.119999999999878,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6814561125418178,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.219999999999867,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6816542513245604,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.319999999999856,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6791200844055648,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.419999999999845,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.5836394931144415,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.519999999999834,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.31919969846726304,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.619999999999823,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.10995000407947382,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": false,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.719999999999812,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.23077121121832514,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.819999999999801,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.4077348622891033,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 3.91999999999979,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.625202841622152,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 4.019999999999779,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.7677744838774918,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 4.119999999999768,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.7891008187674277,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 4.219999999999757,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.7105462860196522,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 4.319999999999746,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6695211707772196,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 4.419999999999735,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6764915300260795,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 4.519999999999724,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6804667006548475,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 4.619999999999713,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6817786246801728,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 4.719999999999702,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6824586574338855,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 4.819999999999691,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6823815759985028,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 4.91999999999968,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6815662541113009,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.019999999999669,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6795945441621138,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.119999999999658,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.673466521919096,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.219999999999647,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6619472309437259,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.319999999999636,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.643645051850157,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.419999999999625,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6048465798301883,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.519999999999614,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.4566051793138784,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.619999999999603,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.1508019493727585,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.719999999999592,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.14895138599393354,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": false,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.819999999999581,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.2923943012970117,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 5.91999999999957,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.5405169028367536,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": false,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 6.019999999999559,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.7128909671522553,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 6.119999999999548,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.7845441731014694,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 6.219999999999537,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.7474292327882596,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 6.319999999999526,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6749472004206215,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 6.419999999999515,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6817215000974558,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 6.519999999999504,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6834512926133856,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 6.619999999999493,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6838660979139293,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 6.719999999999482,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6838344830257971,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.1,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 6.819999999999471,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6837105239396053,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": false
+      }
+    },
+    {
+      "sim_time": 6.91999999999946,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6835531943868871,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.06,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.019999999999449,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6835736564202101,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.16,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.119999999999438,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6836622421277709,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.25999999999999995,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.219999999999427,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.683721092531005,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.36000000000000004,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.319999999999416,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6837159045173637,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.46000000000000013,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.419999999999405,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6836554110208444,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.5600000000000002,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.519999999999394,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6836635800436404,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.6600000000000003,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.619999999999383,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.683739557862001,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.7600000000000003,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.719999999999372,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.683801448476637,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.8600000000000004,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.819999999999361,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6838382343728902,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 0.9600000000000005,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 7.91999999999935,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6838346112132737,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.0600000000000005,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 8.019999999999348,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6837803465129505,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.1600000000000006,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 8.119999999999381,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6836710069073964,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.2600000000000007,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 8.219999999999414,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6836107995322503,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.3600000000000008,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 8.319999999999448,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6835671263470426,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.4600000000000009,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 8.419999999999481,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6835235151702871,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.560000000000001,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 8.519999999999515,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6835006330972806,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.660000000000001,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 8.619999999999548,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6834898353735162,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.7600000000000011,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 8.719999999999581,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6834857862047847,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.8600000000000012,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    },
+    {
+      "sim_time": 8.819999999999615,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.6834850329643222,
+      "max_pelvis_height": 0.8599898471973793,
+      "standing_hold_seconds": 1.9600000000000013,
+      "checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      }
+    }
+  ]
+}

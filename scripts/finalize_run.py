@@ -15,6 +15,7 @@ def main():
     p.add_argument("--run-dir", default="artifacts/runs/local")
     p.add_argument("--output", default="artifacts/submission/local_initial")
     p.add_argument("--video", action="store_true")
+    p.add_argument("--assess-stance", action="store_true")
     a = p.parse_args()
     root = Path(__file__).resolve().parents[1]
     run = (root/a.run_dir).resolve()
@@ -52,6 +53,7 @@ def main():
                  "--checkpoint",str(dest/"actor.pt"),"--episodes","5","--seed","1001",
                  "--output",str(dest/"evaluation")]
         if a.video: command.append("--video")
+        if a.assess_stance: command.append("--assess-stance")
         with (dest/"evaluation.log").open('w') as log:
             subprocess.run(command,cwd=root,stdout=log,stderr=subprocess.STDOUT,check=True)
         subprocess.run([sys.executable,"-m","x2_recovery.plot",str(dest),"--output",str(dest/"training_curve.png")],cwd=root,check=True)
@@ -62,6 +64,8 @@ def main():
                   "checkpoint_sha256":hashlib.sha256((dest/"checkpoint.pt").read_bytes()).hexdigest(),
                   "successes":summary["successes"],"episodes":summary["episodes"],
                   "controller":"learned_policy","evaluation_command":command}
+        if a.assess_stance:
+            manifest['clean_stance_successes'] = summary['clean_stance_successes']
         (dest/"manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
         status("COMPLETED",**manifest)
         print(json.dumps(manifest),flush=True)

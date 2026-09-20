@@ -10,6 +10,7 @@ from mjlab.sim import Simulation, SimulationCfg, MujocoCfg
 from .common import (ModelInfo, CONTROL_DT, EPISODE_SECONDS, HOLD_SECONDS,
                      SUCCESS_TILT, SUCCESS_LINEAR_SPEED, SUCCESS_ANGULAR_SPEED,
                      CONTACT_FORCE, reset_cpu)
+from .stance import MIN_WIDTH, MAX_WIDTH, MAX_HEADING, MAX_HIP_YAW, MAX_SOLE_TILT
 
 
 class X2RecoveryEnv:
@@ -21,8 +22,8 @@ class X2RecoveryEnv:
         self.num_obs = self.num_actions * 3 + 13
         self.num_privileged_obs = self.num_obs
         self.max_episode_length = round(EPISODE_SECONDS / CONTROL_DT)
-        if reward_version not in (1, 2):
-            raise ValueError("reward_version must be 1 (baseline) or 2 (stability correction)")
+        if reward_version not in (1, 2, 3):
+            raise ValueError("reward_version must be 1 (baseline), 2 (stability) or 3 (stance)")
         self.reward_version = reward_version
         self.cfg = {"physics_dt": self.info.model.opt.timestep, "control_dt": CONTROL_DT,
                     "episode_seconds": EPISODE_SECONDS, "hold_seconds": HOLD_SECONDS,
@@ -44,6 +45,8 @@ class X2RecoveryEnv:
         self.qvel = wp.to_torch(self.sim.wp_data.qvel)
         self.ctrl = wp.to_torch(self.sim.wp_data.ctrl)
         self.xmat = wp.to_torch(self.sim.wp_data.xmat)
+        self.geom_xpos = wp.to_torch(self.sim.wp_data.geom_xpos)
+        self.geom_xmat = wp.to_torch(self.sim.wp_data.geom_xmat)
         self.sensors = wp.to_torch(self.sim.wp_data.sensordata)
         self.qadr = torch.as_tensor(self.info.qadr, device=self.device, dtype=torch.long)
         self.vadr = torch.as_tensor(self.info.vadr, device=self.device, dtype=torch.long)
@@ -54,8 +57,23 @@ class X2RecoveryEnv:
         self.foot_sensor = torch.as_tensor([m.sensor_adr[i] for i in meta["foot_sensor_indices"]], device=self.device)
         self.other_sensor = torch.as_tensor([m.sensor_adr[i] for i in meta["nonfoot_sensor_indices"]], device=self.device)
         self.pelvis_id = m.body("pelvis").id
+        self.foot_geoms = [m.geom(f'{side}_ankle_roll_link_collision_0').id for side in ('left', 'right')]
+        self.hip_yaw_qadr = [int(self.info.qadr[self.info.names.index(f'{side}_hip_yaw_joint')]) for side in ('left', 'right')]
+        reference = mujoco.MjData(m)
+        reference.qpos[:] = self.info.standing
+        mujoco.mj_forward(m, reference)
+        self.nominal_foot_width = float((reference.geom_xpos[self.foot_geoms[0]] - reference.geom_xpos[self.foot_geoms[1]]) @ reference.xmat[self.pelvis_id].reshape(3, 3)[:, 1])
+        if reward_version == 3:
+            self.cfg['stance'] = {'min_width_m': MIN_WIDTH, 'max_width_m': MAX_WIDTH,
+                                 'max_heading_rad': MAX_HEADING, 'max_hip_yaw_rad': MAX_HIP_YAW,
+                                 'max_sole_tilt_rad': MAX_SOLE_TILT,
+                                 'nominal_foot_width_m': self.nominal_foot_width,
+                                 'termination': 'original recovery plus clean stance held for 2s',
+                                 'foot_bracing': 'geometry proxy in training; exact force audit in CPU evaluation'}
         self.episode_length_buf = torch.zeros(num_envs, dtype=torch.long, device=self.device)
         self.hold_buf = torch.zeros(num_envs, dtype=torch.long, device=self.device)
+        self.clean_hold_buf = torch.zeros_like(self.hold_buf)
+        self.recovered_buf = torch.zeros(num_envs, dtype=torch.bool, device=self.device)
         self.previous_action = torch.zeros((num_envs, self.num_actions), device=self.device)
         self.episode_reward = torch.zeros(num_envs, device=self.device)
         self.previous_height = torch.zeros(num_envs, device=self.device)
@@ -84,6 +102,8 @@ class X2RecoveryEnv:
         self.previous_action[ids] = 0
         self.episode_length_buf[ids] = 0
         self.hold_buf[ids] = 0
+        self.clean_hold_buf[ids] = 0
+        self.recovered_buf[ids] = False
         self.episode_reward[ids] = 0
         self.previous_height[ids] = self.qpos[ids, 2]
         self.max_height[ids] = self.qpos[ids, 2]
@@ -126,7 +146,26 @@ class X2RecoveryEnv:
         standing = ((height >= self.info.height_threshold) & (up >= np.cos(SUCCESS_TILT)) &
                     feet & other_clear & (linear < SUCCESS_LINEAR_SPEED) & (angular < SUCCESS_ANGULAR_SPEED))
         self.hold_buf = torch.where(standing, self.hold_buf+1, 0)
-        success = self.hold_buf >= round(HOLD_SECONDS/CONTROL_DT)
+        original_success = self.hold_buf >= round(HOLD_SECONDS/CONTROL_DT)
+        self.recovered_buf |= original_success
+        success = original_success
+        if self.reward_version == 3:
+            pelvis_rotation = self.xmat[:, self.pelvis_id].reshape(-1, 3, 3)
+            foot_delta = self.geom_xpos[:, self.foot_geoms[0]] - self.geom_xpos[:, self.foot_geoms[1]]
+            pelvis_forward = torch.nn.functional.normalize(pelvis_rotation[:, :2, 0], dim=-1, eps=1e-8)
+            pelvis_left = torch.stack([-pelvis_forward[:, 1], pelvis_forward[:, 0]], dim=-1)
+            width = (foot_delta[:, :2] * pelvis_left).sum(-1)
+            foot_rotation = self.geom_xmat[:, self.foot_geoms].reshape(-1, 2, 3, 3)
+            foot_forward = foot_rotation[:, :, :2, 0]
+            foot_forward = torch.nn.functional.normalize(foot_forward, dim=-1, eps=1e-8)
+            heading_cos = (foot_forward * pelvis_forward[:, None]).sum(-1).clamp(-1, 1)
+            hip_yaw = self.qpos[:, self.hip_yaw_qadr]
+            posture_ok = ((width >= MIN_WIDTH) & (width <= MAX_WIDTH) &
+                          (heading_cos >= np.cos(MAX_HEADING)).all(-1) &
+                          (foot_rotation[:, :, 2, 2] >= np.cos(MAX_SOLE_TILT)).all(-1) &
+                          (hip_yaw.abs() <= MAX_HIP_YAW).all(-1))
+            self.clean_hold_buf = torch.where(standing & posture_ok, self.clean_hold_buf+1, 0)
+            success = self.clean_hold_buf >= round(HOLD_SECONDS/CONTROL_DT)
         upright = ((up+1.)*.5).clamp(0, 1)
         h = (height/self.info.standing[2]).clamp(0, 1.1)
         progress = (height-self.previous_height).clamp(-.1, .1)/CONTROL_DT
@@ -137,13 +176,22 @@ class X2RecoveryEnv:
                         (self.qpos[:,self.qadr]-self.upper+.03).clamp_min(0))**2).mean(dim=-1)
         reward = (2.*h*upright + upright + .5*progress + 1.*feet.float()*h*upright +
                   4.*standing.float() - .03*effort - .03*action_change - .1*speed_excess - joint_limit)*CONTROL_DT
-        if self.reward_version == 2:
+        if self.reward_version >= 2:
             # The first run stood up but kept hopping/travelling. Give a smooth
             # gradient toward rest before the strict binary success threshold.
             support_gate = h * upright * feet.float() * other_clear.float()
             stability = torch.exp(-1.5*linear.square() - .3*angular.square())
             posture_error = ((self.qpos[:,self.qadr]-self.nominal)**2).mean(dim=-1)
             reward += (4.*support_gate*stability - .15*h*upright*posture_error)*CONTROL_DT
+        if self.reward_version == 3:
+            # Only shape posture near upright standing; leave the supine roll free.
+            phase = ((h-.55)/.35).clamp(0, 1) * ((up-.5)/.5).clamp(0, 1)
+            width_error = (width-self.nominal_foot_width)/.18
+            heading_error = (1.-heading_cos).mean(-1)
+            sole_error = (1.-foot_rotation[:, :, 2, 2]).mean(-1)
+            quality = torch.exp(-width_error.square() - 2.*heading_error - 2.*sole_error)
+            narrow_or_crossed = ((MIN_WIDTH-width)/.18).clamp(0, 2)
+            reward += phase*(6.*quality - 2.*narrow_or_crossed - heading_error - sole_error - .5*hip_yaw.square().mean(-1))*CONTROL_DT
         reward += 10.*success.float()
         invalid = (~torch.isfinite(self.qpos).all(dim=-1) | ~torch.isfinite(self.qvel).all(dim=-1) |
                    (self.qvel.abs().amax(dim=-1)>150) | (height<-.05))
@@ -164,6 +212,12 @@ class X2RecoveryEnv:
                               "recovery/episode_seconds": self.episode_length_buf[ids]*CONTROL_DT,
                               "recovery/terminal_linear_speed": linear[ids],
                               "recovery/terminal_angular_speed": angular[ids]}
+            if self.reward_version == 3:
+                extras['log'].update({'recovery/original_recovery_rate': self.recovered_buf[ids].float(),
+                                      'stance/clean_success_rate': success[ids].float(),
+                                      'stance/terminal_signed_width': width[ids],
+                                      'stance/terminal_sole_error': sole_error[ids],
+                                      'stance/terminal_heading_error': heading_error[ids]})
             self.reset(ids)
         return self.get_observations(), reward, done.long(), extras
 

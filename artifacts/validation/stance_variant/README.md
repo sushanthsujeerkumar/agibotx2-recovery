@@ -1,0 +1,3 @@
+# Stance variant verification
+
+Five geometry/physics tests pass, including neutral stance invariance under world heading and rejection of inward hip yaw. Real GPU smoke completed40updates/122880transitions in128environments with an actual episode timeout/reset, reward version3 and fixed5e-5learning rate. It resumed after five updates and preserved parent provenance. A fixed model_000040_actor.pt CPU rollout checks original recovery and separate clean-stance diagnostics. The initialization check uses the actual frozen successful parent and verifies exact initial actor means/export, fresh noise/optimizer/counters/RNG, PPO updates and resume metadata. These are pipeline checks, not a completed clean-stance learning result.

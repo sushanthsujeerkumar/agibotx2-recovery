@@ -11,10 +11,11 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--directory", default="artifacts/runs/local")
     p.add_argument("--minutes", type=float, default=240)
+    p.add_argument("--assess-stance", action="store_true")
     args = p.parse_args()
     directory = Path(args.directory)
     actor = None
-    runtime = RecoveryRuntime(controller="scripted", render=True)
+    runtime = RecoveryRuntime(controller="scripted", render=True, assess_stance=args.assess_stance)
     end = time.monotonic() + args.minutes*60
     episode = 0
     print("VIEWER: scripted baseline until a trained checkpoint is available", flush=True)
@@ -41,7 +42,8 @@ def main():
             for _ in range(round(EPISODE_SECONDS/CONTROL_DT)):
                 start = time.monotonic()
                 state = runtime.step()
-                if not runtime.viewer.is_running() or state["success"] or state["invalid"]:
+                passed = state['clean_stance_success'] if args.assess_stance else state['success']
+                if not runtime.viewer.is_running() or passed or state["invalid"]:
                     break
                 time.sleep(max(0., CONTROL_DT-(time.monotonic()-start)))
             print(f"VIEWER episode {episode}: controller={runtime.controller} success={state['success']} max_height={state['max_pelvis_height']:.3f}", flush=True)

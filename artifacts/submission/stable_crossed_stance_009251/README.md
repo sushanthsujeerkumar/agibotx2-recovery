@@ -1,4 +1,6 @@
-# Preserved stable recovery with crossed stance
+# Preserved stable recovery with inward-twisted foot bracing
+
+Later geometric audit: ankle and knee origins retain left/right order. The negative sole-centre ordering comes from inward rotation and tilt; it does not prove the leg chains cross. See [geometry audit](../../validation/stance_geometry/README.md) for measured sole tilts and substantial mutual foot force. The historical directory name is retained for checkpoint provenance.
 
 Checkpoint9251 passed five fixed-seed episodes (1001–1005) under the original documented success criteria. Both feet support the floor, no other body touches the floor, height/upright/speed conditions hold continuously for two seconds. Time to pass:5.46,4.66,6.00,4.48,6.30 seconds.
 

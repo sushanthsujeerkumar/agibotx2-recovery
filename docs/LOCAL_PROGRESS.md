@@ -3,53 +3,46 @@
 Project root: /home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery
 Private GitHub: https://github.com/sushanthsujeerkumar/hrs-x2-recovery
 
-User authorized full local build, visible simulator and economical timed monitoring.
-Cloud is NOT authorized to start in this phase; report local outcome and next plan first.
+User authorized full local build, visible simulator and economical timed monitoring. User subsequently approved posture refinement after the second screencast. Cloud is not authorized: report local outcome/next plan first.
 
-## Active experiment / intervention
+## ACTIVE: posture refinement
 
-The initial local run was stopped gracefully after 1450.8s (~24.2min), iteration 2803, 34,443,264 steps because learned Gaussian action std grew to 11.2 and nearly all raw deterministic outputs saturated the action clamp. Frozen checkpoint 2501 reached feet/upright/height but kept moving. Final initial policy evaluation is COMPLETE: 0/5 successes, all timeouts, no invalid physics. Evidence: artifacts/submission/local_initial (checkpoint, actor, config, progress, curve, five videos + JSON, hash manifest). This is partial recovery, not stable standing.
+- Run: artifacts/runs/local_stance, ./TRAIN_STANCE.sh,512env,seed1,max2700s(45min). PID32397; verify process.json and actual command before signaling.
+- New reward version3 and variant stance. Initialized learned actor/critic and normalizers from frozen successful checkpoint9251; fresh optimizer/noise/counters/RNG. Parent provenance hash in config/checkpoint. This is fine-tuning, not a scratch policy.
+- Added standing-phase signed foot-width/forward-heading/sole-flatness/hipyaw reward. No standing-start curriculum or model changes. Observations/actions unchanged. Training now requires clean stance to terminate; logs original recovery separately. CPU evaluation keeps original criterion and reports an additional clean-stance metric, continuing until clean pass or15s.
+- Bounded std0.03–0.20,initial0.10,fixedLR5e-5,clip0.1. CPU parent/export/config tests passed;40update realGPU smoke/resume and episode reset passed. Five physics/stance tests pass. Evidence artifacts/validation/stance_variant.
+- Native viewer PID32580 watches local_stance with --assess-stance; overlay shows original and clean holds. Logs/process metadata parent work/viewer-stance.*.
+- Automatic finalizer PID32581 sleeps60s without AI; at training end freezes artifacts/submission/local_stance and runs five episodes with --assess-stance +videos and rewardplot. Check its finalization.json before duplicating work. Parent work/finalizer-stance.*.
+- Heartbeat check-x2-local-training updated to local_stance every15min. No further method revision or budget extension without user direction. Initial24.2min+stability90min+stance45min=about159min of main local training, under3h cap.
 
-The ONE targeted correction is now RUNNING: fresh PPO variant stability with bounded std .05–.6, initial .4, entropy 1e-4; reward version 2 adds gated dense base-velocity stabilization and a mild upright posture penalty. We did not warm-start the saturated baseline outputs.
+## Preserved results
 
-- Active directory: artifacts/runs/local_stability. Read its status.json and process.json (PID 23009; verify identity, PID can be reused).
-- Command: ./TRAIN_STABILITY.sh. 512 environments, seed 0, maximum 5400 seconds (90 minutes), checkpoint every 250 iterations.
-- GPU smoke passed: 128 environments, five PPO updates, exported actor CPU rollout; independent runner checks cover updates/export and standard-deviation bounds.
-- Native viewer PID 23146 watches local_stability; parent work/viewer-stability.log and process JSON.
-- Lightweight finalizer PID 23147 sleeps 60 seconds between status checks without AI usage. It will save artifacts/submission/local_stability; inspect finalization.json before duplicating work. Parent work/finalizer-stability.log and process JSON.
-- Heartbeat check-x2-local-training updated to check this run every 15 minutes. No further method revisions without user direction; total local training <=3 hours. Initial + planned revised run is about 114 minutes.
-- Initial revised throughput ~22k environment steps/s; std ~0.41. These are health measures, not recovery evidence.
+1. artifacts/submission/local_initial: baseline stopped after1450.8s,2803updates,34443264steps,0/5. It rose but kept hopping/travelling; excessive Gaussian noise11.2 and saturated actions prompted stability correction.
+2. artifacts/submission/local_stability: stability run COMPLETE after5400.24s,10455updates,128471040steps,5/5 original stable recoveries. Automated checkpoint/config/progress/curve/videos/manifest preserved. Additional audit artifacts/evaluation/stability_final_stance_audit gives0/5 clean stance. Allfinalstancechecks fail despite genuine stable floor support.
+3. artifacts/submission/stable_crossed_stance_009251: earlier frozen9251 candidate,113676288steps,4752s,5/5 original recovery in4.48–6.30s. Parent for stancefine-tuning. Preserve even if later policy regresses. Historical folder name says crossed but geometric audit clarifies below.
 
-## Newly verified recovery and user-reported crossed legs
+## Posture diagnosis
 
-User's second screencast shows checkpoint9251. CPU five-seed evaluation now PASSES5/5 under the original standing criteria:4.48–6.30s to completion. Preserved model+actor+config+progress+videos+evaluation+stance audit at artifacts/submission/stable_crossed_stance_009251. IMPORTANT: feet remain crossed and touching each other; do not call this a clean neutral stance. An extended15s audit shows actual stable floor support and low base speed, but signed foot separation around -3.2 to -4.5cm versus nominal +27.4cm. Self-collision is enabled and foot-foot contacts present. Current success and reward lack explicit stance width/foot heading. Preserve this candidate even if final90min actor regresses. Keep existing run unchanged through its stop. Proposed further refinement is stance-specific shaping and collision verification; no new training revision has started.
+User videos showed inward/crossed-looking legs. Quantitative audit confirms inward-turned, staggered, edge-supported FEET that brace against each other; ankle/knee left/right ordering remains correct, so do not overstate crossed LEGS. Foot-contact-centre signedwidth around-5cm vsnominal+27.43cm. Footheadings~-71/+59deg, sole tilts26/58deg, foot-foot normal force~196N. All31jointaxes/ranges match URDF, footcollisionenabled. No missingcollisionfilter or reversedaxis found. See artifacts/validation/stance_geometry/{README.md,geometry.json}.
 
-## Initial experiment (preserved)
-
-- Original PPO: artifacts/runs/local (512 environments, seed 0). Gracefully stopped at 24.2 minutes after diagnosing behavior; full original config and evidence preserved.
-- Trained throughput ~22–24k steps/s including PPO; zero invalid episode rate. GPU memory ~1.65GB with visible CPU viewer.
-- Finalizer completed artifacts/submission/local_initial: 0/5 stable recoveries. All ended upright at standing height, but all failed linear/angular speed thresholds; both feet supported in 3/5 final frames. Do not label this successful recovery.
+Clean stance is separately defined: original stable support plus horizontal pelvis-frame signedfootwidth0.16–0.36m, bothfootheadingerrors<=25deg, |hipyaw|<=.45rad, soles<=20degtilt, footbracing<=2N, held2s. GPUtraining uses geometryproxy for bracing; CPU checks exactfoot-footforce. Original recovery criteria remain unchanged. This extra quality criterion was added after the user's feedback, not retroactively substituted for official recovery results.
 
 ## Completed correctness evidence
 
-- Official URDF-pinned X2 mass/inertias, torque limits, simplified contact shapes, 31 actuators, 1s settled supine resets.
-- 3 physics contract tests pass.
-- CPU/GPU parity: initial obs error 5.96e-8; max qpos error after0.4s 7.78e-6. artifacts/backend_parity.json.
-- Short batched benchmark: 128=15183,256=25266,512=38842 control steps/s (excludes PPO). artifacts/benchmark.json.
-- Real PPO smoke: 512env,5iterations,61440steps; saves/reloads/exports CPU actor.
-- Independent runner test confirms optimizer+normalizer+RNG restoration and iteration accounting (work/training-runner-check.log).
-- ROS19 tests plus actual headless runtime: fresh colcon build, both nodes,0.85ms acceptance,busy rejection,516frames/31joints,FAILED wall timeout. docs/ros_validation.md and ros2_ws/validation/20260919T231348Z-15524.
-- Corrected scripted baseline achieves side-roll motion but no complete recovery. Five-episode video evaluation output artifacts/evaluation/scripted_baseline.
+- Official pinned X2 URDF,41.966521kg,31actuators, torque/velocitycontrol, primitivecontacts, floatingbase, settledsupine resets.
+- Five physics/stancegeometrytests pass. InitialGPUCPUobs parity5.96e-8,maxqposdifference7.78e-6 at0.4s.
+- Benchmark512env~38842 controlsteps/s excludingPPO; fullPPO~20–24ksteps/s. Localcompute is sufficient for these experiments.
+- ROS19tests passed previously; freshcolconbuild+realserviceaccept/busyreject+31jointtelemetry+wall-timeoutpassed.
+- Final stable policy now passed actual ROS SUCCEEDED integration: ros2_ws/validation/policy_recovery. Acceptance0.533ms,428frames,8.56s sim/10.837s wall,seed1001,clean shutdown. ActorSHA4d7dba4dc1f31e01ddeee3f12c7b60b93361a5708d66812585fa8e23dddf08f3.
+- Fresh sourcecheckout smoke passed earlier using existing lockedvenv, avoiding repeat multiGBdownload.
 
 ## Remaining work
 
-1. Monitor revised real learning economically; occasionally evaluate a fixed checkpoint, never a mutable actor_latest.pt across an evaluation. Preserve checkpoint identity.
-2. At revised 90-minute stop, use the automatic finalizer output: five seeds 1001–1005, 15 seconds each, exact feet-only support for two seconds, reward plot and frozen artifacts.
-3. Inspect videos and success checks. One targeted correction has already been used. Do not blindly extend or rent cloud.
-4. Validate selected final policy through ROS: scripts/ros_launch.sh controller:=policy checkpoint:=ABSOLUTE_ACTOR_PATH, then actual service/topic probe and timeout. Existing policy smoke passed (471 frames, busy rejection, configured timeout), but run the final artifact too. See docs/ros_validation.md and ros2_ws/validation/policy_smoke.
-5. Update README/results/docs with final x/5, failure analysis, actual wall time, reproducible commands and selected artifact. Commit/push evidence; runs are ignored, submission evidence is tracked.
-6. Fresh source checkout smoke already passed: three physics tests and one exported-policy simulator step using the existing locked Python environment. Final validation should exercise the selected actor from a clean source checkout, without another multi-GB dependency download.
-7. Finish ready-to-run deliverable, stop project-owned active simulator/training processes cleanly, pause heartbeat, and report final local result plus the next plan before any cloud action.
+1. Monitor active stancefine-tune economically. Occasionally evaluate fixedversionedactor --assess-stance (never mutablelink for reported evidence), preserveidentity. Check originalrecovery retention separately from posture progress.
+2. At45min end inspect automaticfinalizer result. Choose best verified artifact based on actual5episode success and quality. Do not replace successfulbaseline with regression or call tilted/bracedstance clean.
+3. If finalselectedactor differs from alreadyROSvalidated stabilityactor, validate through ROS. Original ROS successcontract remains unchanged. Integrationprobe available ros2_ws/scripts/check_ros_integration.py.
+4. Finalize honestREADME/results/failureanalysis/commands; freshsourcecheckout validation withselectedactor, usinglockedvenv. Save selectedcheckpoint/actor/config/progress/plots/videos/manifest. Commit/push meaningful evidence toexistingprivaterepo. Package ready-to-run deliverable.
+5. Stop project-owned activeprocesses afterfinalvalidation; pauseheartbeat. Report actuallocalresult and recommend nextstep beforeanycloud action. Additionalposturelearning is not guaranteed and furthertraining needsuserdirection.
 
 ## Tool paths / environment
 

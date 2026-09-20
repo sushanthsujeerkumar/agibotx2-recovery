@@ -170,9 +170,11 @@ effective value to [0.05,0.6]. The original Gaussian had initial standard
 deviation 0.6 and default bounds [1e-6,1e6]. Its final mean standard deviation
 grew to 11.21, while raw action means were extensively clipped in inspected
 states. The corrected policy starts afresh rather than inheriting those
-saturated means. Its output directory is `artifacts/runs/local_stability`,
-with 512 environments and a 5,400 s (90-minute) local budget. It is running;
-its final outcome is pending.
+saturated means. The completed `artifacts/runs/local_stability` experiment used
+512 environments, 10,455 updates and 128,471,040 environment steps in 5,400.24 s.
+Its frozen final actor passed 5/5 original recovery evaluations, in
+4.28–8.86 s, and a real ROS episode reached `SUCCEEDED` at 8.56 simulated
+seconds for seed 1001. These results do not establish a neutral stance.
 
 This is a combined targeted revision, not a controlled ablation. **The final
 success thresholds, floor-contact evaluation, episode duration and two-second
@@ -181,10 +183,108 @@ as a successful recovery. Because the reward equation differs, total returns
 between the two versions are not directly comparable; compare the fixed-seed
 success checks and movement instead.
 
-## End of an episode and success measurement
+### Geometry diagnosis and reward version 3
 
-An episode lasts at most 15 simulation seconds (750 control steps). Stop early
-for success or invalid state. Invalid means any nonfinite `qpos/qvel`, any
+The retained checkpoint 9251 passed 5/5 under the original recovery definition.
+A separate 15 s CPU audit found an **inward-twisted, staggered, edge-supported
+stance with substantial foot-to-foot bracing**. Its negative foot-centre width
+did not mean the joint chains crossed: ankle and knee origins retained the
+expected left/right order. Foot rotation and sole tilt shifted the collision
+centres. The audit measured approximately 196 N mutual foot force, with active
+foot collisions; it did not find reversed joint axes or a missing collider.
+See the [full audit](../artifacts/validation/stance_geometry/README.md).
+
+Version 3 preserves model physics, observations, action mapping and supine
+resets. It retains version-2 dense rewards and adds near-standing posture
+shaping. Define horizontal pelvis forward `f` by normalizing the XY projection
+of the pelvis +X axis, and horizontal left `l = [-f_y, f_x]`. For the left and
+right foot collision geoms:
+
+```text
+w = dot((left_foot_centre - right_foot_centre)_XY, l)
+w0 = nominal standing foot-centre width, approximately 0.2743 m
+heading_cos_i = dot(normalized(foot_i +X projected onto XY), f)
+sole_cos_i = dot(foot_i +Z, world +Z)
+
+phase = clip((H - 0.55) / 0.35, 0, 1)
+        * clip((c - 0.5) / 0.5, 0, 1)
+width_error = (w - w0) / 0.18
+heading_error = mean_over_two_feet(1 - heading_cos_i)
+sole_error = mean_over_two_feet(1 - sole_cos_i)
+quality = exp(-width_error^2 - 2*heading_error - 2*sole_error)
+narrow_or_reversed = clip((0.16 - w) / 0.18, 0, 2)
+hip_yaw_error = mean_over_two_hip_yaw_joints(q_i^2)
+
+stance_reward = dt * phase * (6*quality - 2*narrow_or_reversed
+                             - heading_error - sole_error
+                             - 0.5*hip_yaw_error)
+```
+
+Here `H` is normalized height and `c` is the torso up-axis dot world-up from
+the original reward equation. The phase is zero for the supine pose and ramps
+up near upright standing, leaving the ground-recovery sequence free to use
+varied poses. The new posture terms are not gated by foot contact, so lifting
+a foot cannot simply switch off those terms. Hip-yaw error is averaged over
+the two relevant joints rather than diluted over all 31 joints.
+
+Version 3 adds `stance_reward` to the version-2 dense terms and **replaces** the
+terminal bonus with `10 * clean_success`. It does not also award the original
+terminal bonus on every subsequent step after ordinary recovery. Common
+invalid-state penalties and the 15 s timeout remain unchanged.
+
+The running stance experiment initializes from the frozen 9251 checkpoint,
+copying actor/critic networks and observation normalizers into a new run.
+Gaussian noise, optimizer, RNG stream and iteration/step counters are fresh.
+It uses 512 environments, a 2,700 s (45-minute) budget, initial noise 0.10
+bounded to [0.03,0.20], fixed learning rate 0.00005, PPO clip 0.1 and entropy
+coefficient 0.0001. Parent path/SHA and reset/copied state categories are
+recorded. Its additional clean-stance outcome is not yet available.
+
+### Additional clean-stance criterion and training termination
+
+The original recovery function in `common.py` is unchanged. The additional
+stance criterion requires all original instantaneous standing checks plus:
+
+| Added condition | Threshold |
+|---|---|
+| Signed foot-centre width in horizontal pelvis frame | 0.16–0.36 m inclusive |
+| Each horizontal foot heading relative to pelvis | At most 25 degrees |
+| Each hip-yaw joint angle | Absolute value at most 0.45 rad |
+| Each sole tilt relative to world-up | At most 20 degrees |
+| CPU-only exact mutual-foot support check | Sum of foot-to-foot normal forces at most 2 N |
+
+All conditions must hold simultaneously for two continuous seconds; any missed
+condition resets the clean hold counter. These are project-defined evaluation
+thresholds, not vendor specifications. Fore-aft staggering is not separately
+thresholded in this implementation, so even passing clean stance would not
+prove every aspect of a nominal or robust posture.
+
+GPU version-3 training uses the width, heading, hip-yaw and sole checks together
+with the original touch-based standing checks. Its posture geometry is a
+proxy for avoiding foot bracing; it does **not** directly measure the exact
+foot-pair normal force. An original recovery alone no longer ends a version-3
+training episode: the policy can continue adjusting stance until the clean
+hold, invalid state or timeout. Metrics make the distinction explicit:
+
+- `recovery/original_recovery_rate`: whether the original two-second hold was
+  achieved at any time in the episode.
+- `stance/clean_success_rate`: whether the added GPU posture hold completed.
+- `recovery/success_rate`: in version 3, the same training termination outcome
+  as the clean-success metric; in versions 1/2 it is original recovery.
+
+CPU evaluation with `--assess-stance` additionally measures exact foot-to-foot
+normal force from solver contacts. It continues after an original recovery
+pass and records the first original recovery time, then stops at clean stance,
+invalid state or the episode limit. The JSON report retains original
+`successes` and reports `clean_stance_successes` separately. Without this flag,
+evaluation and ROS retain the original recovery behavior. A GPU clean proxy
+pass cannot replace this stricter CPU assessment.
+
+## Original recovery definition and end of an episode
+
+An episode lasts at most 15 simulation seconds (750 control steps). Versions
+1/2 stop early for original recovery; version 3 uses the additional training
+hold described above. All versions stop for invalid state. Invalid means any nonfinite `qpos/qvel`, any
 generalized velocity magnitude above 150, or pelvis height below -0.05 m.
 Horizontal posture and nonfoot support are permitted during recovery.
 
@@ -207,10 +307,11 @@ forces by robot body only when the other geom is the floor. Self-contacts do
 not count as ground support. Feet are `left_ankle_roll_link` and
 `right_ankle_roll_link`; torso orientation uses `torso_link`.
 
-GPU training applies the same kinematic thresholds using model touch sensors,
+GPU training applies the same original kinematic thresholds using model touch sensors,
 which include self-contact. Its recorded success rate can therefore differ
-from final CPU ground-contact evaluation. The latter determines the submitted
-success count. CPU and GPU solvers also need not produce identical trajectories
+from final CPU ground-contact evaluation. The latter determines the original
+recovery count, while CPU stance assessment supplies its separate count.
+CPU and GPU solvers also need not produce identical trajectories
 even with matched integration and actuator settings.
 
 The vector environment auto-resets completed slots and reports terminal
@@ -231,6 +332,9 @@ independent ELU MLPs with layers 256/128/128 and learned observation
 normalization. The Gaussian actor starts at standard deviation 0.6, with a
 logarithmic parameterization; the stability variant starts at 0.4 with bounds
 [0.05,0.6]. Evaluation uses the deterministic action mean in both cases.
+The stance variant uses the same architecture, rollout and update counts but
+fixed learning rate 0.00005, PPO clip 0.1, entropy 0.0001, and initial noise
+0.10 bounded to [0.03,0.20].
 
 At 256 environments the rollout contains 6,144 transitions. Actual batch size,
 seed, dependency versions, elapsed time and counters are saved with every run.
@@ -239,9 +343,10 @@ the result of a hyperparameter search. Independent-seed performance, robust
 fall distributions, hardware transfer and success outside the defined flat
 floor task have not been established.
 
-Both recorded/planned main local runs use 512 environments, or 12,288
-transitions per PPO update. The baseline stopped at iteration 2803; the
-corrected run is limited by its wall-clock budget. GPU numerical variation
+All main local runs use 512 environments, or 12,288 transitions per PPO update.
+The baseline stopped at iteration 2803; stability completed its 90-minute budget
+at iteration 10455. Stance refinement has a separate authorized 45-minute
+budget. GPU numerical variation
 means matching seed/configuration/update budget does not promise identical
 trajectories or elapsed time. Resuming restores the saved reward version so a
 version-2 checkpoint is not silently trained under version-1 rewards.

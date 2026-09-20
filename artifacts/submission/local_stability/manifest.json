@@ -1,0 +1,27 @@
+{
+  "run_directory": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/local_stability",
+  "iteration": 10455,
+  "environment_steps": 128471040,
+  "training_wall_time_s": 5400.240126442999,
+  "actor_sha256": "4d7dba4dc1f31e01ddeee3f12c7b60b93361a5708d66812585fa8e23dddf08f3",
+  "checkpoint_sha256": "115083b2db0b5c3e725835af98163996753cd180e91954587dc2171a431d3a48",
+  "successes": 5,
+  "episodes": 5,
+  "controller": "learned_policy",
+  "evaluation_command": [
+    "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/.venv/bin/python",
+    "-m",
+    "x2_recovery.evaluate",
+    "--controller",
+    "policy",
+    "--checkpoint",
+    "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/submission/local_stability/actor.pt",
+    "--episodes",
+    "5",
+    "--seed",
+    "1001",
+    "--output",
+    "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/submission/local_stability/evaluation",
+    "--video"
+  ]
+}

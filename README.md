@@ -5,7 +5,18 @@ through mjlab, PPO, and ROS 2 Jazzy**. Every assessed episode starts from a
 physically settled supine pose. A shared CPU runtime supplies the local viewer,
 deterministic evaluation and ROS-controlled episodes.
 
-**Current result:** model, runner, GPU/CPU consistency and ROS integration checks passed. The initial baseline achieved **0/5 stable recoveries**. The revised run's checkpoint **9251 now passes 5/5** fixed-seed episodes under the original two-second standing criteria, in **4.48–6.30 seconds**. However, it stands with **crossed feet and foot-foot contact**. This is measured recovery, but not a clean neutral stance or demonstrated robustness. The 90-minute run is still completing; its final checkpoint evaluation is pending. The working candidate and its posture limitation are preserved in [candidate evidence](artifacts/submission/stable_crossed_stance_009251/README.md). The scripted controller remains an untrained baseline.
+**Current result:** the completed 90-minute local stability run achieved
+**5/5 recoveries** under the original two-second standing criteria, in
+**4.28–8.86 seconds**. Its final checkpoint completed **10,455 updates and
+128,471,040 environment steps**; a real ROS episode also reached `SUCCEEDED`.
+The initial baseline remains recorded as 0/5. These results do not establish
+a neutral stance or robustness: a geometry audit of the retained checkpoint
+9251 found an **inward-twisted, staggered stance supported on foot edges and
+braced by foot-to-foot force**. Its ankle and knee ordering was correct, so
+"crossed legs" is not an accurate diagnosis. A separate authorized 45-minute
+stance refinement is running; **no final clean-stance result is claimed**.
+See the [final recovery report](artifacts/submission/local_stability/evaluation/summary.json)
+and [stance audit](artifacts/validation/stance_geometry/README.md).
 
 ## Setup
 
@@ -69,7 +80,8 @@ From the repository root with `.venv` activated, first view one scripted attempt
 python -m x2_recovery.evaluate --controller scripted --episodes 1 --seed 1001 --render --output artifacts/scripted_preview
 ```
 
-Start with a short GPU training smoke test, then the targeted stability revision:
+To reproduce training, start with a short GPU smoke test and the stability
+revision (use a fresh output directory if that run already exists):
 
 ```bash
 python -m x2_recovery.train --num-envs 128 --max-iterations 10 --output artifacts/runs/smoke
@@ -91,12 +103,34 @@ This reproduces the configuration and update budget, not bitwise GPU results
 or an identical wall-clock duration. The baseline's frozen evidence is in
 [`artifacts/submission/local_initial`](artifacts/submission/local_initial/manifest.json).
 
+The next authorized experiment initializes from the preserved learned policy
+without reusing its optimizer, action noise or counters:
+
+```bash
+python -m x2_recovery.train --variant stance --initialize-from artifacts/submission/stable_crossed_stance_009251/checkpoint.pt --num-envs 512 --seed 1 --max-iterations 100000 --max-seconds 2700 --save-interval 250 --output artifacts/runs/local_stance
+```
+
+`./TRAIN_STANCE.sh` is the convenience launcher for this 512-environment,
+45-minute experiment. The stance variant selects reward version 3, initial
+noise 0.10 bounded to [0.03,0.20], fixed learning rate 0.00005, PPO clip 0.1 and
+entropy coefficient 0.0001. Parent network/normalizer weights and provenance
+are retained; the baseline and successful recovery artifacts are preserved.
+
 The learner runs headlessly. In a second terminal, activate `.venv` and open the
 local simulator to replay newly saved policies:
 
 ```bash
 python -m x2_recovery.watch --directory artifacts/runs/local_stability --minutes 120
 ```
+
+For the stance refinement, use its separate directory and assessment mode:
+
+```bash
+python -m x2_recovery.watch --directory artifacts/runs/local_stance --assess-stance --minutes 60
+```
+
+This mode continues after the original recovery pass to measure the additional
+clean-stance hold; it does not retroactively change the original recovery test.
 
 The viewer uses the scripted baseline until the first trained actor exists,
 then switches checkpoints between episodes. Its terminal identifies the
@@ -169,6 +203,10 @@ completed two-second recovery adds 10; an invalid state subtracts 1.
 Reward version 2 adds a smooth low-base-velocity reward when upright/elevated
 and supported by both feet only, plus a mild upright posture penalty. This is
 the targeted stability revision; the original reward remains version 1.
+Version 3 adds near-standing rewards for signed foot width, heading and flat
+soles, plus a targeted hip-yaw penalty. Its training episode ends successfully
+only after the additional posture hold, while original recovery is logged
+separately. CPU clean-stance evaluation also checks actual foot-to-foot force.
 Exact equations, observation ordering, success thresholds and limitations are
 in [environment.md](docs/environment.md).
 
@@ -181,10 +219,10 @@ Recheck the already-frozen initial policy:
 python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/submission/local_initial/actor.pt --episodes 5 --seed 1001 --output artifacts/evaluation/local_initial_recheck
 ```
 
-After the corrected run finishes, evaluate its available policy separately:
+Recheck the completed stability run's frozen actor separately:
 
 ```bash
-python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/runs/local_stability/actor_latest.pt --episodes 5 --seed 1001 --output artifacts/evaluation/local_stability
+python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/submission/local_stability/actor.pt --episodes 5 --seed 1001 --output artifacts/evaluation/local_stability_recheck
 ```
 
 This evaluates seeds **1001–1005** with deterministic actions and writes a
@@ -193,7 +231,7 @@ This evaluates seeds **1001–1005** with deterministic actions and writes a
 an NVIDIA host, select EGL before launching:
 
 ```bash
-MUJOCO_GL=egl python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/runs/local_stability/actor_latest.pt --episodes 5 --seed 1001 --video --output artifacts/evaluation/local_stability_video
+MUJOCO_GL=egl python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/submission/local_stability/actor.pt --episodes 5 --seed 1001 --video --output artifacts/evaluation/local_stability_video
 ```
 
 For a separately labelled scripted comparison:
@@ -208,6 +246,30 @@ than 2 N normal ground force each, all other body-ground support at most 2 N
 in total, base linear speed below 0.15 m/s and angular speed below 0.3 rad/s.
 Final evaluation inspects actual floor contacts and ignores self-contact.
 Merely reaching standing height does not count.
+
+### Additional stance assessment
+
+Watch the frozen inward-stance candidate with the extra checks enabled:
+
+```bash
+python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/submission/stable_crossed_stance_009251/actor.pt --episodes 1 --seed 1001 --render --assess-stance --output artifacts/evaluation/stance_parent_preview
+```
+
+For five episodes after stance refinement:
+
+```bash
+python -m x2_recovery.evaluate --controller policy --checkpoint artifacts/runs/local_stance/actor_latest.pt --episodes 5 --seed 1001 --assess-stance --output artifacts/evaluation/local_stance
+```
+
+Clean stance requires all original standing conditions plus the following for
+two continuous seconds: signed foot-centre width **0.16–0.36 m** in a horizontal
+pelvis-heading frame, each foot heading within **25°** of pelvis heading,
+absolute hip yaw at most **0.45 rad**, each sole tilt at most **20°**, and total
+actual foot-to-foot normal force at most **2 N**. These are added project
+criteria, not manufacturer specifications. This assessment continues beyond
+an original recovery pass, until clean stance, invalid state or the 15 s limit.
+Reports retain original `successes` and add `clean_stance_successes`; a pass
+under the former does not imply a pass under the latter.
 
 ### Recorded initial result and failure analysis
 
@@ -247,21 +309,47 @@ reward increasingly noisy raw actions even though the simulator clips them to
 the same joint targets. The baseline reward also lacks a smooth incentive to
 slow the base before reaching the strict binary stability threshold.
 
-The fresh `local_stability` run addresses these observations with bounded
+### Completed stability result and posture limitation
+
+The fresh `local_stability` run addressed these observations with bounded
 exploration noise, lower entropy weight, a smooth velocity-based reward and a
-mild posture penalty. Its 5,400 s budget and 512 environments are recorded
-separately; **its final five-episode result is not available yet**. This combined
-targeted revision is not a single-variable ablation. The exact solver-ground
-success checks and two-second hold requirement are unchanged. Total returns
-from reward versions 1 and 2 must not be compared directly as evidence of
-better recovery.
+mild posture penalty. It completed 10,455 updates / 128,471,040 environment
+steps in 5,400.24 s with 512 environments. The final deterministic result is
+**5/5**, using the original unchanged solver-ground checks and two-second hold:
+
+| Seed | Outcome | Recovery time |
+|---|---|---:|
+| 1001 | SUCCEEDED | 8.56 s |
+| 1002 | SUCCEEDED | 8.86 s |
+| 1003 | SUCCEEDED | 4.28 s |
+| 1004 | SUCCEEDED | 4.72 s |
+| 1005 | SUCCEEDED | 6.14 s |
+
+The [final report](artifacts/submission/local_stability/evaluation/summary.json),
+[manifest](artifacts/submission/local_stability/manifest.json), actor, checkpoint,
+videos and training curve are preserved in `artifacts/submission/local_stability`.
+This combined targeted revision is not a single-variable ablation. Total
+returns from different reward versions are not directly comparable.
+
+The earlier retained checkpoint 9251 also passed 5/5, in 4.48–6.30 s. A separate
+15 s seed-1001 geometry audit found foot-centre width -0.0495 m but positive
+ankle/knee widths, inward headings of roughly 71°/59°, sole tilts of 26°/59°,
+and about 196 N foot-to-foot bracing force. This is an inward-twisted,
+staggered, edge-supported stance, not evidence that the leg joint chains have
+crossed or that foot collisions are disabled. The exact measurements and model
+checks are in the [geometry audit](artifacts/validation/stance_geometry/README.md).
+
+The running `local_stance` refinement addresses that posture limitation while
+retaining the successful parent and its original result. **No final outcome
+for the additional clean-stance criterion is available yet.** GPU training uses
+stance geometry as a bracing proxy; final CPU assessment checks actual
+foot-to-foot normal force as well.
 
 Remaining limitations include primitive contacts, CPU/GPU solver differences,
 a narrow reset distribution and a single training seed per configuration.
-Further work should follow the corrected evaluation: inspect persistent speed
-or contact failures, refine balance/posture shaping if needed, expand reset
-diversity, and repeat with independent seeds. No result is inferred from an
-absent report or from reward improvement alone.
+Further work should follow the stance evaluation: inspect remaining alignment
+or bracing failures, expand reset diversity, and repeat with independent seeds.
+No result is inferred from an absent report or from reward improvement alone.
 
 ## ROS 2 demonstration
 
@@ -280,7 +368,7 @@ bash scripts/ros_launch.sh controller:=scripted render:=true max_sim_duration_s:
 For the trained actor, replace that launch command with:
 
 ```bash
-bash scripts/ros_launch.sh controller:=policy checkpoint:="$PWD/artifacts/submission/local_initial/actor.pt" render:=true max_sim_duration_s:=15.0 timeout_s:=60.0
+bash scripts/ros_launch.sh controller:=policy checkpoint:="$PWD/artifacts/submission/local_stability/actor.pt" render:=true seed:=1001 max_sim_duration_s:=15.0 timeout_s:=60.0
 ```
 
 In another terminal:
@@ -344,5 +432,9 @@ test scope and detailed evidence, and
 [model validation](assets/x2/model_validation.json) for contact and actuator
 checks. The PPO runner additionally passed a bounded CPU check covering actual
 updates, optimizer/normalizer resume, completed-step counts and TorchScript
-inference parity. The initial learned-policy result is 0/5 as reported above;
-the corrected stability run's final evaluation remains pending.
+inference parity. The frozen final stability actor was also verified through
+ROS: one request accepted, another rejected while busy, **428 actual joint
+frames** and `RUNNING → SUCCEEDED` at **8.56 simulated seconds** for seed 1001.
+Evidence is in
+[the successful ROS integration report](ros2_ws/validation/policy_recovery/integration.json).
+The recovery result is 5/5; the separate stance-refinement result remains pending.

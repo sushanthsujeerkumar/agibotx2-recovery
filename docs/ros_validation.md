@@ -184,3 +184,43 @@ Evidence and checkpoint SHA-256 provenance are in
 `ros2_ws/validation/policy_smoke/{integration.json,metadata.json,probe.log,launch.log}`.
 The short smoke actor did not achieve recovery in this timeout test. No recovery
 success is claimed from this ROS integration result.
+
+### Frozen recovery policy through ROS: succeeded
+
+The frozen 90-minute `local_stability` actor was loaded by the real ROS simulator
+worker and completed a recovery with seed **1001**. This check used the original,
+unchanged success criterion and runtime. Evidence is in
+`ros2_ws/validation/policy_recovery/`.
+
+```bash
+ROS_DOMAIN_ID=73 scripts/ros_launch.sh controller:=policy checkpoint:="$PWD/artifacts/submission/local_stability/actor.pt" seed:=1001 render:=false realtime:=true timeout_s:=30.0 max_sim_duration_s:=15.0
+```
+
+In another sourced terminal:
+
+```bash
+ROS_DOMAIN_ID=73 python3 ros2_ws/scripts/check_ros_integration.py --expect-final SUCCEEDED --deadline 45 --output ros2_ws/validation/policy_recovery/integration.json
+```
+
+| Check | Observed result |
+| --- | --- |
+| First start request | Accepted in **0.000533 seconds**, before simulator telemetry |
+| Second start request | Rejected immediately as busy |
+| Joint telemetry | **428 frames**, all **31 joints**, finite changing positions |
+| Simulation timestamps | Strictly increasing from **0.02 to 8.56 seconds** |
+| Terminal status | **RUNNING → SUCCEEDED** |
+| Wall time including policy/model startup | **10.837 seconds**, within the 30-second deadline |
+| Simulator completion reason | `stable standing success checks passed` |
+| Shutdown | Both ROS nodes exited cleanly |
+
+The actor SHA-256 is
+`4d7dba4dc1f31e01ddeee3f12c7b60b93361a5708d66812585fa8e23dddf08f3`.
+`metadata.json` records that hash, the model/runtime/success-code hashes, seed,
+controller and deadlines. `integration.json` records responses and joint data;
+`launch.log` records both nodes' messages and completion. The simulator reported
+success after the unchanged two-second stable-standing hold; this reproduces the
+8.56-second seed-1001 result in the separate five-episode evaluation.
+
+This validation ran headlessly in an isolated ROS domain. It did not change the
+runtime, training environment, success checks, or the separate posture-refinement
+experiment.
