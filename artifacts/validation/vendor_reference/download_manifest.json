@@ -1,0 +1,19 @@
+{
+  "source": "https://x2-aimdk.agibot.com/downloads/mc-x86-v1.0.0-20260522.zip",
+  "archive_bytes": 225367933,
+  "members": {
+    "rl_models/policy_b_lie_up.onnx": {
+      "size": 1319616,
+      "sha256": "3faf3df8f9616448f9ae580e22c2fa28fcb25c1eb0c9a338a0b0c5b9a520522f"
+    },
+    "rl/ground_up_config.yaml": {
+      "size": 3872,
+      "sha256": "ea3bb6fbee06dbb4d0ded086df1cf261b1d09ebb8bad2c3b3e6afa19683e840b"
+    },
+    "rl/ground_init_config.yaml": {
+      "size": 4820,
+      "sha256": "dbd35ed0ba143c674d89db6e44832845c4f1496e8451bb6d4359a9c818739e84"
+    }
+  },
+  "transferred_bytes": 1303482
+}

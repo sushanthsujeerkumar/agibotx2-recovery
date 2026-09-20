@@ -1,3 +1,5 @@
+> **External comparison added:** an optional adapted vendor policy passes5/5 strict supine episodes, but is not our trained policy or the default ROS controller. See [provenance and limits](../VENDOR_REFERENCE_RESULTS.md). Our own PPO ground-recovery objective remains unresolved.
+
 > **Historical assessment evidence below.** On physics-v2, monitored joint-limit compliance is validated for the new standing/crouch policies and scripted hand-support reference. Full supine recovery remains **0/5** with the latest actor. See [curriculum results](../DEEP_CROUCH_STAGE_RESULTS.md) and [floor-transition results](../FLOOR_TRANSITION_RESULTS.md). These intermediate tests do not satisfy the ground-recovery objective.
 
 # Assessment requirements and evidence

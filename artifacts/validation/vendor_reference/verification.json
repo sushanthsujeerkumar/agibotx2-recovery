@@ -1,0 +1,20 @@
+{
+  "fresh_validation_passes": 5,
+  "portable_probe_matches": true,
+  "recorded_simulation_matches": true,
+  "frozen_source_hashes_match": true,
+  "own_ppo_actor_unchanged": true,
+  "checks": [
+    "standing_return_pass",
+    "limits",
+    "terminal_hold",
+    "max_pelvis_height",
+    "final_stance",
+    "target_adjustment_steps"
+  ],
+  "portable_download_hashes_match": true,
+  "launcher_exit_code": 0,
+  "launcher_full_physical_replay_matches": true,
+  "active_project_python_processes": [],
+  "heartbeat_status": "PAUSED"
+}

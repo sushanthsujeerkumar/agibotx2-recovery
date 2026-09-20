@@ -1,3 +1,33 @@
+# External get-up compatibility stage completed
+
+The user approved inspection of the official get-up reference. The public ONNX
+contains a 151-value single-frame actor input and 344 reference frames. All 29
+joint names map; our forward kinematics matches 14 reference body positions
+within 0.78 micrometres. Raw reference angles exceed some pinned limits; none of
+our robot limits were relaxed. The existing guarded controller, model, gains and
+contact geometry remain unchanged.
+
+A separately labelled external vendor actor plus our adapter, with the reference
+timeline stretched by 1.2 and continuous feedback, passes 5/5 fresh supine seeds
+9401–9405 through the full 15 seconds. Final clean holds are 2.66–3.14 seconds;
+there are zero position violations, peak speed is 0.93819 of the rating, and peak
+commanded effort is 1.0. Five-second preparation is inside the deadline and no
+state is injected after physical supine reset. Actual recording/live viewer for
+9401 agrees exactly with numerical evidence and exits 0. Native timing passed
+2/5 on seeds 9301–9305, with three wrist-speed faults. Fixed-command termination,
+open-loop references and a 1.1 timescale candidate failed. All are preserved.
+
+This is EXTERNAL PRETRAINED policy evidence, not our PPO training. The preserved
+own actor still has its prior 0/5 supine result. No new PPO campaign, cloud use or
+historical ZIP update occurred. Vendor ONNX, configuration, library and reference
+arrays remain outside Git; redistribution/training-data terms are unverified.
+The small library was inspected for symbols only, never loaded. See
+../VENDOR_REFERENCE_RESULTS.md and artifacts/validation/vendor_reference. The
+optional demo launcher requires local vendor assets. Next: appropriately
+attributed reference-guided own-policy training, then independent evaluation.
+Heartbeat remains paused; do not silently promote vendor success to own PPO or
+change ROS defaults.
+
 # Floor-transition feasibility stage
 
 The approved bounded local reference work established a scripted deep-crouch →

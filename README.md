@@ -1,4 +1,4 @@
-> **Current development branch: physics-v2.** A new scripted hands-supported squat returns to clean standing in **5/5** tests; it is not floor recovery or a learned policy. See [floor-transition results](FLOOR_TRANSITION_RESULTS.md) and `./RUN_HAND_SUPPORT_DEMO.sh`. The latest actor passes **5/5 at both crouch depths, 5/5 standing tests and 5/5 with small action noise**. Supine recovery remains **0/5**. Run `./RUN_DEEP_CROUCH_DEMO.sh` and read [latest results and limitations](DEEP_CROUCH_STAGE_RESULTS.md). Historical results below and the original ZIP describe earlier experiments.
+> **Current development branch: physics-v2.** A separately labelled, adapted external AgiBot policy passes **5/5 full supine recoveries** under the monitored limits. Our own PPO remains **0/5 supine**, while passing its crouch/standing curriculum. Read [external-reference results](VENDOR_REFERENCE_RESULTS.md) and [our PPO results](DEEP_CROUCH_STAGE_RESULTS.md). The optional `./RUN_VENDOR_REFERENCE_DEMO.sh` uses external local assets; it does not replace the trained policy. Historical results below and the original ZIP describe earlier experiments.
 
 # AgiBot X2 ground recovery
 
