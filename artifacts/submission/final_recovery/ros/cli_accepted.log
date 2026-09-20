@@ -5,4 +5,3 @@ requester: making request: std_srvs.srv.Trigger_Request()
 
 response:
 std_srvs.srv.Trigger_Response(success=True, message='Accepted: recovery execution is queued')
-

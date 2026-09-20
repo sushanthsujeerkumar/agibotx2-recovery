@@ -1,0 +1,10 @@
+{
+  "start_iteration": 1548,
+  "end_iteration": 1550,
+  "environment_steps": 9523200,
+  "steps_added": 12288,
+  "state": "PAUSED",
+  "source_folder": "separate copy",
+  "python_dependencies": "reused installed locked environment",
+  "submitted_checkpoint_unchanged": true
+}

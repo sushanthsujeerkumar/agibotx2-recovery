@@ -1,3 +1,5 @@
+> Historical experiment record. The submitted model and current results are described in [RESULTS.md](RESULTS.md).
+
 # Floor-transition feasibility results
 
 The new result is a **scripted hands-supported squat and return, 5/5 fresh tests**.

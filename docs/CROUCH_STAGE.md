@@ -1,3 +1,5 @@
+> Historical experiment record. The submitted model and current results are described in [../RESULTS.md](../RESULTS.md).
+
 # Crouch-to-standing curriculum stage
 
 This is a local continuation on `physics-v2`, authorized by the user's next-step request. It is not a supine-recovery result. Existing submission policies and historical artifacts remain unchanged.

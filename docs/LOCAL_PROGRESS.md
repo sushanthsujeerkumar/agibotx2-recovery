@@ -1,3 +1,5 @@
+> Historical experiment record. The submitted model and current results are described in [../RESULTS.md](../RESULTS.md).
+
 # Landing-residual PPO and ROS stage completed
 
 Six PPO updates collected 32,268 transitions in a 183.14-second local campaign, including validation. Selected update 4 and unchanged teacher both pass 24/25 fresh paired episodes (5/5 first batch), with the same right-wrist fault. No improvement claim. The external teacher supplies recovery; the trained policy adds bounded ankle offsets. Original independent PPO remains 0/5.

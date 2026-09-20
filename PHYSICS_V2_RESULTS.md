@@ -1,3 +1,5 @@
+> Historical experiment record. The submitted model and current results are described in [RESULTS.md](RESULTS.md).
+
 > This is the earlier physics/balance phase. See [the completed crouch-to-standing stage](CROUCH_STAGE_RESULTS.md) for the latest policy and replay.
 
 # Physics v2: local progress

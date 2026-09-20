@@ -1,34 +1,21 @@
-> **Current additional evidence:** [landing-residual results](../LANDING_RESIDUAL_RESULTS.md) document a real PPO correction experiment, 5/5 assessment trials (24/25 including broader fresh testing), and fresh ROS build/success/busy/telemetry/timeout checks. Recovery relies on an explicitly external teacher; the correction did not improve its paired success count. Historical independent-policy evidence follows.
-
-> **Latest evidence:** the new imitation student remains **0/5** on independent supine tests; the ground-recovery objective is unresolved. Viewer isolation now prevents display actions from changing evaluated dynamics. See [student evidence](../REFERENCE_STUDENT_RESULTS.md).
-
-> **External comparison added:** an optional adapted vendor policy passes5/5 strict supine episodes, but is not our trained policy or the default ROS controller. See [provenance and limits](../VENDOR_REFERENCE_RESULTS.md). Our own PPO ground-recovery objective remains unresolved.
-
-> **Historical assessment evidence below.** On physics-v2, monitored joint-limit compliance is validated for the new standing/crouch policies and scripted hand-support reference. Full supine recovery remains **0/5** with the latest actor. See [curriculum results](../DEEP_CROUCH_STAGE_RESULTS.md) and [floor-transition results](../FLOOR_TRANSITION_RESULTS.md). These intermediate tests do not satisfy the ground-recovery objective.
-
 # Assessment requirements and evidence
 
-This maps the official HRS take-home requirements to the delivered partial-result project. Actual joint position/speed compliance remains unresolved and is explicitly identified below. The original recovery criterion and the subsequently added clean-stance criterion are reported separately. The posture limitation remains explicit.
+This maps the official HRS task to the submitted version. The final policy is reference-guided PPO; its fixed motion prior is described explicitly rather than attributed to reinforcement learning.
 
-| Requirement | Implementation or recorded evidence |
+| Task requirement | Implementation / evidence |
 |---|---|
-| AgiBot X2 URDF, simulator and model changes | [Model documentation](model.md); source URDF, vendor license, metadata and meshes in `assets/x2` |
-| Floating base, flat floor and collisions | `assets/x2/scene.xml`, `src/x2_recovery/common.py`, [model validation](../assets/x2/model_validation.json) |
-| Respect joint and actuator limits | **Partially satisfied / unresolved:** URDF ranges and command effort bounds are configured, but actual state excursions occur in all five retained-policy trials. [Physics-step audit](../artifacts/validation/final_reproduction/physics_step_limit_audit.json). No fully limit-compliant recovery claim. |
-| Supine start with contact settling | `reset_cpu` in `common.py`; one second of controlled settling before episode time starts. Small numerical soft-contact penetration is recorded, not hidden. |
-| Observations, actions, reward and termination | [Environment specification](environment.md), `env.py`, `common.py` |
-| Actual RL experiment, saved policy and reward plot | PPO configs, full checkpoints, CPU actors, progress logs and `training_curve.png` under each `artifacts/submission/` run |
-| Two ROS nodes, colcon, one launch file | `ros2_ws/src/x2_recovery_ros`; `recovery.launch.py` launches recovery and telemetry nodes |
-| Trigger response before episode; busy rejection | Queue reservation and simulator subprocess; [real integration logs](../ros2_ws/validation/policy_recovery/integration.json) and supervisor unit tests |
-| Actual simulator joint names, positions and timestamps | Worker reads `RecoveryRuntime` state after each control step; integration logs show 31 changing joints and increasing simulation timestamps |
-| Required topics and statuses | `/x2/recovery_status`, `/x2/joint_states`; `IDLE`, `RUNNING`, `SUCCEEDED`, `FAILED` |
-| Telemetry logs status and one joint | `telemetry_node.py`; [launch log](../ros2_ws/validation/policy_recovery/launch.log) |
-| Configurable unsuccessful timeout | Separate wall-clock watchdog covers simulator startup and hangs; [timeout evidence](../ros2_ws/validation/20260919T231348Z-15524/integration.json) |
-| Five policy episodes and defined success | [Selected evaluation](../artifacts/submission/local_stability/evaluation/summary.json), seeds 1001–1005; criteria in [RESULTS.md](../RESULTS.md) |
-| Failures and limitations explained | [RESULTS.md](../RESULTS.md): initial 0/5, selected 5/5, inward/edge-supported bracing, clean-stance 0/5 and strict joint-limit compliance 0/5 |
-| Fresh ROS build, launch, literal CLI request and telemetry | [ROS validation](ros_validation.md), original fresh-build CLI evidence plus later learned-policy `SUCCEEDED` probe |
-| Working source reproduction | [Final reproduction record](../artifacts/validation/final_reproduction/README.md), tested independently of the development source path |
-| Setup, training, evaluation and ROS commands | [README](../README.md), [START_HERE](../START_HERE.md), executable launchers and pinned `uv.lock` |
-| Meaningful GitHub history | [Private repository](https://github.com/sushanthsujeerkumar/hrs-x2-recovery), initialized before model/trainer/integration milestones, with regular pushed commits |
+| X2 URDF, simulator and rationale | [Model](model.md), source URDF and license in `assets/x2`; MuJoCo with mjlab/Warp training |
+| Floating base, floor and collision model | `assets/x2/scene.xml`, metadata and model validation |
+| Supine start without initial intersection | `reset_cpu` in `common.py`; settled reset protocol in [environment](environment.md) |
+| Joint and actuator limits | Guarded torque servo; every-step audit; no violations in the five final assessment trajectories |
+| Observations, actions, reward and termination | [Environment specification](environment.md), `env.py`, `full_recovery_env.py` |
+| Run RL, save checkpoint and reward plot | [Training](training.md); final `checkpoint.pt`, `actor.pt`, `progress.jsonl`, `training_curve.png` |
+| Two nodes, fresh colcon build, one launch | `x2_recovery_ros`, `recovery.launch.py`, [ROS validation](ros_validation.md) |
+| Accept before execution; reject while busy | Service queue and subprocess supervisor; `ros/success.json`, `ros/cli_busy.log` |
+| Status, actual joints and timeout failure | Required topics, telemetry node and independent watchdog; `ros/launch.log`, timeout JSON files |
+| Five episodes, clear success rule and results | [Results](../RESULTS.md), `evaluation_5.json`, complete 15-second episodes |
+| Fresh launch and literal CLI test evidence | `scripts/validate_final_ros.sh`, saved `ros/cli_*.log` |
+| Dependencies, hardware, reproduction and limitations | [README](../README.md), [training](training.md), `uv.lock` |
+| Development history in GitHub | Existing repository and chronological commits; final local changes prepared without rewriting earlier history |
 
-The scripted controller is explicitly an untrained unsuccessful comparison. It is not substituted for learned-policy evidence. The training itself was not blocked. Docker was optional and is not included.
+Evidence paths in the table are relative to `artifacts/submission/final_recovery/` unless otherwise shown. Earlier failed experiments remain available for inspection. Repository sharing/publishing is a separate handoff step.

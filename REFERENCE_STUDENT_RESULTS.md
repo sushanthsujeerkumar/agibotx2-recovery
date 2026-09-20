@@ -1,3 +1,5 @@
+> Historical experiment record. The submitted model and current results are described in [RESULTS.md](RESULTS.md).
+
 # Reference-guided student experiment — incomplete recovery
 
 The local imitation experiment did **not** produce a successful recovery policy.

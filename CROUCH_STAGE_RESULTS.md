@@ -1,3 +1,5 @@
+> Historical experiment record. The submitted model and current results are described in [RESULTS.md](RESULTS.md).
+
 > Later work verified transfer to the deeper crouch and corrected contact normalization. See [the latest stage results](DEEP_CROUCH_STAGE_RESULTS.md). This page preserves the preceding experiment.
 
 # Local crouch-to-standing result

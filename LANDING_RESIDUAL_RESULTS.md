@@ -1,3 +1,5 @@
+> Historical experiment record. The submitted model and current results are described in [RESULTS.md](RESULTS.md).
+
 # External teacher with trained PPO landing corrections
 
 The new composite controller passes **5/5 fresh assessment episodes** and

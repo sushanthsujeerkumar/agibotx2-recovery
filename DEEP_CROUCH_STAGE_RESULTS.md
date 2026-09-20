@@ -1,3 +1,5 @@
+> Historical experiment record. The submitted model and current results are described in [RESULTS.md](RESULTS.md).
+
 # Deeper crouch and contact-normalization correction
 
 The selected curriculum actor passes **5/5 deeper-crouch rises, 5/5 moderate-crouch rises, and 5/5 standing tests**. It also passes **5/5 deeper rises with small action noise**. Supine recovery remains **0/5**. This is an improved intermediate controller, not a solved floor-recovery assessment.

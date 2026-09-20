@@ -12,7 +12,7 @@ The vendor MJCF was inspected but was not copied unchanged: it omits an explicit
 
 Collision geometry uses explicit boxes, capsules and spheres measured against the vendor meshes. Feet retain the approximately 0.212 m by 0.120 m sole footprint and the original 0.0734 m ankle-to-sole distance. Separate primitives cover pelvis, chest, backpack, head, upper/lower legs, upper/lower arms, wrists and palms. These are simulation approximations, not exact CAD contact geometry. Two-edge kinematic ancestors are excluded from self-collision because neighboring motor housings overlap by construction; other self-collisions remain enabled. The exact exclusions are recorded in metadata.
 
-The scene uses a flat plane, gravity 9.81 m/s², 2 ms physics steps, implicit-fast integration and a Newton contact solver. Joint damping 0.1 N m s/rad, armature 0.02 kg m², friction loss 0.1 N m, floor sliding friction 0.8, and the documented PD gains are **simulation assumptions**, not manufacturer controller calibration. No claimed hardware transfer is implied.
+The generated scene uses a flat plane and gravity 9.81 m/s². The submitted `guarded_v2` profile overrides the base scene to 1 ms physics steps, implicit-fast integration and 50 Newton solver iterations. The older legacy profile used 2 ms steps. Joint damping 0.1 N m s/rad, armature 0.02 kg m², friction loss 0.1 N m, floor sliding friction 0.8, and the documented PD gains are **simulation assumptions**, not manufacturer controller calibration. No claimed hardware transfer is implied.
 
 ## Actions, limits and state ordering
 
@@ -71,6 +71,8 @@ Every collision-carrying body has a `touch_<body_name>` scalar normal-contact-fo
 A one-second settling interval already reduced generalized-velocity norm below 0.03 in this deterministic test. Randomized resets should be checked separately. The nominal upright keyframe is geometrically plausible but **does not remain balanced under constant low-gain joint targets**; an active balance policy/controller is required. This limitation must not be confused with successful recovery, and the validation does not claim recovery success.
 
 
-## Final trajectory-limit audit
+## Why the guarded profile was added
 
-Command limits and active soft joint constraints did not keep the learned trajectory within the URDF state bounds. A physics-step audit of the selected policy found position excursions up to 0.14919 rad (8.55 degrees) and speed up to 4.20 times the rating, while commanded torque stayed within effort bounds. All five trajectories fail strict position/speed compliance. The prior posture-based 5/5 result is therefore not a claim of fully valid physical recovery. See [RESULTS.md](../RESULTS.md) and [audit](../artifacts/validation/final_reproduction/physics_step_limit_audit.json). The diagnostic code does not alter physics or clamp state.
+An earlier legacy policy could stand while exceeding the URDF position and speed limits. Its five audited trajectories were rejected, despite passing the original posture-only checks. The unchanged evidence remains in `artifacts/validation/final_reproduction/physics_step_limit_audit.json`.
+
+The submitted model uses `guarded_v2`: earlier joint constraint engagement, target margins and a bounded velocity servo. Published URDF limits are unchanged, and the independent monitor rejects any actual excursion rather than modifying state. The final five episodes have zero position excursions and stay within speed and effort limits. See [current results](../RESULTS.md) and the exact [controller settings](environment.md).
