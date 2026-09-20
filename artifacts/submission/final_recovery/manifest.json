@@ -1,0 +1,29 @@
+{
+  "controller": "full_recovery",
+  "actor": "actor.pt",
+  "checkpoint": "checkpoint.pt",
+  "physics_profile": "guarded_v2",
+  "observation_size": 107,
+  "action_size": 31,
+  "episode_seconds": 15,
+  "required_clean_hold_seconds": 2,
+  "method": "Frozen motion prior fitted to project-generated trajectories, plus bounded PPO state feedback",
+  "feedback_bound": 0.01,
+  "external_policy_required": false,
+  "training_run": "full_recovery_20260920_125144",
+  "updates_total": 1548,
+  "transitions_total": 9510912,
+  "resumed_update": 51,
+  "new_updates": 1497,
+  "new_transitions": 9197568,
+  "files_sha256": {
+    "actor.pt": "aecda7118cc2f3358309aebf0fd68a6abc2ec93d4c3399a0a8eb5b64495c2145",
+    "checkpoint.pt": "69c38392f70f844c8fd4c7b2726b7157adaaac522eb80516d9f5974076bac318",
+    "initial_checkpoint.pt": "7643d66f55c536023415ad81554d6f05f79dd03e75e1ed5c10bb91e5a2bf3fb9",
+    "prepared/motion_prior.pt": "31a2f9bf9d108d698c3e6480ee25bec5dc357abf5f997865f7cacba2e97c1772",
+    "reference/standing_actor.pt": "f4029bed7343c5fecd079ff6dcfd074763aec5db6a442e2cfe942dab62557114",
+    "reference/trajectory.json": "bbcdad2dd412724f385646bd6cc46d169533aaa3449236523d8e9ad9ea4a2e69"
+  },
+  "run_completed": true,
+  "training_status_note": "The trainer records PAUSED after its time budget; this run has ended and has no live training process."
+}

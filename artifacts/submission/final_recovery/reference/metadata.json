@@ -1,0 +1,17 @@
+{
+  "kind": "own_hybrid_recovery_reference",
+  "fully_trained_floor_recovery_policy": false,
+  "floor_transition": "own physically searched scripted targets",
+  "standing_controller": "own learned phase prior plus bounded PPO feedback",
+  "physics_profile": "guarded_v2",
+  "evaluation_seconds": 15.0,
+  "required_clean_hold_seconds": 2.0,
+  "fresh_test_passes": 10,
+  "fresh_test_episodes": 10,
+  "minimum_final_hold_seconds": 2.1200000000000014,
+  "maximum_joint_speed_ratio": 0.9857829090461321,
+  "prior_sha256": "f4029bed7343c5fecd079ff6dcfd074763aec5db6a442e2cfe942dab62557114",
+  "trajectory_sha256": "bbcdad2dd412724f385646bd6cc46d169533aaa3449236523d8e9ad9ea4a2e69",
+  "external_teacher": false,
+  "phase": "reference preparation complete; full floor-recovery PPO training pending"
+}

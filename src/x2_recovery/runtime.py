@@ -13,8 +13,10 @@ class RecoveryRuntime:
 
     def __init__(self, controller="scripted", checkpoint=None, render=False, seed=0, assess_stance=False,
                  physics_profile="legacy", reset_mode="supine"):
-        if controller not in {"scripted", "policy"}:
-            raise ValueError("controller must be scripted or policy")
+        if controller not in {"scripted", "policy", "full_recovery"}:
+            raise ValueError("controller must be scripted, policy or full_recovery")
+        if controller == 'full_recovery' and physics_profile != 'guarded_v2':
+            raise ValueError('full_recovery requires guarded_v2 physics')
         self.info = ModelInfo(physics_profile=physics_profile)
         self.model = self.info.model
         # Same integration/solver settings used by the training backend.
@@ -23,12 +25,14 @@ class RecoveryRuntime:
         self.model.opt.tolerance = 1e-6
         self.data = mujoco.MjData(self.model)
         self.controller = controller
-        self.assess_stance = assess_stance
+        self.assess_stance = assess_stance or controller == "full_recovery"
         self.display_label = "SCRIPTED BASELINE" if controller == "scripted" else "TRAINED POLICY"
+        if controller == "full_recovery":
+            self.display_label = "MOTION PRIOR + PPO FEEDBACK"
         self.policy = None
         self.viewer = None
         self._viewer_threads = []
-        if controller == "policy":
+        if controller in {"policy", "full_recovery"}:
             if not checkpoint:
                 raise ValueError("policy controller requires an exported TorchScript checkpoint")
             import torch
@@ -130,6 +134,8 @@ class RecoveryRuntime:
         if self.policy is not None:
             import torch
             obs = observation_numpy(self.info, self.data, self.previous_action, sensor_forces(self.info, self.data))
+            if self.controller == "full_recovery":
+                obs = np.concatenate([obs, np.array([min(float(self.data.time)/15., 1.)], dtype=np.float32)])
             with torch.inference_mode():
                 action = self.policy(torch.from_numpy(obs).unsqueeze(0)).squeeze(0).numpy()
             if action.shape != (self.model.nu,) or not np.isfinite(action).all():

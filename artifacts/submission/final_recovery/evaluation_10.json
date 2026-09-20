@@ -1,0 +1,147 @@
+{
+  "actor": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/full_recovery_20260920_125144/model_001548_actor.pt",
+  "passes": 10,
+  "episodes": 10,
+  "results": [
+    {
+      "seed": 27201,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.9554590014253704,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    },
+    {
+      "seed": 27202,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.9553017058616947,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    },
+    {
+      "seed": 27203,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.9579070031758457,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    },
+    {
+      "seed": 27204,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.9576735748640476,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    },
+    {
+      "seed": 27205,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.9550982288471616,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    },
+    {
+      "seed": 27206,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.956476920919608,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    },
+    {
+      "seed": 27207,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.955917315393511,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    },
+    {
+      "seed": 27208,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.9573134298988647,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    },
+    {
+      "seed": 27209,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.9576216849326669,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    },
+    {
+      "seed": 27210,
+      "passed": true,
+      "hold": 2.1400000000000015,
+      "sim_time": 14.999999999997126,
+      "limits": {
+        "ok": true,
+        "physics_steps": 15001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.9574209636258172,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      }
+    }
+  ]
+}

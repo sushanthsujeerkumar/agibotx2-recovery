@@ -1,0 +1,557 @@
+{
+  "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+  "candidate_screen": [
+    {
+      "candidate_id": 0,
+      "results": [
+        {
+          "seed": 16301,
+          "generation": 1,
+          "passed": true,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 14.999999999997126,
+          "within_15_seconds": true,
+          "hold": 2.1200000000000014,
+          "height": 0.6687707882440151,
+          "max_height": 0.6687707882440151,
+          "limits": {
+            "ok": true,
+            "physics_steps": 15001,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 0.8552297868175108,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": null
+          }
+        },
+        {
+          "seed": 16302,
+          "generation": 1,
+          "passed": false,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 9.320000000000274,
+          "within_15_seconds": true,
+          "hold": 0.0,
+          "height": 0.36021881059656397,
+          "max_height": 0.3849554446793076,
+          "limits": {
+            "ok": false,
+            "physics_steps": 9321,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 1.529977211598406,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": {
+              "time_s": 9.318000000000275,
+              "kind": "speed",
+              "joint": "head_pitch_joint",
+              "value": 1.0409642336706324
+            }
+          }
+        },
+        {
+          "seed": 16303,
+          "generation": 1,
+          "passed": false,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 9.979999999999908,
+          "within_15_seconds": true,
+          "hold": 0.0,
+          "height": 0.37956592926288935,
+          "max_height": 0.4116535338308437,
+          "limits": {
+            "ok": false,
+            "physics_steps": 9981,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 2.65787214512471,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": {
+              "time_s": 9.960999999999919,
+              "kind": "speed",
+              "joint": "head_pitch_joint",
+              "value": 1.1480084460828626
+            }
+          }
+        }
+      ],
+      "passes": 1
+    },
+    {
+      "candidate_id": 1,
+      "results": [
+        {
+          "seed": 16301,
+          "generation": 1,
+          "passed": true,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 14.999999999997126,
+          "within_15_seconds": true,
+          "hold": 2.1200000000000014,
+          "height": 0.6687707882440151,
+          "max_height": 0.6687707882440151,
+          "limits": {
+            "ok": true,
+            "physics_steps": 15001,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 0.8552297868175108,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": null
+          }
+        },
+        {
+          "seed": 16302,
+          "generation": 1,
+          "passed": false,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 9.320000000000274,
+          "within_15_seconds": true,
+          "hold": 0.0,
+          "height": 0.36021881059656397,
+          "max_height": 0.3849554446793076,
+          "limits": {
+            "ok": false,
+            "physics_steps": 9321,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 1.529977211598406,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": {
+              "time_s": 9.318000000000275,
+              "kind": "speed",
+              "joint": "head_pitch_joint",
+              "value": 1.0409642336706324
+            }
+          }
+        },
+        {
+          "seed": 16303,
+          "generation": 1,
+          "passed": false,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 9.979999999999908,
+          "within_15_seconds": true,
+          "hold": 0.0,
+          "height": 0.37956592926288935,
+          "max_height": 0.4116535338308437,
+          "limits": {
+            "ok": false,
+            "physics_steps": 9981,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 2.65787214512471,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": {
+              "time_s": 9.960999999999919,
+              "kind": "speed",
+              "joint": "head_pitch_joint",
+              "value": 1.1480084460828626
+            }
+          }
+        }
+      ],
+      "passes": 1
+    },
+    {
+      "candidate_id": 64,
+      "results": [
+        {
+          "seed": 16301,
+          "generation": 1,
+          "passed": true,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 14.999999999997126,
+          "within_15_seconds": true,
+          "hold": 2.1200000000000014,
+          "height": 0.6687707882440151,
+          "max_height": 0.6687707882440151,
+          "limits": {
+            "ok": true,
+            "physics_steps": 15001,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 0.8552297868175108,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": null
+          }
+        },
+        {
+          "seed": 16302,
+          "generation": 1,
+          "passed": false,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 9.320000000000274,
+          "within_15_seconds": true,
+          "hold": 0.0,
+          "height": 0.36021881059656397,
+          "max_height": 0.3849554446793076,
+          "limits": {
+            "ok": false,
+            "physics_steps": 9321,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 1.529977211598406,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": {
+              "time_s": 9.318000000000275,
+              "kind": "speed",
+              "joint": "head_pitch_joint",
+              "value": 1.0409642336706324
+            }
+          }
+        },
+        {
+          "seed": 16303,
+          "generation": 1,
+          "passed": false,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 9.979999999999908,
+          "within_15_seconds": true,
+          "hold": 0.0,
+          "height": 0.37956592926288935,
+          "max_height": 0.4116535338308437,
+          "limits": {
+            "ok": false,
+            "physics_steps": 9981,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 2.65787214512471,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": {
+              "time_s": 9.960999999999919,
+              "kind": "speed",
+              "joint": "head_pitch_joint",
+              "value": 1.1480084460828626
+            }
+          }
+        }
+      ],
+      "passes": 1
+    },
+    {
+      "candidate_id": 128,
+      "results": [
+        {
+          "seed": 16301,
+          "generation": 1,
+          "passed": true,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 14.999999999997126,
+          "within_15_seconds": true,
+          "hold": 2.1200000000000014,
+          "height": 0.6687707882440151,
+          "max_height": 0.6687707882440151,
+          "limits": {
+            "ok": true,
+            "physics_steps": 15001,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 0.8552297868175108,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": null
+          }
+        },
+        {
+          "seed": 16302,
+          "generation": 1,
+          "passed": false,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 9.320000000000274,
+          "within_15_seconds": true,
+          "hold": 0.0,
+          "height": 0.36021881059656397,
+          "max_height": 0.3849554446793076,
+          "limits": {
+            "ok": false,
+            "physics_steps": 9321,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 1.529977211598406,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": {
+              "time_s": 9.318000000000275,
+              "kind": "speed",
+              "joint": "head_pitch_joint",
+              "value": 1.0409642336706324
+            }
+          }
+        },
+        {
+          "seed": 16303,
+          "generation": 1,
+          "passed": false,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 9.979999999999908,
+          "within_15_seconds": true,
+          "hold": 0.0,
+          "height": 0.37956592926288935,
+          "max_height": 0.4116535338308437,
+          "limits": {
+            "ok": false,
+            "physics_steps": 9981,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 2.65787214512471,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": {
+              "time_s": 9.960999999999919,
+              "kind": "speed",
+              "joint": "head_pitch_joint",
+              "value": 1.1480084460828626
+            }
+          }
+        }
+      ],
+      "passes": 1
+    },
+    {
+      "candidate_id": 167,
+      "results": [
+        {
+          "seed": 16301,
+          "generation": 1,
+          "passed": true,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 14.999999999997126,
+          "within_15_seconds": true,
+          "hold": 2.1200000000000014,
+          "height": 0.6687733598333115,
+          "max_height": 0.6687733598333115,
+          "limits": {
+            "ok": true,
+            "physics_steps": 15001,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 0.9834416742958647,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": null
+          }
+        },
+        {
+          "seed": 16302,
+          "generation": 1,
+          "passed": true,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 14.999999999997126,
+          "within_15_seconds": true,
+          "hold": 2.1200000000000014,
+          "height": 0.6687743334146442,
+          "max_height": 0.6687743334146442,
+          "limits": {
+            "ok": true,
+            "physics_steps": 15001,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 0.9836530695366607,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": null
+          }
+        },
+        {
+          "seed": 16303,
+          "generation": 1,
+          "passed": true,
+          "scope": "Own scripted sitting bridge plus own learned stand actor; NOT validated full recovery",
+          "sim_time": 14.999999999997126,
+          "within_15_seconds": true,
+          "hold": 2.1200000000000014,
+          "height": 0.6687741340242948,
+          "max_height": 0.6687741340242948,
+          "limits": {
+            "ok": true,
+            "physics_steps": 15001,
+            "max_position_violation_rad": 0.0,
+            "max_speed_ratio": 0.9871515755565818,
+            "max_commanded_effort_ratio": 1.0,
+            "first_violation": null
+          }
+        }
+      ],
+      "passes": 3
+    }
+  ],
+  "selected_candidate_id": 167,
+  "fresh_validation": {
+    "candidate_id": 167,
+    "results": [
+      {
+        "seed": 16401,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.6687740555027035,
+        "max_height": 0.6687740555027035,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9837392002046944,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      },
+      {
+        "seed": 16402,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.6687739375250475,
+        "max_height": 0.6687739375250475,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9837160940495627,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      },
+      {
+        "seed": 16403,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.6687739399373259,
+        "max_height": 0.6687739399373259,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9848576662706231,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      },
+      {
+        "seed": 16404,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.668773165482944,
+        "max_height": 0.668773165482944,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9857829090461321,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      },
+      {
+        "seed": 16405,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.6687736092407893,
+        "max_height": 0.6687736092407893,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9810959353883095,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      },
+      {
+        "seed": 16406,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.6687736667624596,
+        "max_height": 0.6687736667624596,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9803035241336461,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      },
+      {
+        "seed": 16407,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.6687737170557982,
+        "max_height": 0.6687737170557982,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9836223686791046,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      },
+      {
+        "seed": 16408,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.6687740919530056,
+        "max_height": 0.6687740919530056,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9801189743522725,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      },
+      {
+        "seed": 16409,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.6687751139371305,
+        "max_height": 0.6687751139371305,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9810832329051109,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      },
+      {
+        "seed": 16410,
+        "generation": 1,
+        "passed": true,
+        "scope": "Physical recovery reference: own scripted floor transition plus own trained standing actor; NOT a fully trained floor-recovery policy",
+        "sim_time": 14.999999999997126,
+        "within_15_seconds": true,
+        "hold": 2.1200000000000014,
+        "height": 0.6687739404307674,
+        "max_height": 0.6687739404307674,
+        "limits": {
+          "ok": true,
+          "physics_steps": 15001,
+          "max_position_violation_rad": 0.0,
+          "max_speed_ratio": 0.9800333753663079,
+          "max_commanded_effort_ratio": 1.0,
+          "first_violation": null
+        }
+      }
+    ],
+    "passes": 10
+  }
+}

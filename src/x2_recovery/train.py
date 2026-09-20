@@ -142,6 +142,11 @@ def export_actor(checkpoint_path: str | Path, output_path: str | Path) -> Path:
     actor = MLPModel(observations, config["obs_groups"], "actor", checkpoint["num_actions"], **actor_config)
     actor.load_state_dict(checkpoint["actor_state_dict"])
     scripted = torch.jit.script(actor.as_jit().cpu().eval())
+    if 'motion_prior_actions' in checkpoint:
+        from .full_recovery import MotionPrior, ResidualPolicy
+        prior = MotionPrior(checkpoint['motion_prior_actions'].cpu()).eval()
+        scripted = torch.jit.script(ResidualPolicy(prior, scripted,
+                                    checkpoint['environment_cfg']['feedback_bound']).eval())
     destination = Path(output_path).resolve()
     destination.parent.mkdir(parents=True, exist_ok=True)
     temporary = destination.with_suffix(destination.suffix + ".tmp")
@@ -256,6 +261,8 @@ class RecoveryRunner(OnPolicyRunner):
             checkpoint["environment_state"] = self.env.state_dict()
         elif hasattr(self.env, "common_step_counter"):
             checkpoint["common_step_counter"] = self.env.common_step_counter
+        if hasattr(self.env, 'motion_prior_actions'):
+            checkpoint['motion_prior_actions'] = self.env.motion_prior_actions.detach().cpu().clone()
         destination = Path(path)
         # Upstream names files with zero-based iterations; use completed counts.
         if destination.name.startswith("model_"):
