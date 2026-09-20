@@ -51,7 +51,7 @@ Module reset_data__locals__reset_contact_757d9bde 757d9bd load on device 'cuda:0
 Module reset_data__locals__reset_sleep_6b3be194 6b3be19 load on device 'cuda:0' took 0.34 ms  (cached)
 Module reset_data__locals__reset_nworld_e471a890 e471a89 load on device 'cuda:0' took 0.41 ms  (cached)
 --------------------------------------------------------------------------------
-Resolved observation sets: 
+Resolved observation sets:
 	 actor :  ['actor']
 	 critic :  ['critic']
 --------------------------------------------------------------------------------
@@ -82,12 +82,12 @@ Critic Model: MLPModel(
 )
 Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/crouch_v3/git/hrs-x2-recovery.diff
 ################################################################################
-[1m                           Learning iteration 0/1000                            [0m 
+                           Learning iteration 0/1000
 
-                            Total steps: 6144 
-                       Steps per second: 5350 
-                        Collection time: 0.878s 
-                          Learning time: 0.270s 
+                            Total steps: 6144
+                       Steps per second: 5350
+                        Collection time: 0.878s
+                          Learning time: 0.270s
                         Mean value loss: 101.5761
                     Mean surrogate loss: 0.0883
                       Mean entropy loss: -86.2040
@@ -98,12 +98,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:19:07
 
 ################################################################################
-[1m                           Learning iteration 24/1000                           [0m 
+                           Learning iteration 24/1000
 
-                            Total steps: 153600 
-                       Steps per second: 7085 
-                        Collection time: 0.728s 
-                          Learning time: 0.139s 
+                            Total steps: 153600
+                       Steps per second: 7085
+                        Collection time: 0.728s
+                          Learning time: 0.139s
                         Mean value loss: 0.5133
                     Mean surrogate loss: 0.0227
                       Mean entropy loss: -86.1974
@@ -116,12 +116,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:13:43
 
 ################################################################################
-[1m                           Learning iteration 49/1000                           [0m 
+                           Learning iteration 49/1000
 
-                            Total steps: 307200 
-                       Steps per second: 7317 
-                        Collection time: 0.710s 
-                          Learning time: 0.130s 
+                            Total steps: 307200
+                       Steps per second: 7317
+                        Collection time: 0.710s
+                          Learning time: 0.130s
                         Mean value loss: 1.1665
                     Mean surrogate loss: 0.0212
                       Mean entropy loss: -86.1885
@@ -147,12 +147,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:13:32
 
 ################################################################################
-[1m                           Learning iteration 74/1000                           [0m 
+                           Learning iteration 74/1000
 
-                            Total steps: 460800 
-                       Steps per second: 7326 
-                        Collection time: 0.729s 
-                          Learning time: 0.109s 
+                            Total steps: 460800
+                       Steps per second: 7326
+                        Collection time: 0.729s
+                          Learning time: 0.109s
                         Mean value loss: 7.3139
                     Mean surrogate loss: 0.0168
                       Mean entropy loss: -86.1779
@@ -178,12 +178,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:12:56
 
 ################################################################################
-[1m                           Learning iteration 99/1000                           [0m 
+                           Learning iteration 99/1000
 
-                            Total steps: 614400 
-                       Steps per second: 7551 
-                        Collection time: 0.711s 
-                          Learning time: 0.103s 
+                            Total steps: 614400
+                       Steps per second: 7551
+                        Collection time: 0.711s
+                          Learning time: 0.103s
                         Mean value loss: 3.1935
                     Mean surrogate loss: 0.0218
                       Mean entropy loss: -86.1627
@@ -209,12 +209,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:12:29
 
 ################################################################################
-[1m                          Learning iteration 124/1000                           [0m 
+                          Learning iteration 124/1000
 
-                            Total steps: 768000 
-                       Steps per second: 7755 
-                        Collection time: 0.689s 
-                          Learning time: 0.104s 
+                            Total steps: 768000
+                       Steps per second: 7755
+                        Collection time: 0.689s
+                          Learning time: 0.104s
                         Mean value loss: 0.3153
                     Mean surrogate loss: 0.0199
                       Mean entropy loss: -86.1558
@@ -240,12 +240,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:12:02
 
 ################################################################################
-[1m                          Learning iteration 149/1000                           [0m 
+                          Learning iteration 149/1000
 
-                            Total steps: 921600 
-                       Steps per second: 7379 
-                        Collection time: 0.712s 
-                          Learning time: 0.121s 
+                            Total steps: 921600
+                       Steps per second: 7379
+                        Collection time: 0.712s
+                          Learning time: 0.121s
                         Mean value loss: 0.4642
                     Mean surrogate loss: 0.0103
                       Mean entropy loss: -86.1429
@@ -271,12 +271,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:11:39
 
 ################################################################################
-[1m                          Learning iteration 174/1000                           [0m 
+                          Learning iteration 174/1000
 
-                            Total steps: 1075200 
-                       Steps per second: 7630 
-                        Collection time: 0.705s 
-                          Learning time: 0.100s 
+                            Total steps: 1075200
+                       Steps per second: 7630
+                        Collection time: 0.705s
+                          Learning time: 0.100s
                         Mean value loss: 0.8994
                     Mean surrogate loss: 0.0096
                       Mean entropy loss: -86.1342
@@ -302,12 +302,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:11:17
 
 ################################################################################
-[1m                          Learning iteration 199/1000                           [0m 
+                          Learning iteration 199/1000
 
-                            Total steps: 1228800 
-                       Steps per second: 7652 
-                        Collection time: 0.696s 
-                          Learning time: 0.107s 
+                            Total steps: 1228800
+                       Steps per second: 7652
+                        Collection time: 0.696s
+                          Learning time: 0.107s
                         Mean value loss: 0.3036
                     Mean surrogate loss: 0.0125
                       Mean entropy loss: -86.1161
@@ -333,12 +333,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:10:58
 
 ################################################################################
-[1m                          Learning iteration 224/1000                           [0m 
+                          Learning iteration 224/1000
 
-                            Total steps: 1382400 
-                       Steps per second: 7380 
-                        Collection time: 0.701s 
-                          Learning time: 0.132s 
+                            Total steps: 1382400
+                       Steps per second: 7380
+                        Collection time: 0.701s
+                          Learning time: 0.132s
                         Mean value loss: 0.0373
                     Mean surrogate loss: 0.0110
                       Mean entropy loss: -86.1036
@@ -364,12 +364,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:10:38
 
 ################################################################################
-[1m                          Learning iteration 249/1000                           [0m 
+                          Learning iteration 249/1000
 
-                            Total steps: 1536000 
-                       Steps per second: 6240 
-                        Collection time: 0.821s 
-                          Learning time: 0.164s 
+                            Total steps: 1536000
+                       Steps per second: 6240
+                        Collection time: 0.821s
+                          Learning time: 0.164s
                         Mean value loss: 0.0246
                     Mean surrogate loss: 0.0081
                       Mean entropy loss: -86.0946
@@ -395,12 +395,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:10:18
 
 ################################################################################
-[1m                          Learning iteration 274/1000                           [0m 
+                          Learning iteration 274/1000
 
-                            Total steps: 1689600 
-                       Steps per second: 7292 
-                        Collection time: 0.718s 
-                          Learning time: 0.125s 
+                            Total steps: 1689600
+                       Steps per second: 7292
+                        Collection time: 0.718s
+                          Learning time: 0.125s
                         Mean value loss: 0.0386
                     Mean surrogate loss: 0.0168
                       Mean entropy loss: -86.0845
@@ -426,12 +426,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:09:59
 
 ################################################################################
-[1m                          Learning iteration 299/1000                           [0m 
+                          Learning iteration 299/1000
 
-                            Total steps: 1843200 
-                       Steps per second: 7310 
-                        Collection time: 0.714s 
-                          Learning time: 0.127s 
+                            Total steps: 1843200
+                       Steps per second: 7310
+                        Collection time: 0.714s
+                          Learning time: 0.127s
                         Mean value loss: 0.0339
                     Mean surrogate loss: 0.0200
                       Mean entropy loss: -86.0779
@@ -457,12 +457,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:09:39
 
 ################################################################################
-[1m                          Learning iteration 324/1000                           [0m 
+                          Learning iteration 324/1000
 
-                            Total steps: 1996800 
-                       Steps per second: 7673 
-                        Collection time: 0.696s 
-                          Learning time: 0.105s 
+                            Total steps: 1996800
+                       Steps per second: 7673
+                        Collection time: 0.696s
+                          Learning time: 0.105s
                         Mean value loss: 0.0089
                     Mean surrogate loss: 0.0098
                       Mean entropy loss: -86.0729
@@ -488,12 +488,12 @@ Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-0
                                     ETA: 0:09:17
 
 ################################################################################
-[1m                          Learning iteration 349/1000                           [0m 
+                          Learning iteration 349/1000
 
-                            Total steps: 2150400 
-                       Steps per second: 7737 
-                        Collection time: 0.692s 
-                          Learning time: 0.102s 
+                            Total steps: 2150400
+                       Steps per second: 7737
+                        Collection time: 0.692s
+                          Learning time: 0.102s
                         Mean value loss: 0.0054
                     Mean surrogate loss: 0.0160
                       Mean entropy loss: -86.0690
