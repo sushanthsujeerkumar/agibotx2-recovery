@@ -1,3 +1,5 @@
+> This is the earlier physics/balance phase. See [the completed crouch-to-standing stage](CROUCH_STAGE_RESULTS.md) for the latest policy and replay.
+
 # Physics v2: local progress
 
 **Clean standing is now demonstrated. Full supine recovery remains unsolved.** The changes are on `physics-v2`; the earlier main branch and local-results ZIP remain a frozen historical partial result.

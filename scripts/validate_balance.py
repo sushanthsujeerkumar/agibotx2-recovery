@@ -39,7 +39,10 @@ def main():
             else:
                 obs=observation_numpy(info,d,previous,sensor_forces(info,d))
                 with torch.inference_mode():
-                    action=policy(torch.from_numpy(obs)[None]).squeeze(0).numpy().clip(-1,1)
+                    action=policy(torch.from_numpy(obs)[None]).squeeze(0).numpy()
+                if action.shape != (m.nu,) or not np.isfinite(action).all():
+                    raise RuntimeError('Policy returned invalid actions')
+                action=action.clip(-1,1)
             target=info.targets(action)
             for _ in range(info.substeps):
                 d.ctrl[:]=info.torque(d.qpos[info.qadr],d.qvel[info.vadr],target)
@@ -50,7 +53,9 @@ def main():
             hold=hold+.02 if clean else 0.;max_hold=max(max_hold,hold)
             ever_passed |= hold>=2.-1e-8
             if not monitor.ok or not np.isfinite(d.qpos).all() or d.qpos[2]<.3:break
+        completed=step+1 == round(args.seconds/.02)
         row=dict(seed=seed,initial_height=initial_height,sim_time=float(d.time),clean_balance_pass=bool(ever_passed and monitor.ok),
+                 completed_duration=completed,sustained_clean_pass=bool(ever_passed and monitor.ok and clean and completed),
                  clean_at_end=bool(clean),max_clean_hold_s=max_hold,limits=monitor.report(),final_checks=checks,stance=stance)
         rows.append(row)
         print(json.dumps({k:v for k,v in row.items() if k not in ['stance','final_checks']}),flush=True)
@@ -58,6 +63,9 @@ def main():
                 checkpoint=args.checkpoint,actor_sha256=hashlib.sha256(Path(args.checkpoint).read_bytes()).hexdigest() if args.checkpoint else None,
                 episodes=len(rows),clean_balance_passes=sum(r['clean_balance_pass'] for r in rows),
                 trajectory_limit_passes=sum(r['limits']['ok'] for r in rows),results=rows)
+    result.update(sustained_clean_passes=sum(r['sustained_clean_pass'] for r in rows),
+                  monitoring={'joint_limits_hz':1000,'posture_and_contacts_hz':50},
+                  pass_definition='clean_balance_pass: attained two-second clean hold within limits; sustained_clean_pass additionally requires full duration and clean final state')
     out=Path(args.output);out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2)+'\n')
 
 if __name__=='__main__':main()

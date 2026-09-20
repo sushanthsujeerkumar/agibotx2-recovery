@@ -11,7 +11,7 @@ class RecoveryRuntime:
     control_dt = CONTROL_DT
 
     def __init__(self, controller="scripted", checkpoint=None, render=False, seed=0, assess_stance=False,
-                 physics_profile="legacy"):
+                 physics_profile="legacy", reset_mode="supine"):
         if controller not in {"scripted", "policy"}:
             raise ValueError("controller must be scripted or policy")
         self.info = ModelInfo(physics_profile=physics_profile)
@@ -33,7 +33,7 @@ class RecoveryRuntime:
             import torch
             torch.set_num_threads(2)
             self.policy = torch.jit.load(str(checkpoint), map_location="cpu").eval()
-        self.reset(seed)
+        self.reset(seed, reset_mode=reset_mode)
         if render:
             import threading
             from mujoco import viewer as mujoco_viewer

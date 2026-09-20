@@ -18,7 +18,7 @@ def main():
     directory = Path(args.directory)
     actor = None
     runtime = RecoveryRuntime(controller="scripted", render=True, assess_stance=args.assess_stance,
-                              physics_profile=args.physics_profile)
+                              physics_profile=args.physics_profile, reset_mode=args.reset_mode)
     if args.reset_mode == "balance":
         runtime._scripted_target = lambda: runtime.info.nominal.copy()
         runtime.display_label = "BALANCE TEST ONLY - nominal controller"

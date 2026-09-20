@@ -1,4 +1,4 @@
-> **Current development branch: physics-v2.** The frozen ZIP and main branch retain the historical results below. This branch adds strict trajectory monitoring: ROS and the default evaluation launcher now reject the old policy's limit violations. A guarded controller has passed five standing-start balance tests; these are not recoveries. See [current phase results and balance demo](PHYSICS_V2_RESULTS.md).
+> **Current development branch: physics-v2.** The new learned policy passes **5/5 crouch rises and 5/5 standing tests**, but **0/5 supine recoveries**. Run `./RUN_CROUCH_DEMO.sh` and read [current results](CROUCH_STAGE_RESULTS.md). Strict monitoring rejects the older policy's joint-limit violations. Historical results below and the original ZIP describe earlier experiments.
 
 # AgiBot X2 ground recovery
 

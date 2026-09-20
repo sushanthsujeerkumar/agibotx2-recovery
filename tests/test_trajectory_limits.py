@@ -66,8 +66,10 @@ def test_crouch_start_is_physically_reached_and_below_success_height():
 
 def test_runtime_records_crouch_stage_and_restores_supine_default():
     from x2_recovery.runtime import RecoveryRuntime
-    runtime = RecoveryRuntime(physics_profile='guarded_v2')
+    runtime = RecoveryRuntime(physics_profile='guarded_v2', reset_mode='crouch')
     try:
+        assert runtime.reset_mode == 'crouch'
+        assert runtime.data.qpos[2] < runtime.info.height_threshold
         state = runtime.reset(3001, reset_mode='crouch')
         assert state['reset_mode'] == 'crouch'
         assert not state['validated_success']

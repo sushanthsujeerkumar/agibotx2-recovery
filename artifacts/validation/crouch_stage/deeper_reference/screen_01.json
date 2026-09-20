@@ -1,0 +1,266 @@
+{
+  "candidate": {
+    "hip_pitch_rad": -1.0,
+    "knee_rad": 1.7,
+    "ankle_pitch_rad": -0.7,
+    "waist_pitch_rad": 0.0
+  },
+  "seed": 4001,
+  "scripted_reference_pass": false,
+  "complete": false,
+  "end_reason": "pelvis_below_0.3m",
+  "sim_time_s": 3.2919999999997485,
+  "target_bounds": {
+    "inside_published_bounds": true,
+    "inside_guarded_command_margin": true,
+    "maximum_guarded_target_clamp_rad": 0.0,
+    "minimum_distance_to_guarded_boundary_rad": 0.05300000000000009
+  },
+  "maximum_command_clamp_rad": 0.0,
+  "initial": {
+    "time_s": 0.0,
+    "pelvis_height_m": 0.6699249196527635,
+    "joint_positions_rad": [
+      -0.12188997802036527,
+      0.00048252226316897206,
+      -0.000703073868897527,
+      0.2419250285901083,
+      -0.1448469589337884,
+      -0.001336397862300033,
+      -0.12015074237475411,
+      0.00426213197239692,
+      0.0004963484425107474,
+      0.24440526447603933,
+      -0.149099670487191,
+      -0.004813117565295183,
+      -5.873911806791146e-05,
+      0.005340575803055424,
+      0.006803500645976146,
+      0.001590282773039728,
+      0.06950886414025728,
+      -0.0006722997152686465,
+      -0.11894257698222027,
+      -0.00023627155808895016,
+      0.0010649810615182944,
+      -0.00012970035639572032,
+      0.0016138794078124975,
+      -0.0708229602702569,
+      0.0011586991539718381,
+      -0.11930469666389205,
+      -0.0001173007520056759,
+      0.0012557575965733857,
+      1.409070826747381e-05,
+      0.0030688810677894007,
+      -0.006052257298471873
+    ],
+    "exact_ground_forces_n": [
+      187.74703385460128,
+      223.74196226275188,
+      0.0
+    ],
+    "stance": {
+      "signed_foot_width_m": 0.2721065864213853,
+      "foot_heading_error_rad": [
+        0.000672912423328692,
+        0.0008797330967747954
+      ],
+      "hip_yaw_rad": [
+        -0.000703073868897527,
+        0.0004963484425107474
+      ],
+      "sole_tilt_rad": [
+        1.723397725945877e-05,
+        0.000190861709436488
+      ],
+      "foot_bracing_force_n": 0.0,
+      "checks": {
+        "stance_width": true,
+        "foot_heading": true,
+        "hip_yaw": true,
+        "flat_soles": true,
+        "no_foot_bracing": true
+      },
+      "posture_ok": true
+    },
+    "standing_checks": {
+      "upright": true,
+      "height": true,
+      "both_feet": true,
+      "no_other_support": true,
+      "low_linear_speed": true,
+      "low_angular_speed": true
+    },
+    "linear_speed_m_s": 0.03691444386221009,
+    "angular_speed_rad_s": 0.06659506356464945
+  },
+  "minimum_height_state": {
+    "time_s": 3.2919999999997485,
+    "pelvis_height_m": 0.2993812949174349,
+    "joint_positions_rad": [
+      -0.9192306573667766,
+      -0.000516947575563389,
+      0.0005067084390956097,
+      1.5722586577687194,
+      -0.6231986769086724,
+      0.0004530978784042162,
+      -0.9191973299984179,
+      0.0005296737252520315,
+      -0.0005233573572889597,
+      1.5721812944787907,
+      -0.6233100681005196,
+      -0.0007603361148374356,
+      2.097173554081883e-05,
+      0.021631398281019315,
+      -0.00024993063934479405,
+      0.007977476857284746,
+      0.07556673196465118,
+      -0.0005621015701308007,
+      -0.11501200105160608,
+      -2.3954753571810907e-05,
+      0.001584393411091342,
+      -0.0007398328863512692,
+      0.007925409784477814,
+      -0.07559237752507848,
+      0.0005698847346427211,
+      -0.11505876420170867,
+      1.6762481506486755e-05,
+      0.0015760061132162279,
+      0.0007428883412169666,
+      0.00029598708968689577,
+      -1.961317227932646e-05
+    ],
+    "exact_ground_forces_n": [
+      0.0,
+      72.20342837113216,
+      0.0
+    ],
+    "stance": {
+      "signed_foot_width_m": 0.2736557725422945,
+      "foot_heading_error_rad": [
+        0.00019527366964393146,
+        0.0001979557749815687
+      ],
+      "hip_yaw_rad": [
+        0.0005067084390956097,
+        -0.0005233573572889597
+      ],
+      "sole_tilt_rad": [
+        0.8861482670428027,
+        0.8863610512462663
+      ],
+      "foot_bracing_force_n": 0.0,
+      "checks": {
+        "stance_width": true,
+        "foot_heading": true,
+        "hip_yaw": true,
+        "flat_soles": false,
+        "no_foot_bracing": true
+      },
+      "posture_ok": false
+    },
+    "standing_checks": {
+      "upright": false,
+      "height": false,
+      "both_feet": false,
+      "no_other_support": true,
+      "low_linear_speed": false,
+      "low_angular_speed": false
+    },
+    "linear_speed_m_s": 1.476711839215025,
+    "angular_speed_rad_s": 2.8059476082032324
+  },
+  "bottom_hold_end": null,
+  "final": {
+    "time_s": 3.2919999999997485,
+    "pelvis_height_m": 0.2993812949174349,
+    "joint_positions_rad": [
+      -0.9192306573667766,
+      -0.000516947575563389,
+      0.0005067084390956097,
+      1.5722586577687194,
+      -0.6231986769086724,
+      0.0004530978784042162,
+      -0.9191973299984179,
+      0.0005296737252520315,
+      -0.0005233573572889597,
+      1.5721812944787907,
+      -0.6233100681005196,
+      -0.0007603361148374356,
+      2.097173554081883e-05,
+      0.021631398281019315,
+      -0.00024993063934479405,
+      0.007977476857284746,
+      0.07556673196465118,
+      -0.0005621015701308007,
+      -0.11501200105160608,
+      -2.3954753571810907e-05,
+      0.001584393411091342,
+      -0.0007398328863512692,
+      0.007925409784477814,
+      -0.07559237752507848,
+      0.0005698847346427211,
+      -0.11505876420170867,
+      1.6762481506486755e-05,
+      0.0015760061132162279,
+      0.0007428883412169666,
+      0.00029598708968689577,
+      -1.961317227932646e-05
+    ],
+    "exact_ground_forces_n": [
+      0.0,
+      72.20342837113216,
+      0.0
+    ],
+    "stance": {
+      "signed_foot_width_m": 0.2736557725422945,
+      "foot_heading_error_rad": [
+        0.00019527366964393146,
+        0.0001979557749815687
+      ],
+      "hip_yaw_rad": [
+        0.0005067084390956097,
+        -0.0005233573572889597
+      ],
+      "sole_tilt_rad": [
+        0.8861482670428027,
+        0.8863610512462663
+      ],
+      "foot_bracing_force_n": 0.0,
+      "checks": {
+        "stance_width": true,
+        "foot_heading": true,
+        "hip_yaw": true,
+        "flat_soles": false,
+        "no_foot_bracing": true
+      },
+      "posture_ok": false
+    },
+    "standing_checks": {
+      "upright": false,
+      "height": false,
+      "both_feet": false,
+      "no_other_support": true,
+      "low_linear_speed": false,
+      "low_angular_speed": false
+    },
+    "linear_speed_m_s": 1.476711839215025,
+    "angular_speed_rad_s": 2.8059476082032324
+  },
+  "clean_hold_after_return_s": 0.0,
+  "terminal_clean_hold_s": 0.0,
+  "minimum_exact_foot_ground_forces_n": [
+    0.0,
+    0.0
+  ],
+  "maximum_exact_nonfoot_ground_force_n": 0.0,
+  "maximum_foot_bracing_force_n": 0.0,
+  "trajectory_limits": {
+    "ok": true,
+    "physics_steps": 3293,
+    "max_position_violation_rad": 0.0,
+    "max_speed_ratio": 0.051840468075405946,
+    "max_commanded_effort_ratio": 0.46892690585792807,
+    "first_violation": null
+  },
+  "candidate_index": 1
+}

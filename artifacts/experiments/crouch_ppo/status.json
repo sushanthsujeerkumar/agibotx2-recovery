@@ -1,0 +1,37 @@
+{
+  "iteration": 362,
+  "environment_steps": 2224128,
+  "wall_time_s": 300.6266231109985,
+  "training_time_s": 297.76130986213684,
+  "iteration_time_s": 0.8112359046936035,
+  "steps_per_second": 7573.629279044957,
+  "mean_episode_reward": 15.317824850082397,
+  "mean_episode_length": 735.92,
+  "success_rate": 0.0,
+  "learning_rate": 1e-05,
+  "mean_action_std": 0.015067121013998985,
+  "losses": {
+    "value": 0.020318862050771713,
+    "surrogate": 0.010322222486138344,
+    "entropy": -86.06541442871094
+  },
+  "metrics": {
+    "recovery/success_rate": 0.0,
+    "recovery/invalid_rate": 0.0476190485060215,
+    "recovery/max_pelvis_height": 0.5578938722610474,
+    "recovery/episode_return": 15.069390296936035,
+    "recovery/episode_seconds": 14.330476760864258,
+    "recovery/terminal_linear_speed": 0.12290754914283752,
+    "recovery/terminal_angular_speed": 0.8638957142829895,
+    "recovery/original_recovery_rate": 0.0,
+    "stance/clean_success_rate": 0.0,
+    "stance/terminal_signed_width": 0.21388694643974304,
+    "stance/terminal_sole_error": 0.7708626985549927,
+    "stance/terminal_heading_error": 0.29618459939956665,
+    "physics/limit_failure_rate": 0.0476190485060215
+  },
+  "state": "PAUSED",
+  "pid": 53789,
+  "updated_unix": 1789888854.4991302,
+  "checkpoint": "/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/crouch_v3/model_000362.pt"
+}

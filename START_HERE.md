@@ -1,4 +1,4 @@
-> **physics-v2 update:** ROS now fails an episode after a joint-limit violation. The old actor therefore no longer receives `SUCCEEDED` on this branch. `./EVALUATE.sh` also uses strict checks; append `--posture-only` only to reproduce the historical posture count. Its historical posture-based evidence remains unchanged. See [new physics and balance results](PHYSICS_V2_RESULTS.md).
+> **Current development branch: physics-v2.** The new learned policy passes **5/5 crouch rises and 5/5 standing tests**, but **0/5 supine recoveries**. Run `./RUN_CROUCH_DEMO.sh` and read [current results](CROUCH_STAGE_RESULTS.md). Strict monitoring rejects the older policy's joint-limit violations. Historical results below and the original ZIP describe earlier experiments.
 
 # Run the submitted project
 
@@ -27,7 +27,7 @@ The extra clean-stance timer is deliberately separate from recovery success.
 ./EVALUATE.sh --assess-stance --output artifacts/local_evaluation/stance
 ```
 
-Results are JSON under `artifacts/local_evaluation`. The first command reproduces the original metric; the second continues after a recovery pass to check posture. For headless videos add `--video` and set `MUJOCO_GL=egl` on this NVIDIA host.
+Results are JSON under `artifacts/local_evaluation`. Both commands now enforce trajectory limits on this branch. Add `--posture-only` only to reproduce the historical posture metric; the stance option additionally checks foot posture. For headless videos add `--video` and set `MUJOCO_GL=egl` on this NVIDIA host.
 
 ## ROS 2 demo
 

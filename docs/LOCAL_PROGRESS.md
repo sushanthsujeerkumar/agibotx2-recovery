@@ -1,6 +1,6 @@
-# Active crouch-to-standing stage
+# Completed crouch-to-standing stage
 
-The user's next "nxt" request authorizes this local stage. Reference and aggregated supervised policy each pass 5/5 crouch trials. A bounded 300-second PPO fine-tune at artifacts/runs/crouch_v3 is now starting; preserve artifacts/experiments/crouch_teacher_augmented if PPO regresses. See CROUCH_STAGE.md. Do not report a scripted reference or standing/crouch-start result as supine recovery. No cloud or spending.
+The user's next "nxt" request authorized this local stage. Final PPO update362 after300.63s and2,224,128 transitions is frozen at artifacts/experiments/crouch_ppo. It passes5/5 fresh-seed CPU crouch rises and5/5 standing tests through the full10s, but0/5 supine recoveries; all15 trajectories respect monitored limits. Reference and aggregated supervised actor also pass5/5 moderate-crouch tests. Both failed direct clones are preserved. See ../CROUCH_STAGE_RESULTS.md and CROUCH_STAGE.md. CPU/controller/ROS tests:32passed. Timed training and viewers exited0, heartbeat remains paused, no cloud or spending. GPU stochastic training success stays0, but the separate deterministic GPU diagnostic passed16/16 initial episodes with no faults; exploration sensitivity is plausible, not causally proven. The deeper scripted reference passes5/5 at minimum pelvis~.4715m but has not been learned. Do not report curriculum success as supine recovery.
 
 # Physics v2 local phase completed
 

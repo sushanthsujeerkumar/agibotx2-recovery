@@ -28,8 +28,9 @@ def main():
         ax.set_ylabel(label);ax.set_xlabel("Environment steps");ax.grid(alpha=.25)
     axes[1].set_ylim(-.02,1.02)
     config_path = Path(a.directory)/"config.json"
-    balance = config_path.exists() and json.loads(config_path.read_text()).get("environment", {}).get("reset_mode") == "balance"
-    fig.suptitle("X2 standing-balance PPO — standing starts" if balance else "X2 recovery PPO — observed training results")
+    mode = json.loads(config_path.read_text()).get("environment", {}).get("reset_mode", "supine") if config_path.exists() else "supine"
+    titles = {"balance": "X2 standing-balance PPO — standing starts", "crouch": "X2 crouch-to-standing PPO — crouch starts"}
+    fig.suptitle(titles.get(mode, "X2 recovery PPO — observed training results"))
     dest=Path(a.output) if a.output else Path(a.directory)/"training_curve.png"
     dest.parent.mkdir(parents=True,exist_ok=True)
     fig.savefig(dest,dpi=150)

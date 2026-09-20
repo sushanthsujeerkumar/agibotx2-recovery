@@ -1,0 +1,270 @@
+{
+  "task": "Scripted deeper-crouch reference feasibility only; NOT learned or ground recovery",
+  "physics_profile": "guarded_v2",
+  "physics_dt_s": 0.001,
+  "control_dt_s": 0.02,
+  "screen_seed": 4001,
+  "validation_seeds": [
+    5001,
+    5002,
+    5003,
+    5004,
+    5005
+  ],
+  "candidate_count_cap": 8,
+  "candidates": [
+    {
+      "knee_rad": 1.6,
+      "ankle_pitch_rad": -0.7,
+      "hip_pitch_rad": -0.9000000000000001,
+      "waist_pitch_rad": 0.0
+    },
+    {
+      "knee_rad": 1.7,
+      "ankle_pitch_rad": -0.7,
+      "hip_pitch_rad": -1.0,
+      "waist_pitch_rad": 0.0
+    },
+    {
+      "knee_rad": 1.8,
+      "ankle_pitch_rad": -0.7,
+      "hip_pitch_rad": -1.1,
+      "waist_pitch_rad": 0.0
+    },
+    {
+      "knee_rad": 1.9,
+      "ankle_pitch_rad": -0.7,
+      "hip_pitch_rad": -1.2,
+      "waist_pitch_rad": 0.0
+    },
+    {
+      "knee_rad": 1.7,
+      "ankle_pitch_rad": -0.65,
+      "hip_pitch_rad": -1.0499999999999998,
+      "waist_pitch_rad": 0.0
+    },
+    {
+      "knee_rad": 1.8,
+      "ankle_pitch_rad": -0.72,
+      "hip_pitch_rad": -1.08,
+      "waist_pitch_rad": 0.0
+    },
+    {
+      "knee_rad": 1.9,
+      "ankle_pitch_rad": -0.72,
+      "hip_pitch_rad": -1.18,
+      "waist_pitch_rad": 0.12
+    },
+    {
+      "knee_rad": 1.9,
+      "ankle_pitch_rad": -0.72,
+      "hip_pitch_rad": -1.18,
+      "waist_pitch_rad": -0.12
+    }
+  ],
+  "lower_seconds": 4.0,
+  "bottom_hold_seconds": 1.0,
+  "return_seconds": 4.0,
+  "final_hold_seconds": 4.0,
+  "interpolation": "smoothstep",
+  "reset": "physically settled reset_balance; no later state edits",
+  "checks": "Exact ground/foot-bracing contacts, clean standing and latched trajectory limits at every physics step",
+  "selection": "Deepest minimum pelvis height among screen passes; selected before five additional validation seeds",
+  "limits": {
+    "left_hip_pitch_joint": {
+      "lower_rad": -2.704,
+      "upper_rad": 2.556,
+      "guarded_lower_rad": -2.6540000000000004,
+      "guarded_upper_rad": 2.5060000000000002
+    },
+    "left_hip_roll_joint": {
+      "lower_rad": -0.235,
+      "upper_rad": 2.906,
+      "guarded_lower_rad": -0.185,
+      "guarded_upper_rad": 2.8560000000000003
+    },
+    "left_hip_yaw_joint": {
+      "lower_rad": -1.8588,
+      "upper_rad": 3.6041,
+      "guarded_lower_rad": -1.8088,
+      "guarded_upper_rad": 3.5541
+    },
+    "left_knee_joint": {
+      "lower_rad": 0.0,
+      "upper_rad": 2.4073,
+      "guarded_lower_rad": 0.05,
+      "guarded_upper_rad": 2.3573000000000004
+    },
+    "left_ankle_pitch_joint": {
+      "lower_rad": -0.803,
+      "upper_rad": 0.453,
+      "guarded_lower_rad": -0.753,
+      "guarded_upper_rad": 0.403
+    },
+    "left_ankle_roll_joint": {
+      "lower_rad": -0.2967,
+      "upper_rad": 0.2967,
+      "guarded_lower_rad": -0.24670000000000003,
+      "guarded_upper_rad": 0.24670000000000003
+    },
+    "right_hip_pitch_joint": {
+      "lower_rad": -2.704,
+      "upper_rad": 2.556,
+      "guarded_lower_rad": -2.6540000000000004,
+      "guarded_upper_rad": 2.5060000000000002
+    },
+    "right_hip_roll_joint": {
+      "lower_rad": -2.906,
+      "upper_rad": 0.235,
+      "guarded_lower_rad": -2.8560000000000003,
+      "guarded_upper_rad": 0.185
+    },
+    "right_hip_yaw_joint": {
+      "lower_rad": -3.6041,
+      "upper_rad": 1.8588,
+      "guarded_lower_rad": -3.5541,
+      "guarded_upper_rad": 1.8088
+    },
+    "right_knee_joint": {
+      "lower_rad": 0.0,
+      "upper_rad": 2.4073,
+      "guarded_lower_rad": 0.05,
+      "guarded_upper_rad": 2.3573000000000004
+    },
+    "right_ankle_pitch_joint": {
+      "lower_rad": -0.803,
+      "upper_rad": 0.453,
+      "guarded_lower_rad": -0.753,
+      "guarded_upper_rad": 0.403
+    },
+    "right_ankle_roll_joint": {
+      "lower_rad": -0.2967,
+      "upper_rad": 0.2967,
+      "guarded_lower_rad": -0.24670000000000003,
+      "guarded_upper_rad": 0.24670000000000003
+    },
+    "waist_yaw_joint": {
+      "lower_rad": -3.43,
+      "upper_rad": 2.2078,
+      "guarded_lower_rad": -3.3800000000000003,
+      "guarded_upper_rad": 2.1578000000000004
+    },
+    "waist_pitch_joint": {
+      "lower_rad": -0.314,
+      "upper_rad": 0.314,
+      "guarded_lower_rad": -0.264,
+      "guarded_upper_rad": 0.264
+    },
+    "waist_roll_joint": {
+      "lower_rad": -0.488,
+      "upper_rad": 0.488,
+      "guarded_lower_rad": -0.438,
+      "guarded_upper_rad": 0.438
+    },
+    "left_shoulder_pitch_joint": {
+      "lower_rad": -3.08,
+      "upper_rad": 2.04,
+      "guarded_lower_rad": -3.0300000000000002,
+      "guarded_upper_rad": 1.99
+    },
+    "left_shoulder_roll_joint": {
+      "lower_rad": -0.061,
+      "upper_rad": 3.0456,
+      "guarded_lower_rad": -0.010999999999999996,
+      "guarded_upper_rad": 2.9956
+    },
+    "left_shoulder_yaw_joint": {
+      "lower_rad": -2.556,
+      "upper_rad": 2.556,
+      "guarded_lower_rad": -2.5060000000000002,
+      "guarded_upper_rad": 2.5060000000000002
+    },
+    "left_elbow_joint": {
+      "lower_rad": -2.3556,
+      "upper_rad": 0.0,
+      "guarded_lower_rad": -2.3056,
+      "guarded_upper_rad": -0.05
+    },
+    "left_wrist_yaw_joint": {
+      "lower_rad": -2.556,
+      "upper_rad": 2.556,
+      "guarded_lower_rad": -2.5060000000000002,
+      "guarded_upper_rad": 2.5060000000000002
+    },
+    "left_wrist_pitch_joint": {
+      "lower_rad": -0.5236,
+      "upper_rad": 0.5236,
+      "guarded_lower_rad": -0.47359999999999997,
+      "guarded_upper_rad": 0.47359999999999997
+    },
+    "left_wrist_roll_joint": {
+      "lower_rad": -1.5097,
+      "upper_rad": 0.724,
+      "guarded_lower_rad": -1.4597,
+      "guarded_upper_rad": 0.6739999999999999
+    },
+    "right_shoulder_pitch_joint": {
+      "lower_rad": -3.08,
+      "upper_rad": 2.04,
+      "guarded_lower_rad": -3.0300000000000002,
+      "guarded_upper_rad": 1.99
+    },
+    "right_shoulder_roll_joint": {
+      "lower_rad": -3.0456,
+      "upper_rad": 0.061,
+      "guarded_lower_rad": -2.9956,
+      "guarded_upper_rad": 0.010999999999999996
+    },
+    "right_shoulder_yaw_joint": {
+      "lower_rad": -2.556,
+      "upper_rad": 2.556,
+      "guarded_lower_rad": -2.5060000000000002,
+      "guarded_upper_rad": 2.5060000000000002
+    },
+    "right_elbow_joint": {
+      "lower_rad": -2.3556,
+      "upper_rad": 0.0,
+      "guarded_lower_rad": -2.3056,
+      "guarded_upper_rad": -0.05
+    },
+    "right_wrist_yaw_joint": {
+      "lower_rad": -2.556,
+      "upper_rad": 2.556,
+      "guarded_lower_rad": -2.5060000000000002,
+      "guarded_upper_rad": 2.5060000000000002
+    },
+    "right_wrist_pitch_joint": {
+      "lower_rad": -0.5236,
+      "upper_rad": 0.5236,
+      "guarded_lower_rad": -0.47359999999999997,
+      "guarded_upper_rad": 0.47359999999999997
+    },
+    "right_wrist_roll_joint": {
+      "lower_rad": -0.724,
+      "upper_rad": 1.5097,
+      "guarded_lower_rad": -0.6739999999999999,
+      "guarded_upper_rad": 1.4597
+    },
+    "head_yaw_joint": {
+      "lower_rad": -0.349,
+      "upper_rad": 0.349,
+      "guarded_lower_rad": -0.299,
+      "guarded_upper_rad": 0.299
+    },
+    "head_pitch_joint": {
+      "lower_rad": -0.3838,
+      "upper_rad": 0.3838,
+      "guarded_lower_rad": -0.3338,
+      "guarded_upper_rad": 0.3338
+    }
+  },
+  "source_git_commit": "cf32c3bd3058803721bef43140892f59ef5c6c38",
+  "source_sha256": {
+    "scripts/screen_deeper_crouch.py": "e49982eaa1079e14bc012f944056c5b106d0c2dde41b8b0e7e6fcf816d0b045d",
+    "assets/x2/scene.xml": "500a69c1463fb0814964d31e003f74ba8316a91bf66b004645f1d4e4e7bbf6cd",
+    "assets/x2/model_metadata.json": "92796edede1fc693f1c53a2a707a64929c91b9c1fffd6756098564453246c554",
+    "src/x2_recovery/common.py": "760bb247c67080baba92e18377fc1be67806d673e10d58f6aaf73cd24fb66347",
+    "src/x2_recovery/physics.py": "7faff98b78484b59825926d894f12c354074ff430f65f3b88b4603f006174801",
+    "src/x2_recovery/stance.py": "8e3a265a4ad9f39ecf8d48b8d2c1b3ad41ea3c46aebf53a72d54f717650654ff"
+  }
+}

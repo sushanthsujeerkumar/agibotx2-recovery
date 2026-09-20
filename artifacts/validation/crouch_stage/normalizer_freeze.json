@@ -1,0 +1,11 @@
+{
+  "checkpoint": "artifacts/experiments/crouch_ppo/checkpoint.pt",
+  "completed_iterations": 362,
+  "config_freeze": true,
+  "equal": {
+    "obs_normalizer._mean": true,
+    "obs_normalizer._var": true,
+    "obs_normalizer._std": true,
+    "obs_normalizer.count": true
+  }
+}
