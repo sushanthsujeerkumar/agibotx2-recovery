@@ -14,6 +14,7 @@ def generate_launch_description():
         ('timeout_s', '60.0', 'Wall-clock deadline including simulator startup'),
         ('max_sim_duration_s', '20.0', 'Maximum simulated episode duration'),
         ('realtime', 'true', 'Pace simulation to wall time for a visible demonstration'),
+        ('physics_profile', 'legacy', 'Versioned physics: legacy or guarded_v2'),
         ('log_period_s', '1.0', 'Telemetry log interval'),
     ]
     declarations = [DeclareLaunchArgument(name, default_value=value, description=description)
@@ -23,6 +24,7 @@ def generate_launch_description():
                       'controller': str, 'checkpoint': str, 'render': bool,
                       'seed': int, 'timeout_s': float, 'max_sim_duration_s': float,
                       'realtime': bool,
+                      'physics_profile': str,
                   }.items()}
     return LaunchDescription(declarations + [
         Node(package='x2_recovery_ros', executable='recovery_node',

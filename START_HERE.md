@@ -1,3 +1,5 @@
+> **physics-v2 update:** ROS now fails an episode after a joint-limit violation. The old actor therefore no longer receives `SUCCEEDED` on this branch. Its historical posture-based evidence remains unchanged. See [new physics and balance experiment](artifacts/validation/physics_v2/README.md).
+
 # Run the submitted project
 
 The retained policy passes the original posture-based check in 5/5 episodes, but the additional clean-stance and whole-trajectory joint-limit audits both score 0/5. The simulator, PPO pipeline, ROS integration and evidence are runnable; the controller remains a partial result with unresolved physical-limit and posture problems. See [RESULTS.md](RESULTS.md). Do not describe the earlier 5/5 posture count as fully validated physical recovery.

@@ -1,3 +1,15 @@
+# New local phase authorized by user: "nxt"
+
+Working branch: physics-v2. The prior local-results ZIP remains frozen. No cloud resources or spending.
+
+Guarded physics uses earlier joint-stop engagement and a bounded velocity servo, preserving URDF mass/inertia/ranges/effort. Five perturbed standing tests each sustain 10 s of clean stance within all audited limits. This is balance, not supine recovery. CPU runtime and guarded GPU training now latch joint-limit violations; ROS rejects them before success. A real ROS test of the old actor reaches FAILED for a physical-limit violation, with acceptance, busy rejection and actual telemetry verified.
+
+A bounded 180 s balance pilot uses the previous stance PPO settings, but random initial actor/noise disrupt the known stable nominal controller. Its outcome must be evaluated honestly. A second bounded 180 s pilot will initialize the actor mean at zero (the independently validated nominal target), with standard deviation .03. This is a disclosed controller prior, not a learned initial success. Preserve both run results and measure held-out standing starts and separate supine starts. Do not extend into an overnight campaign automatically. Pause/stop viewers after evidence is saved.
+
+See artifacts/validation/physics_v2/README.md for current evidence. The historical campaign ledger below records the original frozen package.
+
+---
+
 # Local campaign completed
 
 Project: `/home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery`

@@ -28,6 +28,7 @@ class RecoveryNode(Node):
             'timeout_s': 60.0,
             'max_sim_duration_s': 20.0,
             'realtime': True,
+            'physics_profile': 'legacy',
         }.items():
             self.declare_parameter(name, default)
         qos = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL,
@@ -63,11 +64,15 @@ class RecoveryNode(Node):
             return response
         config = {name: self.get_parameter(name).value for name in (
             'controller', 'checkpoint', 'render', 'seed', 'timeout_s',
-            'max_sim_duration_s', 'realtime',
+            'max_sim_duration_s', 'realtime', 'physics_profile',
         )}
         if config['controller'] not in ('scripted', 'policy'):
             response.success = False
             response.message = 'controller must be scripted or policy'
+            return response
+        if config['physics_profile'] not in ('legacy', 'guarded_v2'):
+            response.success = False
+            response.message = 'physics_profile must be legacy or guarded_v2'
             return response
         if config['controller'] == 'policy' and not config['checkpoint']:
             response.success = False

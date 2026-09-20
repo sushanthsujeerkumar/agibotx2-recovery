@@ -38,6 +38,7 @@ def run_episode(config, connection):
             checkpoint=config['checkpoint'] or None,
             render=config['render'],
             seed=config['seed'],
+            physics_profile=config.get('physics_profile', 'legacy'),
         )
         runtime.reset(seed=config['seed'])
         control_dt = float(runtime.control_dt)

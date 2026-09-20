@@ -1,0 +1,78 @@
+Starting >>> x2_recovery_ros
+Finished <<< x2_recovery_ros [1.90s]
+
+Summary: 1 package finished [2.06s]
+[INFO] [launch]: All log files can be found below /home/sushanth/.ros/log/2026-09-20-07-46-17-648096-sushanth-ISRMOT-220-48174
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [recovery_node-1]: process started with pid [48227]
+[INFO] [telemetry_node-2]: process started with pid [48228]
+[recovery_node-1] [INFO] [1789886778.142929075] [x2_recovery]: Ready: /x2/start_recovery; simulator starts after an accepted response
+[telemetry_node-2] [INFO] [1789886778.213818986] [x2_telemetry]: Status: IDLE
+[telemetry_node-2] [INFO] [1789886779.115194701] [x2_telemetry]: status=IDLE; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789886780.115218545] [x2_telemetry]: status=IDLE; awaiting simulator joint telemetry
+[recovery_node-1] [INFO] [1789886780.491522410] [x2_recovery]: Recovery status: RUNNING
+[telemetry_node-2] [INFO] [1789886780.491797868] [x2_telemetry]: Status: RUNNING
+[telemetry_node-2] [INFO] [1789886781.115677100] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[telemetry_node-2] [INFO] [1789886782.115043396] [x2_telemetry]: status=RUNNING; awaiting simulator joint telemetry
+[recovery_node-1] [INFO] [1789886783.011946220] [x2_recovery]: Recovery status: FAILED
+[telemetry_node-2] [INFO] [1789886783.012278300] [x2_telemetry]: Status: FAILED
+[recovery_node-1] [INFO] [1789886783.012396680] [x2_recovery]: Recovery completed: trajectory limits failed or unavailable
+[telemetry_node-2] [INFO] [1789886783.115062161] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886784.115011960] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886785.115050768] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886786.115018427] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886787.115086378] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886788.115186982] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886789.115501416] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886790.115019993] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886791.115015262] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886792.115199250] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886793.115119340] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886794.115287664] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886795.115204085] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886796.115531516] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886797.115303383] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886798.115065900] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886799.115302632] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886800.115309687] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886801.115041896] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886802.115241964] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886803.115196141] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886804.115038247] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886805.115244977] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886806.115222913] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886807.115262109] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886808.115228116] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886809.115020280] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886810.115193275] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886811.115207832] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886812.115011852] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886813.115071916] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886814.115236786] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886815.115276931] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886816.115051609] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886817.115293861] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886818.115378149] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886819.115211733] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886820.115050802] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886821.115248558] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886822.115229604] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886823.115059160] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886824.115164349] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886825.115539248] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886826.115283823] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886827.115044405] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886828.115201312] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886829.115056788] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886830.115018407] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886831.115190049] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886832.115021000] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886833.115225755] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886834.115224662] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886835.115032478] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886836.115237427] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886837.115074219] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886838.115542892] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886839.115219764] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886840.115042706] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s
+[telemetry_node-2] [INFO] [1789886841.115129608] [x2_telemetry]: status=FAILED; left_hip_pitch_joint=-0.32515 rad; sim_time=0.020 s

@@ -24,6 +24,8 @@ def main():
     parser.add_argument('--expect-final', choices=['SUCCEEDED', 'FAILED'], default='FAILED')
     parser.add_argument('--deadline', type=float, default=90.0)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--min-joint-frames', type=int, default=2,
+                        help='Use 1 only for immediate physical-limit rejection tests.')
     args = parser.parse_args()
     rclpy.init()
     node = Node('x2_integration_probe')
@@ -79,7 +81,7 @@ def main():
         evidence['joint_frame_count'] = len(frames)
         assert 'RUNNING' in statuses, 'RUNNING was never observed'
         assert statuses[-1] == args.expect_final, evidence['statuses']
-        assert len(frames) >= 2, 'Fewer than two actual simulator joint frames received'
+        assert len(frames) >= args.min_joint_frames, 'Too few actual simulator joint frames received'
         assert frames[0]['received_at'] >= first_response_at, 'A joint frame preceded acceptance'
         for frame in frames:
             assert len(frame['names']) == len(frame['positions']) > 0
