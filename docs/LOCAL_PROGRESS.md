@@ -1,3 +1,11 @@
+# Reference-guided student stage completed; recovery remains unresolved
+
+Teacher collection passed 14/16. Four supervised fits (50,000 gradient steps, 80.67 seconds of fitting) produced no student-alone recovery: the final fresh batch scored 0/5, including three speed faults. No new PPO or cloud run was started. Student weights and datasets remain in the ignored local experiment directory; numerical evidence and source are preserved. The prior PPO actor hash is unchanged.
+
+A live replay exposed shared viewer data changing contact observations. Both the student recorder and main runtime now isolate display model/data. The student video matches headless evidence exactly; the main viewer has regression and physical-parity checks. See [the full stage report](../REFERENCE_STUDENT_RESULTS.md). Next: preserve the explicit reference/feedback contract and first address the teacher ankle-speed failures before reference-conditioned PPO.
+
+---
+
 # External get-up compatibility stage completed
 
 The user approved inspection of the official get-up reference. The public ONNX

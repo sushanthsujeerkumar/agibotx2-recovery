@@ -1,4 +1,4 @@
-> **Current development branch: physics-v2.** A separately labelled, adapted external AgiBot policy passes **5/5 full supine recoveries** under the monitored limits. Our own PPO remains **0/5 supine**, while passing its crouch/standing curriculum. Read [external-reference results](VENDOR_REFERENCE_RESULTS.md) and [our PPO results](DEEP_CROUCH_STAGE_RESULTS.md). The optional `./RUN_VENDOR_REFERENCE_DEMO.sh` uses external local assets; it does not replace the trained policy. Historical results below and the original ZIP describe earlier experiments.
+> **Current development branch: physics-v2.** The adapted external teacher passed its earlier **5/5** batch and **14/16** additional trials. The new teacher-guided student scored **0/5** fresh supine recoveries; our existing PPO also remains **0/5 supine**. Read [student results and viewer fix](REFERENCE_STUDENT_RESULTS.md), [external-reference results](VENDOR_REFERENCE_RESULTS.md), and [PPO curriculum results](DEEP_CROUCH_STAGE_RESULTS.md). Historical results below and the original ZIP describe earlier experiments.
 
 # Run the submitted project
 

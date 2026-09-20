@@ -1,0 +1,30 @@
+{
+  "contract": "x2_phase_student_v1: shared106 + elapsed_seconds/15 -> normalized_joint_targets31",
+  "external_teacher_sha256": "3faf3df8f9616448f9ae580e22c2fa28fcb25c1eb0c9a338a0b0c5b9a520522f",
+  "policy_source": "https://x2-aimdk.agibot.com/downloads/mc-x86-v1.0.0-20260522.zip",
+  "reference_timescale": 1.2,
+  "seeds": [
+    9501,
+    9502,
+    9503,
+    9504,
+    9505,
+    9506,
+    9507,
+    9508,
+    9509,
+    9510,
+    9511,
+    9512,
+    9513,
+    9514,
+    9515,
+    9516
+  ],
+  "passes": 14,
+  "selection": "Only successful complete teacher demonstrations; all student-state labels retained when aggregating",
+  "actor_sha256": null,
+  "teacher_fraction": 0.0,
+  "samples": 10500,
+  "original_vendor_assets_in_repository": false
+}

@@ -1,0 +1,22 @@
+{
+  "teacher_successes": 14,
+  "teacher_trials": 16,
+  "assisted_successes": 5,
+  "assisted_trials": 6,
+  "final_student_successes": 0,
+  "final_student_trials": 5,
+  "final_student_faults": 3,
+  "fit_gradient_steps": 50000,
+  "fit_wall_seconds_total": 80.66902970599767,
+  "new_ppo_updates": 0,
+  "student_actor_sha256": "0ef5958b2e7f37a36ad954dcf2b62292445adb43d2df76d04e8714cedfa1d5bf",
+  "own_ppo_actor_sha256": "cb8dfa17c71b2b2e1bd2ed5e4b1282b47e92308706f0e4d8daa981dc403c9a47",
+  "datasets_and_student_weights": "Local ignored artifacts/experiments/reference_student_local/; original vendor assets outside repository",
+  "fresh_evaluation_seeds": [
+    9901,
+    9902,
+    9903,
+    9904,
+    9905
+  ]
+}

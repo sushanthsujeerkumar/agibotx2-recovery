@@ -1,0 +1,131 @@
+{
+  "checks": {
+    "full_state_sensor_control_trajectory_exact": true,
+    "final_snapshot_exact": true,
+    "clean_stance": true,
+    "limits_ok": true
+  },
+  "seed": 9101,
+  "reset_mode": "deep_crouch",
+  "control_steps": 500,
+  "result": {
+    "joint_names": [
+      "left_hip_pitch_joint",
+      "left_hip_roll_joint",
+      "left_hip_yaw_joint",
+      "left_knee_joint",
+      "left_ankle_pitch_joint",
+      "left_ankle_roll_joint",
+      "right_hip_pitch_joint",
+      "right_hip_roll_joint",
+      "right_hip_yaw_joint",
+      "right_knee_joint",
+      "right_ankle_pitch_joint",
+      "right_ankle_roll_joint",
+      "waist_yaw_joint",
+      "waist_pitch_joint",
+      "waist_roll_joint",
+      "left_shoulder_pitch_joint",
+      "left_shoulder_roll_joint",
+      "left_shoulder_yaw_joint",
+      "left_elbow_joint",
+      "left_wrist_yaw_joint",
+      "left_wrist_pitch_joint",
+      "left_wrist_roll_joint",
+      "right_shoulder_pitch_joint",
+      "right_shoulder_roll_joint",
+      "right_shoulder_yaw_joint",
+      "right_elbow_joint",
+      "right_wrist_yaw_joint",
+      "right_wrist_pitch_joint",
+      "right_wrist_roll_joint",
+      "head_yaw_joint",
+      "head_pitch_joint"
+    ],
+    "joint_positions": [
+      -0.1199578651590599,
+      0.0020882245375486654,
+      -0.0014211862881044663,
+      0.23920289701314768,
+      -0.16395651176364817,
+      -0.0020934497495104457,
+      -0.12074700851376077,
+      -0.0002647341005660719,
+      0.001131712652368004,
+      0.23959546316546496,
+      -0.16357240314721772,
+      0.0003609675700452014,
+      -0.0009813484086056764,
+      0.010107847871289795,
+      -0.0009717134022176198,
+      0.0028926113417785688,
+      0.07068240324715311,
+      0.0058995672625033095,
+      -0.12161783856932393,
+      0.005805224946934624,
+      0.0001440142717992114,
+      0.00017614725948617498,
+      -0.005299371976739059,
+      -0.0716286233687197,
+      -0.002073786313472647,
+      -0.1217547118896089,
+      -0.003932050854241495,
+      0.0010707885332992453,
+      9.685012406771995e-05,
+      -0.00021568524112649962,
+      0.008247898148053443
+    ],
+    "sim_time": 9.999999999999897,
+    "success": true,
+    "invalid": false,
+    "pelvis_height": 0.669436046022088,
+    "max_pelvis_height": 0.6703046163205063,
+    "standing_hold_seconds": 8.8399999999999,
+    "checks": {
+      "upright": true,
+      "height": true,
+      "both_feet": true,
+      "no_other_support": true,
+      "low_linear_speed": true,
+      "low_angular_speed": true
+    },
+    "physics_profile": "guarded_v2",
+    "reset_mode": "deep_crouch",
+    "trajectory_limits": {
+      "ok": true,
+      "physics_steps": 10001,
+      "max_position_violation_rad": 0.0,
+      "max_speed_ratio": 0.3144167773190586,
+      "max_commanded_effort_ratio": 1.0,
+      "first_violation": null
+    },
+    "validated_success": true,
+    "stance": {
+      "signed_foot_width_m": 0.27583018050508606,
+      "foot_heading_error_rad": [
+        0.0012584560398156736,
+        0.0011100550864954653
+      ],
+      "hip_yaw_rad": [
+        -0.0014211862881044663,
+        0.001131712652368004
+      ],
+      "sole_tilt_rad": [
+        0.0002582755913596428,
+        0.00023862687396832973
+      ],
+      "foot_bracing_force_n": 0.0,
+      "checks": {
+        "stance_width": true,
+        "foot_heading": true,
+        "hip_yaw": true,
+        "flat_soles": true,
+        "no_foot_bracing": true
+      },
+      "posture_ok": true
+    },
+    "clean_stance_hold_seconds": 8.8399999999999,
+    "max_clean_stance_hold_seconds": 8.8399999999999,
+    "clean_stance_success": true
+  }
+}

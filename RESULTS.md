@@ -1,3 +1,5 @@
+> **Latest local stage:** teacher-guided imitation scored **0/5** fresh supine trials; the external teacher scored **14/16** additional trials. The viewer now uses isolated display data. See [REFERENCE_STUDENT_RESULTS.md](REFERENCE_STUDENT_RESULTS.md). Historical experiment results follow.
+
 > **Separate external-controller result:** [VENDOR_REFERENCE_RESULTS.md](VENDOR_REFERENCE_RESULTS.md) records5/5 compliant supine recoveries using an adapted vendor policy. These are separate from this project's PPO experiments and do not replace their results.
 
 > **Historical main-run results.** Newer physics-v2 curriculum results are in [DEEP_CROUCH_STAGE_RESULTS.md](DEEP_CROUCH_STAGE_RESULTS.md); scripted contact-transition diagnostics are in [FLOOR_TRANSITION_RESULTS.md](FLOOR_TRANSITION_RESULTS.md). Full supine recovery with the latest curriculum actor remains **0/5**.

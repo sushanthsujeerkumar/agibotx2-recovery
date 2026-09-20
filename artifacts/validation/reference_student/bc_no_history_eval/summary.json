@@ -1,0 +1,12 @@
+{
+  "actor_sha256": "f4d3103dcaf1fa3d5aceee21e8694968d34a3fc498a5bafe6368d7af3a475edc",
+  "passes": 0,
+  "episodes": 3,
+  "seeds": [
+    9601,
+    9602,
+    9603
+  ],
+  "contract": "x2_phase_student_v1: shared106 + elapsed_seconds/15 -> normalized_joint_targets31",
+  "external_teacher_at_inference": false
+}

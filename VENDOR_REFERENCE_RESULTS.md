@@ -1,3 +1,5 @@
+> **Subsequent test:** the same adapted teacher passed **14/16** additional trials, with two ankle-speed faults. Its distilled student scored **0/5**. The **5/5** result below describes the original batch only. See [REFERENCE_STUDENT_RESULTS.md](REFERENCE_STUDENT_RESULTS.md).
+
 # External get-up policy compatibility results
 
 **An adapted, externally pretrained AgiBot policy completed five of five fresh
