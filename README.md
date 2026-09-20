@@ -2,7 +2,7 @@
 
 A MuJoCo recovery controller for the AgiBot X2 Ultra, with PPO training and a ROS 2 service interface.
 
-The submitted policy passed **5/5 fresh assessment episodes**, starting on its back and finishing with two seconds of stable, uncrossed standing. It also passed the earlier ten-episode final-checkpoint evaluation. Both sets check joint position, velocity and commanded effort throughout the trajectory. [Results and limits](RESULTS.md) · [Release checks](docs/verification.md) · [Recovery video](artifacts/submission/final_recovery/recovery.mp4) · [Requirement mapping](docs/requirements.md)
+The submitted policy passed **5/5 fresh assessment episodes**, starting on its back and finishing with two seconds of stable, uncrossed standing. It also passed the earlier ten-episode final-checkpoint evaluation. Both sets check joint position, velocity and commanded effort throughout the trajectory. [Results and limits](RESULTS.md) · [Release checks](docs/verification.md) · [Recovery video](artifacts/submission/final_recovery/recovery.mp4) · [Parallel training video](artifacts/submission/final_recovery/parallel_training.mp4) · [Requirement mapping](docs/requirements.md)
 
 The controller combines a frozen motion prior with learned PPO feedback. The prior comes from recovery trajectories generated in this project; PPO learns small corrections using the robot's state across the full episode. The motion sequence was **not discovered from scratch by PPO**. No external policy or vendor controller is needed to run the submitted model.
 
@@ -82,7 +82,7 @@ The recovery node supervises a simulator subprocess so that startup or a stalled
   --seconds 1800 --num-envs 256 --headless --evaluate-final
 ```
 
-In the batch viewer, press **V** to switch between 16 and all 256 robots. It displays snapshots of the actual training environments. Rendering has its own simulator data and cannot change their dynamics. Training stops at its time budget, saves a checkpoint, and runs a separate deterministic evaluation. Ctrl+C requests a checkpoint and clean shutdown. A timer or iteration count reproduces the procedure, not an identical result across different GPUs or solver versions.
+In the batch viewer, press **V** to switch between 16 and all 256 robots; the [parallel training video](artifacts/submission/final_recovery/parallel_training.mp4) shows that toggle during the final run. It displays snapshots of the actual training environments. Rendering has its own simulator data and cannot change their dynamics. Training stops at its time budget, saves a checkpoint, and runs a separate deterministic evaluation. Ctrl+C requests a checkpoint and clean shutdown. A timer or iteration count reproduces the procedure, not an identical result across different GPUs or solver versions.
 
 [Training settings and reference provenance](docs/training.md) explain how to regenerate the supervised prior, resume training, export the actor and record video. [Environment specification](docs/environment.md) gives every observation, action, reward term and success threshold. [Model notes](docs/model.md) cover the source URDF, limits and simulation assumptions.
 
@@ -98,7 +98,7 @@ The main remaining limitation is the reset distribution: small perturbations aro
 
 - `src/x2_recovery/`: model contract, simulation, policy export, training and viewer.
 - `ros2_ws/src/x2_recovery_ros/`: recovery node, telemetry node and one launch file.
-- `artifacts/submission/final_recovery/`: selected actor, resumable checkpoint, reference, raw training log, reward plot, evaluation and ROS evidence. `manifest.json` identifies the deployment files and hashes.
+- `artifacts/submission/final_recovery/`: selected actor, resumable checkpoint, reference, raw training log, reward plot, evaluation, recovery and parallel-training videos, and ROS evidence. `manifest.json` identifies the deployment files and hashes.
 - `tests/`: export parity, physics, stance, viewer isolation and related regression tests.
 - Earlier experiments, failed checkpoints and their results remain in Git history. The working tree contains the submitted method only; see [development history](docs/development.md).
 
