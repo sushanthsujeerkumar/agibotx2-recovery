@@ -1,4 +1,4 @@
-> **Current development branch: physics-v2.** The new learned policy passes **5/5 crouch rises and 5/5 standing tests**, but **0/5 supine recoveries**. Run `./RUN_CROUCH_DEMO.sh` and read [current results](CROUCH_STAGE_RESULTS.md). Strict monitoring rejects the older policy's joint-limit violations. Historical results below and the original ZIP describe earlier experiments.
+> **Current development branch: physics-v2.** The latest actor passes **5/5 at both crouch depths, 5/5 standing tests and 5/5 with small action noise**. Supine recovery remains **0/5**. Run `./RUN_DEEP_CROUCH_DEMO.sh` and read [latest results and limitations](DEEP_CROUCH_STAGE_RESULTS.md). Historical results below and the original ZIP describe earlier experiments.
 
 # Run the submitted project
 

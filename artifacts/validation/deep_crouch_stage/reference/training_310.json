@@ -1,0 +1,76 @@
+{
+  "seed": 310,
+  "scripted_reference_pass": true,
+  "complete": true,
+  "sim_time_s": 9.999999999999897,
+  "initial_pelvis_height_m": 0.47254499054730525,
+  "initial_standing_checks": {
+    "upright": true,
+    "height": false,
+    "both_feet": true,
+    "no_other_support": true,
+    "low_linear_speed": true,
+    "low_angular_speed": true
+  },
+  "minimum_pelvis_height_m": 0.47254499054730525,
+  "final_pelvis_height_m": 0.6691630363437249,
+  "first_clean_hold_s": 4.049999999999687,
+  "max_clean_hold_s": 7.95000000000099,
+  "terminal_clean_hold_s": 7.95000000000099,
+  "terminal_clean_standing": true,
+  "final_base_linear_speed_m_s": 4.44498786681565e-05,
+  "final_base_angular_speed_rad_s": 8.266518411004258e-05,
+  "maximum_foot_bracing_force_n": 0.0,
+  "minimum_exact_foot_ground_forces_n": [
+    186.9613912274946,
+    186.14020974066779
+  ],
+  "maximum_exact_nonfoot_ground_force_n": 0.0,
+  "maximum_command_target_clamp_rad": 0.0,
+  "final_exact_ground_forces_n": [
+    206.25059599777208,
+    205.44142637945112,
+    0.0
+  ],
+  "final_standing_checks": {
+    "upright": true,
+    "height": true,
+    "both_feet": true,
+    "no_other_support": true,
+    "low_linear_speed": true,
+    "low_angular_speed": true
+  },
+  "final_stance": {
+    "signed_foot_width_m": 0.2742268035793078,
+    "foot_heading_error_rad": [
+      1.5123026915032014e-07,
+      1.9146687513283823e-06
+    ],
+    "hip_yaw_rad": [
+      3.432253927598614e-06,
+      -2.9976664884688375e-06
+    ],
+    "sole_tilt_rad": [
+      0.00030969021341709655,
+      0.00031102412337292735
+    ],
+    "foot_bracing_force_n": 0.0,
+    "checks": {
+      "stance_width": true,
+      "foot_heading": true,
+      "hip_yaw": true,
+      "flat_soles": true,
+      "no_foot_bracing": true
+    },
+    "posture_ok": true
+  },
+  "trajectory_limits": {
+    "ok": true,
+    "physics_steps": 10001,
+    "max_position_violation_rad": 0.0,
+    "max_speed_ratio": 0.04624385383686254,
+    "max_commanded_effort_ratio": 0.4264169122294155,
+    "first_violation": null
+  },
+  "control_samples": 500
+}

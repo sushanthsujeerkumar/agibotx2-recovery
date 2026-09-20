@@ -1,0 +1,113 @@
+{
+  "scope": "deeper-crouch PPO; ground recovery requires independent supine tests",
+  "iteration": 226,
+  "environment_steps": 1388544,
+  "wall_time_s": 180.15651815899764,
+  "files": {
+    "actor.pt": "cb8dfa17c71b2b2e1bd2ed5e4b1282b47e92308706f0e4d8daa981dc403c9a47",
+    "checkpoint.pt": "7aad4aa8ee383454c0c2f9fad85b0ccb87633f2a921dc6a4d7b476e61538dc32",
+    "config.json": "91ff0a205e4a86d91632e5e9d8d5714b618fe894954df6dabf734c07936c2666",
+    "progress.jsonl": "d1f25c56243ce6d6a6f4bd4e04819462e73e3eb5b229fce07587233b79742b88",
+    "deep_evaluation.json": "fce9cf3aa97b34fd66c29391afcb41742cb338bd269f4084676dce42d2b6518d",
+    "moderate_evaluation.json": "07523862d66ef49d43a9f235e5b83df8e8aac683953a391f5a788d028d61ab7e",
+    "balance_evaluation.json": "8f9912f2404347fcc41b8fac0dcfd01c834235af9f13a0b58f1c963a30b3682e",
+    "noise_0003.json": "448155a9326879c4aff597f1be9dfcc74b72c0dfb5d2d00ccc708b6786b35905",
+    "noise_0005.json": "31f03d0d9d640b990e12c2f85033e7c3c16bc1cb7f53cb2d4cae0eea41e8034a",
+    "noise_0015.json": "d0eb874c513c9bfc3aefecb4bae3b665291a348d372fd36447a8e64280879fff",
+    "supine_evaluation/summary.json": "689eb7a0a470589ad2659dfc412cbd6ff26873003d72120c78f7ebf0955b3f22",
+    "video/episode.mp4": "99b7e846c585fb95253fa88f1558efebe5dd20e74902475bc45c47146791e0cb",
+    "video/episode.json": "b044d624c6088c64ece8a40d7b61acd07747ed4daae5c6751ec8a97edac2d6c5",
+    "training_curve.png": "b0e44a59a06bc9fc5acd110b9dd6f2eeb694eff935ec8c9750041741ff5d721e"
+  },
+  "selection": "Selected for deeper-crouch replay after complete-duration deterministic multi-start and small-noise validation; NOT a successful supine controller",
+  "comparison": "Matched noise.003: original1/5, contact-corrected warmstart5/5, finalPPO5/5. No demonstrated incremental pass-count gain over corrected warmstart.",
+  "training_source_commit": "db194a2",
+  "normalizer_frozen": true,
+  "normalized_contact_change_magnitude": 1.0,
+  "console_formatting": "ANSI colour and trailing whitespace removed",
+  "evaluations": {
+    "deep_evaluation": {
+      "episodes": 5,
+      "seeds": [
+        8001,
+        8002,
+        8003,
+        8004,
+        8005
+      ],
+      "passes": 5,
+      "complete_duration": 5,
+      "observed_prefix_limit_passes": 5
+    },
+    "moderate_evaluation": {
+      "episodes": 5,
+      "seeds": [
+        8101,
+        8102,
+        8103,
+        8104,
+        8105
+      ],
+      "passes": 5,
+      "complete_duration": 5,
+      "observed_prefix_limit_passes": 5
+    },
+    "balance_evaluation": {
+      "episodes": 5,
+      "seeds": [
+        8201,
+        8202,
+        8203,
+        8204,
+        8205
+      ],
+      "passes": 5,
+      "complete_duration": 5,
+      "observed_prefix_limit_passes": 5
+    },
+    "noise_0003": {
+      "episodes": 5,
+      "seeds": [
+        8301,
+        8302,
+        8303,
+        8304,
+        8305
+      ],
+      "passes": 5,
+      "complete_duration": 5,
+      "observed_prefix_limit_passes": 5
+    },
+    "noise_0005": {
+      "episodes": 5,
+      "seeds": [
+        8301,
+        8302,
+        8303,
+        8304,
+        8305
+      ],
+      "passes": 0,
+      "complete_duration": 5,
+      "observed_prefix_limit_passes": 5
+    },
+    "noise_0015": {
+      "episodes": 5,
+      "seeds": [
+        8301,
+        8302,
+        8303,
+        8304,
+        8305
+      ],
+      "passes": 0,
+      "complete_duration": 1,
+      "observed_prefix_limit_passes": 5
+    },
+    "supine": {
+      "episodes": 5,
+      "validated_successes": 0,
+      "trajectory_limit_passes": 5
+    }
+  }
+}

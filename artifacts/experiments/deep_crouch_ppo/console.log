@@ -1,0 +1,377 @@
+Warp 1.17.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.2
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 5060" (8 GiB, sm_120, mempool enabled)
+   Kernel cache:
+     /home/sushanth/.cache/warp/1.17.0
+Module mujoco_warp._src.smooth b9cc505 load on device 'cuda:0' took 4.40 ms  (cached)
+Module _nxn_broadphase__locals__kernel_3a0c7ab9 3a0c7ab load on device 'cuda:0' took 0.44 ms  (cached)
+Module ccd_kernel_builder__locals__ccd_kernel_f173d362 f173d36 load on device 'cuda:0' took 2.06 ms  (cached)
+Module ccd_kernel_builder__locals__ccd_kernel_f173d362 c570b25 load on device 'cuda:0' took 2.27 ms  (cached)
+Module _primitive_narrowphase__locals__primitive_narrowphase_c206fcb1 c206fcb load on device 'cuda:0' took 1.35 ms  (cached)
+Module mujoco_warp._src.constraint 9435a53 load on device 'cuda:0' took 0.38 ms  (cached)
+Module _friction_dof__locals__kernel_85239eb5 85239eb load on device 'cuda:0' took 0.62 ms  (cached)
+Module _limit_slide_hinge__locals__kernel_b8014c9f b8014c9 load on device 'cuda:0' took 0.63 ms  (cached)
+Module _efc_contact_init__locals__kernel_34eca94d 34eca94 load on device 'cuda:0' took 0.58 ms  (cached)
+Module _efc_contact_jac_sparse__locals__kernel_eb752226 eb75222 load on device 'cuda:0' took 0.47 ms  (cached)
+Module _efc_contact_update__locals__kernel_1a7e7f98 1a7e7f9 load on device 'cuda:0' took 0.84 ms  (cached)
+Module mujoco_warp._src.forward f44d3e1 load on device 'cuda:0' took 1.02 ms  (cached)
+Module mujoco_warp._src.passive 80f3681 load on device 'cuda:0' took 1.06 ms  (cached)
+Module mujoco_warp._src.forward 0a75030 load on device 'cuda:0' took 1.01 ms  (cached)
+Module _qfrc_smooth__locals__kernel_2c4e0694 2c4e069 load on device 'cuda:0' took 0.83 ms  (cached)
+Module mujoco_warp._src.support f39c2de load on device 'cuda:0' took 0.44 ms  (cached)
+Module _tile_cholesky_factorize_solve_block__locals__kernel_410b5cee df4fccb load on device 'cuda:0' took 31.16 ms  (cached)
+Module _solve_init_dof__locals__kernel_48710307 4871030 load on device 'cuda:0' took 0.40 ms  (cached)
+Module mujoco_warp._src.solver c97221b load on device 'cuda:0' took 1.45 ms  (cached)
+Module _solve_init_jaref_kernel__locals__kernel_2a872ce1 2a872ce load on device 'cuda:0' took 0.46 ms  (cached)
+Module mul_m_kernel__locals___mul_m_74986a16 74986a1 load on device 'cuda:0' took 0.41 ms  (cached)
+Module _update_constraint_efc__locals__kernel_ed085732 ed08573 load on device 'cuda:0' took 0.54 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_sparse__locals__kernel_67d0743a 67d0743 load on device 'cuda:0' took 0.44 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_ada3cc5f ada3cc5 load on device 'cuda:0' took 0.50 ms  (cached)
+Module _update_gradient_grad__locals__kernel_45d59ec9 45d59ec load on device 'cuda:0' took 0.55 ms  (cached)
+Module _update_gradient_init_h_sparse__locals__kernel_3d60cf50 3d60cf5 load on device 'cuda:0' took 0.39 ms  (cached)
+Module _JTDAJ_sparse__locals__kernel_eac33f90 eac33f9 load on device 'cuda:0' took 0.41 ms  (cached)
+Module _JTDAJ_sparse__locals__kernel_eac33f90 afcc61a load on device 'cuda:0' took 0.40 ms  (cached)
+Module _update_gradient_cholesky_blocked__locals__kernel_42d7c12a 8fc8818 load on device 'cuda:0' took 68.95 ms  (cached)
+Module _linesearch_jv_fused_kernel__locals__kernel_399fca1a 399fca1 load on device 'cuda:0' took 0.45 ms  (cached)
+Module _linesearch_iterative_kernel__locals__kernel_7c89cc6f bbd1d99 load on device 'cuda:0' took 0.71 ms  (cached)
+Module _update_constraint_efc__locals__kernel_b09277e7 b09277e load on device 'cuda:0' took 0.61 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_90b73b32 90b73b3 load on device 'cuda:0' took 0.45 ms  (cached)
+Module _update_gradient_grad__locals__kernel_89d63404 89d6340 load on device 'cuda:0' took 0.42 ms  (cached)
+Module _update_gradient_h_incremental_sparse__locals__kernel_8510a60f 8510a60 load on device 'cuda:0' took 0.54 ms  (cached)
+Module _update_gradient_cholesky_blocked_skip_unchanged__locals__kernel_99cf3aa8 220e8d0 load on device 'cuda:0' took 75.84 ms  (cached)
+Module mujoco_warp._src.sensor 764597f load on device 'cuda:0' took 2.07 ms  (cached)
+Module mujoco_warp._src.derivative 1d93a53 load on device 'cuda:0' took 1.17 ms  (cached)
+Module _next_time_builder__locals___next_time_cc50a46c cc50a46 load on device 'cuda:0' took 0.58 ms  (cached)
+Module reset_data__locals__reset_xfrc_applied_c7eeecfb c7eeecf load on device 'cuda:0' took 0.83 ms  (cached)
+Module reset_data__locals__reset_M_d1ea7a8e d1ea7a8 load on device 'cuda:0' took 0.36 ms  (cached)
+Module reset_data__locals__reset_mocap_b017f38a b017f38 load on device 'cuda:0' took 0.35 ms  (cached)
+Module reset_data__locals__reset_contact_757d9bde 757d9bd load on device 'cuda:0' took 0.37 ms  (cached)
+Module reset_data__locals__reset_sleep_6b3be194 6b3be19 load on device 'cuda:0' took 0.35 ms  (cached)
+Module reset_data__locals__reset_nworld_e471a890 e471a89 load on device 'cuda:0' took 0.44 ms  (cached)
+--------------------------------------------------------------------------------
+Resolved observation sets:
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=106, out_features=256, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=256, out_features=128, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=128, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=31, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=106, out_features=256, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=256, out_features=128, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=128, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+Storing git diff for 'hrs-x2-recovery' in: /home/sushanth/Documents/Codex/2026-09-19/l/outputs/hrs-x2-recovery/artifacts/runs/deep_crouch_v3/git/hrs-x2-recovery.diff
+################################################################################
+                           Learning iteration 0/1000
+
+                            Total steps: 6144
+                       Steps per second: 5808
+                        Collection time: 0.813s
+                          Learning time: 0.245s
+                        Mean value loss: 5.3964
+                    Mean surrogate loss: 0.2954
+                      Mean entropy loss: -136.0962
+                        Mean action std: 0.00
+--------------------------------------------------------------------------------
+                         Iteration time: 1.06s
+                           Time elapsed: 0:00:01
+                                    ETA: 0:17:36
+
+################################################################################
+                           Learning iteration 24/1000
+
+                            Total steps: 153600
+                       Steps per second: 7793
+                        Collection time: 0.675s
+                          Learning time: 0.113s
+                        Mean value loss: 4.4359
+                    Mean surrogate loss: 0.0090
+                      Mean entropy loss: -136.0988
+                            Mean reward: 73.92
+                    Mean episode length: 196.68
+                        Mean action std: 0.00
+          stance/terminal_heading_error: 0.0000
+         recovery/terminal_linear_speed: 0.0224
+             recovery/max_pelvis_height: 0.6697
+             stance/terminal_sole_error: 0.0000
+        recovery/original_recovery_rate: 1.0000
+                  recovery/success_rate: 1.0000
+        recovery/terminal_angular_speed: 0.0823
+                recovery/episode_return: 80.1206
+             physics/limit_failure_rate: 0.0000
+           stance/terminal_signed_width: 0.2783
+                  recovery/invalid_rate: 0.0000
+               recovery/episode_seconds: 4.2800
+              stance/clean_success_rate: 1.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.79s
+                           Time elapsed: 0:00:19
+                                    ETA: 0:12:48
+
+################################################################################
+                           Learning iteration 49/1000
+
+                            Total steps: 307200
+                       Steps per second: 7789
+                        Collection time: 0.682s
+                          Learning time: 0.106s
+                        Mean value loss: 3.7976
+                    Mean surrogate loss: 0.0042
+                      Mean entropy loss: -136.0959
+                            Mean reward: 72.98
+                    Mean episode length: 193.63
+                        Mean action std: 0.00
+          stance/terminal_heading_error: 0.0000
+         recovery/terminal_linear_speed: 0.0208
+             recovery/max_pelvis_height: 0.6696
+             stance/terminal_sole_error: -0.0000
+        recovery/original_recovery_rate: 1.0000
+                  recovery/success_rate: 1.0000
+        recovery/terminal_angular_speed: 0.0975
+                recovery/episode_return: 71.4606
+             physics/limit_failure_rate: 0.0000
+           stance/terminal_signed_width: 0.2782
+                  recovery/invalid_rate: 0.0000
+               recovery/episode_seconds: 3.7884
+              stance/clean_success_rate: 1.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.79s
+                           Time elapsed: 0:00:40
+                                    ETA: 0:12:49
+
+################################################################################
+                           Learning iteration 74/1000
+
+                            Total steps: 460800
+                       Steps per second: 7859
+                        Collection time: 0.682s
+                          Learning time: 0.100s
+                        Mean value loss: 3.5070
+                    Mean surrogate loss: 0.0057
+                      Mean entropy loss: -136.0912
+                            Mean reward: 72.52
+                    Mean episode length: 192.07
+                        Mean action std: 0.00
+          stance/terminal_heading_error: 0.0000
+         recovery/terminal_linear_speed: 0.0212
+             recovery/max_pelvis_height: 0.6698
+             stance/terminal_sole_error: -0.0000
+        recovery/original_recovery_rate: 1.0000
+                  recovery/success_rate: 1.0000
+        recovery/terminal_angular_speed: 0.0926
+                recovery/episode_return: 74.0635
+             physics/limit_failure_rate: 0.0000
+           stance/terminal_signed_width: 0.2783
+                  recovery/invalid_rate: 0.0000
+               recovery/episode_seconds: 3.9262
+              stance/clean_success_rate: 1.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.78s
+                           Time elapsed: 0:01:00
+                                    ETA: 0:12:23
+
+################################################################################
+                           Learning iteration 99/1000
+
+                            Total steps: 614400
+                       Steps per second: 7889
+                        Collection time: 0.678s
+                          Learning time: 0.101s
+                        Mean value loss: 3.3016
+                    Mean surrogate loss: 0.0008
+                      Mean entropy loss: -136.0854
+                            Mean reward: 73.14
+                    Mean episode length: 193.43
+                        Mean action std: 0.00
+          stance/terminal_heading_error: 0.0000
+         recovery/terminal_linear_speed: 0.0233
+             recovery/max_pelvis_height: 0.6698
+             stance/terminal_sole_error: 0.0000
+        recovery/original_recovery_rate: 1.0000
+                  recovery/success_rate: 1.0000
+        recovery/terminal_angular_speed: 0.1048
+                recovery/episode_return: 73.6453
+             physics/limit_failure_rate: 0.0000
+           stance/terminal_signed_width: 0.2779
+                  recovery/invalid_rate: 0.0000
+               recovery/episode_seconds: 3.8955
+              stance/clean_success_rate: 1.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.78s
+                           Time elapsed: 0:01:19
+                                    ETA: 0:11:59
+
+################################################################################
+                          Learning iteration 124/1000
+
+                            Total steps: 768000
+                       Steps per second: 7843
+                        Collection time: 0.676s
+                          Learning time: 0.108s
+                        Mean value loss: 3.3261
+                    Mean surrogate loss: 0.0038
+                      Mean entropy loss: -136.0823
+                            Mean reward: 72.42
+                    Mean episode length: 191.03
+                        Mean action std: 0.00
+          stance/terminal_heading_error: 0.0000
+         recovery/terminal_linear_speed: 0.0211
+             recovery/max_pelvis_height: 0.6699
+             stance/terminal_sole_error: -0.0000
+        recovery/original_recovery_rate: 1.0000
+                  recovery/success_rate: 1.0000
+        recovery/terminal_angular_speed: 0.1095
+                recovery/episode_return: 73.3031
+             physics/limit_failure_rate: 0.0000
+           stance/terminal_signed_width: 0.2775
+                  recovery/invalid_rate: 0.0000
+               recovery/episode_seconds: 3.8665
+              stance/clean_success_rate: 1.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.78s
+                           Time elapsed: 0:01:39
+                                    ETA: 0:11:35
+
+################################################################################
+                          Learning iteration 149/1000
+
+                            Total steps: 921600
+                       Steps per second: 7857
+                        Collection time: 0.674s
+                          Learning time: 0.108s
+                        Mean value loss: 3.5170
+                    Mean surrogate loss: 0.0029
+                      Mean entropy loss: -136.0743
+                            Mean reward: 74.21
+                    Mean episode length: 195.72
+                        Mean action std: 0.00
+          stance/terminal_heading_error: 0.0000
+         recovery/terminal_linear_speed: 0.0222
+             recovery/max_pelvis_height: 0.6699
+             stance/terminal_sole_error: -0.0000
+        recovery/original_recovery_rate: 1.0000
+                  recovery/success_rate: 1.0000
+        recovery/terminal_angular_speed: 0.1119
+                recovery/episode_return: 71.4633
+             physics/limit_failure_rate: 0.0000
+           stance/terminal_signed_width: 0.2779
+                  recovery/invalid_rate: 0.0000
+               recovery/episode_seconds: 3.7606
+              stance/clean_success_rate: 1.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.78s
+                           Time elapsed: 0:01:59
+                                    ETA: 0:11:14
+
+################################################################################
+                          Learning iteration 174/1000
+
+                            Total steps: 1075200
+                       Steps per second: 7956
+                        Collection time: 0.668s
+                          Learning time: 0.104s
+                        Mean value loss: 3.1593
+                    Mean surrogate loss: 0.0039
+                      Mean entropy loss: -136.0690
+                            Mean reward: 76.40
+                    Mean episode length: 201.41
+                        Mean action std: 0.00
+          stance/terminal_heading_error: 0.0000
+         recovery/terminal_linear_speed: 0.0216
+             recovery/max_pelvis_height: 0.6699
+             stance/terminal_sole_error: 0.0000
+        recovery/original_recovery_rate: 1.0000
+                  recovery/success_rate: 1.0000
+        recovery/terminal_angular_speed: 0.1002
+                recovery/episode_return: 73.2967
+             physics/limit_failure_rate: 0.0000
+           stance/terminal_signed_width: 0.2774
+                  recovery/invalid_rate: 0.0000
+               recovery/episode_seconds: 3.8536
+              stance/clean_success_rate: 1.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.77s
+                           Time elapsed: 0:02:18
+                                    ETA: 0:10:53
+
+################################################################################
+                          Learning iteration 199/1000
+
+                            Total steps: 1228800
+                       Steps per second: 7760
+                        Collection time: 0.675s
+                          Learning time: 0.116s
+                        Mean value loss: 3.5602
+                    Mean surrogate loss: 0.0009
+                      Mean entropy loss: -136.0620
+                            Mean reward: 72.93
+                    Mean episode length: 191.68
+                        Mean action std: 0.00
+          stance/terminal_heading_error: 0.0000
+         recovery/terminal_linear_speed: 0.0174
+             recovery/max_pelvis_height: 0.6700
+             stance/terminal_sole_error: -0.0000
+        recovery/original_recovery_rate: 1.0000
+                  recovery/success_rate: 1.0000
+        recovery/terminal_angular_speed: 0.0927
+                recovery/episode_return: 74.2505
+             physics/limit_failure_rate: 0.0000
+           stance/terminal_signed_width: 0.2780
+                  recovery/invalid_rate: 0.0000
+               recovery/episode_seconds: 3.9081
+              stance/clean_success_rate: 1.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.79s
+                           Time elapsed: 0:02:37
+                                    ETA: 0:10:31
+
+################################################################################
+                          Learning iteration 224/1000
+
+                            Total steps: 1382400
+                       Steps per second: 7915
+                        Collection time: 0.675s
+                          Learning time: 0.101s
+                        Mean value loss: 3.8833
+                    Mean surrogate loss: 0.0015
+                      Mean entropy loss: -136.0535
+                            Mean reward: 73.82
+                    Mean episode length: 194.20
+                        Mean action std: 0.00
+          stance/terminal_heading_error: 0.0000
+         recovery/terminal_linear_speed: 0.0227
+             recovery/max_pelvis_height: 0.6700
+             stance/terminal_sole_error: -0.0000
+        recovery/original_recovery_rate: 1.0000
+                  recovery/success_rate: 1.0000
+        recovery/terminal_angular_speed: 0.0993
+                recovery/episode_return: 76.0294
+             physics/limit_failure_rate: 0.0000
+           stance/terminal_signed_width: 0.2779
+                  recovery/invalid_rate: 0.0000
+               recovery/episode_seconds: 4.0067
+              stance/clean_success_rate: 1.0000
+--------------------------------------------------------------------------------
+                         Iteration time: 0.78s
+                           Time elapsed: 0:02:57
+                                    ETA: 0:10:10

@@ -1,0 +1,7 @@
+{
+  "iteration": 226,
+  "environment_steps": 1388544,
+  "checkpoint": "artifacts/experiments/deep_crouch_ppo/checkpoint.pt",
+  "actor": "artifacts/experiments/deep_crouch_ppo/actor.pt",
+  "label": "DEEP CROUCH ONLY - not floor recovery"
+}

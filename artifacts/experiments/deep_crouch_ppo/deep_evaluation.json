@@ -1,0 +1,268 @@
+{
+  "task": "deep_crouch-start balance; NOT supine recovery",
+  "physics_profile": "guarded_v2",
+  "checkpoint": "artifacts/experiments/deep_crouch_ppo/actor.pt",
+  "actor_sha256": "cb8dfa17c71b2b2e1bd2ed5e4b1282b47e92308706f0e4d8daa981dc403c9a47",
+  "episodes": 5,
+  "clean_balance_passes": 5,
+  "trajectory_limit_passes": 5,
+  "results": [
+    {
+      "seed": 8001,
+      "initial_height": 0.4724743741526998,
+      "sim_time": 9.999999999999897,
+      "clean_balance_pass": true,
+      "completed_duration": true,
+      "sustained_clean_pass": true,
+      "clean_at_end": true,
+      "max_clean_hold_s": 8.8399999999999,
+      "limits": {
+        "ok": true,
+        "physics_steps": 10001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.31434452340878277,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      },
+      "final_checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      },
+      "stance": {
+        "signed_foot_width_m": 0.2758583385208514,
+        "foot_heading_error_rad": [
+          0.0012563468649991658,
+          0.0011131712405212085
+        ],
+        "hip_yaw_rad": [
+          -0.0014208473539871682,
+          0.0011365742192992931
+        ],
+        "sole_tilt_rad": [
+          0.00025859780587982934,
+          0.00023901103411244634
+        ],
+        "foot_bracing_force_n": 0.0,
+        "checks": {
+          "stance_width": true,
+          "foot_heading": true,
+          "hip_yaw": true,
+          "flat_soles": true,
+          "no_foot_bracing": true
+        },
+        "posture_ok": true
+      }
+    },
+    {
+      "seed": 8002,
+      "initial_height": 0.4725040160843221,
+      "sim_time": 9.999999999999897,
+      "clean_balance_pass": true,
+      "completed_duration": true,
+      "sustained_clean_pass": true,
+      "clean_at_end": true,
+      "max_clean_hold_s": 8.8599999999999,
+      "limits": {
+        "ok": true,
+        "physics_steps": 10001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.31459714943394723,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      },
+      "final_checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      },
+      "stance": {
+        "signed_foot_width_m": 0.27579437722643063,
+        "foot_heading_error_rad": [
+          0.0012622030716599496,
+          0.0010867327255640667
+        ],
+        "hip_yaw_rad": [
+          -0.0014216063697474288,
+          0.0011075736261026928
+        ],
+        "sole_tilt_rad": [
+          0.00025680026533869807,
+          0.00023721512903495022
+        ],
+        "foot_bracing_force_n": 0.0,
+        "checks": {
+          "stance_width": true,
+          "foot_heading": true,
+          "hip_yaw": true,
+          "flat_soles": true,
+          "no_foot_bracing": true
+        },
+        "posture_ok": true
+      }
+    },
+    {
+      "seed": 8003,
+      "initial_height": 0.4724654223235895,
+      "sim_time": 9.999999999999897,
+      "clean_balance_pass": true,
+      "completed_duration": true,
+      "sustained_clean_pass": true,
+      "clean_at_end": true,
+      "max_clean_hold_s": 8.8399999999999,
+      "limits": {
+        "ok": true,
+        "physics_steps": 10001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.31445260536045533,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      },
+      "final_checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      },
+      "stance": {
+        "signed_foot_width_m": 0.27580277260913655,
+        "foot_heading_error_rad": [
+          0.0012613754369448513,
+          0.0010887933866264349
+        ],
+        "hip_yaw_rad": [
+          -0.0014213640944405232,
+          0.0011100919780411558
+        ],
+        "sole_tilt_rad": [
+          0.000256897972649256,
+          0.0002373544725883723
+        ],
+        "foot_bracing_force_n": 0.0,
+        "checks": {
+          "stance_width": true,
+          "foot_heading": true,
+          "hip_yaw": true,
+          "flat_soles": true,
+          "no_foot_bracing": true
+        },
+        "posture_ok": true
+      }
+    },
+    {
+      "seed": 8004,
+      "initial_height": 0.47251242590901643,
+      "sim_time": 9.999999999999897,
+      "clean_balance_pass": true,
+      "completed_duration": true,
+      "sustained_clean_pass": true,
+      "clean_at_end": true,
+      "max_clean_hold_s": 8.8599999999999,
+      "limits": {
+        "ok": true,
+        "physics_steps": 10001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.3144509821892822,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      },
+      "final_checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      },
+      "stance": {
+        "signed_foot_width_m": 0.2758816007739309,
+        "foot_heading_error_rad": [
+          0.0012547283912234992,
+          0.0011159439305905169
+        ],
+        "hip_yaw_rad": [
+          -0.001420706852230032,
+          0.0011407572925542307
+        ],
+        "sole_tilt_rad": [
+          0.0002589325372707002,
+          0.00023936376572414086
+        ],
+        "foot_bracing_force_n": 0.0,
+        "checks": {
+          "stance_width": true,
+          "foot_heading": true,
+          "hip_yaw": true,
+          "flat_soles": true,
+          "no_foot_bracing": true
+        },
+        "posture_ok": true
+      }
+    },
+    {
+      "seed": 8005,
+      "initial_height": 0.47257165129399925,
+      "sim_time": 9.999999999999897,
+      "clean_balance_pass": true,
+      "completed_duration": true,
+      "sustained_clean_pass": true,
+      "clean_at_end": true,
+      "max_clean_hold_s": 8.8799999999999,
+      "limits": {
+        "ok": true,
+        "physics_steps": 10001,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.314663793373523,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      },
+      "final_checks": {
+        "upright": true,
+        "height": true,
+        "both_feet": true,
+        "no_other_support": true,
+        "low_linear_speed": true,
+        "low_angular_speed": true
+      },
+      "stance": {
+        "signed_foot_width_m": 0.2759072547970184,
+        "foot_heading_error_rad": [
+          0.0012545006741039133,
+          0.0010861200876103026
+        ],
+        "hip_yaw_rad": [
+          -0.0014202719071003452,
+          0.001114928284216919
+        ],
+        "sole_tilt_rad": [
+          0.00025742020932031863,
+          0.00023816848757046057
+        ],
+        "foot_bracing_force_n": 0.0,
+        "checks": {
+          "stance_width": true,
+          "foot_heading": true,
+          "hip_yaw": true,
+          "flat_soles": true,
+          "no_foot_bracing": true
+        },
+        "posture_ok": true
+      }
+    }
+  ],
+  "sustained_clean_passes": 5,
+  "action_noise_std": 0.0,
+  "monitoring": {
+    "joint_limits_hz": 1000,
+    "posture_and_contacts_hz": 50
+  },
+  "pass_definition": "clean_balance_pass: attained two-second clean hold within limits; sustained_clean_pass additionally requires full duration and clean final state"
+}

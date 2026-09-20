@@ -1,0 +1,89 @@
+{
+  "task": "Independent frozen deep-crouch PPO provenance/normalizer audit; no simulation",
+  "audited_at_utc": "2026-09-20T07:52:19.286605+00:00",
+  "checkpoint_sha256": "7aad4aa8ee383454c0c2f9fad85b0ccb87633f2a921dc6a4d7b476e61538dc32",
+  "actor_sha256": "cb8dfa17c71b2b2e1bd2ed5e4b1282b47e92308706f0e4d8daa981dc403c9a47",
+  "parent_checkpoint_sha256": "52f2d654ee59917c5f9ef885db72b68e8ac2680cf95250484ccadde5579f604c",
+  "all_checks_pass": true,
+  "checks": {
+    "manifest_file_hashes_match": true,
+    "parent_hash_matches_checkpoint_and_config": true,
+    "checkpoint_and_config_initialization_match": true,
+    "training_configuration_matches_except_documented_runtime_field": true,
+    "environment_configuration_matches": true,
+    "environment_is_guarded_deep_crouch": true,
+    "normalizer_freeze_enabled_in_checkpoint_config_and_arguments": true,
+    "iteration_counters_match": true,
+    "transition_count_matches_rollout_dimensions": true,
+    "trained_checkpoint_not_warmstart_only": true,
+    "optimizer_contains_training_state": true,
+    "all_actor_normalizer_buffers_exactly_frozen": true,
+    "all_exported_state_matches_checkpoint": true,
+    "only_unused_gaussian_parameter_omitted_from_export": true,
+    "contact_denominator_still_exactly_one": true,
+    "contact_variance_matches_parent": true,
+    "all_actor_means_preserved": true,
+    "all_continuous_actor_statistics_preserved": true,
+    "ppo_changed_actor_network_parameters": true,
+    "ordinary_forward_outputs_match": true
+  },
+  "documented_runtime_configuration_difference": {
+    "multi_gpu": "Checkpoint adds a runtime multi_gpu:null field absent from startup configuration; single-GPU behavior is unchanged."
+  },
+  "iterations": 226,
+  "environment_transitions": 1388544,
+  "rollout_steps_per_update": 24,
+  "num_environments": 256,
+  "checkpoint_wall_seconds": 180.12631166199571,
+  "final_manifest_wall_seconds": 180.15651815899764,
+  "training_compute_seconds": 178.03243780136108,
+  "timing_note": "Checkpoint, last-update and final-status clocks are saved moments apart; final campaign duration is the manifest value.",
+  "normalizer_buffer_equality_to_parent": {
+    "obs_normalizer._mean": true,
+    "obs_normalizer._var": true,
+    "obs_normalizer._std": true,
+    "obs_normalizer.count": true
+  },
+  "normalizer_count": 8000,
+  "normalizer_eps": 0.01,
+  "contact_means": [
+    1.0,
+    1.0,
+    0.0
+  ],
+  "contact_stds": [
+    0.9900000095367432,
+    0.9900000095367432,
+    0.9900000095367432
+  ],
+  "contact_effective_denominators": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "changed_actor_parameter_tensors": [
+    "mlp.0.weight",
+    "mlp.0.bias",
+    "mlp.2.weight",
+    "mlp.2.bias",
+    "mlp.4.weight",
+    "mlp.4.bias",
+    "mlp.6.weight",
+    "mlp.6.bias"
+  ],
+  "ordinary_forward_observations_checked": 8,
+  "ordinary_forward_max_abs_difference": 0.0,
+  "reporting_limitations": [
+    "Only supine starts count as ground recovery; deep, moderate and standing starts are curriculum stages.",
+    "Use sustained_clean_passes for full-duration CPU stage counts. It requires complete duration, at least one two-second clean hold, trajectory compliance and a clean final state. It does not assert uninterrupted standing through the episode or a fresh two-second hold immediately before the end.",
+    "First-attainment clean_balance_passes can remain positive after a later fall; they must not replace the full-duration count.",
+    "A noisy rollout can complete the full duration and be clean at its final sample while still failing the two-second continuous-hold requirement. Do not describe every unsuccessful noisy episode as a fall.",
+    "Posture and exact contact checks are sampled at 50 Hz; joint position, speed and commanded-effort audits run at 1000 Hz.",
+    "Noise standard deviations are in normalized action units, sampled independently every 20 ms before action clipping. They are not joint radians or external pushes.",
+    "Each five-seed group is a small controlled sample with fixed model and reset assumptions, not broad hardware or disturbance robustness.",
+    "GPU training success uses touch/geometric criteria and ends an episode after the clean hold. It is not a full-duration exact-contact CPU score.",
+    "Limit-pass counts for early-stopped failures cover only their observed prefixes.",
+    "The contact-normalization intervention precedes this PPO run. Actual parameter updates are verified here, but parameter changes alone do not prove a pass-count gain over that warm start; report matched ablation results separately."
+  ],
+  "evaluation_scope": "Root owns final CPU evaluations and count comparisons; this audit verifies provenance, normalization and export consistency without adding simulation results."
+}

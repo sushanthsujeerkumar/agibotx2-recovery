@@ -1,0 +1,31 @@
+{
+  "parent_sha256": "8c484840828ddf9f79198f2b37cf6a6913976810d7f68141febfcec4f1a308cf",
+  "candidate_sha256": "52f2d654ee59917c5f9ef885db72b68e8ac2680cf95250484ccadde5579f604c",
+  "actor_changed_keys": [
+    "obs_normalizer._var",
+    "obs_normalizer._std"
+  ],
+  "changed_indices": [
+    72,
+    73,
+    74
+  ],
+  "critic_unchanged": true,
+  "warmstart_only": true,
+  "new_ppo_steps": 0,
+  "effective_contact_scale_old": [
+    [
+      0.009999999776482582,
+      0.009999999776482582,
+      0.009999999776482582
+    ]
+  ],
+  "effective_contact_scale_new": [
+    [
+      1.0,
+      1.0,
+      1.0
+    ]
+  ],
+  "explicit_freeze_used_in_training_launcher": true
+}

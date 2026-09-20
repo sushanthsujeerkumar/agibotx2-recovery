@@ -1,3 +1,5 @@
+> Later work verified transfer to the deeper crouch and corrected contact normalization. See [the latest stage results](DEEP_CROUCH_STAGE_RESULTS.md). This page preserves the preceding experiment.
+
 # Local crouch-to-standing result
 
 The frozen PPO actor passes **5/5 moderate-crouch rises and 5/5 standing holds** in CPU MuJoCo. It still achieves **0/5 supine recoveries**. This is a working intermediate skill, not a completed ground-recovery assessment. The private development branch is `physics-v2`.
