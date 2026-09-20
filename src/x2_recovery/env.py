@@ -14,10 +14,17 @@ from .stance import MIN_WIDTH, MAX_WIDTH, MAX_HEADING, MAX_HIP_YAW, MAX_SOLE_TIL
 
 
 class X2RecoveryEnv:
-    def __init__(self, num_envs=256, device="cuda:0", seed=0, reward_version=1):
+    def __init__(self, num_envs=256, device="cuda:0", seed=0, reward_version=1,
+                 physics_profile="legacy", reset_mode="supine"):
         self.device = torch.device(device)
         self.num_envs = num_envs
-        self.info = ModelInfo()
+        self.info = ModelInfo(physics_profile=physics_profile)
+        if reset_mode not in {"supine", "balance"}:
+            raise ValueError("reset_mode must be supine or balance")
+        if reset_mode == "balance" and physics_profile != "guarded_v2":
+            raise ValueError("Balance curriculum requires guarded_v2")
+        self.reset_mode = reset_mode
+        self.strict_limits = physics_profile == "guarded_v2"
         self.num_actions = self.info.model.nu
         self.num_obs = self.num_actions * 3 + 13
         self.num_privileged_obs = self.num_obs
@@ -27,7 +34,9 @@ class X2RecoveryEnv:
         self.reward_version = reward_version
         self.cfg = {"physics_dt": self.info.model.opt.timestep, "control_dt": CONTROL_DT,
                     "episode_seconds": EPISODE_SECONDS, "hold_seconds": HOLD_SECONDS,
-                    "reset": "settled_supine", "seed": seed, "num_envs": num_envs,
+                    "reset": "settled_supine" if reset_mode == "supine" else "training_only_balance",
+                    "reset_mode": reset_mode, "physics_profile": physics_profile,
+                    "strict_trajectory_limits": self.strict_limits, "seed": seed, "num_envs": num_envs,
                     "reward_version": reward_version, "is_finite_horizon": False}
         torch.manual_seed(seed)
         np.random.seed(seed)
@@ -38,7 +47,7 @@ class X2RecoveryEnv:
             torch.cuda.set_stream(self._torch_stream)
         cfg = SimulationCfg(nconmax=128, njmax=512,
             mujoco=MujocoCfg(timestep=self.info.model.opt.timestep,
-                            iterations=30, ls_iterations=10, tolerance=1e-6,
+                            iterations=50 if self.strict_limits else 30, ls_iterations=10, tolerance=1e-6,
                             integrator="implicitfast", cone="pyramidal", solver="newton"))
         self.sim = Simulation(num_envs=num_envs, cfg=cfg, model=self.info.model, device=str(self.device))
         self.qpos = wp.to_torch(self.sim.wp_data.qpos)
@@ -74,6 +83,7 @@ class X2RecoveryEnv:
         self.hold_buf = torch.zeros(num_envs, dtype=torch.long, device=self.device)
         self.clean_hold_buf = torch.zeros_like(self.hold_buf)
         self.recovered_buf = torch.zeros(num_envs, dtype=torch.bool, device=self.device)
+        self.limit_failed = torch.zeros_like(self.recovered_buf)
         self.previous_action = torch.zeros((num_envs, self.num_actions), device=self.device)
         self.episode_reward = torch.zeros(num_envs, device=self.device)
         self.previous_height = torch.zeros(num_envs, device=self.device)
@@ -85,7 +95,11 @@ class X2RecoveryEnv:
         d = mujoco.MjData(self.info.model)
         qs, vs = [], []
         for i in range(16):
-            reset_cpu(self.info, d, seed+i)
+            if self.reset_mode == "balance":
+                from .physics import reset_balance
+                reset_balance(self.info, d, seed+i)
+            else:
+                reset_cpu(self.info, d, seed+i)
             qs.append(d.qpos.copy())
             vs.append(d.qvel.copy())
         return (torch.as_tensor(np.stack(qs), dtype=torch.float32, device=self.device),
@@ -104,6 +118,7 @@ class X2RecoveryEnv:
         self.hold_buf[ids] = 0
         self.clean_hold_buf[ids] = 0
         self.recovered_buf[ids] = False
+        self.limit_failed[ids] = False
         self.episode_reward[ids] = 0
         self.previous_height[ids] = self.qpos[ids, 2]
         self.max_height[ids] = self.qpos[ids, 2]
@@ -133,8 +148,21 @@ class X2RecoveryEnv:
             v = self.qvel[:, self.vadr]
             tau = (self.kp * (target-self.qpos[:, self.qadr]) - self.kd*v).clamp(-self.effort, self.effort)
             tau = torch.where(((v >= self.velocity) & (tau > 0)) | ((v <= -self.velocity) & (tau < 0)), 0., tau)
+            if self.strict_limits:
+                from .physics import guarded_torque_torch
+                tau = guarded_torque_torch(self.qpos[:, self.qadr], v, target,
+                                           self.lower, self.upper, self.kp, self.kd,
+                                           self.velocity, self.effort)
             self.ctrl.copy_(tau)
             self.sim.step()
+            if self.strict_limits:
+                from .physics import POSITION_TOLERANCE, RATIO_TOLERANCE
+                q = self.qpos[:, self.qadr]
+                bad = ((q < self.lower - POSITION_TOLERANCE) |
+                       (q > self.upper + POSITION_TOLERANCE) |
+                       (self.qvel[:, self.vadr].abs() > self.velocity * (1. + RATIO_TOLERANCE))).any(-1)
+                bad |= ~torch.isfinite(q).all(-1) | ~torch.isfinite(self.qvel).all(-1)
+                self.limit_failed |= bad
         self.episode_length_buf += 1
         height = self.qpos[:, 2]
         up = self.xmat[:, self.info.torso_id].reshape(-1, 3, 3)[:, 2, 2]
@@ -147,6 +175,8 @@ class X2RecoveryEnv:
                     feet & other_clear & (linear < SUCCESS_LINEAR_SPEED) & (angular < SUCCESS_ANGULAR_SPEED))
         self.hold_buf = torch.where(standing, self.hold_buf+1, 0)
         original_success = self.hold_buf >= round(HOLD_SECONDS/CONTROL_DT)
+        if self.strict_limits:
+            original_success &= ~self.limit_failed
         self.recovered_buf |= original_success
         success = original_success
         if self.reward_version == 3:
@@ -166,6 +196,8 @@ class X2RecoveryEnv:
                           (hip_yaw.abs() <= MAX_HIP_YAW).all(-1))
             self.clean_hold_buf = torch.where(standing & posture_ok, self.clean_hold_buf+1, 0)
             success = self.clean_hold_buf >= round(HOLD_SECONDS/CONTROL_DT)
+            if self.strict_limits:
+                success &= ~self.limit_failed
         upright = ((up+1.)*.5).clamp(0, 1)
         h = (height/self.info.standing[2]).clamp(0, 1.1)
         progress = (height-self.previous_height).clamp(-.1, .1)/CONTROL_DT
@@ -195,6 +227,8 @@ class X2RecoveryEnv:
         reward += 10.*success.float()
         invalid = (~torch.isfinite(self.qpos).all(dim=-1) | ~torch.isfinite(self.qvel).all(dim=-1) |
                    (self.qvel.abs().amax(dim=-1)>150) | (height<-.05))
+        if self.strict_limits:
+            invalid |= self.limit_failed
         reward = torch.nan_to_num(reward, nan=-1., posinf=-1., neginf=-1.) - invalid.float()
         timeout = self.episode_length_buf >= self.max_episode_length
         done = success | timeout | invalid
@@ -218,6 +252,8 @@ class X2RecoveryEnv:
                                       'stance/terminal_signed_width': width[ids],
                                       'stance/terminal_sole_error': sole_error[ids],
                                       'stance/terminal_heading_error': heading_error[ids]})
+            if self.strict_limits:
+                extras['log']['physics/limit_failure_rate'] = self.limit_failed[ids].float()
             self.reset(ids)
         return self.get_observations(), reward, done.long(), extras
 

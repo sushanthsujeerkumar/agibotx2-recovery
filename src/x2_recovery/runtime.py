@@ -10,13 +10,14 @@ from .common import (ModelInfo, CONTROL_DT, HOLD_SECONDS, ground_forces,
 class RecoveryRuntime:
     control_dt = CONTROL_DT
 
-    def __init__(self, controller="scripted", checkpoint=None, render=False, seed=0, assess_stance=False):
+    def __init__(self, controller="scripted", checkpoint=None, render=False, seed=0, assess_stance=False,
+                 physics_profile="legacy"):
         if controller not in {"scripted", "policy"}:
             raise ValueError("controller must be scripted or policy")
-        self.info = ModelInfo()
+        self.info = ModelInfo(physics_profile=physics_profile)
         self.model = self.info.model
         # Same integration/solver settings used by the training backend.
-        self.model.opt.iterations = 30
+        self.model.opt.iterations = 50 if physics_profile == "guarded_v2" else 30
         self.model.opt.ls_iterations = 10
         self.model.opt.tolerance = 1e-6
         self.data = mujoco.MjData(self.model)
@@ -41,8 +42,14 @@ class RecoveryRuntime:
             self.viewer.cam.lookat[:] = [0, 0, .45]
             self.viewer.opt.geomgroup[3] = 0
 
-    def reset(self, seed=0):
-        reset_cpu(self.info, self.data, seed)
+    def reset(self, seed=0, reset_mode="supine"):
+        if reset_mode == "supine":
+            reset_cpu(self.info, self.data, seed)
+        elif reset_mode == "balance" and self.info.physics_profile == "guarded_v2":
+            from .physics import reset_balance
+            reset_balance(self.info, self.data, seed)
+        else:
+            raise ValueError("Only guarded_v2 supports training-only balance resets")
         self.previous_action = np.zeros(self.model.nu)
         self.hold_time = 0.
         self.clean_hold_time = 0.
@@ -50,6 +57,10 @@ class RecoveryRuntime:
         self.stance = {}
         self.max_height = float(self.data.qpos[2])
         self.last_conditions = {}
+        from .physics import TrajectoryLimits
+        self.limits = TrajectoryLimits(self.info)
+        # Include the attained initial state, but not the untimed settling path.
+        self.limits.observe(self.data)
         return self.snapshot(False, False)
 
     def _scripted_target(self):
@@ -116,6 +127,7 @@ class RecoveryRuntime:
         for _ in range(self.info.substeps):
             self.data.ctrl[:] = self.info.torque(self.data.qpos[self.info.qadr], self.data.qvel[self.info.vadr], target)
             mujoco.mj_step(self.model, self.data)
+            self.limits.observe(self.data)
         self.previous_action = action.copy()
         invalid = not (np.isfinite(self.data.qpos).all() and np.isfinite(self.data.qvel).all())
         invalid = invalid or np.max(np.abs(self.data.qvel)) > 150 or self.data.qpos[2] < -.05
@@ -134,10 +146,11 @@ class RecoveryRuntime:
             extra_title = '\nClean stance' if self.assess_stance else ''
             extra_value = f'\n{self.clean_hold_time:.2f} / {HOLD_SECONDS:.1f} s' if self.assess_stance else ''
             display_success = self.clean_hold_time >= HOLD_SECONDS - 1e-8 if self.assess_stance else success
+            outcome = 'LIMIT FAILURE' if not self.limits.ok else 'SUCCEEDED' if display_success else 'RUNNING'
             self.viewer.set_texts((mujoco.mjtFontScale.mjFONTSCALE_150,
                                    mujoco.mjtGridPos.mjGRID_TOPLEFT,
                                    "X2 recovery evaluation\nController\nEpisode time\nPelvis height\nStable standing\nOutcome" + extra_title,
-                                   f"\n{self.display_label}\n{self.data.time:.1f} s\n{self.data.qpos[2]:.3f} m\n{self.hold_time:.2f} / {HOLD_SECONDS:.1f} s\n{'SUCCEEDED' if display_success else 'RUNNING'}" + extra_value))
+                                   f"\n{self.display_label}\n{self.data.time:.1f} s\n{self.data.qpos[2]:.3f} m\n{self.hold_time:.2f} / {HOLD_SECONDS:.1f} s\n{outcome}" + extra_value))
             self.viewer.sync()
         return self.snapshot(success, bool(invalid))
 
@@ -147,6 +160,9 @@ class RecoveryRuntime:
                 "sim_time": float(self.data.time), "success": bool(success), "invalid": bool(invalid),
                 "pelvis_height": float(self.data.qpos[2]), "max_pelvis_height": self.max_height,
                 "standing_hold_seconds": self.hold_time, "checks": dict(self.last_conditions)}
+        result.update(physics_profile=self.info.physics_profile,
+                      trajectory_limits=self.limits.report(),
+                      validated_success=bool(success and self.limits.ok))
         if self.assess_stance:
             result.update(stance=self.stance, clean_stance_hold_seconds=self.clean_hold_time,
                           max_clean_stance_hold_seconds=self.max_clean_hold_time,

@@ -16,12 +16,15 @@ CONTACT_FORCE = 2.0
 
 
 class ModelInfo:
-    def __init__(self, model=None):
+    def __init__(self, model=None, physics_profile="legacy"):
         self.model = model or mujoco.MjModel.from_xml_path(str(MODEL_PATH))
         m = self.model
         meta_path = MODEL_PATH.parent / "model_metadata.json"
         self.metadata = json.loads(meta_path.read_text()) if meta_path.exists() else {}
         self.joint_ids = m.actuator_trnid[:, 0].astype(int)
+        from .physics import configure_model
+        self.physics_profile = physics_profile
+        configure_model(m, self.joint_ids, physics_profile)
         self.names = [m.joint(int(i)).name for i in self.joint_ids]
         self.qadr = m.jnt_qposadr[self.joint_ids]
         self.vadr = m.jnt_dofadr[self.joint_ids]
@@ -57,6 +60,9 @@ class ModelInfo:
         return np.clip(self.nominal + action * scale, self.lower, self.upper)
 
     def torque(self, q, v, target):
+        if self.physics_profile == "guarded_v2":
+            from .physics import guarded_torque
+            return guarded_torque(self, q, v, target)
         torque = np.clip(self.kp * (target - q) - self.kd * v, -self.effort, self.effort)
         # Never command further acceleration beyond the published speed limit.
         torque = np.where((v >= self.velocity) & (torque > 0), 0., torque)

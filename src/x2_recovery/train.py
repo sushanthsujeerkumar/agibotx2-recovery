@@ -412,6 +412,11 @@ def main(argv: list[str] | None = None) -> None:
         if env_kwargs.get("reward_version", saved_reward_version) != saved_reward_version:
             raise SystemExit("Resume must preserve checkpoint reward_version; start a separate run for a new experiment")
         env_kwargs["reward_version"] = saved_reward_version
+        for key, default in [("physics_profile", "legacy"), ("reset_mode", "supine")]:
+            saved = checkpoint.get("environment_cfg", {}).get(key, default)
+            if env_kwargs.get(key, saved) != saved:
+                raise SystemExit(f"Resume must preserve {key}; initialize a separate experiment instead")
+            env_kwargs[key] = saved
         del checkpoint
     elif args.variant in {"stability", "stance"}:
         reward_version = {"stability": 2, "stance": 3}[args.variant]

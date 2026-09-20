@@ -47,7 +47,8 @@ def run_episode(config, connection):
         previous_sim_time = None
         elapsed_sim_time = 0.0
         while True:
-            frame = checked_frame(runtime.step())
+            raw = runtime.step()
+            frame = checked_frame(raw)
             if previous_sim_time is not None:
                 delta = frame['sim_time'] - previous_sim_time
                 if delta <= 0.0:
@@ -59,6 +60,10 @@ def run_episode(config, connection):
             connection.send(('frame', frame))
             if frame['invalid']:
                 connection.send(('result', {'success': False, 'reason': 'invalid simulator state'}))
+                break
+            limits = raw.get('trajectory_limits')
+            if not isinstance(limits, dict) or not limits.get('ok', False):
+                connection.send(('result', {'success': False, 'reason': 'trajectory limits failed or unavailable'}))
                 break
             if frame['success']:
                 connection.send(('result', {'success': True, 'reason': 'stable standing success checks passed'}))

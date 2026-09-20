@@ -10,7 +10,7 @@ from x2_recovery_ros.episode_worker import checked_frame, run_episode
 
 def frame(**changes):
     return {'joint_names': ['hip'], 'joint_positions': [0.25], 'sim_time': 0.02,
-            'success': False, 'invalid': False, **changes}
+            'success': False, 'invalid': False, 'trajectory_limits': {'ok': True}, **changes}
 
 
 @pytest.mark.parametrize('changes', [
@@ -69,7 +69,7 @@ def exercise_worker(frames, duration=1.0):
 
 def test_success_comes_from_runtime_and_preserves_telemetry():
     messages = exercise_worker([frame(success=True)])
-    assert messages[0] == ('frame', frame(success=True))
+    assert messages[0] == ('frame', checked_frame(frame(success=True)))
     assert messages[-1][1]['success'] is True
 
 
@@ -77,6 +77,13 @@ def test_invalid_state_overrides_success():
     messages = exercise_worker([frame(success=True, invalid=True)])
     assert messages[-1][1]['success'] is False
     assert messages[-1][1]['reason'] == 'invalid simulator state'
+
+
+@pytest.mark.parametrize('limits', [{'ok': False}, {}, None])
+def test_trajectory_violation_or_missing_monitor_overrides_posture_success(limits):
+    messages = exercise_worker([frame(success=True, trajectory_limits=limits)])
+    assert messages[-1][1]['success'] is False
+    assert 'trajectory limits' in messages[-1][1]['reason']
 
 
 def test_simulation_timeout_prevents_infinite_episode():

@@ -12,10 +12,16 @@ def main():
     p.add_argument("--directory", default="artifacts/runs/local")
     p.add_argument("--minutes", type=float, default=240)
     p.add_argument("--assess-stance", action="store_true")
+    p.add_argument("--physics-profile", choices=["legacy", "guarded_v2"], default="legacy")
+    p.add_argument("--reset-mode", choices=["supine", "balance"], default="supine")
     args = p.parse_args()
     directory = Path(args.directory)
     actor = None
-    runtime = RecoveryRuntime(controller="scripted", render=True, assess_stance=args.assess_stance)
+    runtime = RecoveryRuntime(controller="scripted", render=True, assess_stance=args.assess_stance,
+                              physics_profile=args.physics_profile)
+    if args.reset_mode == "balance":
+        runtime._scripted_target = lambda: runtime.info.nominal.copy()
+        runtime.display_label = "BALANCE TEST ONLY - nominal controller"
     end = time.monotonic() + args.minutes*60
     episode = 0
     print("VIEWER: scripted baseline until a trained checkpoint is available", flush=True)
@@ -33,17 +39,17 @@ def main():
                         policy = torch.jit.load(str(candidate), map_location="cpu").eval()
                         runtime.policy = policy
                         runtime.controller = "policy"
-                        runtime.display_label = f"PPO checkpoint {meta['iteration']}"
+                        runtime.display_label = f"{'BALANCE ONLY' if args.reset_mode == 'balance' else 'PPO'} checkpoint {meta['iteration']}"
                         actor = stamp
                         print("VIEWER: trained policy", json.dumps(meta), flush=True)
                 except (OSError, ValueError, RuntimeError) as exc:
                     print(f"Waiting for readable checkpoint: {exc}", flush=True)
-            runtime.reset(seed=1001 + episode % 5)
+            runtime.reset(seed=1001 + episode % 5, reset_mode=args.reset_mode)
             for _ in range(round(EPISODE_SECONDS/CONTROL_DT)):
                 start = time.monotonic()
                 state = runtime.step()
                 passed = state['clean_stance_success'] if args.assess_stance else state['success']
-                if not runtime.viewer.is_running() or passed or state["invalid"]:
+                if not runtime.viewer.is_running() or passed or state["invalid"] or not state['trajectory_limits']['ok']:
                     break
                 time.sleep(max(0., CONTROL_DT-(time.monotonic()-start)))
             print(f"VIEWER episode {episode}: controller={runtime.controller} success={state['success']} max_height={state['max_pelvis_height']:.3f}", flush=True)

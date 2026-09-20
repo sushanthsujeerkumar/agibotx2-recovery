@@ -17,11 +17,14 @@ def main():
     parser.add_argument("--render", action="store_true")
     parser.add_argument("--video", action="store_true")
     parser.add_argument("--assess-stance", action="store_true", help="Report extra posture criteria and continue after original recovery until clean stance or timeout.")
+    parser.add_argument("--physics-profile", choices=["legacy", "guarded_v2"], default="legacy")
+    parser.add_argument("--require-limits", action="store_true", help="Fail immediately after any trajectory limit violation.")
     parser.add_argument("--output", default="artifacts/evaluation")
     args = parser.parse_args()
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=True)
-    runtime = RecoveryRuntime(args.controller, args.checkpoint, args.render, args.seed, assess_stance=args.assess_stance)
+    runtime = RecoveryRuntime(args.controller, args.checkpoint, args.render, args.seed,
+                              assess_stance=args.assess_stance, physics_profile=args.physics_profile)
     renderer = None
     if args.video:
         import mujoco
@@ -51,7 +54,7 @@ def main():
                     if args.render:
                         time.sleep(max(0., CONTROL_DT-(time.monotonic()-start)))
                     passed = state['clean_stance_success'] if args.assess_stance else state['success']
-                    if passed or state["invalid"]:
+                    if passed or state["invalid"] or (args.require_limits and not state['trajectory_limits']['ok']):
                         break
             finally:
                 if writer: writer.close()
@@ -60,10 +63,13 @@ def main():
                       "reason": "stable_standing" if state["success"] else "invalid_simulation" if state["invalid"] else "timeout",
                       **{k: v for k,v in state.items() if k not in {"joint_names","joint_positions"}}}
             results.append(result)
+            if args.require_limits and not state['trajectory_limits']['ok']:
+                result.update(success=False, outcome='FAILED', reason='trajectory_limit_violation')
             if args.assess_stance:
-                result.update(success=first_recovery_time is not None, recovery_time_s=first_recovery_time,
-                              outcome='SUCCEEDED' if first_recovery_time is not None else 'FAILED',
-                              reason='stable_standing' if first_recovery_time is not None else result['reason'],
+                accepted = first_recovery_time is not None and (not args.require_limits or state['trajectory_limits']['ok'])
+                result.update(success=accepted, recovery_time_s=first_recovery_time,
+                              outcome='SUCCEEDED' if accepted else 'FAILED',
+                              reason='stable_standing' if accepted else result['reason'],
                               clean_stance_outcome='SUCCEEDED' if state['clean_stance_success'] else 'FAILED')
             (output/f"episode_{episode+1}.json").write_text(json.dumps({"result":result,"trajectory":history},indent=2))
             print(json.dumps(result),flush=True)
@@ -81,6 +87,9 @@ def main():
                                       'signed_width_m': [MIN_WIDTH, MAX_WIDTH], 'max_heading_rad': MAX_HEADING,
                                       'max_hip_yaw_rad': MAX_HIP_YAW, 'max_sole_tilt_rad': MAX_SOLE_TILT,
                                       'max_foot_bracing_force_n': MAX_FOOT_BRACING_FORCE}
+    summary.update(physics_profile=args.physics_profile, require_limits=args.require_limits,
+                   trajectory_limit_passes=sum(r['trajectory_limits']['ok'] for r in results),
+                   validated_successes=sum(r['validated_success'] for r in results))
     (output/"summary.json").write_text(json.dumps(summary,indent=2)+"\n")
 
 

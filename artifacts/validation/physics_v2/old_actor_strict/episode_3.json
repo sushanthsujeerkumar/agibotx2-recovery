@@ -1,0 +1,227 @@
+{
+  "result": {
+    "episode": 3,
+    "seed": 1003,
+    "outcome": "FAILED",
+    "reason": "trajectory_limit_violation",
+    "sim_time": 0.2800000000000002,
+    "success": false,
+    "invalid": false,
+    "pelvis_height": 0.09292127939997745,
+    "max_pelvis_height": 0.14941450812532667,
+    "standing_hold_seconds": 0.0,
+    "checks": {
+      "upright": false,
+      "height": false,
+      "both_feet": false,
+      "no_other_support": false,
+      "low_linear_speed": false,
+      "low_angular_speed": false
+    },
+    "physics_profile": "guarded_v2",
+    "trajectory_limits": {
+      "ok": false,
+      "physics_steps": 281,
+      "max_position_violation_rad": 0.0,
+      "max_speed_ratio": 1.9376693190756555,
+      "max_commanded_effort_ratio": 1.0,
+      "first_violation": {
+        "time_s": 0.2740000000000002,
+        "kind": "speed",
+        "joint": "right_wrist_roll_joint",
+        "value": 1.1704888790107748
+      }
+    },
+    "validated_success": false,
+    "stance": {
+      "signed_foot_width_m": 0.6203242499725852,
+      "foot_heading_error_rad": [
+        0.5473707703669695,
+        1.720232734151263
+      ],
+      "hip_yaw_rad": [
+        -1.2910932423224744,
+        -0.9894772120232511
+      ],
+      "sole_tilt_rad": [
+        1.7230199178978882,
+        2.736718512880585
+      ],
+      "foot_bracing_force_n": 0.0,
+      "checks": {
+        "stance_width": false,
+        "foot_heading": false,
+        "hip_yaw": false,
+        "flat_soles": false,
+        "no_foot_bracing": true
+      },
+      "posture_ok": false
+    },
+    "clean_stance_hold_seconds": 0.0,
+    "max_clean_stance_hold_seconds": 0.0,
+    "clean_stance_success": false,
+    "recovery_time_s": null,
+    "clean_stance_outcome": "FAILED"
+  },
+  "trajectory": [
+    {
+      "sim_time": 0.02000000000000001,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.14025905783239387,
+      "max_pelvis_height": 0.14941450812532667,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": false,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      },
+      "physics_profile": "guarded_v2",
+      "trajectory_limits": {
+        "ok": true,
+        "physics_steps": 21,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.4752164698925405,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      },
+      "validated_success": false,
+      "stance": {
+        "signed_foot_width_m": 0.2761143596210869,
+        "foot_heading_error_rad": [
+          1.4911130902135639,
+          1.6096165508150808
+        ],
+        "hip_yaw_rad": [
+          -0.08827097364648302,
+          -0.09355727049627148
+        ],
+        "sole_tilt_rad": [
+          1.5997328921861058,
+          1.6096033505533414
+        ],
+        "foot_bracing_force_n": 0.0,
+        "checks": {
+          "stance_width": true,
+          "foot_heading": false,
+          "hip_yaw": true,
+          "flat_soles": false,
+          "no_foot_bracing": true
+        },
+        "posture_ok": false
+      },
+      "clean_stance_hold_seconds": 0.0,
+      "max_clean_stance_hold_seconds": 0.0,
+      "clean_stance_success": false
+    },
+    {
+      "sim_time": 0.12000000000000009,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.10134158448192723,
+      "max_pelvis_height": 0.14941450812532667,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      },
+      "physics_profile": "guarded_v2",
+      "trajectory_limits": {
+        "ok": true,
+        "physics_steps": 121,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.5187245824919945,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      },
+      "validated_success": false,
+      "stance": {
+        "signed_foot_width_m": 0.4517074642115062,
+        "foot_heading_error_rad": [
+          2.2347530028522136,
+          2.998576296257339
+        ],
+        "hip_yaw_rad": [
+          -0.5514416285364546,
+          -0.2299523574643635
+        ],
+        "sole_tilt_rad": [
+          2.0899469673505298,
+          2.1087201844797523
+        ],
+        "foot_bracing_force_n": 0.0,
+        "checks": {
+          "stance_width": false,
+          "foot_heading": false,
+          "hip_yaw": false,
+          "flat_soles": false,
+          "no_foot_bracing": true
+        },
+        "posture_ok": false
+      },
+      "clean_stance_hold_seconds": 0.0,
+      "max_clean_stance_hold_seconds": 0.0,
+      "clean_stance_success": false
+    },
+    {
+      "sim_time": 0.22000000000000017,
+      "success": false,
+      "invalid": false,
+      "pelvis_height": 0.09424731125978215,
+      "max_pelvis_height": 0.14941450812532667,
+      "standing_hold_seconds": 0.0,
+      "checks": {
+        "upright": false,
+        "height": false,
+        "both_feet": false,
+        "no_other_support": true,
+        "low_linear_speed": false,
+        "low_angular_speed": false
+      },
+      "physics_profile": "guarded_v2",
+      "trajectory_limits": {
+        "ok": true,
+        "physics_steps": 221,
+        "max_position_violation_rad": 0.0,
+        "max_speed_ratio": 0.5277318755276063,
+        "max_commanded_effort_ratio": 1.0,
+        "first_violation": null
+      },
+      "validated_success": false,
+      "stance": {
+        "signed_foot_width_m": 0.5609248794233643,
+        "foot_heading_error_rad": [
+          1.153673824272651,
+          2.0878834613242567
+        ],
+        "hip_yaw_rad": [
+          -1.0073431368120254,
+          -0.705308846739022
+        ],
+        "sole_tilt_rad": [
+          2.028656776673677,
+          2.6855790880487844
+        ],
+        "foot_bracing_force_n": 0.0,
+        "checks": {
+          "stance_width": false,
+          "foot_heading": false,
+          "hip_yaw": false,
+          "flat_soles": false,
+          "no_foot_bracing": true
+        },
+        "posture_ok": false
+      },
+      "clean_stance_hold_seconds": 0.0,
+      "max_clean_stance_hold_seconds": 0.0,
+      "clean_stance_success": false
+    }
+  ]
+}
