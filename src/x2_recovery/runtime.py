@@ -1,6 +1,7 @@
 """Single-episode CPU MuJoCo runtime used by ROS, evaluation and the viewer."""
 from __future__ import annotations
 
+import copy
 import numpy as np
 import mujoco
 from .common import (ModelInfo, CONTROL_DT, HOLD_SECONDS, ground_forces,
@@ -38,7 +39,12 @@ class RecoveryRuntime:
             import threading
             from mujoco import viewer as mujoco_viewer
             previous_threads = set(threading.enumerate())
-            self.viewer = mujoco_viewer.launch_passive(self.model, self.data)
+            # The passive viewer calls mj_forward and accepts GUI edits. Keep
+            # both away from the controller's solver state and touch sensors.
+            self._view_model = copy.copy(self.model)
+            self._view_data = mujoco.MjData(self._view_model)
+            mujoco.mj_copyData(self._view_data, self._view_model, self.data)
+            self.viewer = mujoco_viewer.launch_passive(self._view_model, self._view_data)
             # MuJoCo 3.11's close() requests exit without joining its daemon GUI
             # thread. Keep the render thread created by this launch alive through
             # teardown, before interpreter-level GLFW cleanup can run.
@@ -154,6 +160,8 @@ class RecoveryRuntime:
             self.clean_hold_time = self.clean_hold_time + CONTROL_DT if clean else 0.
             self.max_clean_hold_time = max(self.max_clean_hold_time, self.clean_hold_time)
         if self.viewer is not None and self.viewer.is_running() and round(self.data.time/CONTROL_DT) % 2 == 0:
+            with self.viewer.lock():
+                mujoco.mj_copyData(self._view_data, self._view_model, self.data)
             extra_title = '\nClean stance' if self.assess_stance else ''
             extra_value = f'\n{self.clean_hold_time:.2f} / {HOLD_SECONDS:.1f} s' if self.assess_stance else ''
             display_success = self.clean_hold_time >= HOLD_SECONDS - 1e-8 if self.assess_stance else success
@@ -162,7 +170,7 @@ class RecoveryRuntime:
                                    mujoco.mjtGridPos.mjGRID_TOPLEFT,
                                    f"X2 {'supine recovery' if self.reset_mode == 'supine' else self.reset_mode + ' curriculum'} evaluation\nController\nEpisode time\nPelvis height\nStable standing\nOutcome" + extra_title,
                                    f"\n{self.display_label}\n{self.data.time:.1f} s\n{self.data.qpos[2]:.3f} m\n{self.hold_time:.2f} / {HOLD_SECONDS:.1f} s\n{outcome}" + extra_value))
-            self.viewer.sync()
+            self.viewer.sync(state_only=True)
         return self.snapshot(success, bool(invalid))
 
     def snapshot(self, success, invalid):
