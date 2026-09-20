@@ -19,8 +19,8 @@ class X2RecoveryEnv:
         self.device = torch.device(device)
         self.num_envs = num_envs
         self.info = ModelInfo(physics_profile=physics_profile)
-        if reset_mode not in {"supine", "balance", "crouch"}:
-            raise ValueError("reset_mode must be supine, balance or crouch")
+        if reset_mode not in {"supine", "balance", "crouch", "deep_crouch"}:
+            raise ValueError("reset_mode must be supine, balance, crouch or deep_crouch")
         if reset_mode != "supine" and physics_profile != "guarded_v2":
             raise ValueError("Standing/crouch curriculum requires guarded_v2")
         self.reset_mode = reset_mode
@@ -95,9 +95,9 @@ class X2RecoveryEnv:
         d = mujoco.MjData(self.info.model)
         qs, vs = [], []
         for i in range(16):
-            if self.reset_mode in {"balance", "crouch"}:
-                from .physics import reset_balance, reset_crouch
-                resetter = reset_balance if self.reset_mode == "balance" else reset_crouch
+            if self.reset_mode in {"balance", "crouch", "deep_crouch"}:
+                from .physics import reset_balance, reset_crouch, reset_deep_crouch
+                resetter = {"balance": reset_balance, "crouch": reset_crouch, "deep_crouch": reset_deep_crouch}[self.reset_mode]
                 resetter(self.info, d, seed+i)
             else:
                 reset_cpu(self.info, d, seed+i)

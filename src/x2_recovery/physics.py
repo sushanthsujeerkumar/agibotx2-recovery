@@ -137,3 +137,38 @@ def reset_crouch(info, data, seed):
         raise RuntimeError(f"Invalid crouch curriculum reset: {audit.report()}")
     data.time = 0.
     mujoco.mj_forward(info.model, data)
+
+
+def deep_crouch_target(info):
+    """Validated deeper command; each joint stays inside guarded target margins."""
+    target = info.nominal.copy()
+    for side in ("left", "right"):
+        for part, value in [("hip_pitch", -.9), ("knee", 1.6), ("ankle_pitch", -.7)]:
+            target[info.names.index(f"{side}_{part}_joint")] = value
+    if np.any(target < info.lower + .05) or np.any(target > info.upper - .05):
+        raise ValueError('Deep crouch reference exceeds guarded command bounds')
+    return target
+
+
+def reset_deep_crouch(info, data, seed):
+    """Physical 4 s lowering plus 1 s hold, matching the audited deeper reference."""
+    import mujoco
+    from .common import CONTROL_DT
+    if info.physics_profile != 'guarded_v2':
+        raise ValueError('Deep crouch requires guarded_v2')
+    reset_balance(info, data, seed)
+    target = deep_crouch_target(info)
+    audit = TrajectoryLimits(info)
+    audit.observe(data)
+    for step in range(round(5. / CONTROL_DT)):
+        phase = min(step * CONTROL_DT / 4., 1.)
+        phase = phase * phase * (3. - 2. * phase)
+        command = info.nominal * (1. - phase) + target * phase
+        for _ in range(info.substeps):
+            data.ctrl[:] = info.torque(data.qpos[info.qadr], data.qvel[info.vadr], command)
+            mujoco.mj_step(info.model, data)
+            audit.observe(data)
+            if not audit.ok or not np.isfinite(data.qpos).all() or data.qpos[2] < .4:
+                raise RuntimeError(f'Invalid deep crouch reset: {audit.report()}')
+    data.time = 0.
+    mujoco.mj_forward(info.model, data)

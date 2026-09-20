@@ -7,20 +7,24 @@ from pathlib import Path
 import mujoco
 import numpy as np
 from x2_recovery.common import ModelInfo, observation_numpy, sensor_forces, ground_forces, success_conditions
-from x2_recovery.physics import reset_balance, reset_crouch, TrajectoryLimits
+from x2_recovery.physics import reset_balance, reset_crouch, reset_deep_crouch, TrajectoryLimits
 from x2_recovery.stance import stance_metrics
 
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--checkpoint')
-    p.add_argument('--start',choices=['balance','crouch'],default='balance')
+    p.add_argument('--start',choices=['balance','crouch','deep_crouch'],default='balance')
     p.add_argument('--episodes',type=int,default=5)
     p.add_argument('--seed',type=int,default=2001)
     p.add_argument('--seconds',type=float,default=10.)
+    p.add_argument('--action-noise-std',type=float,default=0.,help='Independent Gaussian perturbation before normalized action clipping; robustness diagnostic only')
     p.add_argument('--output',default='artifacts/validation/physics_v2/standing_validation.json')
     args=p.parse_args()
-    if args.episodes<1 or args.seconds<=0: p.error('episodes and seconds must be positive')
+    if args.episodes<1 or not np.isfinite(args.seconds) or args.seconds<.02 or not np.isfinite(args.action_noise_std) or args.action_noise_std<0:
+        p.error('episodes must be positive, seconds finite and >= .02, noise finite and >= 0')
+    if args.action_noise_std and not args.checkpoint:
+        p.error('action noise requires a learned checkpoint')
     info=ModelInfo(physics_profile='guarded_v2');m=info.model;d=mujoco.MjData(m)
     policy=None
     if args.checkpoint:
@@ -29,7 +33,8 @@ def main():
         policy=torch.jit.load(args.checkpoint,map_location='cpu').eval()
     rows=[]
     for seed in range(args.seed,args.seed+args.episodes):
-        (reset_balance if args.start=='balance' else reset_crouch)(info,d,seed)
+        noise_rng=np.random.default_rng(seed)
+        {'balance': reset_balance, 'crouch': reset_crouch, 'deep_crouch': reset_deep_crouch}[args.start](info,d,seed)
         initial_height=float(d.qpos[2])
         monitor=TrajectoryLimits(info);monitor.observe(d)
         hold=0.;max_hold=0.;previous=np.zeros(m.nu);ever_passed=False
@@ -42,6 +47,8 @@ def main():
                     action=policy(torch.from_numpy(obs)[None]).squeeze(0).numpy()
                 if action.shape != (m.nu,) or not np.isfinite(action).all():
                     raise RuntimeError('Policy returned invalid actions')
+                if args.action_noise_std:
+                    action=action+noise_rng.normal(0.,args.action_noise_std,size=m.nu)
                 action=action.clip(-1,1)
             target=info.targets(action)
             for _ in range(info.substeps):
@@ -64,6 +71,7 @@ def main():
                 episodes=len(rows),clean_balance_passes=sum(r['clean_balance_pass'] for r in rows),
                 trajectory_limit_passes=sum(r['limits']['ok'] for r in rows),results=rows)
     result.update(sustained_clean_passes=sum(r['sustained_clean_pass'] for r in rows),
+                  action_noise_std=args.action_noise_std,
                   monitoring={'joint_limits_hz':1000,'posture_and_contacts_hz':50},
                   pass_definition='clean_balance_pass: attained two-second clean hold within limits; sustained_clean_pass additionally requires full duration and clean final state')
     out=Path(args.output);out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2)+'\n')

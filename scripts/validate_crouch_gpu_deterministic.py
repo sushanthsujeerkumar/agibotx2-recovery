@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 import time
 
@@ -33,7 +34,11 @@ def main():
     parser.add_argument("--output", type=Path,
                         default=Path("artifacts/validation/crouch_stage/gpu_deterministic"))
     parser.add_argument("--seed", type=int, default=6001)
+    parser.add_argument("--start", choices=['crouch','deep_crouch'], default='crouch')
+    parser.add_argument("--action-noise-std", type=float, default=0.)
     args = parser.parse_args()
+    if not math.isfinite(args.action_noise_std) or args.action_noise_std < 0:
+        parser.error('noise must be finite and nonnegative')
     args.output.mkdir(parents=True, exist_ok=True)
     if (args.output / "summary.json").exists():
         parser.error("Choose a fresh output directory")
@@ -43,7 +48,7 @@ def main():
     actor_digest = digest(args.actor)
     started = time.monotonic()
     env = X2RecoveryEnv(num_envs=16, seed=args.seed, device="cuda:0", reward_version=3,
-                        physics_profile="guarded_v2", reset_mode="crouch")
+                        physics_profile="guarded_v2", reset_mode=args.start)
     records = []
     first_results = {}
     episode_indices = [0] * 16
@@ -55,8 +60,9 @@ def main():
         initial_pool_indices = (env.qpos[:, None, :] - env.reset_q[None, :, :]).abs().amax(-1).argmin(-1).tolist()
         initial_heights = env.qpos[:, 2].tolist()
         config = {
-            "task": "Deterministic GPU crouch-stage diagnostic; NOT ground recovery",
-            "controller": "frozen TorchScript actor; no exploration, optimizer or parameter updates",
+            "task": f"GPU {args.start} diagnostic; NOT ground recovery",
+            "controller": "frozen TorchScript actor; optional declared Gaussian action noise; no optimizer or parameter updates",
+            "action_noise_std": args.action_noise_std,
             "actor": str(args.actor), "actor_sha256": actor_digest,
             "environment": env.cfg, "num_envs": 16, "maximum_control_steps": 750,
             "maximum_simulated_seconds_per_env": 15., "seed": args.seed,
@@ -76,6 +82,8 @@ def main():
                 actions = actor(obs["actor"])
             if actions.shape != (16, 31) or not torch.isfinite(actions).all():
                 raise RuntimeError("Actor returned invalid shape or nonfinite actions")
+            if args.action_noise_std:
+                actions = actions + torch.randn_like(actions) * args.action_noise_std
             obs, _rewards, done, extras = env.step(actions)
             control_steps = step + 1
             ids = torch.nonzero(done, as_tuple=False).flatten().tolist()
@@ -124,7 +132,8 @@ def main():
         env.close()
     first = [first_results[index] for index in sorted(first_results)]
     summary = {
-        "task": "Deterministic GPU crouch-stage diagnostic; NOT ground recovery",
+        "task": f"GPU {args.start} diagnostic; NOT ground recovery",
+        "action_noise_std": args.action_noise_std,
         "actor_sha256": actor_digest, "num_envs": 16,
         "control_steps": control_steps, "maximum_sim_time_per_env_s": control_steps * CONTROL_DT,
         "simulation_budget_env_seconds": 16 * control_steps * CONTROL_DT,

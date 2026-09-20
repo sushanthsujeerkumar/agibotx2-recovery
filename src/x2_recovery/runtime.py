@@ -55,9 +55,9 @@ class RecoveryRuntime:
         self.reset_mode = reset_mode
         if reset_mode == "supine":
             reset_cpu(self.info, self.data, seed)
-        elif reset_mode in {"balance", "crouch"} and self.info.physics_profile == "guarded_v2":
-            from .physics import reset_balance, reset_crouch
-            resetter = reset_balance if reset_mode == "balance" else reset_crouch
+        elif reset_mode in {"balance", "crouch", "deep_crouch"} and self.info.physics_profile == "guarded_v2":
+            from .physics import reset_balance, reset_crouch, reset_deep_crouch
+            resetter = {"balance": reset_balance, "crouch": reset_crouch, "deep_crouch": reset_deep_crouch}[reset_mode]
             resetter(self.info, self.data, seed)
         else:
             raise ValueError("Only guarded_v2 supports training-only balance/crouch resets")

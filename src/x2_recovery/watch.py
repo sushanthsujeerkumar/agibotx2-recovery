@@ -13,7 +13,7 @@ def main():
     p.add_argument("--minutes", type=float, default=240)
     p.add_argument("--assess-stance", action="store_true")
     p.add_argument("--physics-profile", choices=["legacy", "guarded_v2"], default="legacy")
-    p.add_argument("--reset-mode", choices=["supine", "balance", "crouch"], default="supine")
+    p.add_argument("--reset-mode", choices=["supine", "balance", "crouch", "deep_crouch"], default="supine")
     args = p.parse_args()
     directory = Path(args.directory)
     actor = None
@@ -22,13 +22,16 @@ def main():
     if args.reset_mode == "balance":
         runtime._scripted_target = lambda: runtime.info.nominal.copy()
         runtime.display_label = "BALANCE TEST ONLY - nominal controller"
-    elif args.reset_mode == "crouch":
+    elif args.reset_mode in {"crouch", "deep_crouch"}:
         pose = runtime.info.nominal.copy()
         for side in ('left', 'right'):
             for part, value in [('hip_pitch', -.7), ('knee', 1.4), ('ankle_pitch', -.7)]:
                 pose[runtime.info.names.index(f'{side}_{part}_joint')] = value
         runtime._scripted_target = lambda: pose.copy()
-        runtime.display_label = "CROUCH TEST ONLY - waiting for actor"
+        if args.reset_mode == 'deep_crouch':
+            from .physics import deep_crouch_target
+            pose = deep_crouch_target(runtime.info)
+        runtime.display_label = f"{args.reset_mode.upper()} TEST ONLY - waiting for actor"
     end = time.monotonic() + args.minutes*60
     episode = 0
     print("VIEWER: scripted baseline until a trained checkpoint is available", flush=True)

@@ -29,7 +29,7 @@ def main():
     axes[1].set_ylim(-.02,1.02)
     config_path = Path(a.directory)/"config.json"
     mode = json.loads(config_path.read_text()).get("environment", {}).get("reset_mode", "supine") if config_path.exists() else "supine"
-    titles = {"balance": "X2 standing-balance PPO — standing starts", "crouch": "X2 crouch-to-standing PPO — crouch starts"}
+    titles = {"balance": "X2 standing-balance PPO — standing starts", "crouch": "X2 crouch-to-standing PPO — crouch starts", "deep_crouch": "X2 deeper-crouch PPO — deeper starts"}
     fig.suptitle(titles.get(mode, "X2 recovery PPO — observed training results"))
     dest=Path(a.output) if a.output else Path(a.directory)/"training_curve.png"
     dest.parent.mkdir(parents=True,exist_ok=True)

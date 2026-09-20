@@ -79,3 +79,20 @@ def test_runtime_records_crouch_stage_and_restores_supine_default():
         assert state['pelvis_height'] < .25
     finally:
         runtime.close()
+
+
+def test_deeper_crouch_is_physical_and_keeps_default_recovery_start():
+    from x2_recovery.physics import deep_crouch_target
+    from x2_recovery.runtime import RecoveryRuntime
+    runtime = RecoveryRuntime(physics_profile='guarded_v2', reset_mode='deep_crouch')
+    try:
+        assert .46 < runtime.data.qpos[2] < .49
+        assert runtime.data.time == 0.
+        assert runtime.limits.ok
+        command = deep_crouch_target(runtime.info)
+        assert np.all(command >= runtime.info.lower + .05)
+        assert np.all(command <= runtime.info.upper - .05)
+        assert runtime.reset(0)['reset_mode'] == 'supine'
+        assert runtime.data.qpos[2] < .25
+    finally:
+        runtime.close()

@@ -10,7 +10,7 @@ from x2_recovery.runtime import RecoveryRuntime
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--checkpoint',required=True)
-    p.add_argument('--start',choices=['supine','crouch','balance'],required=True)
+    p.add_argument('--start',choices=['supine','crouch','balance','deep_crouch'],required=True)
     p.add_argument('--seed',type=int,default=3001)
     p.add_argument('--seconds',type=float,default=10.)
     p.add_argument('--output',required=True)

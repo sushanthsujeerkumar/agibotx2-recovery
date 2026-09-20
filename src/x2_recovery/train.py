@@ -31,7 +31,7 @@ from rsl_rl.runners import OnPolicyRunner
 def ppo_config(seed: int = 0, steps_per_env: int = 24, save_interval: int = 50,
                variant: str = "baseline") -> dict:
     """Conservative feed-forward PPO defaults, shared by training and inference."""
-    if variant not in {"baseline", "stability", "stance", "balance", "crouch"}:
+    if variant not in {"baseline", "stability", "stance", "balance", "crouch", "deep_crouch"}:
         raise ValueError(f"Unknown PPO variant: {variant}")
     model = {
         "class_name": "MLPModel",
@@ -78,16 +78,19 @@ def ppo_config(seed: int = 0, steps_per_env: int = 24, save_interval: int = 50,
     if variant == "stability":
         cfg["actor"]["distribution_cfg"].update(init_std=0.4, std_range=(0.05, 0.6))
         cfg["algorithm"]["entropy_coef"] = 1e-4
-    elif variant in {"stance", "balance", "crouch"}:
+    elif variant in {"stance", "balance", "crouch", "deep_crouch"}:
         cfg["actor"]["distribution_cfg"].update(init_std=0.10, std_range=(0.03, 0.20))
         cfg["algorithm"].update(entropy_coef=1e-4, learning_rate=5e-5,
                                 schedule="fixed", clip_param=0.1)
         if variant == "balance":
             cfg["actor"]["distribution_cfg"].update(init_std=.03, std_range=(.01, .08))
             cfg["algorithm"]["entropy_coef"] = 0.
-        elif variant == "crouch":
+        elif variant in {"crouch", "deep_crouch"}:
             cfg["actor"]["distribution_cfg"].update(init_std=.015, std_range=(.005, .04))
             cfg["algorithm"].update(entropy_coef=0., learning_rate=1e-5, clip_param=.05)
+            if variant == "deep_crouch":
+                # Smaller exploration after measured failure of larger action noise.
+                cfg["actor"]["distribution_cfg"].update(init_std=.003, std_range=(.001, .01))
     return cfg
 
 
@@ -367,7 +370,7 @@ def make_parser() -> argparse.ArgumentParser:
     parser.add_argument("--num-envs", type=int, default=256)
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--variant", choices=["baseline", "stability", "stance", "balance", "crouch"], default="baseline",
+    parser.add_argument("--variant", choices=["baseline", "stability", "stance", "balance", "crouch", "deep_crouch"], default="baseline",
                         help="Configuration for a new run; resume uses the saved variant.")
     parser.add_argument("--max-iterations", type=int, default=3000, help="Total target, including iterations already trained.")
     parser.add_argument("--steps-per-env", type=int, default=24)
@@ -429,8 +432,8 @@ def main(argv: list[str] | None = None) -> None:
                 raise SystemExit(f"Resume must preserve {key}; initialize a separate experiment instead")
             env_kwargs[key] = saved
         del checkpoint
-    elif args.variant in {"stability", "stance", "balance", "crouch"}:
-        reward_version = {"stability": 2, "stance": 3, "balance": 3, "crouch": 3}[args.variant]
+    elif args.variant in {"stability", "stance", "balance", "crouch", "deep_crouch"}:
+        reward_version = {"stability": 2, "stance": 3, "balance": 3, "crouch": 3, "deep_crouch": 3}[args.variant]
         if env_kwargs.get("reward_version", reward_version) != reward_version:
             raise SystemExit(f"The {args.variant} variant requires reward_version={reward_version}")
         env_kwargs["reward_version"] = reward_version
@@ -439,8 +442,8 @@ def main(argv: list[str] | None = None) -> None:
                 if env_kwargs.get(key, required) != required:
                     raise SystemExit(f"Balance variant requires {key}={required}")
                 env_kwargs[key] = required
-        elif args.variant == "crouch":
-            for key, required in [("physics_profile", "guarded_v2"), ("reset_mode", "crouch")]:
+        elif args.variant in {"crouch", "deep_crouch"}:
+            for key, required in [("physics_profile", "guarded_v2"), ("reset_mode", args.variant)]:
                 if env_kwargs.get(key, required) != required:
                     raise SystemExit(f"Crouch variant requires {key}={required}")
                 env_kwargs[key] = required
