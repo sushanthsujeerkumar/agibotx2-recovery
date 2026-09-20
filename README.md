@@ -5,14 +5,7 @@ through mjlab, PPO, and ROS 2 Jazzy**. Every assessed episode starts from a
 physically settled supine pose. A shared CPU runtime supplies the local viewer,
 deterministic evaluation and ROS-controlled episodes.
 
-**Current result:** model validation, the PPO runner's CPU contract checks and
-the real-simulator ROS integration check have passed. GPU/CPU consistency and
-512-environment PPO smoke tests passed. The initial local PPO experiment
-completed **34,443,264 environment steps in 1,450.8 s** and achieved **0/5 stable
-recoveries** in the recorded evaluation. It learned to rise but kept moving
-afterward. A fresh 512-environment stability revision is **running with a
-90-minute local training budget**; its final outcome is pending. **No successful learned
-recovery is claimed.** The scripted controller is an untrained baseline.
+**Current result:** model, runner, GPU/CPU consistency and ROS integration checks passed. The initial baseline achieved **0/5 stable recoveries**. The revised run's checkpoint **9251 now passes 5/5** fixed-seed episodes under the original two-second standing criteria, in **4.48–6.30 seconds**. However, it stands with **crossed feet and foot-foot contact**. This is measured recovery, but not a clean neutral stance or demonstrated robustness. The 90-minute run is still completing; its final checkpoint evaluation is pending. The working candidate and its posture limitation are preserved in [candidate evidence](artifacts/submission/stable_crossed_stance_009251/README.md). The scripted controller remains an untrained baseline.
 
 ## Setup
 

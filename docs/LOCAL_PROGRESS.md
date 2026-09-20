@@ -20,6 +20,10 @@ The ONE targeted correction is now RUNNING: fresh PPO variant stability with bou
 - Heartbeat check-x2-local-training updated to check this run every 15 minutes. No further method revisions without user direction; total local training <=3 hours. Initial + planned revised run is about 114 minutes.
 - Initial revised throughput ~22k environment steps/s; std ~0.41. These are health measures, not recovery evidence.
 
+## Newly verified recovery and user-reported crossed legs
+
+User's second screencast shows checkpoint9251. CPU five-seed evaluation now PASSES5/5 under the original standing criteria:4.48–6.30s to completion. Preserved model+actor+config+progress+videos+evaluation+stance audit at artifacts/submission/stable_crossed_stance_009251. IMPORTANT: feet remain crossed and touching each other; do not call this a clean neutral stance. An extended15s audit shows actual stable floor support and low base speed, but signed foot separation around -3.2 to -4.5cm versus nominal +27.4cm. Self-collision is enabled and foot-foot contacts present. Current success and reward lack explicit stance width/foot heading. Preserve this candidate even if final90min actor regresses. Keep existing run unchanged through its stop. Proposed further refinement is stance-specific shaping and collision verification; no new training revision has started.
+
 ## Initial experiment (preserved)
 
 - Original PPO: artifacts/runs/local (512 environments, seed 0). Gracefully stopped at 24.2 minutes after diagnosing behavior; full original config and evidence preserved.

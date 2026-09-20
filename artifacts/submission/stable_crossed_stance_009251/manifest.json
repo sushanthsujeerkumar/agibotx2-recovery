@@ -1,0 +1,12 @@
+{
+  "iteration": 9251,
+  "environment_steps": 113676288,
+  "controller": "learned_policy",
+  "successes": 5,
+  "episodes": 5,
+  "success_definition": "Existing two-second feet-only floor-supported stable standing; no stance-width or foot-heading criterion.",
+  "limitation": "Crossed feet with foot-foot self-contact. Passing this criterion does not establish a clean neutral stance or robustness.",
+  "actor_sha256": "2d5196394f5107205bf166d59b91b7e1044fd45f53c78639bdf3b7d013129043",
+  "checkpoint_sha256": "789632b4098a42494c4c2506e4d259c8d85f0762b21fec878894d22fb3fd21a4",
+  "training_wall_time_s": 4752.013546963
+}
