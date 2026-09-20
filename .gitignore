@@ -12,3 +12,6 @@ artifacts/videos/
 assets/x2/meshes/
 
 .tools/
+artifacts/local_demo/
+artifacts/local_evaluation/
+.cache/

@@ -5,22 +5,13 @@ through mjlab, PPO, and ROS 2 Jazzy**. Every assessed episode starts from a
 physically settled supine pose. A shared CPU runtime supplies the local viewer,
 deterministic evaluation and ROS-controlled episodes.
 
-**Current result:** the completed 90-minute local stability run achieved
-**5/5 recoveries** under the original two-second standing criteria, in
-**4.28–8.86 seconds**. Its final checkpoint completed **10,455 updates and
-128,471,040 environment steps**; a real ROS episode also reached `SUCCEEDED`.
-The initial baseline remains recorded as 0/5. These results do not establish
-a neutral stance or robustness: a geometry audit of the retained checkpoint
-9251 found an **inward-twisted, staggered stance supported on foot edges and
-braced by foot-to-foot force**. Its ankle and knee ordering was correct, so
-"crossed legs" is not an accurate diagnosis. A separate authorized 45-minute
-stance refinement is running; **no final clean-stance result is claimed**.
-See the [final recovery report](artifacts/submission/local_stability/evaluation/summary.json)
-and [stance audit](artifacts/validation/stance_geometry/README.md).
+**Final local result:** the selected learned policy achieved **5/5 recoveries** under the documented two-second stability check, in **4.28–8.86 seconds**, and completed a real recovery through ROS 2. The posture remains undesirable: the feet turn inward, stand partly on their edges and brace against each other. It achieved **0/5 on the additional clean-stance check**. A separate 45-minute refinement retained 5/5 first recoveries but also scored 0/5 clean stance and lost stability again in 2/5 episodes during the extended 15-second audit. The more consistent 90-minute policy is retained as the default. No neutral-stance or hardware-readiness claim is made.
+
+Start with [START_HERE.md](START_HERE.md). See [RESULTS.md](RESULTS.md) for experiment comparison and remaining limitations, [requirement evidence](docs/requirements.md) for the assessment checklist, and [selected policy provenance](artifacts/selected_policy.json) for hashes. All three local experiments are preserved. Main training totaled **2 h 39 m 12 s**, excluding setup, compilation, smoke tests and evaluation; no cloud was used.
 
 ## Setup
 
-The tested host is Ubuntu 24.04, an Intel i5-10600K (6 cores/12 threads), about
+The tested host is Ubuntu 24.04, an Intel i 5-10600 K (6 cores/12 threads), about
 23 GiB usable RAM, and an NVIDIA GeForce RTX 5060 with 8 GB VRAM. The verified
 driver is 595.84. No cloud compute has been used.
 
@@ -103,7 +94,7 @@ This reproduces the configuration and update budget, not bitwise GPU results
 or an identical wall-clock duration. The baseline's frozen evidence is in
 [`artifacts/submission/local_initial`](artifacts/submission/local_initial/manifest.json).
 
-The next authorized experiment initializes from the preserved learned policy
+The completed posture-refinement experiment initialized from the preserved learned policy
 without reusing its optimizer, action noise or counters:
 
 ```bash
@@ -166,7 +157,7 @@ Open [local TensorBoard](http://127.0.0.1:6006). The plot command creates
 
 ## Model, environment and learning method
 
-The model is **AgiBot X2 Ultra v1.3.0**, using the official
+The model is **AgiBot X2 Ultra v 1.3.0**, using the official
 `x2_ultra_simple_collision.urdf` at commit
 `60c5de582c523cd188f563819e62d34cfdc3d2d0`. It has 31 actuated joints, a free
 pelvis and total mass 41.966521 kg. URDF inertias, transforms, joint ranges and
@@ -339,16 +330,13 @@ staggered, edge-supported stance, not evidence that the leg joint chains have
 crossed or that foot collisions are disabled. The exact measurements and model
 checks are in the [geometry audit](artifacts/validation/stance_geometry/README.md).
 
-The running `local_stance` refinement addresses that posture limitation while
-retaining the successful parent and its original result. **No final outcome
-for the additional clean-stance criterion is available yet.** GPU training uses
-stance geometry as a bracing proxy; final CPU assessment checks actual
-foot-to-foot normal force as well.
+The completed `local_stance` refinement ran 4,828 updates /59,326,464 new transitions in 2,700.50 s, initialized from checkpoint 9251. It retained 5/5 original recoveries (first passes 5.88–9.88 s), but scored **0/5 clean stance**. Signed sole-centre spacing became positive (2.8–11.3 cm at 15 s) but remained below the 16 cm minimum. Feet still turned inward and used edge support; three final frames had approximately 180 N mutual-foot bracing, while two had no bracing but had become unstable again. The selected stability policy retained stability in all five final frames of the same extended audit. Therefore refinement did not establish an overall improvement and does not replace the default actor. See [refinement results](artifacts/submission/local_stance/evaluation/summary.json).
+
+GPU training uses stance geometry as a bracing proxy; final CPU assessment checks actual foot-to-foot normal force. The original success count records the first continuous 2-second pass. In `--assess-stance` mode, later loss of balance is retained in the terminal checks rather than erasing that earlier pass; the clean-stance count is reported separately.
 
 Remaining limitations include primitive contacts, CPU/GPU solver differences,
 a narrow reset distribution and a single training seed per configuration.
-Further work should follow the stance evaluation: inspect remaining alignment
-or bracing failures, expand reset diversity, and repeat with independent seeds.
+The next experiment should first establish clean standing balance and validate a physically feasible recovery reference, then use staged reference guidance or a curriculum in a separately documented experiment. Expand reset diversity and repeat with independent seeds after the posture issue is resolved. More parallel environments alone are not evidence that the posture objective will improve.
 No result is inferred from an absent report or from reward improvement alone.
 
 ## ROS 2 demonstration
@@ -437,4 +425,4 @@ ROS: one request accepted, another rejected while busy, **428 actual joint
 frames** and `RUNNING → SUCCEEDED` at **8.56 simulated seconds** for seed 1001.
 Evidence is in
 [the successful ROS integration report](ros2_ws/validation/policy_recovery/integration.json).
-The recovery result is 5/5; the separate stance-refinement result remains pending.
+The selected recovery result is 5/5. The completed stance refinement also reached 5/5 first recoveries but 0/5 clean stance; the selected policy is unchanged. Final clean-source and archive reproduction evidence is in artifacts/validation/final_reproduction/.

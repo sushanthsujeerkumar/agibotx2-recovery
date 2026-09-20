@@ -55,7 +55,7 @@ the same saturated joint target.
 
 RSL-RL's Gaussian entropy is calculated on the unbounded sampled distribution,
 before environment action clipping. Its default standard-deviation bounds are
-1e-6 to 1e6. Increasing that entropy can therefore increase latent noise without
+1e-6 to 1 e 6. Increasing that entropy can therefore increase latent noise without
 providing useful additional physical exploration. The PPO likelihoods themselves
 remain consistent with the recorded raw samples; this is an exploration-design
 problem rather than an incorrect likelihood implementation. PPO normalizes
@@ -74,7 +74,7 @@ python -m x2_recovery.train --variant stability --num-envs 512 --seed 0 --max-it
 
 The same 512-environment, 90-minute configuration is available through
 [`./TRAIN_STABILITY.sh`](../TRAIN_STABILITY.sh), which also sets CPU thread
-limits and a quieter print interval. This stability experiment completed with5/5 original recoveries; its frozen evidence is in artifacts/submission/local_stability. A separate stance refinement is now running. The generic `runs/local`
+limits and a quieter print interval. This stability experiment completed with 5/5 original recoveries; its frozen evidence is in artifacts/submission/local_stability. A separate stance refinement has also completed:5/5 first recoveries and 0/5 clean stance; see RESULTS.md. The generic `runs/local`
 examples elsewhere in this document describe independent baseline runs.
 
 `--variant stability` passes `reward_version=2` in the environment constructor
@@ -226,7 +226,7 @@ read this JSON, load its explicit `actor` path, and switch only between episodes
 so a demonstration uses one checkpoint throughout.
 
 The actor embeds observation normalization and outputs deterministic action
-means. Its input is a float32 tensor of shape `[batch, num_actor_observations]`
+means. Its input is a float 32 tensor of shape `[batch, num_actor_observations]`
 and output is `[batch, num_actions]`. The caller must implement the exact
 training observation order, scaling, previous-action bookkeeping, action
 clipping, control timing and joint mapping. Loading the network alone does not

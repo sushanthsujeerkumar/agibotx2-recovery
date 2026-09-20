@@ -38,7 +38,7 @@ applied, and no joint velocity is clamped to fabricate a recovery.
 
 ## Observation space
 
-Actor and critic receive the same **106 float32 values**, with no privileged
+Actor and critic receive the same **106 float 32 values**, with no privileged
 critic information. Joint/action order comes from the model's actuator-to-joint
 mapping and is recorded in `assets/x2/model_metadata.json`.
 
@@ -167,7 +167,7 @@ recovery poses remain feasible and physical actuator limits still apply.
 The fresh `--variant stability` experiment also reduces entropy coefficient
 from 0.01 to 0.0001, starts Gaussian standard deviation at 0.4 and limits its
 effective value to [0.05,0.6]. The original Gaussian had initial standard
-deviation 0.6 and default bounds [1e-6,1e6]. Its final mean standard deviation
+deviation 0.6 and default bounds [1e-6,1 e 6]. Its final mean standard deviation
 grew to 11.21, while raw action means were extensively clipped in inspected
 states. The corrected policy starts afresh rather than inheriting those
 saturated means. The completed `artifacts/runs/local_stability` experiment used
@@ -232,13 +232,13 @@ terminal bonus with `10 * clean_success`. It does not also award the original
 terminal bonus on every subsequent step after ordinary recovery. Common
 invalid-state penalties and the 15 s timeout remain unchanged.
 
-The running stance experiment initializes from the frozen 9251 checkpoint,
+The completed stance experiment initialized from the frozen 9251 checkpoint,
 copying actor/critic networks and observation normalizers into a new run.
 Gaussian noise, optimizer, RNG stream and iteration/step counters are fresh.
 It uses 512 environments, a 2,700 s (45-minute) budget, initial noise 0.10
 bounded to [0.03,0.20], fixed learning rate 0.00005, PPO clip 0.1 and entropy
 coefficient 0.0001. Parent path/SHA and reset/copied state categories are
-recorded. Its additional clean-stance outcome is not yet available.
+recorded. It completed 4,828 updates /59,326,464 new transitions in 2,700.50 s:5/5 first recoveries,0/5 clean stance. It did not replace the selected stability policy; see RESULTS.md.
 
 ### Additional clean-stance criterion and training termination
 
