@@ -58,6 +58,6 @@
     "artifacts/validation/vendor_reference/verification.json": "a7ff8f2f765986d8dfccf89b5694ff55a27ca2337804d3299213f90dfa45fef9",
     "scripts/fetch_vendor_reference.py": "cc5ef3a24f39f37a8f04e21c63bd125154667c20eb67a068674aa01c9c9d8eda",
     "scripts/record_vendor_reference.py": "ee8d5445bc2ea00779b0042a303c9131e8da5f6e83a2aad2c89072416c41b3dd",
-    "scripts/vendor_reference_probe.py": "3e3a176d3913240610b3352e99a3943d9b972d8b49dbde5f94f7c7515e75a18b"
+    "scripts/vendor_reference_probe.py": "ab446bab4ae93f5db50e1cc322686d307524f96b7e8395fbfdff6881fd60c975"
   }
 }

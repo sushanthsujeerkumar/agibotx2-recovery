@@ -136,7 +136,7 @@ def run(graph,mode,timescale,seed,finish='blend',on_step=None):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--asset-dir',type=Path,required=True);p.add_argument('--mode',choices=['reference','vendor_actor'],required=True);p.add_argument('--timescale',type=float,default=1.);p.add_argument('--finish',choices=['blend','feedback'],default='blend');p.add_argument('--seed',type=int,default=9201);p.add_argument('--output',required=True);args=p.parse_args()
-    
+
     if not np.isfinite(args.timescale) or args.timescale <= 0:raise ValueError('Timescale must be positive and finite')
     out=Path(args.output);out.mkdir(parents=True,exist_ok=True)
     if (out/'result.json').exists():raise ValueError('Choose fresh output')
